@@ -22,6 +22,42 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.project.paypack.MainActivity"
+            android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name="com.project.paypack.CreateTransactionActivity"
+            android:label="@string/title_activity_create_transaction" >
+        </activity>
+        <activity
+            android:name="com.project.paypack.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name="com.project.paypack.ResolveActivity"
+            android:label="@string/title_activity_resolve" >
+        </activity>
+        <activity
+            android:name="com.project.paypack.ResolveTransactionActivity"
+            android:label="@string/title_activity_resolve_transaction" >
+        </activity>
+        <activity
+            android:name="com.project.paypack.ContactActivity"
+            android:label="@string/title_activity_contact" >
+        </activity>
+        <activity
+            android:name="com.project.paypack.ManageGroupActivity"
+            android:label="@string/title_activity_manage_group" >
+        </activity>
+        <activity
+            android:name="com.project.paypack.NotificationActivity"
+            android:label="@string/title_activity_notification" >
+        </activity>
+        <activity
+            android:name="com.project.paypack.StatisticActivity"
+            android:label="@string/title_activity_statistic" >
+        </activity>
     </application>
 
 </manifest>
