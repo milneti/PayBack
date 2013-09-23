@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.payback"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="9"
+        android:targetSdkVersion="18" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.example.payback.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.payback.MainActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.payback.CreateTransactionActivity"
+            android:label="@string/title_activity_create_transaction" >
+        </activity>
+        <activity
+            android:name="com.example.payback.ContactActivity"
+            android:label="@string/title_activity_contact" >
+        </activity>
+        <activity
+            android:name="com.example.payback.ManageGroupActivity"
+            android:label="@string/title_activity_manage_group" >
+        </activity>
+        <activity
+            android:name="com.example.payback.ResolveTransactionActivity"
+            android:label="@string/title_activity_resolve_transaction" >
+        </activity>
+        <activity
+            android:name="com.example.payback.NotificationActivity"
+            android:label="@string/title_activity_notification" >
+        </activity>
+        <activity
+            android:name="com.example.payback.StatisticActivity"
+            android:label="@string/title_activity_statistic" >
+        </activity>
+        <activity
+            android:name="com.example.payback.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
+    </application>
+
+</manifest>
