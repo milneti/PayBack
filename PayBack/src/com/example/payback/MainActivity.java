@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
     
     public void CreateTrsn(View view)
     {
-    	Intent intent = new Intent(this, CreateTransactionActivity.class);
+    	Intent intent = new Intent(this, Transaction1Activity.class);
         startActivity(intent);
     }
     
