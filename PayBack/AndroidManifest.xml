@@ -55,6 +55,26 @@
             android:name="com.example.payback.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
+        <activity
+            android:name="com.example.payback.Transaction2Activity"
+            android:label="@string/title_activity_transaction2" >
+        </activity>
+        <activity
+            android:name="com.example.payback.Transaction1Activity"
+            android:label="@string/title_activity_transaction1" >
+        </activity>
+        <activity
+            android:name="com.example.payback.Transaction3Activity"
+            android:label="@string/title_activity_transaction3" >
+        </activity>
+        <activity
+            android:name="com.example.payback.Transaction4Activity"
+            android:label="@string/title_activity_transaction4" >
+        </activity>
+        <activity
+            android:name="com.example.payback.Transaction5Activity"
+            android:label="@string/title_activity_transaction5" >
+        </activity>
     </application>
 
 </manifest>

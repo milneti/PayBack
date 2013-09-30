@@ -10,5 +10,19 @@
     <string name="title_activity_resolve_transaction">ResolveTransactionActivity</string>
     <string name="title_activity_notification">NotificationActivity</string>
     <string name="title_activity_statistic">StatisticActivity</string>
+    <string name="title_activity_transaction2">Transaction2Activity</string>
+    <string name="title_activity_transaction1">Transaction1Activity</string>
+    <string name="Cost">Enter Transaction Total</string>
+    <string name="Home">Home</string>
+    <string name="Next">Next</string>
+    <string name="HoldReset">Hold to Reset</string>
+    <string name="Comment">Comments</string>
+    <string name="transactionHeader">Create a Transaction</string>
+    <string name="CommentsOption">Comments (optional)</string>
+    <string name="title_activity_transaction3">Transaction3Activity</string>
+    <string name="title_activity_transaction4">Transaction4Activity</string>
+    <string name="title_activity_transaction5">Transaction5Activity</string>
+    <string name="Previous">Previous</string>
+    <string name="contactSelectHeader">Contact Selection</string>
 
 </resources>
