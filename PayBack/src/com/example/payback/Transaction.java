@@ -5,11 +5,14 @@ import java.util.*;
 public class Transaction {
 
 	int lenderId, borrowerId;
+	double amount;
+	String comment;
 	Transaction(int lenderId, int borrowerId, double amount, String comment)
 	{
 		this.lenderId = lenderId;
 		this.borrowerId = borrowerId;
-		
+		this.amount = amount;
+		this.comment = comment;
 	}
 	//Example for outside code: t.sendTransToServer();
 	void sendTransactionToServer()
