@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 
+
+/*******************
+ * 	Will's Comment!*
+ *******************/
 public class Transaction3Activity extends Activity {
 
 	@Override
