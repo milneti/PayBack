@@ -9,8 +9,29 @@
     tools:context=".Transaction4Activity" >
 
     <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
+
+    <Button
+        android:id="@+id/Button01"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="showTrans5"
+        android:text="@string/Next" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:longClickable="true"
+        android:onClick="showTrans3"
+        android:text="@string/Previous"
+        android:textAlignment="center" />
 
 </RelativeLayout>
