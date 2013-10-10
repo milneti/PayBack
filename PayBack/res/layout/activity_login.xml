@@ -132,7 +132,7 @@
             android:layout_height="200dp"
             android:baselineAlignBottom="false"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/payback" />
     </LinearLayout>
 
 </merge>

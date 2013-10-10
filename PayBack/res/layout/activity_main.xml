@@ -6,69 +6,37 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity" 
+    android:background="@drawable/activitybackground">
 
     <Button
         android:id="@+id/ResolveTrsnB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/CreateTrsnB"
-        android:layout_alignRight="@+id/ManageGroupB"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/CreateTrsnB"
         android:onClick="ResolveTrsn"
-        android:text="Resolve" />
-
-    <Button
-        android:id="@+id/ContactB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/ResolveTrsnB"
-        android:layout_alignBottom="@+id/ResolveTrsnB"
-        android:layout_alignLeft="@+id/NotificationB"
-        android:layout_alignRight="@+id/CreateTrsnB"
-        android:layout_below="@+id/CreateTrsnB"
-        android:onClick="Contact"
-        android:text="Contact" />
-
-    <Button
-        android:id="@+id/NotificationB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/CreateTrsnB"
-        android:layout_below="@+id/ContactB"
-        android:layout_toRightOf="@+id/ManageGroupB"
-        android:onClick="Notification"
-        android:text="Notification" />
-
-    <Button
-        android:id="@+id/StatisticB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ResolveTrsnB"
-        android:layout_alignRight="@+id/ManageGroupB"
-        android:layout_below="@+id/ManageGroupB"
-        android:onClick="Statistic"
-        android:text="Statistic" />
+        android:text="Resolve Transaction" />
 
     <Button
         android:id="@+id/SettingB"
-        android:layout_width="wrap_content"
+        android:layout_width="143dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/NotificationB"
-        android:layout_alignRight="@+id/CreateTrsnB"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/NotificationB"
         android:onClick="Setting"
         android:text="Settings" />
 
     <Button
-        android:id="@+id/ManageGroupB"
+        android:id="@+id/ContactB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/SettingB"
-        android:layout_alignLeft="@+id/CreateTrsnB"
+        android:layout_alignLeft="@+id/ResolveTrsnB"
+        android:layout_alignRight="@+id/ResolveTrsnB"
         android:layout_below="@+id/ResolveTrsnB"
-        android:onClick="ManageGroup"
-        android:text="Manage Groups" />
+        android:onClick="Contact"
+        android:text="Contact List" />
 
     <Button
         android:id="@+id/CreateTrsnB"
@@ -77,8 +45,45 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="204dp"
+        android:layout_marginTop="100dp"
         android:onClick="CreateTrsn"
         android:text="Create Transaction" />
+
+    <Button
+        android:id="@+id/NotificationB"
+        android:layout_width="143dp"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/ContactB"
+        android:layout_below="@+id/ContactB"
+        android:onClick="Notification"
+        android:text="Notification" />
+
+    <Button
+        android:id="@+id/ManageGroupB"
+        android:layout_width="143dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ContactB"
+        android:layout_below="@+id/ContactB"
+        android:onClick="ManageGroup"
+        android:text="Groups" />
+
+    <Button
+        android:id="@+id/StatisticB"
+        android:layout_width="143dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/SettingB"
+        android:layout_alignBottom="@+id/SettingB"
+        android:layout_alignParentLeft="true"
+        android:onClick="Statistic"
+        android:text="Statistics" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        android:text="Logout" />
 
 </RelativeLayout>

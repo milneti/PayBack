@@ -57,6 +57,12 @@ public class MainActivity extends Activity {
     	Intent intent = new Intent(this, StatisticActivity.class);
         startActivity(intent);
     }
+    public void MainLogout(View view)
+    {
+    	Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
     
     public void Setting(View view)
     {
