@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 
 public class Transaction2Activity extends Activity {
 
@@ -12,6 +13,9 @@ public class Transaction2Activity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_transaction2);
+		
+		TextView costDisplay = (TextView) findViewById(R.id.textView3);
+		costDisplay.setText(getIntent().getStringExtra(Transaction1Activity.transactionCost));
 	}
 
 	@Override
