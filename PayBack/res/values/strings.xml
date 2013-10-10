@@ -24,5 +24,9 @@
     <string name="title_activity_transaction5">Transaction5Activity</string>
     <string name="Previous">Previous</string>
     <string name="contactSelectHeader">Contact Selection</string>
+    <string name="Done">Done</string>
+    <string name="LenderShareHeader">Lender\'s Share</string>
+    <string name="LenderEven">Split Evenly</string>
+    <string name="LenderCustom">Custom Value</string>
 
 </resources>
