@@ -6,31 +6,26 @@ public class User {
 	String fName;
 	String lName;
 	String email;
-	int userId;
-	static int nextIdToUse = 0; //currently it resets every time the program is run; will change with server implementation
 	ArrayList<Integer> friends; //populated whenever user inputs an email address to create a transaction with
 	User(String fName, String lName, String email)
 	{
 		this.fName = fName;
 		this.lName = lName;
 		this.email = email;
+		boolean worked = sendNewUserToServer();
+		if(!worked)
+			throw new IllegalArgumentException();
 		
-		//get last used userid from server
-		
-		userId = nextIdToUse++;
-		
-		
-		//send updated last used userid back to server
 	}
-	
-	static String idToEmail(int id)
+	static boolean sendNewUserToServer()
 	{
-		//server stuff
-		return "a@b.com";
+		//TODO: send email, fname, lname, pword to database
+		//return success/fail
+		return false;
 	}
-	static int emailToId(String email)
+	ArrayList<String> friendEmailsLookup()
 	{
-		//server stuff
-		return -1;
+		//TODO: look up email addresses of friends, given the friends' user ids
+		return new ArrayList<String>();
 	}
 }
