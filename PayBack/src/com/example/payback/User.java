@@ -6,6 +6,7 @@ abstract class Account
 	String fName;
 	String lName;
 	String email;
+	
 	public String getfName() {
 		return fName;
 	}
@@ -49,4 +50,38 @@ public class User extends Account{
 	}
 }
 
-class Friend extends Account {}
+class Friend extends Account {
+	boolean selected;
+	
+	Friend(String fName, String lName, String email)
+	{
+		this.fName = fName;
+		this.lName = lName;
+		this.email = email;
+		this.selected = false;
+		boolean worked = sendNewFriendToServer();
+		if(!worked)
+			throw new IllegalArgumentException();
+		
+	}
+	
+	//Getters and Setters
+	  public boolean isSelected() {
+		    return selected;
+		  }
+
+		  public void setSelected(boolean selected) {
+		    this.selected = selected;
+		  }
+	
+	//Methods
+	static boolean sendNewFriendToServer()
+	{
+		//TODO: send email, fname, lname, pword to database
+		//return success/fail
+		return true;
+	}
+	
+	
+	
+}
