@@ -1,6 +1,7 @@
 package com.example.payback;
 
 import java.util.*;
+<<<<<<< HEAD
 
 public class User {
 	private String fName;
@@ -72,15 +73,58 @@ public class User {
 
 	// Methods
 	static String idToEmail(int id)
-	{
-		//server stuff
-		return "a@b.com";
+=======
+abstract class Account 
+{
+	String fName;
+	String lName;
+	String email;
+	public String getfName() {
+		return fName;
 	}
-	static int emailToId(String email)
+	public void setfName(String fName) {
+		this.fName = fName;
+	}
+	public String getlName() {
+		return lName;
+	}
+	public void setlName(String lName) {
+		this.lName = lName;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+}
+public class User extends Account{
+	private ArrayList<Friend> friends; //updated when the User logs in
+	User(String fName, String lName, String email)
 	{
-		//server stuff
-		return -1;
+		this.fName = fName;
+		this.lName = lName;
+		this.email = email;
+		boolean worked = sendNewUserToServer();
+		if(!worked)
+			throw new IllegalArgumentException();
+	}
+	static boolean sendNewUserToServer()
+>>>>>>> master
+	{
+		//TODO: send email, fname, lname, pword to database
+		//return success/fail
+		return true;
+	}
+	ArrayList<String> friendEmailsLookup()
+	{
+		//TODO: look up email addresses of friends, given the friends' user ids
+		return new ArrayList<String>();
 	}
 }
 
+<<<<<<< HEAD
 
+=======
+class Friend extends Account {}
+>>>>>>> master
