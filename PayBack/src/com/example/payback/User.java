@@ -1,12 +1,32 @@
 package com.example.payback;
 
 import java.util.*;
-
-public class User {
+abstract class Account 
+{
 	String fName;
 	String lName;
 	String email;
-	ArrayList<Integer> friends; //populated whenever user inputs an email address to create a transaction with
+	public String getfName() {
+		return fName;
+	}
+	public void setfName(String fName) {
+		this.fName = fName;
+	}
+	public String getlName() {
+		return lName;
+	}
+	public void setlName(String lName) {
+		this.lName = lName;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+}
+public class User extends Account{
+	private ArrayList<Friend> friends; //updated when the User logs in
 	User(String fName, String lName, String email)
 	{
 		this.fName = fName;
@@ -15,13 +35,12 @@ public class User {
 		boolean worked = sendNewUserToServer();
 		if(!worked)
 			throw new IllegalArgumentException();
-		
 	}
 	static boolean sendNewUserToServer()
 	{
 		//TODO: send email, fname, lname, pword to database
 		//return success/fail
-		return false;
+		return true;
 	}
 	ArrayList<String> friendEmailsLookup()
 	{
@@ -29,3 +48,5 @@ public class User {
 		return new ArrayList<String>();
 	}
 }
+
+class Friend extends Account {}
