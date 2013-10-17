@@ -1,6 +1,10 @@
 package com.example.payback;
 
 import java.util.List;
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+<<<<<<< HEAD
 public class Transaction2Activity_contactlist extends ArrayAdapter<Model> {
 
   private final List<Model> list;
@@ -17,6 +22,15 @@ public class Transaction2Activity_contactlist extends ArrayAdapter<Model> {
 
   public Transaction2Activity_contactlist(Activity context, List<Model> list) {
     super(context, R.layout.rowbuttonlayout, list);
+=======
+public class Transaction2Activity_contactlist extends ArrayAdapter<Friend> {
+
+  private final List<Friend> list;
+  private final Activity context;
+
+  public Transaction2Activity_contactlist(Activity context, List<Friend> list) {
+    super(context, R.layout.activity_transaction2_contactlist, list);
+>>>>>>> master
     this.context = context;
     this.list = list;
   }
