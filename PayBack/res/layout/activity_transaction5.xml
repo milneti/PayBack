@@ -41,11 +41,10 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
         android:layout_below="@+id/textView2"
-        android:layout_marginLeft="54dp"
-        android:layout_marginTop="88dp"
-        android:layout_toRightOf="@+id/button1"
-        android:text="TextView" 
+        android:layout_marginTop="28dp"
+        android:text="TextView"
         android:textColor="@color/White" />
 
 </RelativeLayout>
