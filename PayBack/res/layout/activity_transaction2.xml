@@ -36,40 +36,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/contactSelectHeader"
+        android:text="@string/transaction2_contactSelectHeader"
+        android:textColor="@color/White"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textStyle="bold" />
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginBottom="@dimen/DoubleMargin"
-    android:layout_marginTop="@dimen/DoubleMargin"
-    android:orientation="horizontal"
-    android:padding="5dp" >
- 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
-
-    <CheckBox
-        android:id="@+id/checkBox1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/DoubleMargin"
-        android:layout_marginTop="@dimen/DoubleMargin"
-        android:checked="false" />
- 
-</LinearLayout>
 
 <TextView
     android:id="@+id/textView3"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_alignBottom="@+id/textView2"
-    android:layout_alignParentRight="true"
+    android:layout_alignLeft="@+id/Button01"
+    android:layout_alignParentTop="true"
     android:text=" " />
 
 </RelativeLayout>
