@@ -22,4 +22,16 @@
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1" />
 
+    <Button
+        android:id="@+id/button1"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/spinner1"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="46dp"
+        android:layout_marginLeft="14dp"
+        android:onClick="showCreateContact"
+        android:text="Button" />
+
 </RelativeLayout>

@@ -38,8 +38,6 @@ public class Transaction1Activity extends Activity {
     	EditText transComment = (EditText)findViewById(R.id.editText2);
     	intent.putExtra(transactionCost, transCost.getText().toString());
     	intent.putExtra(transactionComment, transComment.getText().toString());
-    	intent5.putExtra(transactionCost, transCost.getText().toString());
-    	intent5.putExtra(transactionComment, transComment.getText().toString());
         startActivity(intent);
     }
 

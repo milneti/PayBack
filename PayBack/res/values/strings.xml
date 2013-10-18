@@ -28,5 +28,6 @@
     <string name="LenderShareHeader">Lender\'s Share</string>
     <string name="LenderEven">Split Evenly</string>
     <string name="LenderCustom">Custom Value</string>
+    <string name="title_activity_create_contact">CreateContact</string>
 
 </resources>
