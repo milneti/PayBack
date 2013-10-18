@@ -21,7 +21,7 @@ public class Transaction2Activity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		
 		//setContentView(R.layout.activity_transaction2);
-	    View header = getLayoutInflater().inflate(R.layout.activity_transaction2, null);
+	    View header = getLayoutInflater().inflate(R.layout.activity_transaction2_header, null);
 	    View footer = getLayoutInflater().inflate(R.layout.activity_transaction2_footer, null);
 	    
 	    // create an array of Strings, that will be put to our ListActivity
@@ -29,6 +29,7 @@ public class Transaction2Activity extends ListActivity {
 	    
 	    ListView listView = getListView();
 	    listView.addHeaderView(header);
+	    listView.addFooterView(footer);
 	    
 	    setListAdapter(adapter);
 		
