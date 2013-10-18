@@ -28,25 +28,48 @@ abstract class Account
 }
 public class User extends Account{
 	private ArrayList<Friend> friends; //updated when the User logs in
-	User(String fName, String lName, String email)
+	
+	/* Only called when creating a brand new account! */
+	User(String fName, String lName, String email) 
 	{
 		this.fName = fName;
 		this.lName = lName;
 		this.email = email;
+		friends = new ArrayList<Friend>();
 		boolean worked = sendNewUserToServer();
 		if(!worked)
 			throw new IllegalArgumentException();
 	}
-	static boolean sendNewUserToServer()
+	static private boolean sendNewUserToServer()
 	{
 		//TODO: send email, fname, lname, pword to database
 		//return success/fail
 		return true;
 	}
-	ArrayList<String> friendEmailsLookup()
+	
+	/* Used for the rest of the time, when the user logs in */
+	User(String email)
 	{
-		//TODO: look up email addresses of friends, given the friends' user ids
-		return new ArrayList<String>();
+		this.email = email;
+		fName = firstNameLookup(email);
+		lName = lastNameLookup(email);
+		friends = friendsLookup(email);
+	}
+	private String firstNameLookup(String email)
+	{
+		//TODO: Pull user's first name from server
+		return "John";
+	}
+	private String lastNameLookup(String email)
+	{
+		//TODO: Pull user's last name from server
+		return "Doe";
+	}
+	private ArrayList<Friend> friendsLookup(String email) // Used for existing users
+	{
+		ArrayList<Friend> f = new ArrayList<Friend>();
+		//TODO: Pull information about each friend from the server: first name, last name, email. 
+		return f;
 	}
 }
 
