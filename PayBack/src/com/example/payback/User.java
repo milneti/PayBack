@@ -1,79 +1,6 @@
 package com.example.payback;
 
 import java.util.*;
-<<<<<<< HEAD
-
-public class User {
-	private String fName;
-	private String lName;
-	private String email;
-	private int userId;
-	private boolean selected;	
-	static int nextIdToUse = 0; //currently it resets every time the program is run; will change with server implementation
-	ArrayList<Integer> friends; //populated whenever user inputs an email address to create a transaction with
-
-	User(String fName, String lName, String email)
-	{
-		this.setfName(fName);
-		this.setlName(lName);
-		this.setEmail(email);
-		
-		//get last used userid from server
-		
-		setUserId(nextIdToUse++);
-		
-		
-		//send updated last used userid back to server
-	}
-
-
-	// Getters and Setters
-
-	public String getfName() {
-		return fName;
-	}
-
-	public void setfName(String fName) {
-		this.fName = fName;
-	}
-
-	public String getlName() {
-		return lName;
-	}
-	public void setlName(String lName) {
-		this.lName = lName;
-	}
-
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-
-	public boolean isSelected() {
-		return selected;
-	}
-
-	public void setSelected(boolean selected) {
-		this.selected = selected;
-	}
-
-	// Methods
-	static String idToEmail(int id)
-=======
 abstract class Account 
 {
 	String fName;
@@ -111,7 +38,6 @@ public class User extends Account{
 			throw new IllegalArgumentException();
 	}
 	static boolean sendNewUserToServer()
->>>>>>> master
 	{
 		//TODO: send email, fname, lname, pword to database
 		//return success/fail
@@ -124,21 +50,14 @@ public class User extends Account{
 	}
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-class Friend extends Account {}
->>>>>>> master
-=======
 class Friend extends Account {
 	boolean selected;
 	
-	Friend(String fName, String lName, String email)
+	Friend(String fName)
 	{
 		this.fName = fName;
-		this.lName = lName;
-		this.email = email;
+		this.lName = "";
+		this.email = "";
 		this.selected = false;
 		boolean worked = sendNewFriendToServer();
 		if(!worked)
@@ -166,4 +85,3 @@ class Friend extends Account {
 	
 	
 }
->>>>>>> master

@@ -1,5 +1,8 @@
 package com.example.payback;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Bundle;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -16,17 +19,39 @@ public class Transaction2Activity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
-	    String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-		        "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-		        "Linux", "OS/2" };
-	    // use your own layout
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				R.layout.activity_transaction2, R.id.label , values);
+		
+		//setContentView(R.layout.activity_transaction2);
+	    View header = getLayoutInflater().inflate(R.layout.activity_transaction2, null);
+	    View footer = getLayoutInflater().inflate(R.layout.activity_transaction2_footer, null);
+	    
+	    // create an array of Strings, that will be put to our ListActivity
+	    ArrayAdapter<Friend> adapter = new Transaction2Activity_contactlist_adapter(this, getModel());
+	    
+	    ListView listView = getListView();
+	    listView.addHeaderView(header);
+	    
 	    setListAdapter(adapter);
 		
-		TextView costDisplay = (TextView) findViewById(R.id.textView2);
-		costDisplay.setText(getIntent().getStringExtra(Transaction1Activity.transactionCost));
 	}
+	
+	private List<Friend> getModel() {
+	    List<Friend> list = new ArrayList<Friend>();
+	    list.add(get("Linux"));
+	    list.add(get("Windows7"));
+	    list.add(get("Suse"));
+	    list.add(get("Eclipse"));
+	    list.add(get("Ubuntu"));
+	    list.add(get("Solaris"));
+	    list.add(get("Android"));
+	    list.add(get("iPhone"));
+	    // Initially select one of the items
+	    //list.get(1).setSelected(true);
+	    return list;
+	  }
+
+	  private Friend get(String s) {
+	    return new Friend(s);
+	  }
 	
 
 	@Override
