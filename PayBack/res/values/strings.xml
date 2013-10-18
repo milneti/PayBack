@@ -23,6 +23,7 @@
     <string name="transaction1_Comment_hint">Comments (optional)</string>
     
     <string name="transaction2_contactSelectHeader">Contact Selection</string>
+    <string name="transaction2_newContact">New Contact</string>
     
     <string name="transaction3_LenderShareHeader">Lender\'s Share</string>
     <string name="transaction3_LenderEven">Split Evenly</string>
