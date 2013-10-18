@@ -35,7 +35,7 @@
     <string name="Home">Home</string>
     <string name="Next">Next</string>
     <string name="Previous">Previous</string>
-
+<<<<<<< HEAD
     <string name="contactSelectHeader">Contact Selection</string>
     <string name="Done">Done</string>
     <string name="LenderShareHeader">Lender\'s Share</string>
@@ -43,4 +43,9 @@
     <string name="LenderCustom">Custom Value</string>
     <string name="title_activity_create_contact">CreateContact</string>
 
+=======
+    <string name="Done">Done</string>    
+    <string name="HoldReset">Hold to Reset</string>
+    <string name="action_logout">logout</string>    
+>>>>>>> origin/master
 </resources>
