@@ -34,9 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/transaction3_LenderShareHeader"
+        android:text="@string/LenderShareHeader"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/White"
         android:textStyle="bold" />
 
     <RadioButton
@@ -46,9 +45,7 @@
         android:layout_alignBaseline="@+id/radioButton1"
         android:layout_alignBottom="@+id/radioButton1"
         android:layout_alignParentRight="true"
-        android:text="@string/transaction3_LenderCustom" 
-        android:textColor="@color/White"
-        />
+        android:text="@string/LenderCustom" />
 
     <RadioButton
         android:id="@+id/radioButton1"
@@ -57,9 +54,7 @@
         android:layout_alignLeft="@+id/button1"
         android:layout_below="@+id/textView2"
         android:layout_marginTop="90dp"
-        android:text="@string/transaction3_LenderEven" 
-        android:textColor="@color/White"
-        />
+        android:text="@string/LenderEven" />
 
     <EditText
         android:id="@+id/editText1"
@@ -69,7 +64,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:inputType="number" 
-        />
+        android:inputType="number" />
 
 </RelativeLayout>

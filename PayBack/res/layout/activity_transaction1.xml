@@ -18,6 +18,7 @@
         android:longClickable="true"
         android:onClick="showMainMenu"
         android:text="@string/Home"
+        android:textColor="@color/White"
         android:textAlignment="center" />
 
     <Button
@@ -29,53 +30,39 @@
         android:layout_alignParentRight="true"
         android:onClick="showTrans2"
         android:text="@string/Next"
-        />
+        android:textColor="@color/White" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText1"
-        android:layout_marginTop="36dp"
-        android:layout_toLeftOf="@+id/Button01"
-        android:text="@string/transaction1_Comment"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/White"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="@string/transaction1_Header"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/transactionHeader"
         android:textColor="@color/White"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
         android:ems="10"
-        android:hint="@string/transaction1_Cost"
-        android:inputType="number" >
-
-        <requestFocus />
-    </EditText>
+        android:hint="@string/Cost"
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1"
-        android:layout_below="@+id/textView2"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/editText1"
+        android:layout_marginTop="35dp"
         android:ems="10"
-        android:hint="@string/transaction1_Comment_hint"
+        android:hint="@string/CommentsOption"
         android:inputType="textMultiLine"
         android:lines="@integer/Int4" />
 

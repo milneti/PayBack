@@ -10,17 +10,6 @@
     android:background="@drawable/activitybackground">
 
     <Button
-        android:id="@+id/CreateTrsnB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="100dp"
-        android:onClick="CreateTrsn"
-        android:text="@string/title_activity_create_transaction" />
-    
-    <Button
         android:id="@+id/ResolveTrsnB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,8 +17,17 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/CreateTrsnB"
         android:onClick="ResolveTrsn"
-        android:text="@string/title_activity_resolve_transaction" />
-    
+        android:text="Resolve Transaction" />
+
+    <Button
+        android:id="@+id/SettingB"
+        android:layout_width="143dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/NotificationB"
+        android:onClick="Setting"
+        android:text="Settings" />
+
     <Button
         android:id="@+id/ContactB"
         android:layout_width="wrap_content"
@@ -38,16 +36,18 @@
         android:layout_alignRight="@+id/ResolveTrsnB"
         android:layout_below="@+id/ResolveTrsnB"
         android:onClick="Contact"
-        android:text="@string/title_activity_contact" />
+        android:text="Contact List" />
 
     <Button
-        android:id="@+id/ManageGroupB"
-        android:layout_width="143dp"
+        android:id="@+id/CreateTrsnB"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ContactB"
-        android:layout_below="@+id/ContactB"
-        android:onClick="ManageGroup"
-        android:text="@string/title_activity_manage_group" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="100dp"
+        android:onClick="CreateTrsn"
+        android:text="Create Transaction" />
 
     <Button
         android:id="@+id/NotificationB"
@@ -56,8 +56,16 @@
         android:layout_alignRight="@+id/ContactB"
         android:layout_below="@+id/ContactB"
         android:onClick="Notification"
-        android:text="@string/title_activity_notification" />
+        android:text="Notification" />
 
+    <Button
+        android:id="@+id/ManageGroupB"
+        android:layout_width="143dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ContactB"
+        android:layout_below="@+id/ContactB"
+        android:onClick="ManageGroup"
+        android:text="Groups" />
 
     <Button
         android:id="@+id/StatisticB"
@@ -67,16 +75,7 @@
         android:layout_alignBottom="@+id/SettingB"
         android:layout_alignParentLeft="true"
         android:onClick="Statistic"
-        android:text="@string/title_activity_statistic" />
-        
-    <Button
-        android:id="@+id/SettingB"
-        android:layout_width="143dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/NotificationB"
-        android:onClick="Setting"
-        android:text="@string/action_settings" />
+        android:text="Statistics" />
 
     <Button
         android:id="@+id/button1"
@@ -85,6 +84,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="25dp"
-        android:text="@string/action_logout" />
+        android:text="Logout" />
 
 </RelativeLayout>
