@@ -25,9 +25,8 @@ public class Transaction2Activity extends ListActivity {
 		 super.onCreate(savedInstanceState);
 		    setContentView(R.layout.activity_transaction2_expandablecontactlist_main);
 		    createData();
-		    ExpandableListView listView = (ExpandableListView) findViewById(R.id.contactlistView);
-		    Transaction2Activity_expandablecontactlist_adapter adapter =
-		    			new Transaction2Activity_expandablecontactlist_adapter(this, groups);
+		    ExpandableListView listView = (ExpandableListView) findViewById(R.id.listview);	
+		    Transaction2Activity_expandablecontactlist_adapter adapter = new Transaction2Activity_expandablecontactlist_adapter(this, groups);
 		    listView.setAdapter(adapter);
 	    
 	    
