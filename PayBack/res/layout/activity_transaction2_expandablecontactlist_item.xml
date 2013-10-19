@@ -4,7 +4,8 @@
     android:layout_height="40dp"
     android:clickable="true"
     android:orientation="vertical"
-    android:paddingLeft="40dp" >
+    android:paddingLeft="40dp"
+    tools:context=".MainActivity" >
 
     <TextView
         android:id="@+id/textView1"
@@ -13,7 +14,7 @@
         android:drawableLeft="@drawable/ic_launcher"
         android:drawablePadding="5dp"
         android:gravity="center_vertical"
-        android:text="@string/app_name"
+        android:text="@string/hello_world"
         android:textSize="14sp"
         android:textStyle="bold" >
     </TextView>

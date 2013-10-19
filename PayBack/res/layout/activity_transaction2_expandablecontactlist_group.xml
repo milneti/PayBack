@@ -8,7 +8,7 @@
     android:gravity="left"
     android:paddingLeft="32dp"
     android:paddingTop="8dp"
-    android:text="@string/app_name"    
+    android:text="Test"
     android:textSize="14sp"
     android:textAlignment="textEnd"
     android:textStyle="bold" /> 

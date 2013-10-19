@@ -1,21 +1,21 @@
 package com.example.payback;
 
-import java.util.ArrayList;
-import java.util.List;
-
+//import java.util.ArrayList;
+//import java.util.List;
 import android.os.Bundle;
-import android.app.ListActivity;
+import android.app.Activity;
+//import android.app.ListActivity;
 import android.content.Intent;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ArrayAdapter;
+//import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
-import android.widget.TextView;
-import android.widget.ListView;
-import android.widget.Toast;
+//import android.widget.TextView;
+//import android.widget.ListView;
+//import android.widget.Toast;
 
-public class Transaction2Activity extends ListActivity {
+public class Transaction2Activity extends Activity  {
 
 	SparseArray<Transaction2Activity_expandablecontactlist_group> groups = new SparseArray<Transaction2Activity_expandablecontactlist_group>();
 	
@@ -23,9 +23,10 @@ public class Transaction2Activity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		 super.onCreate(savedInstanceState);
+		    super.onCreate(savedInstanceState);
 		    setContentView(R.layout.activity_transaction2_expandablecontactlist_main);
 		    createData();
-		    ExpandableListView listView = (ExpandableListView) findViewById(R.id.listview);	
+		    ExpandableListView listView = (ExpandableListView) findViewById(R.id.listView);
 		    Transaction2Activity_expandablecontactlist_adapter adapter = new Transaction2Activity_expandablecontactlist_adapter(this, groups);
 		    listView.setAdapter(adapter);
 	    
@@ -45,35 +46,46 @@ public class Transaction2Activity extends ListActivity {
 //		
 	}
 	
-	  public void createData() {
-		    for (int j = 0; j < 5; j++) {
-		    	Transaction2Activity_expandablecontactlist_group group = 
-		    			new Transaction2Activity_expandablecontactlist_group("Test " + j);
-		      for (int i = 0; i < 5; i++) {
-		        group.children.add("Sub Item" + i);
-		      }
-		      groups.append(j, group);
-		    }
-		  }
-	
-	private List<Friend> getModel() {
-	    List<Friend> list = new ArrayList<Friend>();
-	    list.add(get("Linux"));
-	    list.add(get("Windows7"));
-	    list.add(get("Suse"));
-	    list.add(get("Eclipse"));
-	    list.add(get("Ubuntu"));
-	    list.add(get("Solaris"));
-	    list.add(get("Android"));
-	    list.add(get("iPhone"));
-	    // Initially select one of the items
-	    //list.get(1).setSelected(true);
-	    return list;
-	  }
+	public void createData() {
+	    for (int j = 0; j < 2; j++) {
+	    	if(j==0){
+		    	Transaction2Activity_expandablecontactlist_group group = new Transaction2Activity_expandablecontactlist_group("Groups");
+		        for (int i = 0; i < 5; i++) {
+		          group.children.add("Sub Item" + i);
+		        }
+		        groups.append(j, group);
+	    	}
+	    	if(j==1){
+		    	Transaction2Activity_expandablecontactlist_group group = new Transaction2Activity_expandablecontactlist_group("Contacts");
+		        for (int i = 0; i < 5; i++) {
+		          group.children.add("Sub Item" + i);
+		        }
+		        groups.append(j, group);
+	    	}
+ 
 
-	private Friend get(String s) {
-	    return new Friend(s);
-	  }
+	      }
+		}
+
+	
+//	private List<Friend> getModel() {
+//	    List<Friend> list = new ArrayList<Friend>();
+//	    list.add(get("Linux"));
+//	    list.add(get("Windows7"));
+//	    list.add(get("Suse"));
+//	    list.add(get("Eclipse"));
+//	    list.add(get("Ubuntu"));
+//	    list.add(get("Solaris"));
+//	    list.add(get("Android"));
+//	    list.add(get("iPhone"));
+//	    // Initially select one of the items
+//	    //list.get(1).setSelected(true);
+//	    return list;
+//	  }
+
+//	private Friend get(String s) {
+//	    return new Friend(s);
+//	  }
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

@@ -39,4 +39,7 @@
     <string name="Done">Done</string>    
     <string name="HoldReset">Hold to Reset</string>
     <string name="action_logout">logout</string>    
+    
+    <string name="hello_world">Hello World</string>
+    
 </resources>
