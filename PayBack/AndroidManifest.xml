@@ -75,14 +75,6 @@
             android:name="com.example.payback.Transaction5Activity"
             android:label="@string/title_activity_transaction5" >
         </activity>
-        <activity
-            android:name="com.example.payback.CreateContact"
-            android:label="@string/title_activity_create_contact"
-            android:parentActivityName="com.example.payback.ContactActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.payback.ContactActivity" />
-        </activity>
     </application>
 
 </manifest>

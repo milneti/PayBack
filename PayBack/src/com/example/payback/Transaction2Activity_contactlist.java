@@ -1,5 +1,5 @@
 package com.example.payback;
-
+/*
 import java.util.List;
 
 import android.app.Activity;
@@ -60,3 +60,4 @@ public class Transaction2Activity_contactlist extends ArrayAdapter<Friend> {
     return view;
   }
 } 
+*/

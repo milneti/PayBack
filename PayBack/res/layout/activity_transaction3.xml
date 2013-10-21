@@ -16,8 +16,7 @@
         android:layout_alignParentBottom="true"
         android:longClickable="true"
         android:onClick="showTrans2"
-        android:text="@string/Previous"
-        android:textAlignment="center" />
+        android:text="@string/Previous"/>
 
     <Button
         android:id="@+id/Button01"

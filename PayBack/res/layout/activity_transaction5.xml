@@ -34,8 +34,7 @@
         android:layout_alignParentLeft="true"
         android:longClickable="true"
         android:onClick="showTrans4"
-        android:text="@string/Previous"
-        android:textAlignment="center" />
+        android:text="@string/Previous"/>
 
     <TextView
         android:id="@+id/textView1"
