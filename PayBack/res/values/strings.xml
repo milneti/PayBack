@@ -30,14 +30,10 @@
     <string name="Home">Home</string>
     <string name="Next">Next</string>
     <string name="Previous">Previous</string>
-<<<<<<< HEAD
-    <string name="Done">Done</string>    
+
     <string name="HoldReset">Hold to Reset</string>
     <string name="action_logout">logout</string>    
-    
-    <string name="hello_world">Hello World</string>
-    
-=======
+
     <string name="contactSelectHeader">Contact Selection</string>
     <string name="Done">Done</string>
     <string name="LenderShareHeader">Lender\'s Share</string>
@@ -49,6 +45,4 @@
     <string name="Confirm">Confirm</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="hello_world">Hello world!</string>
-
->>>>>>> master
 </resources>
