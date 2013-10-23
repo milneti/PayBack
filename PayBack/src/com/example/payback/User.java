@@ -76,11 +76,11 @@ public class User extends Account{
 class Friend extends Account {
 	boolean selected;
 	
-	Friend(String fName, String lName, String email)
+	Friend(String fName)
 	{
 		this.fName = fName;
-		this.lName = lName;
-		this.email = email;
+		this.lName = "";
+		this.email = "";
 		this.selected = false;
 		boolean worked = sendNewFriendToServer();
 		if(!worked)

@@ -32,14 +32,11 @@ public class Transaction1Activity extends Activity {
 	
 	public void showTrans2(View view)
     {	
-		Intent intent5 = new Intent(this, Transaction5Activity.class);
     	Intent intent = new Intent(this, Transaction2Activity.class);
     	EditText transCost = (EditText)findViewById(R.id.editText1);
     	EditText transComment = (EditText)findViewById(R.id.editText2);
     	intent.putExtra(transactionCost, transCost.getText().toString());
     	intent.putExtra(transactionComment, transComment.getText().toString());
-    	intent5.putExtra(transactionCost, transCost.getText().toString());
-    	intent5.putExtra(transactionComment, transComment.getText().toString());
         startActivity(intent);
     }
 
