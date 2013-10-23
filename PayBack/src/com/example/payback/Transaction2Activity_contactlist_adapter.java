@@ -60,3 +60,4 @@ public class Transaction2Activity_contactlist_adapter extends ArrayAdapter<Frien
     return view;
   }
 } 
+

@@ -17,8 +17,7 @@
         android:layout_alignParentLeft="true"
         android:longClickable="true"
         android:onClick="showMainMenu"
-        android:text="@string/Home"
-        android:textAlignment="center" />
+        android:text="@string/Home" />
 
     <Button
         android:id="@+id/Button01"
