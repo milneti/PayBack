@@ -33,14 +33,4 @@
         android:onClick="showCreateContact"
         android:text="New Contact" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_marginBottom="78dp"
-        android:textColor="@color/White"
-        android:text="TextView" />
-
 </RelativeLayout>
