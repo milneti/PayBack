@@ -1,5 +1,5 @@
 package com.example.payback;
-/*
+
 import java.util.List;
 
 import android.app.Activity;
@@ -11,12 +11,12 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-public class Transaction2Activity_contactlist extends ArrayAdapter<Friend> {
+public class Transaction2Activity_contactlist_adapter extends ArrayAdapter<Friend> {
 
   private final List<Friend> list;
   private final Activity context;
 
-  public Transaction2Activity_contactlist(Activity context, List<Friend> list) {
+  public Transaction2Activity_contactlist_adapter(Activity context, List<Friend> list) {
     super(context, R.layout.activity_transaction2_contactlist, list);
     this.context = context;
     this.list = list;
@@ -32,17 +32,17 @@ public class Transaction2Activity_contactlist extends ArrayAdapter<Friend> {
     View view = null;
     if (convertView == null) {
       LayoutInflater inflator = context.getLayoutInflater();
-      view = inflator.inflate(R.layout.rowbuttonlayout, null);
+      view = inflator.inflate(R.layout.activity_transaction2_contactlist, null);
       final ViewHolder viewHolder = new ViewHolder();
-      viewHolder.text = (TextView) view.findViewById(R.id.label);
-      viewHolder.checkbox = (CheckBox) view.findViewById(R.id.check);
+      viewHolder.text = (TextView) view.findViewById(R.id.contactname);
+      viewHolder.checkbox = (CheckBox) view.findViewById(R.id.checkBox);
       viewHolder.checkbox
           .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
                 boolean isChecked) {
-              Model element = (Model) viewHolder.checkbox
+            	Friend element = (Friend) viewHolder.checkbox
                   .getTag();
               element.setSelected(buttonView.isChecked());
 
@@ -55,9 +55,9 @@ public class Transaction2Activity_contactlist extends ArrayAdapter<Friend> {
       ((ViewHolder) view.getTag()).checkbox.setTag(list.get(position));
     }
     ViewHolder holder = (ViewHolder) view.getTag();
-    holder.text.setText(list.get(position).getName());
+    holder.text.setText(list.get(position).getfName());
     holder.checkbox.setChecked(list.get(position).isSelected());
     return view;
   }
 } 
-*/
+

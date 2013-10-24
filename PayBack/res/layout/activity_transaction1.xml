@@ -55,19 +55,6 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:ems="10"
-        android:hint="@string/transaction1_Cost"
-        android:inputType="number" >
-
-        <requestFocus />
-    </EditText>
-
-    <EditText
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -77,5 +64,15 @@
         android:hint="@string/transaction1_Comment_hint"
         android:inputType="textMultiLine"
         android:lines="@integer/Int4" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:ems="10"
+        android:hint="@string/transaction1_Cost"
+        android:inputType="number" />
 
 </RelativeLayout>
