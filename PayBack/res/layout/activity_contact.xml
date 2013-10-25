@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/activitybackground"
+    android:gravity="right"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -38,14 +39,27 @@
             android:layout_gravity="right"
             android:onClick="showCreateContact"
             android:text="@string/transaction2_newContact" />
-
     </LinearLayout>
 
     <ListView
         android:id="@+id/listofcontacts"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dip"
+        android:layout_weight="1.06"
+        android:dividerHeight="0.05dp"
+        android:focusableInTouchMode="true"
+        android:smoothScrollbar="true"
+        android:cacheColorHint="#00000000" >
 
     </ListView>
+
+    <Button
+        android:id="@+id/button2"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:onClick="showMainMenu"
+        android:text="@string/Home" />
 
 </LinearLayout>

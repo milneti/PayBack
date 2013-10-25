@@ -14,6 +14,7 @@
     <string name="title_activity_transaction3">Transaction Page 3</string>
     <string name="title_activity_transaction4">Transaction Page 4</string>
     <string name="title_activity_transaction5">Transaction Page 5</string>
+    
     <string name="transaction1_Header">Create a Transaction</string>
     <string name="transaction1_Cost">Enter Transaction Total</string>
     <string name="transaction1_Comment">Comments</string>
@@ -43,11 +44,11 @@
     <string name="Confirm">Confirm</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="hello_world">Hello world!</string>
-<<<<<<< HEAD
-=======
+    
     <string name="title_activity_create_account">CreateAccountActivity</string>
     <string name="create_account_here">New user? Register here</string>
     <string name="login_here">Have an account? Login here</string>
+    
+    <string name="activity_contact_create">Enter Email Address</string>
 
->>>>>>> origin/master
 </resources>
