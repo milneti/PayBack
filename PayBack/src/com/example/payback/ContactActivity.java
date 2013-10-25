@@ -1,45 +1,56 @@
 package com.example.payback;
 
+import java.util.ArrayList;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
-public class ContactActivity extends ListActivity {
+public class ContactActivity extends Activity {
 
+	  private ListView contactlistview;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_contact);
+
 		
-		String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-		        "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-		        "Linux", "OS/2","Android", "iPhone", "WindowsMobile",
-		        "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-		        "Linux", "OS/2","Android", "iPhone", "WindowsMobile",
-		        "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-		        "Linux", "OS/2","Android", "iPhone", "WindowsMobile",
-		        "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-		        "Linux", "OS/2","Android", "iPhone", "WindowsMobile",
-		        "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-		        "Linux", "OS/2" };
+
+		contactlistview = (ListView) findViewById(R.id.listofcontacts);
+		ArrayList<String> friendList = buildFriendList();
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-		        R.layout.activity_contact_rowlayout, R.id.contactlabel, values);
-		    setListAdapter(adapter);
+		        R.layout.activity_contact_rowlayout, R.id.contactlabel, friendList);
+
+		contactlistview.setAdapter(adapter);
 		    
-		//setContentView(R.layout.activity_contact);
 	}
 
+
+	private ArrayList<String> buildFriendList() {
+	    ArrayList<String> list = new ArrayList<String>();
+	    
+	    //dummy friends
+	    Friend test1 = new Friend("Android", "Mobile");
+	    Friend test2 = new Friend("Windows7", "Windows7");
+	    Friend test3 = new Friend("iPhone", "iPhone");
+
+	    list.add(test1.getfName() + " " + test1.getlName());
+	    list.add(test2.getfName() + " " + test2.getlName());
+	    list.add(test3.getfName() + " " + test3.getlName());
+	    return list;
+	  }
+
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
