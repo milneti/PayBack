@@ -26,11 +26,16 @@ public class LoginActivity extends Activity {
 		return true;
 	}
 	
-	public void Login(View view){
+	public void Login(View view) {
 		Intent intent = new Intent(this, MainActivity.class);
 		Toast.makeText(getApplicationContext(),
                 "Welcome", Toast.LENGTH_SHORT)
                 .show();
+        startActivity(intent);
+	}
+	
+	public void CreateAccount(View view) {
+		Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
         startActivity(intent);
 	}
 }
