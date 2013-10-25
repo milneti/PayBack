@@ -19,9 +19,7 @@
     <string name="transaction1_Comment">Comments</string>
     <string name="transaction1_Comment_hint">Comments (optional)</string>
     <string name="transaction2_contactSelectHeader">Contact Selection</string>
-
     <string name="transaction2_newContact">New Contact</string>
-
     <string name="transaction3_LenderShareHeader">Lender\'s Share</string>
     <string name="transaction3_LenderEven">Split Evenly</string>
     <string name="transaction3_LenderCustom">Custom Value</string>
@@ -41,5 +39,8 @@
     <string name="Confirm">Confirm</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_create_account">CreateAccountActivity</string>
+    <string name="create_account_here">New user? Register here</string>
+    <string name="login_here">Have an account? Login here</string>
 
 </resources>
