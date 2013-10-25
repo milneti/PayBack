@@ -40,5 +40,7 @@
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_create_account">CreateAccountActivity</string>
+    <string name="create_account_here">New user? Register here</string>
+    <string name="login_here">Have an account? Login here</string>
 
 </resources>

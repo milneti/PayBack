@@ -14,22 +14,22 @@
             android:orientation="vertical" >
 
         	<EditText
-                android:id="@+id/fName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/prompt_email"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:singleLine="true" />
+        	    android:id="@+id/fName"
+        	    android:layout_width="match_parent"
+        	    android:layout_height="wrap_content"
+        	    android:hint="@string/prompt_first_name"
+        	    android:inputType="textPersonName"
+        	    android:maxLines="1"
+        	    android:singleLine="true" />
         	
         	<EditText
-                android:id="@+id/lName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/prompt_email"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:singleLine="true" />
+        	    android:id="@+id/lName"
+        	    android:layout_width="match_parent"
+        	    android:layout_height="wrap_content"
+        	    android:hint="@string/prompt_last_name"
+        	    android:inputType="textPersonName"
+        	    android:maxLines="1"
+        	    android:singleLine="true" />
         	
             <EditText
                 android:id="@+id/email"
@@ -61,7 +61,7 @@
                 android:onClick="Login"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                android:text="@string/action_sign_in_register" />
+                android:text="@string/action_register" />
             
             <TextView
                 android:id="@+id/link_to_login"
@@ -72,9 +72,9 @@
                 android:gravity="center"
                 android:onClick="Login"
                 android:clickable="true"
-                android:text="Have an account? Login here"
+                android:text="@string/login_here"
                 android:textColor="#0b84aa"
-                android:textSize="16dip" />
+                android:textSize="16sp" />
 
         </LinearLayout>
         

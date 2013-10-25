@@ -39,7 +39,7 @@
                 android:onClick="Login"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                android:text="@string/action_sign_in_register" />
+                android:text="@string/action_sign_in_short" />
             
             <TextView
                 android:id="@+id/link_to_register"
@@ -50,9 +50,9 @@
                 android:gravity="center"
                 android:onClick="CreateAccount"
                 android:clickable="true"
-                android:text="New user? Register here"
+                android:text="@string/create_account_here"
                 android:textColor="#0b84aa"
-                android:textSize="16dip" />
+                android:textSize="16sp" />
 
         </LinearLayout>
 
