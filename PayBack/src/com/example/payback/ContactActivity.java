@@ -43,7 +43,7 @@ public class ContactActivity extends Activity {
 	    Friend test1 = new Friend("Android", "Mobile");
 	    Friend test2 = new Friend("Windows7", "PC");
 	    Friend test3 = new Friend("iPhone", "IOS");
-	    for(int x = 0; x < 10;x++){
+	    for(int x = 0; x < 20;x++){
 		    list.add(test1.getfName() + " " + test1.getlName());
 		    list.add(test2.getfName() + " " + test2.getlName());
 		    list.add(test3.getfName() + " " + test3.getlName());

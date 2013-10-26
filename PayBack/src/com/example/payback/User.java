@@ -105,6 +105,11 @@ class Friend extends Account {
 		//return success/fail
 		return true;
 	}
+
+	public String Friendtostring() {
+		return  getfName() + " " + getlName();
+	}
+	
 	
 	
 	

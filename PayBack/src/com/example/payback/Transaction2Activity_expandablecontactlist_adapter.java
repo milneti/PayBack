@@ -1,5 +1,9 @@
 package com.example.payback;
 
+import java.util.List;
+
+import com.example.payback.Transaction2Activity_contactlist_adapter.ViewHolder;
+
 import android.app.Activity;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -7,24 +11,32 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.CheckBox;
 import android.widget.CheckedTextView;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpandableListAdapter {
 
   private final SparseArray<Transaction2Activity_expandablecontactlist_group> groups;
-  public LayoutInflater inflater;
-  public Activity activity;
+  private LayoutInflater inflater;
+  private Activity activity;
+//  private List<Friend> list;
 
   public Transaction2Activity_expandablecontactlist_adapter(Activity act, SparseArray<Transaction2Activity_expandablecontactlist_group> groups) {
     activity = act;
     this.groups = groups;
     inflater = act.getLayoutInflater();
   }
-
+  
+  static class ViewHolder {
+	    protected TextView text;
+	    protected CheckBox checkbox;
+  }
+  
   @Override
-  public Object getChild(int groupPosition, int childPosition) {
+  public Friend getChild(int groupPosition, int childPosition) {
     return groups.get(groupPosition).children.get(childPosition);
   }
 
@@ -36,12 +48,12 @@ public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpa
   @Override
   public View getChildView(int groupPosition, final int childPosition,
       boolean isLastChild, View convertView, ViewGroup parent) {
-    final String children = (String) getChild(groupPosition, childPosition);
+    final String children = getChild(groupPosition, childPosition).Friendtostring();
     TextView text = null;
     if (convertView == null) {
-      convertView = inflater.inflate(R.layout.activity_transaction2_expandablecontactlist_item, null);
+      convertView = inflater.inflate(R.layout.activity_transaction2_contactlist, null);
     }
-    text = (TextView) convertView.findViewById(R.id.textView1);
+    text = (TextView) convertView.findViewById(R.id.contactname);
     text.setText(children);
     convertView.setOnClickListener(new OnClickListener() {
       @Override
@@ -84,16 +96,50 @@ public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpa
   }
 
   @Override
-  public View getGroupView(int groupPosition, boolean isExpanded,
-      View convertView, ViewGroup parent) {
-    if (convertView == null) {
-      convertView = inflater.inflate(R.layout.activity_transaction2_expandablecontactlist_group, null);
-    }
+  public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+	  
+	  View view = null;
+	    if (convertView == null) {
+	      LayoutInflater inflator = context.getLayoutInflater();
+	      view = inflator.inflate(R.layout.activity_transaction2_contactlist, null);
+	      final ViewHolder viewHolder = new ViewHolder();
+	      viewHolder.text = (TextView) view.findViewById(R.id.contactname);
+	      viewHolder.checkbox = (CheckBox) view.findViewById(R.id.checkBox);
+	      viewHolder.checkbox
+	          .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+	            @Override
+	            public void onCheckedChanged(CompoundButton buttonView,
+	                boolean isChecked) {
+	            	Friend element = (Friend) viewHolder.checkbox
+	                  .getTag();
+	              element.setSelected(buttonView.isChecked());
+
+	            }
+	          });
+	      view.setTag(viewHolder);
+	      viewHolder.checkbox.setTag(list.get(groupPosition));
+	    } else {
+	      view = convertView;
+	      ((ViewHolder) view.getTag()).checkbox.setTag(list.get(groupPosition));
+	    }
+	    ViewHolder holder = (ViewHolder) view.getTag();
+	    holder.text.setText(list.get(groupPosition).getfName());
+	    holder.checkbox.setChecked(list.get(groupPosition).isSelected());
+
+//    if (convertView == null) {
+//      convertView = inflater.inflate(R.layout.activity_transaction2_expandablecontactlist_group, null);
+//    }
     Transaction2Activity_expandablecontactlist_group group = (Transaction2Activity_expandablecontactlist_group) getGroup(groupPosition);
     ((CheckedTextView) convertView).setText(group.string);
     ((CheckedTextView) convertView).setChecked(isExpanded);
-    return convertView;
+//    return convertView;
+	    
+	    return view;
+
   }
+  
+
 
   @Override
   public boolean hasStableIds() {

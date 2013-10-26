@@ -30,36 +30,67 @@ public class Transaction2Activity extends Activity  {
 		    Transaction2Activity_expandablecontactlist_adapter adapter = new Transaction2Activity_expandablecontactlist_adapter(this, groups);
 		    listView.setAdapter(adapter);
 	    
-	    
-//		//setContentView(R.layout.activity_transaction2);
-//	    View header = getLayoutInflater().inflate(R.layout.activity_transaction2_header, null);
-//	    View footer = getLayoutInflater().inflate(R.layout.activity_transaction2_footer, null);
-//	    
-//	    // create an array of Strings, that will be put to our ListActivity
-//	    ArrayAdapter<Friend> adapter = new Transaction2Activity_contactlist_adapter(this, getModel());
-//	    
-//	    ListView listView = getListView();
-//	    listView.addHeaderView(header);
-//	    listView.addFooterView(footer);
-//	    
-//	    setListAdapter(adapter);
-//		
+	
 	}
 	
 	public void createData() {
+		
+	    Friend test1 = new Friend("Price", "Gutierrez");
+	    Friend test2 = new Friend("Vanna", "Mccullough");
+	    Friend test3 = new Friend("Wyatt", "Paul");
+	    Friend test4 = new Friend("Thaddeus", "Robbins");
+	    Friend test5 = new Friend("Rooney", "Dejesus");
+	    Friend test6 = new Friend("Xavier", "Wolfe");
+	    Friend test7 = new Friend("Byron", "Raymond");
+	    Friend test8 = new Friend("Quinn", "Whitfield");
+	    Friend test9 = new Friend("Farrah", "Moon");
+	    Friend test10 = new Friend("Ainsley", "Whitehead");
+	    Friend test11 = new Friend("Josephine", "Patton");
+	    Friend test12 = new Friend("Mariko", "Patton");
+	    Friend test13 = new Friend("Raphael", "Fitzgerald");
+	    Friend test14 = new Friend("Deacon", "Daniels");
+	    Friend test15 = new Friend("Delilah", "Fletcher");
+	    Friend test16 = new Friend("Robin", "Andrews");
+	    Friend test17 = new Friend("Melvin", "Price");
+	    
+	    
 	    for (int j = 0; j < 2; j++) {
 	    	if(j==0){
 		    	Transaction2Activity_expandablecontactlist_group group = new Transaction2Activity_expandablecontactlist_group("Groups");
-		        for (int i = 0; i < 5; i++) {
-		          group.children.add("Sub Item" + i);
-		        }
+//		        for (int i = 0; i < 3; i++) {
+//			          group.children.add(test1.getfName() + " " + test1.getlName());
+//		        }
+		    	
+		    	group.children.add(test1);
+
+		    	
+//		    	group.children.add(test1.getfName() + " " + test1.getlName());
+//		    	group.children.add(test2.getfName() + " " + test2.getlName());
+//		    	group.children.add(test3.getfName() + " " + test3.getlName());
+//		    	group.children.add(test4.getfName() + " " + test4.getlName());
+//		    	group.children.add(test5.getfName() + " " + test5.getlName());
+		    	
 		        groups.append(j, group);
 	    	}
 	    	if(j==1){
 		    	Transaction2Activity_expandablecontactlist_group group = new Transaction2Activity_expandablecontactlist_group("Contacts");
-		        for (int i = 0; i < 5; i++) {
-		          group.children.add("Sub Item" + i);
-		        }
+//		        for (int i = 0; i < 5; i++) {
+//			          group.children.add(test1.getfName() + " " + test1.getlName());
+//		        }
+		    	
+//		    	group.children.add(test6.getfName() + " " + test6.getlName());
+//		    	group.children.add(test7.getfName() + " " + test7.getlName());
+//		    	group.children.add(test8.getfName() + " " + test8.getlName());
+//		    	group.children.add(test9.getfName() + " " + test9.getlName());
+//		    	group.children.add(test10.getfName() + " " + test10.getlName());
+//		    	group.children.add(test11.getfName() + " " + test11.getlName());
+//		    	group.children.add(test12.getfName() + " " + test12.getlName());
+//		    	group.children.add(test13.getfName() + " " + test13.getlName());
+//		    	group.children.add(test14.getfName() + " " + test14.getlName());
+//		    	group.children.add(test15.getfName() + " " + test15.getlName());
+//		    	group.children.add(test16.getfName() + " " + test16.getlName());
+//		    	group.children.add(test17.getfName() + " " + test17.getlName());
+		    	
 		        groups.append(j, group);
 	    	}
  
@@ -68,24 +99,6 @@ public class Transaction2Activity extends Activity  {
 		}
 
 	
-//	private List<Friend> getModel() {
-//	    List<Friend> list = new ArrayList<Friend>();
-//	    list.add(get("Linux"));
-//	    list.add(get("Windows7"));
-//	    list.add(get("Suse"));
-//	    list.add(get("Eclipse"));
-//	    list.add(get("Ubuntu"));
-//	    list.add(get("Solaris"));
-//	    list.add(get("Android"));
-//	    list.add(get("iPhone"));
-//	    // Initially select one of the items
-//	    //list.get(1).setSelected(true);
-//	    return list;
-//	  }
-
-//	private Friend get(String s) {
-//	    return new Friend(s);
-//	  }
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -94,6 +107,11 @@ public class Transaction2Activity extends Activity  {
 		return true;
 	}
 
+	public void showCreateContact(View view)
+    {
+
+    }
+	
 	public void showTrans1(View view)
     {
     	Intent intent = new Intent(this, Transaction1Activity.class);
@@ -105,4 +123,5 @@ public class Transaction2Activity extends Activity  {
     	Intent intent = new Intent(this, Transaction3Activity.class);
         startActivity(intent);
     }
+	
 }

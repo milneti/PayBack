@@ -4,10 +4,10 @@
     android:layout_width="wrap_content"
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:layout_marginLeft="8dp"
-    android:drawableRight="@drawable/ic_launcher"
     android:gravity="left"
-    android:paddingLeft="32dp"
+    android:paddingLeft="38dp"
     android:paddingTop="8dp"
-    android:text="Test"
-    android:textSize="14sp"
-    android:textStyle="bold" /> 
+    android:textStyle="bold"
+    android:textColor="@color/White"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    /> 

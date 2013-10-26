@@ -36,8 +36,7 @@ public class Transaction2Activity_contactlist_adapter extends ArrayAdapter<Frien
       final ViewHolder viewHolder = new ViewHolder();
       viewHolder.text = (TextView) view.findViewById(R.id.contactname);
       viewHolder.checkbox = (CheckBox) view.findViewById(R.id.checkBox);
-      viewHolder.checkbox
-          .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      viewHolder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
