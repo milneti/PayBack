@@ -83,8 +83,8 @@ class Friend extends Account {
 		this.lName = lName;
 		this.email = "";
 		this.selected = false;
-		boolean worked = sendNewFriendToServer();
-		if(!worked)
+		
+		if(!sendNewFriendToServer())
 			throw new IllegalArgumentException();
 		
 	}
@@ -106,7 +106,7 @@ class Friend extends Account {
 		return true;
 	}
 
-	public String Friendtostring() {
+	public String toString() {
 		return  getfName() + " " + getlName();
 	}
 	
