@@ -1,31 +1,22 @@
 package com.example.payback;
 
-//import java.util.ArrayList;
-//import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import android.os.Bundle;
 import android.app.Activity;
-//import android.app.ListActivity;
 import android.content.Intent;
-import android.util.SparseArray;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
-//import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
-//import android.widget.TextView;
-//import android.widget.ListView;
-//import android.widget.Toast;
 
 public class Transaction2Activity extends Activity  {
 
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listHeader;
-    HashMap<String, List<String>> listChild;
+    HashMap<String, List<Friend>> listChild;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,21 +36,79 @@ public class Transaction2Activity extends Activity  {
 	public void createData() {
 		
         listHeader = new ArrayList<String>();
-        listChild = new HashMap<String, List<String>>();
+        listChild = new HashMap<String, List<Friend>>();
 
-        for (int i=0; i<=10; i++){
-            listHeader.add("Header"+ i);
+        //test friends
+    	Friend tests1 = new Friend("Place", "Ment");
+    	Friend tests2 = new Friend("For", "Later");
+    	Friend tests3 = new Friend("Sprints", "Lname");
+	    Friend test1 = new Friend("Price", "Gutierrez");
+	    Friend test2 = new Friend("Vanna", "Mccullough");
+	    Friend test3 = new Friend("Wyatt", "Paul");
+	    Friend test4 = new Friend("Thaddeus", "Robbins");
+	    Friend test5 = new Friend("Rooney", "Dejesus");
+	    Friend test6 = new Friend("Xavier", "Wolfe");
+	    Friend test7 = new Friend("Byron", "Raymond");
+	    Friend test8 = new Friend("Quinn", "Whitfield");
+	    Friend test9 = new Friend("Farrah", "Moon");
+	    Friend test10 = new Friend("Ainsley", "Whitehead");
+	    Friend test11 = new Friend("Josephine", "Patton");
+	    Friend test12 = new Friend("Mariko", "Patton");
+	    Friend test13 = new Friend("Raphael", "Fitzgerald");
+	    Friend test14 = new Friend("Deacon", "Daniels");
+	    Friend test15 = new Friend("Delilah", "Fletcher");
+	    Friend test16 = new Friend("Robin", "Andrews");
+	    Friend test17 = new Friend("Melvin", "Price");
 
-            List<String> child = new ArrayList<String>();
-            child.add("Child"+i);
-            child.add("Child"+i);
+        
+        listHeader.add("Groups");
+        List<Friend> child0 = new ArrayList<Friend>();
+        
+        child0.add(tests1);
+        child0.add(tests2);
+        child0.add(tests3);
+        
+        listChild.put(listHeader.get(0), child0);
+        
+        listHeader.add("Individual");
+        List<Friend> child1 = new ArrayList<Friend>();
+        
+        child1.add(test1);
+        child1.add(test2);
+        child1.add(test3);
+        child1.add(test4);
+        child1.add(test5);
+        child1.add(test6);
+        child1.add(test7);
+        child1.add(test8);
+        child1.add(test9);
+        child1.add(test10);
+        child1.add(test11);
+        child1.add(test12);
+        child1.add(test13);
+        child1.add(test14);
+        child1.add(test15);
+        child1.add(test16);
+        child1.add(test17);
+        
+        listChild.put(listHeader.get(1), child1);
+        
+        
+//        for (int i=0; i<=10; i++){
+//        	
+//        	Friend test1 = new Friend("Price" + i, "Gutierrez");
+//        	
+//            listHeader.add("Header"+ i);
+//
+//            List<Friend> child = new ArrayList<Friend>();
+//            child.add(test1);
+//            child.add(test1);
+//
+//            listChild.put(listHeader.get(i), child); // Header, Child data
+//
+//        }
 
-            listChild.put(listHeader.get(i), child); // Header, Child data
-
-        }
-
-
-//		
+	
 //	    Friend test1 = new Friend("Price", "Gutierrez");
 //	    Friend test2 = new Friend("Vanna", "Mccullough");
 //	    Friend test3 = new Friend("Wyatt", "Paul");
@@ -77,50 +126,8 @@ public class Transaction2Activity extends Activity  {
 //	    Friend test15 = new Friend("Delilah", "Fletcher");
 //	    Friend test16 = new Friend("Robin", "Andrews");
 //	    Friend test17 = new Friend("Melvin", "Price");
-//	    
-//	    
-//	    for (int j = 0; j < 2; j++) {
-//	    	if(j==0){
-//		    	Transaction2Activity_expandablecontactlist_group group = new Transaction2Activity_expandablecontactlist_group("Groups");
-////		        for (int i = 0; i < 3; i++) {
-////			          group.children.add(test1.getfName() + " " + test1.getlName());
-////		        }
-//		    	
-//		    	group.children.add(test1);
-//
-//		    	
-////		    	group.children.add(test1.getfName() + " " + test1.getlName());
-////		    	group.children.add(test2.getfName() + " " + test2.getlName());
-////		    	group.children.add(test3.getfName() + " " + test3.getlName());
-////		    	group.children.add(test4.getfName() + " " + test4.getlName());
-////		    	group.children.add(test5.getfName() + " " + test5.getlName());
-//		    	
-//		        groups.append(j, group);
-//	    	}
-//	    	if(j==1){
-//		    	Transaction2Activity_expandablecontactlist_group group = new Transaction2Activity_expandablecontactlist_group("Contacts");
-////		        for (int i = 0; i < 5; i++) {
-////			          group.children.add(test1.getfName() + " " + test1.getlName());
-////		        }
-//		    	
-////		    	group.children.add(test6.getfName() + " " + test6.getlName());
-////		    	group.children.add(test7.getfName() + " " + test7.getlName());
-////		    	group.children.add(test8.getfName() + " " + test8.getlName());
-////		    	group.children.add(test9.getfName() + " " + test9.getlName());
-////		    	group.children.add(test10.getfName() + " " + test10.getlName());
-////		    	group.children.add(test11.getfName() + " " + test11.getlName());
-////		    	group.children.add(test12.getfName() + " " + test12.getlName());
-////		    	group.children.add(test13.getfName() + " " + test13.getlName());
-////		    	group.children.add(test14.getfName() + " " + test14.getlName());
-////		    	group.children.add(test15.getfName() + " " + test15.getlName());
-////		    	group.children.add(test16.getfName() + " " + test16.getlName());
-////		    	group.children.add(test17.getfName() + " " + test17.getlName());
-//		    	
-//		        groups.append(j, group);
-//	    	}
-// 
-//
-//	      }
+//	       
+
 		}
 
 	
@@ -134,7 +141,7 @@ public class Transaction2Activity extends Activity  {
 
 	public void showCreateContact(View view)
     {
-
+		
     }
 	
 	public void showTrans1(View view)

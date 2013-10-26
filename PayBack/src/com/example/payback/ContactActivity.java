@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -39,14 +38,42 @@ public class ContactActivity extends Activity {
 	    ArrayList<String> list = new ArrayList<String>();
 	    
 	    //dummy friends
-
-	    Friend test1 = new Friend("Android", "Mobile");
-	    Friend test2 = new Friend("Windows7", "PC");
-	    Friend test3 = new Friend("iPhone", "IOS");
-	    for(int x = 0; x < 20;x++){
-		    list.add(test1.getfName() + " " + test1.getlName());
-		    list.add(test2.getfName() + " " + test2.getlName());
-		    list.add(test3.getfName() + " " + test3.getlName());
+	    Friend test1 = new Friend("Price", "Gutierrez");
+	    Friend test2 = new Friend("Vanna", "Mccullough");
+	    Friend test3 = new Friend("Wyatt", "Paul");
+	    Friend test4 = new Friend("Thaddeus", "Robbins");
+	    Friend test5 = new Friend("Rooney", "Dejesus");
+	    Friend test6 = new Friend("Xavier", "Wolfe");
+	    Friend test7 = new Friend("Byron", "Raymond");
+	    Friend test8 = new Friend("Quinn", "Whitfield");
+	    Friend test9 = new Friend("Farrah", "Moon");
+	    Friend test10 = new Friend("Ainsley", "Whitehead");
+	    Friend test11 = new Friend("Josephine", "Patton");
+	    Friend test12 = new Friend("Mariko", "Patton");
+	    Friend test13 = new Friend("Raphael", "Fitzgerald");
+	    Friend test14 = new Friend("Deacon", "Daniels");
+	    Friend test15 = new Friend("Delilah", "Fletcher");
+	    Friend test16 = new Friend("Robin", "Andrews");
+	    Friend test17 = new Friend("Melvin", "Price");
+	    
+	    for(int x = 0; x < 2;x++){
+		    list.add(test1.toString());
+		    list.add(test2.toString());
+		    list.add(test3.toString());
+		    list.add(test4.toString());
+		    list.add(test5.toString());
+		    list.add(test6.toString());
+		    list.add(test7.toString());
+		    list.add(test8.toString());
+		    list.add(test9.toString());
+		    list.add(test10.toString());
+		    list.add(test11.toString());
+		    list.add(test12.toString());
+		    list.add(test13.toString());
+		    list.add(test14.toString());
+		    list.add(test15.toString());
+		    list.add(test16.toString());
+		    list.add(test17.toString());
 	    }
 
 	    return list;
@@ -62,13 +89,10 @@ public class ContactActivity extends Activity {
 	
 	public void showCreateContact(View view)
     {
-		//setContentView(R.layout.activity_contact);
 		LayoutInflater inflater = this.getLayoutInflater();
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		
-		//setContentView(R.layout.dialog_create_contact);
  	    final EditText email = (EditText)findViewById(R.id.newemail);		
- 	   // setContentView(R.layout.activity_contact);
  	    
  	    builder.setTitle("Add new Contact")
 		

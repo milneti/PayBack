@@ -2,20 +2,15 @@ package com.example.payback;
 
 import java.util.HashMap;
 import java.util.List;
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
-import android.widget.CheckedTextView;
-import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpandableListAdapter {
 
@@ -26,14 +21,14 @@ public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpa
   
   private Context context;
   private List<String> listHeader;
-  private HashMap<String, List<String>> listChild;
+  private HashMap<String, List<Friend>> listChild;
 
-  public Transaction2Activity_expandablecontactlist_adapter(Context context, List<String> listHeader, HashMap<String, List<String>> listChild) {
+  public Transaction2Activity_expandablecontactlist_adapter(Context context, List<String> listHeader, HashMap<String, List<Friend>> listChild) {
 	  this.context = context;
       this.listHeader = listHeader;
       this.listChild = listChild;
   }
-    
+      
   @Override
   public Object getChild(int groupPosition, int childPosition) {
       return this.listChild.get(this.listHeader.get(groupPosition)).get(childPosition);
@@ -45,22 +40,34 @@ public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpa
   }
 
   @Override
-  public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-	  
-	final String childText = (String) getChild(groupPosition, childPosition);
+  public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
-    if (convertView == null) {
-        LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView = infalInflater.inflate(R.layout.activity_transaction2_expandablecontactlist_item, null);
-    }
+      final String childText = getChild(groupPosition, childPosition).toString();
 
-    TextView txtListChild = (TextView) convertView
-            .findViewById(R.id.contactname);
+      if (convertView == null) {
+          LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+          convertView = infalInflater.inflate(R.layout.activity_transaction2_expandablecontactlist_item, null);
+      }
+      
+      final CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
+      checkBox.setChecked(listChild.get(listHeader.get(groupPosition)).get(childPosition).isSelected());
 
-    txtListChild.setText(childText);
-    return convertView;
+      checkBox.setOnClickListener(new OnClickListener() {
+    	    @Override
+    	    public void onClick(View arg0) {
+    	        final boolean isChecked = checkBox.isChecked();
+    	        listChild.get(listHeader.get(groupPosition)).get(childPosition).setSelected(isChecked);
+    	    }
+    	});
+
+      TextView txtListChild = (TextView) convertView.findViewById(R.id.contactname);
+
+      txtListChild.setText(childText);
+      return convertView;
     
   }
+  
+  
 
   @Override
   public int getChildrenCount(int groupPosition) {
@@ -108,8 +115,6 @@ public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpa
       return convertView;
 
   }
-  
-
 
   @Override
   public boolean hasStableIds() {
