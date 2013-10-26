@@ -8,6 +8,10 @@ if (mysqli_connect_errno($mysqli)) {
 }
 //basic query list would go here
 $sacct = mysqli_query($mysqli, "SELECT * as _msg FROM ACCOUNT");
+//_POST['fname' = Bob];
+$fname = $_POST['fname'];
+$fname = mysql_real_escape_string($fname);
+$findbyfname = mysqli_query($mysqli, "SELECT * FROM ACCOUNT WHERE FNAME = "+$fname);
 $row = mysqli_fetch_assoc($sacct);
 echo $row['_msg'];
 
