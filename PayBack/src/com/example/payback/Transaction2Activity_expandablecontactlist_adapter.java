@@ -6,8 +6,10 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpandableListAdapter {
@@ -38,7 +40,7 @@ public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpa
   }
 
   @Override
-  public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+  public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
       final String childText = getChild(groupPosition, childPosition).toString();
 
@@ -46,6 +48,17 @@ public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpa
           LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
           convertView = infalInflater.inflate(R.layout.activity_transaction2_expandablecontactlist_item, null);
       }
+      
+      final CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
+      checkBox.setChecked(listChild.get(listHeader.get(groupPosition)).get(childPosition).isSelected());
+
+      checkBox.setOnClickListener(new OnClickListener() {
+    	    @Override
+    	    public void onClick(View arg0) {
+    	        final boolean isChecked = checkBox.isChecked();
+    	        listChild.get(listHeader.get(groupPosition)).get(childPosition).setSelected(isChecked);
+    	    }
+    	});
 
       TextView txtListChild = (TextView) convertView.findViewById(R.id.contactname);
 
@@ -53,6 +66,8 @@ public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpa
       return convertView;
     
   }
+  
+  
 
   @Override
   public int getChildrenCount(int groupPosition) {
