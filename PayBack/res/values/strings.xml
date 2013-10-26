@@ -48,7 +48,11 @@
     <string name="title_activity_create_account">CreateAccountActivity</string>
     <string name="create_account_here">New user? Register here</string>
     <string name="login_here">Have an account? Login here</string>
+<<<<<<< HEAD
     
     <string name="activity_contact_create">Enter Email Address</string>
+=======
+    <string name="save_changes">Save Changes</string>
+>>>>>>> origin/master
 
 </resources>
