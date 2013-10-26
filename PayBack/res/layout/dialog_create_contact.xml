@@ -5,12 +5,12 @@
     android:layout_height="match_parent" >
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/newemail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_vertical_margin"
         android:ems="10"
-        android:hint="Enter Email Address"
+        android:hint="@string/activity_contact_create"
         android:inputType="textEmailAddress" >
 
         <requestFocus />

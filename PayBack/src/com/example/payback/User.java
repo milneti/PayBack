@@ -76,14 +76,15 @@ public class User extends Account{
 class Friend extends Account {
 	boolean selected;
 	
-	Friend(String fName)
+	//blank friend. FOR TESTING ONLY
+	Friend(String fName, String lName)
 	{
 		this.fName = fName;
-		this.lName = "";
+		this.lName = lName;
 		this.email = "";
 		this.selected = false;
-		boolean worked = sendNewFriendToServer();
-		if(!worked)
+		
+		if(!sendNewFriendToServer())
 			throw new IllegalArgumentException();
 		
 	}
@@ -93,9 +94,9 @@ class Friend extends Account {
 		    return selected;
 		  }
 
-		  public void setSelected(boolean selected) {
-		    this.selected = selected;
-		  }
+	  public void setSelected(boolean selected) {
+		  this.selected = selected;
+	  }
 	
 	//Methods
 	static boolean sendNewFriendToServer()
@@ -104,6 +105,11 @@ class Friend extends Account {
 		//return success/fail
 		return true;
 	}
+
+	public String toString() {
+		return  getfName() + " " + getlName();
+	}
+	
 	
 	
 	

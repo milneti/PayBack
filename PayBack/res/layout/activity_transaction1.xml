@@ -31,18 +31,6 @@
         />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText1"
-        android:layout_marginTop="36dp"
-        android:layout_toLeftOf="@+id/Button01"
-        android:text="@string/transaction1_Comment"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/White"
-        android:textStyle="bold" />
-
-    <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,23 +42,38 @@
         android:textColor="@color/White"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp"
+        android:text="@string/transaction1_Comment"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/White"
+        android:textStyle="bold" />
+
     <EditText
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1"
         android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
         android:ems="10"
         android:hint="@string/transaction1_Comment_hint"
         android:inputType="textMultiLine"
-        android:lines="@integer/Int4" />
+        android:lines="@integer/Int4" >
+
+        <requestFocus />
+    </EditText>
 
     <EditText
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
         android:ems="10"
         android:hint="@string/transaction1_Cost"
         android:inputType="number" />
