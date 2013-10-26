@@ -1,10 +1,10 @@
 package com.example.payback;
 
+import java.util.HashMap;
 import java.util.List;
-
-import com.example.payback.Transaction2Activity_contactlist_adapter.ViewHolder;
-
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Typeface;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,65 +19,62 @@ import android.widget.Toast;
 
 public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpandableListAdapter {
 
-  private final SparseArray<Transaction2Activity_expandablecontactlist_group> groups;
-  private LayoutInflater inflater;
-  private Activity activity;
+//  private final SparseArray<Transaction2Activity_expandablecontactlist_group> groups;
+//  private LayoutInflater inflater;
+//  private Activity activity;
 //  private List<Friend> list;
+  
+  private Context context;
+  private List<String> listHeader;
+  private HashMap<String, List<String>> listChild;
 
-  public Transaction2Activity_expandablecontactlist_adapter(Activity act, SparseArray<Transaction2Activity_expandablecontactlist_group> groups) {
-    activity = act;
-    this.groups = groups;
-    inflater = act.getLayoutInflater();
+  public Transaction2Activity_expandablecontactlist_adapter(Context context, List<String> listHeader, HashMap<String, List<String>> listChild) {
+	  this.context = context;
+      this.listHeader = listHeader;
+      this.listChild = listChild;
   }
-  
-  static class ViewHolder {
-	    protected TextView text;
-	    protected CheckBox checkbox;
-  }
-  
+    
   @Override
-  public Friend getChild(int groupPosition, int childPosition) {
-    return groups.get(groupPosition).children.get(childPosition);
-  }
+  public Object getChild(int groupPosition, int childPosition) {
+      return this.listChild.get(this.listHeader.get(groupPosition)).get(childPosition);
+      }
 
   @Override
   public long getChildId(int groupPosition, int childPosition) {
-    return 0;
+    return childPosition;
   }
 
   @Override
-  public View getChildView(int groupPosition, final int childPosition,
-      boolean isLastChild, View convertView, ViewGroup parent) {
-    final String children = getChild(groupPosition, childPosition).Friendtostring();
-    TextView text = null;
+  public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+	  
+	final String childText = (String) getChild(groupPosition, childPosition);
+
     if (convertView == null) {
-      convertView = inflater.inflate(R.layout.activity_transaction2_contactlist, null);
+        LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        convertView = infalInflater.inflate(R.layout.activity_transaction2_expandablecontactlist_item, null);
     }
-    text = (TextView) convertView.findViewById(R.id.contactname);
-    text.setText(children);
-    convertView.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        Toast.makeText(activity, children,
-            Toast.LENGTH_SHORT).show();
-      }
-    });
+
+    TextView txtListChild = (TextView) convertView
+            .findViewById(R.id.contactname);
+
+    txtListChild.setText(childText);
     return convertView;
+    
   }
 
   @Override
   public int getChildrenCount(int groupPosition) {
-    return groups.get(groupPosition).children.size();
+	return this.listChild.get(this.listHeader.get(groupPosition)).size();
   }
 
   @Override
   public Object getGroup(int groupPosition) {
-    return groups.get(groupPosition);
+	return this.listHeader.get(groupPosition);
   }
 
   @Override
   public int getGroupCount() {
-    return groups.size();
+	  return this.listHeader.size();
   }
 
   @Override
@@ -97,45 +94,18 @@ public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpa
 
   @Override
   public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-	  
-	  View view = null;
-	    if (convertView == null) {
-	      LayoutInflater inflator = context.getLayoutInflater();
-	      view = inflator.inflate(R.layout.activity_transaction2_contactlist, null);
-	      final ViewHolder viewHolder = new ViewHolder();
-	      viewHolder.text = (TextView) view.findViewById(R.id.contactname);
-	      viewHolder.checkbox = (CheckBox) view.findViewById(R.id.checkBox);
-	      viewHolder.checkbox
-	          .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		  
+	  String headerTitle = (String) getGroup(groupPosition);
+      if (convertView == null) {
+          LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+          convertView = infalInflater.inflate(R.layout.activity_transaction2_expandablecontactlist_group, null);
+      }
 
-	            @Override
-	            public void onCheckedChanged(CompoundButton buttonView,
-	                boolean isChecked) {
-	            	Friend element = (Friend) viewHolder.checkbox
-	                  .getTag();
-	              element.setSelected(buttonView.isChecked());
+      TextView ListHeader = (TextView) convertView.findViewById(R.id.grouptext1);
+      ListHeader.setTypeface(null, Typeface.BOLD);
+      ListHeader.setText(headerTitle);
 
-	            }
-	          });
-	      view.setTag(viewHolder);
-	      viewHolder.checkbox.setTag(list.get(groupPosition));
-	    } else {
-	      view = convertView;
-	      ((ViewHolder) view.getTag()).checkbox.setTag(list.get(groupPosition));
-	    }
-	    ViewHolder holder = (ViewHolder) view.getTag();
-	    holder.text.setText(list.get(groupPosition).getfName());
-	    holder.checkbox.setChecked(list.get(groupPosition).isSelected());
-
-//    if (convertView == null) {
-//      convertView = inflater.inflate(R.layout.activity_transaction2_expandablecontactlist_group, null);
-//    }
-    Transaction2Activity_expandablecontactlist_group group = (Transaction2Activity_expandablecontactlist_group) getGroup(groupPosition);
-    ((CheckedTextView) convertView).setText(group.string);
-    ((CheckedTextView) convertView).setChecked(isExpanded);
-//    return convertView;
-	    
-	    return view;
+      return convertView;
 
   }
   
@@ -148,6 +118,6 @@ public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpa
 
   @Override
   public boolean isChildSelectable(int groupPosition, int childPosition) {
-    return false;
+    return true;
   }
 } 

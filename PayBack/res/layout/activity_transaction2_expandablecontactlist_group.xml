@@ -1,13 +1,15 @@
-<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/textView1"
-    android:layout_width="wrap_content"
-    android:layout_height="?android:attr/listPreferredItemHeight"
-    android:layout_marginLeft="8dp"
-    android:gravity="left"
-    android:paddingLeft="38dp"
-    android:paddingTop="8dp"
-    android:textStyle="bold"
-    android:textColor="@color/White"
-    android:textAppearance="?android:attr/textAppearanceLarge"
-    /> 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/grouptext1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+        android:textColor="@color/White" />
+
+</LinearLayout>

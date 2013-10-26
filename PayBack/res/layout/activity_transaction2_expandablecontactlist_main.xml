@@ -52,7 +52,7 @@
         android:orientation="horizontal" >
 
         <ExpandableListView
-            android:id="@+id/listView"
+            android:id="@+id/expandlistView"
             android:layout_width="match_parent"
             android:layout_height="fill_parent" 
             android:cacheColorHint="#00000000">
