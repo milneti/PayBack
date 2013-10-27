@@ -9,12 +9,6 @@
     tools:context=".Transaction4Activity" 
     android:background="@drawable/activitybackground">
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Borrower's Share" />
-
     <Button
         android:id="@+id/Button01"
         android:layout_width="100dp"
@@ -32,7 +26,29 @@
         android:layout_alignParentLeft="true"
         android:longClickable="true"
         android:onClick="showTrans3"
-        android:text="@string/Previous"
-        android:textAlignment="center" />
+        android:text="@string/Previous"/>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:text="@string/transaction4_BorrowersShare"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/White" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:inputType="numberDecimal" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>

@@ -1,13 +1,15 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android1="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/activitybackground"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Transaction3Activity" 
-    android:background="@drawable/activitybackground">
+    android1:clipChildren="true"
+    tools:context=".Transaction3Activity" >
 
     <Button
         android:id="@+id/button1"
@@ -16,11 +18,10 @@
         android:layout_alignParentBottom="true"
         android:longClickable="true"
         android:onClick="showTrans2"
-        android:text="@string/Previous"
-        android:textAlignment="center" />
+        android:text="@string/Previous" />
 
     <Button
-        android:id="@+id/Button01"
+        android:id="@+id/tran3buttonnext"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -34,36 +35,47 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/LenderShareHeader"
+        android:text="@string/transaction3_LenderShareHeader"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/White"
         android:textStyle="bold" />
 
-    <RadioButton
-        android:id="@+id/RadioButton01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/radioButton1"
-        android:layout_alignBottom="@+id/radioButton1"
-        android:layout_alignParentRight="true"
-        android:text="@string/LenderCustom" />
-
-    <RadioButton
-        android:id="@+id/radioButton1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="90dp"
-        android:text="@string/LenderEven" />
-
     <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/RadioButton01"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:inputType="number" />
+        android1:id="@+id/editText1"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:layout_centerHorizontal="true"
+        android1:layout_marginTop="200dp"
+        android1:ems="10"
+        android1:hint="@string/lender_responsibility"
+        android1:inputType="number"
+        tools:ignore="HardcodedText" >
+
+        <requestFocus />
+    </EditText>
+
+    <RadioGroup
+        android1:id="@+id/radioGroup1"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:layout_centerHorizontal="true"
+        android1:layout_marginTop="50dp" >
+
+        <RadioButton
+            android1:id="@+id/radio1"
+            android1:layout_width="match_parent"
+            android1:layout_height="wrap_content"
+            android1:text="@string/specify_debt_automatically"
+            android1:textColor="@color/White" />
+
+        <RadioButton
+            android1:id="@+id/radio0"
+            android1:layout_width="match_parent"
+            android1:layout_height="wrap_content"
+            android1:checked="true"
+            android1:text="@string/specify_debt_manually"
+            android1:textColor="@color/White" />
+
+    </RadioGroup>
 
 </RelativeLayout>
