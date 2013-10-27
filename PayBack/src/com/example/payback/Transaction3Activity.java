@@ -1,13 +1,12 @@
 package com.example.payback;
 
-import java.util.ArrayList;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class Transaction3Activity extends Activity {
 
@@ -18,6 +17,21 @@ public class Transaction3Activity extends Activity {
 
 	}
 
+	private boolean checkEditText(EditText edit) {
+	    return edit.getText().length() == 0;
+	}
+	
+	void updateButtonState() {
+		EditText transCost= (EditText) findViewById(R.id.editText1);
+
+        Button button=(Button) findViewById(R.id.tran3buttonnext);
+		
+	    if(checkEditText(transCost)) 
+	    	button.setEnabled(false);
+	    else 
+	    	button.setEnabled(true);
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
