@@ -8,13 +8,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 public class Transaction2Activity extends Activity  {
 
@@ -25,6 +20,7 @@ public class Transaction2Activity extends Activity  {
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		 super.onCreate(savedInstanceState);
+				 
 		    super.onCreate(savedInstanceState);
 		    setContentView(R.layout.activity_transaction2_expandablecontactlist_main);
 		    ExpandableListView expListView = (ExpandableListView) findViewById(R.id.expandlistView);
@@ -33,9 +29,8 @@ public class Transaction2Activity extends Activity  {
 
 		    final Transaction2Activity_expandablecontactlist_adapter listAdapter = new Transaction2Activity_expandablecontactlist_adapter(this, listHeader, listChild);
 		    expListView.setAdapter(listAdapter);
-	}
-	
 
+	}
 	
 	public void createData() {
 		
@@ -117,6 +112,23 @@ public class Transaction2Activity extends Activity  {
         startActivity(intent);
     }
 	
+	public void checktomoveontotrans3(View view){
+		int onetoast = 1;
+		for(int i = 0; i < listHeader.size(); i++){
+			String currentheader = listHeader.get(i);
+			for(int j = 0; j < listChild.get(currentheader).size(); j++){
+				if(listChild.get(currentheader).get(j).isSelected()){
+					onetoast = 0;
+					showTrans3(view);
+				}
+			}
+		}
+		if(onetoast == 1){
+			Toast.makeText(getApplicationContext(), "No Contact Selected", Toast.LENGTH_SHORT).show();
+			onetoast = onetoast - 1;
+		}
+	}
+	
 	public void showTrans3(View view)
     {
 	    Bundle oldbundle = getIntent().getExtras();
@@ -129,13 +141,20 @@ public class Transaction2Activity extends Activity  {
         Bundle.putInt("Transaction1transCost", transCostInt);
         Bundle.putString("Transaction1transComment", transCommentString);
         
+        ArrayList<Friend> selectedContacts = new ArrayList<Friend>();
+        for(int i = 0; i < listHeader.size(); i++){
+			String currentheader = listHeader.get(i);
+			for(int j = 0; j < listChild.get(currentheader).size(); j++){
+				if(listChild.get(currentheader).get(j).isSelected()){
+					selectedContacts.add(listChild.get(currentheader).get(j));
+				}
+			}
+			
+		}
+        
+        Bundle.putParcelableArrayList("Transaction2selected", selectedContacts);
 
-	    
-    	
-    	
-    	
-    	
-    	
+        intent.putExtras(Bundle);
         startActivity(intent);
     }
 	
