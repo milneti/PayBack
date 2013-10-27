@@ -58,9 +58,8 @@
         android1:id="@+id/radioGroup1"
         android1:layout_width="wrap_content"
         android1:layout_height="wrap_content"
-        android1:layout_below="@+id/textView2"
         android1:layout_centerHorizontal="true"
-        android1:layout_marginTop="20dp" >
+        android1:layout_marginTop="50dp" >
 
         <RadioButton
             android1:id="@+id/radio1"
@@ -73,7 +72,6 @@
             android1:id="@+id/radio0"
             android1:layout_width="match_parent"
             android1:layout_height="wrap_content"
-            android1:layout_below="@+id/editText1"
             android1:checked="true"
             android1:text="@string/specify_debt_manually"
             android1:textColor="@color/White" />
