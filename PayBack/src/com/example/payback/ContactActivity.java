@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ContactActivity extends Activity {
 
@@ -89,22 +91,25 @@ public class ContactActivity extends Activity {
 	
 	public void showCreateContact(View view)
     {
-		LayoutInflater inflater = this.getLayoutInflater();
+		//LayoutInflater inflater = this.getLayoutInflater();
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		
- 	    final EditText email = (EditText)findViewById(R.id.newemail);		
- 	    
+		//EditText email = (EditText) findViewById(R.id.newemail);
+		final EditText emailinput = new EditText(this);
+		
  	    builder.setTitle("Add new Contact")
 		
-		       .setView(inflater.inflate(R.layout.dialog_create_contact, null))
-		       
+		       //.setView(inflater.inflate(R.layout.dialog_create_contact, null))
+		       .setView(emailinput)
+		    		   
 		       .setPositiveButton(R.string.Add, new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
 		        	   
 		        	   //InputMethodManager inputManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE); 
 		        	   //inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_IMPLICIT_ONLY);
 		        	   dialog.dismiss();
-		        	   confirmContact(email.getText().toString());
+		        	   
+		        	   confirmContact(emailinput.getText().toString());
 		        	   
 		           }
 		       })
@@ -141,9 +146,15 @@ public class ContactActivity extends Activity {
 	}
 	
 	public void sendContact(String email){
-		setContentView(R.layout.activity_contact);
-		TextView textView2 = (TextView)findViewById(R.id.textView2);
-		textView2.setText(email);
+//		setContentView(R.layout.activity_contact);
+//		TextView textView2 = (TextView)findViewById(R.id.textView2);
+//		textView2.setText(email);
+		Context context = getApplicationContext();
+		CharSequence text = "I found this string =' " + email + " '";
+		int duration = Toast.LENGTH_SHORT;
+
+		Toast toast = Toast.makeText(context, text, duration);
+		toast.show();
 	}
 	
 	public void showMainMenu(View view)

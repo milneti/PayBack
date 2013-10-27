@@ -15,7 +15,6 @@ public class Transaction5Activity extends Activity {
 		setContentView(R.layout.activity_transaction5);
 		
 		TextView costDisp = (TextView) findViewById(R.id.textView1);
-		costDisp.setText(getIntent().getStringExtra(Transaction1Activity.transactionCost));
 	}
 
 	@Override

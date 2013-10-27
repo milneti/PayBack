@@ -8,15 +8,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
 public class Transaction2Activity extends Activity  {
 
-    ExpandableListAdapter listAdapter;
-    ExpandableListView expListView;
-    List<String> listHeader;
-    HashMap<String, List<Friend>> listChild;
+    private List<String> listHeader;
+    private HashMap<String, List<Friend>> listChild;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +31,11 @@ public class Transaction2Activity extends Activity  {
 
 		    createData();
 
-		    Transaction2Activity_expandablecontactlist_adapter listAdapter = new Transaction2Activity_expandablecontactlist_adapter(this, listHeader, listChild);
+		    final Transaction2Activity_expandablecontactlist_adapter listAdapter = new Transaction2Activity_expandablecontactlist_adapter(this, listHeader, listChild);
 		    expListView.setAdapter(listAdapter);
-	      
 	}
+	
+
 	
 	public void createData() {
 		
@@ -93,52 +97,15 @@ public class Transaction2Activity extends Activity  {
         
         listChild.put(listHeader.get(1), child1);
         
-        
-//        for (int i=0; i<=10; i++){
-//        	
-//        	Friend test1 = new Friend("Price" + i, "Gutierrez");
-//        	
-//            listHeader.add("Header"+ i);
-//
-//            List<Friend> child = new ArrayList<Friend>();
-//            child.add(test1);
-//            child.add(test1);
-//
-//            listChild.put(listHeader.get(i), child); // Header, Child data
-//
-//        }
+	}
 
-	
-//	    Friend test1 = new Friend("Price", "Gutierrez");
-//	    Friend test2 = new Friend("Vanna", "Mccullough");
-//	    Friend test3 = new Friend("Wyatt", "Paul");
-//	    Friend test4 = new Friend("Thaddeus", "Robbins");
-//	    Friend test5 = new Friend("Rooney", "Dejesus");
-//	    Friend test6 = new Friend("Xavier", "Wolfe");
-//	    Friend test7 = new Friend("Byron", "Raymond");
-//	    Friend test8 = new Friend("Quinn", "Whitfield");
-//	    Friend test9 = new Friend("Farrah", "Moon");
-//	    Friend test10 = new Friend("Ainsley", "Whitehead");
-//	    Friend test11 = new Friend("Josephine", "Patton");
-//	    Friend test12 = new Friend("Mariko", "Patton");
-//	    Friend test13 = new Friend("Raphael", "Fitzgerald");
-//	    Friend test14 = new Friend("Deacon", "Daniels");
-//	    Friend test15 = new Friend("Delilah", "Fletcher");
-//	    Friend test16 = new Friend("Robin", "Andrews");
-//	    Friend test17 = new Friend("Melvin", "Price");
-//	       
-
-		}
-
-	
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.transaction2, menu);
 		return true;
 	}
-
+	
 	public void showCreateContact(View view)
     {
 		
@@ -152,7 +119,23 @@ public class Transaction2Activity extends Activity  {
 	
 	public void showTrans3(View view)
     {
+	    Bundle oldbundle = getIntent().getExtras();
+	    int transCostInt = oldbundle.getInt("Transaction1transCost");
+	    String transCommentString = oldbundle.getString("Transaction1transComment");
+
     	Intent intent = new Intent(this, Transaction3Activity.class);
+        Bundle Bundle = new Bundle();
+        
+        Bundle.putInt("Transaction1transCost", transCostInt);
+        Bundle.putString("Transaction1transComment", transCommentString);
+        
+
+	    
+    	
+    	
+    	
+    	
+    	
         startActivity(intent);
     }
 	

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpa
   private Context context;
   private List<String> listHeader;
   private HashMap<String, List<Friend>> listChild;
+  private int numofselect = 0;
 
   public Transaction2Activity_expandablecontactlist_adapter(Context context, List<String> listHeader, HashMap<String, List<Friend>> listChild) {
 	  this.context = context;
@@ -50,13 +52,25 @@ public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpa
       }
       
       final CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
+      final Button button=(Button) parent.findViewById(R.id.tran2buttonnext);
+      
       checkBox.setChecked(listChild.get(listHeader.get(groupPosition)).get(childPosition).isSelected());
 
+      
       checkBox.setOnClickListener(new OnClickListener() {
     	    @Override
     	    public void onClick(View arg0) {
     	        final boolean isChecked = checkBox.isChecked();
     	        listChild.get(listHeader.get(groupPosition)).get(childPosition).setSelected(isChecked);
+    	        if(isChecked){
+    	        	numofselect=+ 1;
+    	        	if(numofselect > 0){
+    	        		button.setEnabled(true);
+    	        	}
+    	        	else{
+    	        		button.setEnabled(false);
+    	        	}
+    	        }
     	    }
     	});
 
