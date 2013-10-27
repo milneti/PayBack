@@ -46,7 +46,7 @@
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:ems="10"
-        android:inputType="number" >
+        android:inputType="numberDecimal" >
 
         <requestFocus />
     </EditText>

@@ -1,14 +1,36 @@
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".LoginActivity" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".CreateAccountActivity" >
 
-    <!-- Login form -->
-
-        <LinearLayout
+    <LinearLayout
             style="@style/LoginFormContainer"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="80dp"
             android:orientation="vertical" >
 
+        	<EditText
+        	    android:id="@+id/fName"
+        	    android:layout_width="match_parent"
+        	    android:layout_height="wrap_content"
+        	    android:hint="@string/prompt_first_name"
+        	    android:inputType="textPersonName"
+        	    android:maxLines="1"
+        	    android:singleLine="true" />
+        	
+        	<EditText
+        	    android:id="@+id/lName"
+        	    android:layout_width="match_parent"
+        	    android:layout_height="wrap_content"
+        	    android:hint="@string/prompt_last_name"
+        	    android:inputType="textPersonName"
+        	    android:maxLines="1"
+        	    android:singleLine="true" />
+        	
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
@@ -36,24 +58,24 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_marginTop="16dp"
-                android:onClick="Login"
+                android:onClick="Register"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                android:text="@string/action_sign_in_short" />
+                android:text="@string/action_register" />
             
             <TextView
-                android:id="@+id/link_to_register"
+                android:id="@+id/link_to_login"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dip"
-                android:layout_marginTop="20dip"
+                android:layout_marginTop="00dip"
                 android:gravity="center"
-                android:onClick="CreateAccount"
+                android:onClick="Login"
                 android:clickable="true"
-                android:text="@string/create_account_here"
+                android:text="@string/login_here"
                 android:textColor="#0b84aa"
                 android:textSize="16sp" />
 
         </LinearLayout>
-
-</merge>
+        
+</RelativeLayout>
