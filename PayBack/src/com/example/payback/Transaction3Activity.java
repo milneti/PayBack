@@ -1,21 +1,21 @@
 package com.example.payback;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 
-
-/*******************
- * 	Will's Comment!*
- *******************/
 public class Transaction3Activity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_transaction3);
+
 	}
 
 	@Override
@@ -28,11 +28,24 @@ public class Transaction3Activity extends Activity {
 	public void showTrans2(View view)
     {
     	Intent intent = new Intent(this, Transaction2Activity.class);
-        startActivity(intent);
+
+		Bundle oldbundle = getIntent().getExtras();
+		int transCostInt = oldbundle.getInt("Transaction1transCost");
+		String transCommentString = oldbundle.getString("Transaction1transComment");
+		
+	    Bundle Bundle = new Bundle();
+	    Bundle.putInt("Transaction1transCost", transCostInt);
+	    Bundle.putString("Transaction1transComment", transCommentString);
+
+	        
+	    intent.putExtras(Bundle);
+	    startActivity(intent);
+		
     }
 	
 	public void showTrans4(View view)
     {
+		//intent not finished
     	Intent intent = new Intent(this, Transaction4Activity.class);
         startActivity(intent);
     }

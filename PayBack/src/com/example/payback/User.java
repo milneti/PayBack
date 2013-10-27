@@ -1,7 +1,10 @@
 package com.example.payback;
 
 import java.util.*;
-abstract class Account 
+
+import android.os.Parcel;
+import android.os.Parcelable;
+abstract class Account
 {
 	String fName;
 	String lName;
@@ -71,14 +74,26 @@ public class User extends Account{
 		//TODO: Pull information about each friend from the server: first name, last name, email. 
 		return f;
 	}
+	
+	
 }
 
-class Friend extends Account {
+class Friend extends Account implements Parcelable {
 	boolean selected;
 	
+	Friend(String fName, String lName, String email){
+		this.fName = fName;
+		this.lName = lName;
+		this.email = email;
+		this.selected = false;
+		
+		if(!sendNewFriendToServer())
+			throw new IllegalArgumentException();
+		
+	}
+	
 	//blank friend. FOR TESTING ONLY
-	Friend(String fName, String lName)
-	{
+	Friend(String fName, String lName){
 		this.fName = fName;
 		this.lName = lName;
 		this.email = "";
@@ -109,8 +124,40 @@ class Friend extends Account {
 	public String toString() {
 		return  getfName() + " " + getlName();
 	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(fName);
+		dest.writeString(lName);
+		dest.writeString(email);
 	
+	}
 	
+	public Friend(Parcel source){
+		 this.fName = source.readString();
+		 this.lName = source.readString();
+		 this.email = source.readString();
+	}
 	
+    public static final Parcelable.Creator<Friend> CREATOR = new Parcelable.Creator<Friend>() {
+    	 
+        @Override
+        public Friend createFromParcel(Parcel source) {
+            return new Friend(source);
+        }
+ 
+        @Override
+        public Friend[] newArray(int size) {
+            return new Friend[size];
+        }
+    };
+    
+    
+    
 	
 }

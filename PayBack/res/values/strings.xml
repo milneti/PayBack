@@ -44,6 +44,11 @@
     <string name="Confirm">Confirm</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="hello_world">Hello world!</string>
+
+    <string name="lender_responsibility">Lender responsibility</string>
+    <string name="specify_debt_automatically">Specify Debt Automatically</string>
+    <string name="specify_debt_manually">Specify Debt Manually</string>
+
     
     <string name="title_activity_create_account">CreateAccountActivity</string>
     <string name="create_account_here">New user? Register here</string>
