@@ -66,10 +66,8 @@ public class MainActivity extends Activity {
     
     public void Setting(View view)
     {
-    	/*Intent intent = new Intent(this, SettingsActivty.class);
-        EditText editText = (EditText) findViewById(R.id.editText1);
-        String message = editText.getText().toString();
-        startActivity(intent);*/
+    	Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 
 }

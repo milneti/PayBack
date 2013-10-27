@@ -22,17 +22,6 @@
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1" />
 
-    <Button
-        android:id="@+id/button1"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="62dp"
-        android:onClick="showCreateContact"
-        android:text="New Contact" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -42,5 +31,28 @@
         android:layout_marginBottom="78dp"
         android:textColor="@color/White"
         android:text="TextView" />
+
+    <Button
+        android:id="@+id/button1"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/spinner1"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="74dp"
+        android:layout_marginLeft="31dp"
+        android:onClick="showCreateContact"
+        android:text="Add" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_alignRight="@+id/spinner1"
+        android:layout_below="@+id/textView2"
+        android:layout_marginLeft="48dp"
+        android:layout_toRightOf="@+id/button1"
+        android:text="Delete" />
 
 </RelativeLayout>
