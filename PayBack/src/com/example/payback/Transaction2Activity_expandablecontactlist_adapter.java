@@ -9,8 +9,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpandableListAdapter {
 
@@ -22,8 +24,14 @@ public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpa
   private Context context;
   private List<String> listHeader;
   private HashMap<String, List<Friend>> listChild;
+  private static int numofselect = 0;
 
-  public Transaction2Activity_expandablecontactlist_adapter(Context context, List<String> listHeader, HashMap<String, List<Friend>> listChild) {
+  public int getNumofselect() {
+	return numofselect;
+  }
+	
+
+public Transaction2Activity_expandablecontactlist_adapter(Context context, List<String> listHeader, HashMap<String, List<Friend>> listChild) {
 	  this.context = context;
       this.listHeader = listHeader;
       this.listChild = listChild;
@@ -49,14 +57,23 @@ public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpa
           convertView = infalInflater.inflate(R.layout.activity_transaction2_expandablecontactlist_item, null);
       }
       
-      final CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
+      final CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);      
       checkBox.setChecked(listChild.get(listHeader.get(groupPosition)).get(childPosition).isSelected());
 
+  
+      
       checkBox.setOnClickListener(new OnClickListener() {
     	    @Override
     	    public void onClick(View arg0) {
     	        final boolean isChecked = checkBox.isChecked();
     	        listChild.get(listHeader.get(groupPosition)).get(childPosition).setSelected(isChecked);
+    	        	    		
+    	        if(isChecked){
+    	        	numofselect = numofselect + 1;
+    	        }
+    	        else{
+    	        	numofselect= numofselect - 1;
+    	        }
     	    }
     	});
 

@@ -20,7 +20,7 @@
         android:text="@string/Home" />
 
     <Button
-        android:id="@+id/Button01"
+        android:id="@+id/tran1buttonnext"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/button1"
@@ -28,6 +28,7 @@
         android:layout_alignParentRight="true"
         android:onClick="showTrans2"
         android:text="@string/Next"
+        android:enabled="false"
         />
 
     <TextView

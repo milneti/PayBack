@@ -66,13 +66,14 @@
         android:layout_height="51dp" >
 
         <Button
-            android:id="@+id/Button03"
+            android:id="@+id/tran2buttonnext"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:onClick="showTrans3"
-            android:text="@string/Next" />
+            android:onClick="checktomoveontotrans3"
+            android:text="@string/Next"
+            />
 
         <Button
             android:id="@+id/button2"
