@@ -44,6 +44,7 @@
         android:onClick="showCreateContact"
         android:text="Add" />
 
+<<<<<<< HEAD
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
@@ -55,4 +56,6 @@
         android:layout_toRightOf="@+id/button1"
         android:text="Delete" />
 
+=======
+>>>>>>> 012acdc035709d8e084bddfc2e66272d82b39c3c
 </RelativeLayout>
