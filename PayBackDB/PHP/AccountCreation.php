@@ -20,8 +20,7 @@ $mysqli = mysqli_connect("localhost", "Admin", "password", "database");
 if (mysqli_connect_errno($mysqli)) {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
-//basic query list would go here
-$sacct = mysqli_query($mysqli, "SELECT * as _msg FROM ACCOUNT ");
+
 
 //input
 $fname = $_POST['fname'];
