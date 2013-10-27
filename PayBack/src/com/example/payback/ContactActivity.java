@@ -125,11 +125,12 @@ public class ContactActivity extends Activity {
     }
 	
 	public void confirmContact(final String email){
-		
+		LayoutInflater inflater = this.getLayoutInflater();
 		AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
 		
 		builder2.setTitle("Confirm Add Contact?")
-		       
+		       .setView(inflater.inflate(R.layout.dialog_confirm_contact, null))
+
 		       .setPositiveButton(R.string.Confirm, new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
 		        	   dialog.dismiss();
