@@ -26,8 +26,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:onClick="showTrans4"
-        android:text="@string/Next" />
+        android:onClick="checktomoveontotrans4"
+        android:text="@string/Next"
+        android:enabled="false"
+        />
 
     <TextView
         android:id="@+id/textView2"
@@ -41,7 +43,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android1:id="@+id/editText1"
+        android1:id="@+id/lenderamount"
         android1:layout_width="wrap_content"
         android1:layout_height="wrap_content"
         android1:layout_centerHorizontal="true"
@@ -66,15 +68,20 @@
             android1:layout_width="match_parent"
             android1:layout_height="wrap_content"
             android1:text="@string/specify_debt_automatically"
-            android1:textColor="@color/White" />
+            android1:textColor="@color/White"
+            android1:checked="false"
+            android1:onClick="onRadioButtonClick"
+             />
 
         <RadioButton
-            android1:id="@+id/radio0"
+            android1:id="@+id/radio2"
             android1:layout_width="match_parent"
             android1:layout_height="wrap_content"
             android1:checked="true"
             android1:text="@string/specify_debt_manually"
-            android1:textColor="@color/White" />
+            android1:textColor="@color/White"
+		 	android1:onClick="onRadioButtonClick"
+            />
 
     </RadioGroup>
 
