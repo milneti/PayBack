@@ -1,6 +1,7 @@
 package com.example.payback;
 
 import java.text.DecimalFormat;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 
 public class Transaction1Activity extends Activity {
 	
+	@SuppressLint("CutPasteId")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
