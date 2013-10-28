@@ -11,7 +11,6 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class Transaction5Activity extends Activity {
 	ListView listView;
@@ -27,7 +26,7 @@ public class Transaction5Activity extends Activity {
 	    int transCostInt = oldbundle.getInt("Transaction1transCost");
 
 	    DecimalFormat dec = new DecimalFormat("0.00");
-        float percen = transCostInt/100;
+        float percen = transCostInt/100F;
         String transCoststring = "$" + dec.format(percen);
 	    
 	    String transCommentString = oldbundle.getString("Transaction1transComment");
@@ -35,8 +34,8 @@ public class Transaction5Activity extends Activity {
 	    int translenderamountInt = oldbundle.getInt("Transaction3lenderamount");
 	    
 	    DecimalFormat dec2 = new DecimalFormat("0.00");
-        float percen2 = translenderamountInt/100;
-        String translenderamountstring = "$" + dec.format(percen);
+        float percen2 = translenderamountInt/100F;
+        String translenderamountstring = "$" + dec2.format(percen2);
 	    
 	    
 	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
@@ -47,7 +46,7 @@ public class Transaction5Activity extends Activity {
 	    data.add("Amount: " + transCoststring);
 	    data.add("Comment: " + transCommentString);
 	    for(int i = 0; i < transselected.size(); i++){
-	    	data.add(transselected.get(i).toString());
+	    	data.add("Selected: "+transselected.get(i).toString());
 	    }
 	    data.add("LendAmt: " + translenderamountstring);
 	    data.add("Auto: " +String.valueOf(button1Selected));
