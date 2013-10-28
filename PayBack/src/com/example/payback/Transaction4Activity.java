@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
-public class Transaction4Activity extends Activity {
-	
+public class Transaction4Activity extends TitleActivity {
+
 	 ListView listView;
 	 EditText editing;
 
@@ -22,7 +22,7 @@ public class Transaction4Activity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_transaction4);
+		modifyTitle("Borrowers' Share",R.layout.activity_transaction4);
 //		
 //		 data.add("Hello World");
 //		 data.add("Hello World2");

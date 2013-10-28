@@ -14,11 +14,12 @@
     </style>
 
     <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-
+     <style name="DefaultAppTheme" parent="AppBaseTheme">
     </style>
-
+    
+    <style name="AppTheme" parent="AppBaseTheme">   
+        <item name="android:windowTitleSize">50dp</item>            
+    </style>
 
     <style name="LoginFormContainer">
         <item name="android:layout_width">match_parent</item>

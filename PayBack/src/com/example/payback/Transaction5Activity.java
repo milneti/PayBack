@@ -12,14 +12,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class Transaction5Activity extends Activity {
+public class Transaction5Activity extends TitleActivity {
 	ListView listView;
 	List<String> data = new ArrayList<String>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_transaction5);
+		modifyTitle("Transaction Summary",R.layout.activity_transaction5);
 
 	    Bundle oldbundle = getIntent().getExtras();
 	    

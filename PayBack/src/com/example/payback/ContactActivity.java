@@ -17,17 +17,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ContactActivity extends Activity {
+public class ContactActivity extends TitleActivity {
 
-	  private ListView contactlistview;
-	  
+	  private ListView contactlistview;	  
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_contact);
+		modifyTitle("Select Contacts",R.layout.activity_contact);
 
-		contactlistview = (ListView) findViewById(R.id.listofcontacts);
+		contactlistview = (ListView) findViewById(R.id.listofselected);
 		ArrayList<String> friendList = buildFriendList();
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.activity_contact_iteminlist,
 				friendList);
@@ -91,31 +90,23 @@ public class ContactActivity extends Activity {
 	
 	public void showCreateContact(View view)
     {
-		//LayoutInflater inflater = this.getLayoutInflater();
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		
-		//EditText email = (EditText) findViewById(R.id.newemail);
 		final EditText emailinput = new EditText(this);
 		
  	    builder.setTitle("Add new Contact")
-		
-		       //.setView(inflater.inflate(R.layout.dialog_create_contact, null))
 		       .setView(emailinput)
-		    		   
 		       .setPositiveButton(R.string.Add, new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
 		        	   
 		        	   //InputMethodManager inputManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE); 
 		        	   //inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_IMPLICIT_ONLY);
-		        	   dialog.dismiss();
-		        	   
-		        	   confirmContact(emailinput.getText().toString());
-		        	   
+		        	   dialog.dismiss();	     
+		        	   confirmContact(emailinput.getText().toString());		        	   
 		           }
 		       })
 		       .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
-		              // dialog.dismiss();
 		        	   dialog.cancel();
 		           }
 		       });
@@ -153,7 +144,8 @@ public class ContactActivity extends Activity {
 		Context context = getApplicationContext();
 		CharSequence text = "I found this string =' " + email + " '";
 		int duration = Toast.LENGTH_SHORT;
-
+		
+		
 		Toast toast = Toast.makeText(context, text, duration);
 		toast.show();
 	}

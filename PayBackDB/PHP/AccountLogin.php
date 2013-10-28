@@ -28,7 +28,7 @@ $email = mysql_real_escape_string($email);
 $password = mysql_real_escape_string($password);
 
 //query to lookup password account
-if($loginPass = mysqli_query("SELECT 'password' FROM 'Account' WHERE 'email' = '"+$email+"';")){
+if($loginPass = mysqli_query("SELECT `password` FROM `Account` WHERE `email` = \""+$email+"\";")){
 	if(mysqli_fetch_object($loginPass) == $password){
 		//insert code to do things after auth
 		echo "Login and query sucess";

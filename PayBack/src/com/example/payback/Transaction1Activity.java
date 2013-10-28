@@ -13,14 +13,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class Transaction1Activity extends Activity {
+public class Transaction1Activity extends TitleActivity {
 	
 	@SuppressLint("CutPasteId")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_transaction1);
-		
+
+		modifyTitle("Create Transaction",R.layout.activity_transaction1);		
 		
 		EditText text = (EditText)findViewById(R.id.editText1);  
 
@@ -114,7 +114,6 @@ public class Transaction1Activity extends Activity {
         
         intent.putExtras(Bundle);
         startActivity(intent);
-
     }
 
 }

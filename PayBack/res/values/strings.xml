@@ -14,7 +14,6 @@
     <string name="title_activity_transaction3">Transaction Page 3</string>
     <string name="title_activity_transaction4">Transaction Page 4</string>
     <string name="title_activity_transaction5">Transaction Page 5</string>
-    
     <string name="transaction1_Header">Create a Transaction</string>
     <string name="transaction1_Cost">Enter Transaction Total</string>
     <string name="transaction1_Comment">Comments</string>
@@ -29,10 +28,8 @@
     <string name="Home">Home</string>
     <string name="Next">Next</string>
     <string name="Previous">Previous</string>
-
     <string name="HoldReset">Hold to Reset</string>
-    <string name="action_logout">logout</string>    
-
+    <string name="action_logout">logout</string>
     <string name="contactSelectHeader">Contact Selection</string>
     <string name="Done">Done</string>
     <string name="LenderShareHeader">Lender\'s Share</string>
@@ -44,18 +41,16 @@
     <string name="Confirm">Confirm</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="hello_world">Hello world!</string>
-
     <string name="lender_responsibility">Lender responsibility</string>
     <string name="specify_debt_automatically">Specify Debt Automatically</string>
     <string name="specify_debt_manually">Specify Debt Manually</string>
-
-    
-    <string name="title_activity_create_account">CreateAccountActivity</string>
+    <string name="title_activity_create_account">New Account</string>
     <string name="create_account_here">New user? Register here</string>
     <string name="login_here">Have an account? Login here</string>
-    
     <string name="activity_contact_create">Enter Email Address</string>
-
     <string name="save_changes">Save Changes</string>
+    <string name="shortcuts">Shortcuts</string>
+    <string name="title_activity_title">TitleActivity</string>
+    <string name="title_activity_shortcuts">ShortcutsActivity</string>
 
 </resources>
