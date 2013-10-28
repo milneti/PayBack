@@ -1,3 +1,4 @@
+<?php
 //this is the script to lookup an account to mySQL db
 //for source please go to: http://www.php.net/manual/en/mysqli.quickstart.dual-interface.php
 
@@ -17,7 +18,7 @@
 //DO NOT ADD THIS TO THE SERVER!!!!!!!!! THIS IS A WORK IN PROGRESS AND IS MISSING AUTH!!!!!
 //ADDING WOULD CREATE A VERY BIG SECURITY HOLE!!!!!!!
 
-<?php
+
 //Connect to DB
 //Please contact Chase for proper user login info
 $mysqli = mysqli_connect("localhost", "Admin", "password", "database");
@@ -30,35 +31,34 @@ $sacct = mysqli_query($mysqli, "SELECT * as _msg FROM ACCOUNT ");
 //input
 $attribute = $_POST['attribute'];
 $value = $_POST['value'];
-$attribute = mysql_real_escape_string($attribute);
-$value = mysql_real_escape_string($value);
+$attribute = mysqli_real_escape_string($mysqli, $attribute);
+$value = mysqli_real_escape_string($mysqli, $value);
 $email = $_POST['email'];
 $password = $_POST['password'];
-$email = mysql_real_escape_string($email);
-$password = mysql_real_escape_string($password);
+$email = mysqli_real_escape_string($mysqli, $email);
+$password = mysqli_real_escape_string($mysqli, $password);
 
 //auth
-if($loginPass = mysqli_query("SELECT 'password' FROM 'Account' WHERE 'email' = '"+$email+"';")){
-	if(mysqli_fetch_object($loginPass) == $password){
+if($queryResult = mysqli_query($mysqli, "SELECT `password` FROM `Account` WHERE `email` = '$email';")){
+	if(mysqli_fetch_object($queryResult)->password == $password){
 		//insert code to do things after auth
 		//check that attribute is one of the following: email, fname, lname
 		if($attribute=="email" || $attribute == "fname" || $attribute == "lname"){
 			//sql query
-			if($lookup = mysqli_query("SELECT 'email', 'fname', 'lname' FROM 'Account' WHERE '"+$attribute+"' LIKE '%"+$value"%';");){
+			if($lookup = mysqli_query($mysqli, "SELECT `email`, `fname`, `lname` FROM `Account` WHERE `$attribute` LIKE '%$value%';")){
 				$data = mysqli_fetch_all($lookup);
 				echo json_encode($data);
 				//echo $lookup;
 			}
-			//echo "Login and query sucess";
+			//echo "Login and query success";
 		}
 		else
-			echo "Query failed due to attribute name =" + $attribute;
+			{echo "Query failed due to attribute name = $attribute";}
 	}
 	else
-		{echo "Query sucess, but Password does not match";}
+		{echo "Query success, but Password does not match";}
 }
 else
 	{echo "Query for auth failed: user does not exist";}
-
 
 ?>

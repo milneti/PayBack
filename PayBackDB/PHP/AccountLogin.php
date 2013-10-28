@@ -1,3 +1,4 @@
+<?php
 //this is the script to login to our system
 //for source please go to: http://www.php.net/manual/en/mysqli.quickstart.dual-interface.php
 
@@ -12,7 +13,7 @@
 
 //we would want this script to run whenever they login to the system as user
 //by Hohyun Jeon @10/27/2013
-<?php
+
 //Connect to DB
 //Please contact Chase for proper admin login info
 $mysqli = mysqli_connect("localhost", "Admin", "password", "database");
@@ -20,21 +21,20 @@ if (mysqli_connect_errno($mysqli)) {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-
 //input
 $email = $_POST['email'];
 $password = $_POST['password'];
-$email = mysql_real_escape_string($email);
-$password = mysql_real_escape_string($password);
+$email = mysqli_real_escape_string($mysqli, $email);
+$password = mysqli_real_escape_string($mysqli, $password);
 
 //query to lookup password account
-if($loginPass = mysqli_query("SELECT `password` FROM `Account` WHERE `email` = \""+$email+"\";")){
-	if(mysqli_fetch_object($loginPass) == $password){
+if($queryResult = mysqli_query($mysqli, "SELECT `password` FROM `Account` WHERE `email` = \"$email\";")){
+	if(mysqli_fetch_object($queryResult)->password == $password){
 		//insert code to do things after auth
-		echo "Login and query sucess";
+		echo "Login and query success";
 	}
 	else
-		{echo "Query sucess, but Password does not match";}
+		{echo "Query success, but Password does not match";}
 }
 else
 	{echo "Query failed";}
