@@ -10,12 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class Transaction1Activity extends Activity {
+public class Transaction1Activity extends TitleActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_transaction1);
+
+		modifyTitle("Create Transaction",R.layout.activity_transaction1);
 		
 		EditText transCost = (EditText) findViewById(R.id.editText1);
 		transCost.addTextChangedListener(new TextWatcher() {

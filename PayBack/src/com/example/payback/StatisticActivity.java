@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class StatisticActivity extends Activity {
+public class StatisticActivity extends TitleActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_statistic);
+		modifyTitle("Select Contacts",R.layout.activity_statistic);
 	}
 
 	@Override

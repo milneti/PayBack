@@ -6,12 +6,12 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 
-public class Transaction4Activity extends Activity {
+public class Transaction4Activity extends TitleActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_transaction4);
+		modifyTitle("Select Contacts",R.layout.activity_transaction4);
 	}
 
 	@Override
