@@ -43,6 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
         android:orientation="vertical" >
 
         <ProgressBar
@@ -86,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="18dp"
                 android:onClick="showMainMenu"
-                android:text="@string/Next" />
+                android:text="@string/Done" />
         </LinearLayout>
     </LinearLayout>
 
