@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <!-- android:textColor="@color/White" -->
+
+    <TextView
+        android:id="@+id/borrowername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/borroweramount"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/borroweramount"
+        android:layout_toLeftOf="@+id/borroweramount"
+        android:text="@string/hello_world" />
+
+    <EditText
+        android:id="@+id/borroweramount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="92dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:singleLine="true" >
+
+        <requestFocus />
+    </EditText>
+
+</RelativeLayout>
