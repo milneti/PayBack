@@ -25,10 +25,10 @@ if (mysqli_connect_errno($mysqli)) {
 
 //input
 
-$fname = "Robert";
-$lname = "Frost";
-$email = "RFrost@fakemail.com";
-$password = "thisisthepasswor";
+$fname = $_POST['fname'];
+$lname = $_POST['lname'];
+$email = $_POST['email'];
+$password = $_POST['password'];
 
 $fname = mysqli_real_escape_string($mysqli, $fname);
 $lname = mysqli_real_escape_string($mysqli, $lname);
