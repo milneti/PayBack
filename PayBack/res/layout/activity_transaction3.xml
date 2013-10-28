@@ -65,6 +65,7 @@
             android1:id="@+id/radio1"
             android1:layout_width="match_parent"
             android1:layout_height="wrap_content"
+            android1:onClick = "onRadioButtonClicked"
             android1:text="@string/specify_debt_automatically"
             android1:textColor="@color/White" />
 
@@ -73,6 +74,7 @@
             android1:layout_width="match_parent"
             android1:layout_height="wrap_content"
             android1:checked="true"
+            android1:onClick = "onRadioButtonClicked"
             android1:text="@string/specify_debt_manually"
             android1:textColor="@color/White" />
 
