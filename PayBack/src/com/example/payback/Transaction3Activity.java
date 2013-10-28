@@ -1,6 +1,5 @@
 package com.example.payback;
 
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import android.os.Bundle;
@@ -21,8 +20,7 @@ public class Transaction3Activity extends Activity {
 
 	private boolean button1Selected = false;
     private boolean button2Selected = true;
-	
-	
+
 	@SuppressLint("CutPasteId")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +89,7 @@ public class Transaction3Activity extends Activity {
 	    	button.setEnabled(true);
 	}
 	
-	public void onRadioButtonClick(View view){
+	/*public void onRadioButtonClick(View view){
 	    RadioButton button = (RadioButton) view;
 	    if ( button.getId() == R.id.radio1) {
 	    	button1Selected = true;
@@ -104,7 +102,7 @@ public class Transaction3Activity extends Activity {
 
 	    }
 	    
-	}
+	}*/
 	
 	
 	@Override
@@ -113,25 +111,39 @@ public class Transaction3Activity extends Activity {
 		getMenuInflater().inflate(R.menu.transaction3, menu);
 		return true;
 	}
-
-	public void showTrans2(View view)
-    {
-    	Intent intent = new Intent(this, Transaction2Activity.class);
-
+	
+	public void onRadioButtonClicked(View view)
+	{
 		Bundle oldbundle = getIntent().getExtras();
 		int transCostInt = oldbundle.getInt("Transaction1transCost");
-		String transCommentString = oldbundle.getString("Transaction1transComment");
+		int numContacts = oldbundle.getParcelableArrayList("Transaction2selected").size();
+		int lenderShare = transCostInt/(numContacts+1);
+		String evenLenderShare = Integer.toString(lenderShare);
 		
-	    Bundle Bundle = new Bundle();
-	    Bundle.putInt("Transaction1transCost", transCostInt);
-	    Bundle.putString("Transaction1transComment", transCommentString);
-
-	        
-	    intent.putExtras(Bundle);
-	    startActivity(intent);
+		evenLenderShare = "$" + evenLenderShare;
+		int elsLength = evenLenderShare.length();
+		String lenderText = evenLenderShare.substring(0, elsLength-2) + "." + evenLenderShare.substring(elsLength-2, elsLength);
+				
+		boolean checked = ((RadioButton) view).isChecked();
 		
-    }
-	
+		switch(view.getId())
+		{
+			case R.id.radio1:
+				if (checked)
+				{
+					EditText transCost = (EditText)findViewById(R.id.lenderamount);
+					transCost.setText(lenderText);
+				}
+				break;
+			case R.id.radio2:
+				if (checked)
+				{
+					EditText transCost = (EditText)findViewById(R.id.lenderamount);
+					transCost.setText("$0.00");
+				}
+				break;
+		}
+	}
 	public void checktomoveontotrans4(View view){
 	    Bundle oldbundle = getIntent().getExtras();
 	    int transCostInt = oldbundle.getInt("Transaction1transCost");
@@ -149,6 +161,23 @@ public class Transaction3Activity extends Activity {
 		}
 		
 	}
+
+	public void showTrans2(View view)
+    {
+    	Intent intent = new Intent(this, Transaction2Activity.class);
+
+		Bundle oldbundle = getIntent().getExtras();
+		int transCostInt = oldbundle.getInt("Transaction1transCost");
+		String transCommentString = oldbundle.getString("Transaction1transComment");
+		
+	    Bundle Bundle = new Bundle();
+	    Bundle.putInt("Transaction1transCost", transCostInt);
+	    Bundle.putString("Transaction1transComment", transCommentString);
+     
+	    intent.putExtras(Bundle);
+	    startActivity(intent);
+		
+    }
 	
 	public void showTrans4(View view)
     {

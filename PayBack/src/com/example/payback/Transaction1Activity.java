@@ -114,7 +114,6 @@ public class Transaction1Activity extends Activity {
         
         intent.putExtras(Bundle);
         startActivity(intent);
-
     }
 
 }
