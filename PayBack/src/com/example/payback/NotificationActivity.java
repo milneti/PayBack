@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class NotificationActivity extends Activity {
+public class NotificationActivity extends TitleActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_notification);
+		modifyTitle("Notifications",R.layout.activity_notification);
 	}
 
 	@Override
