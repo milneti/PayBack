@@ -1,17 +1,16 @@
-//this is the script to add user to mySQL db
+//this is the script to login to our system
 //for source please go to: http://www.php.net/manual/en/mysqli.quickstart.dual-interface.php
 
 //function:
 	//input
-		//fname
-		//lname
 		//email
 		//password
 	//action
-		//makes an input query to mySQL database with given data
+		//makes an select query to mySQL database with given data
 	//output
-		//true or false on query.
+		//message on login.
 
+//we would want this script to run whenever they login to the system as user
 //by Hohyun Jeon @10/27/2013
 <?php
 //Connect to DB
@@ -23,19 +22,20 @@ if (mysqli_connect_errno($mysqli)) {
 
 
 //input
-$fname = $_POST['fname'];
-$lname = $_POST['lname'];
 $email = $_POST['email'];
 $password = $_POST['password'];
-$fname = mysql_real_escape_string($fname);
-$lname = mysql_real_escape_string($lname);
 $email = mysql_real_escape_string($email);
 $password = mysql_real_escape_string($password);
 
-//query to add account
-$insertuser = mysqli_query($mysqli, "INSERT INTO 'Account' ('email', 'fname', 'lname', 'password') VALUES("+$email+", "+$fname+", "+$lname+", "+$password+");");
-
-//output
-echo $insertuser;
-
+//query to lookup password account
+if($loginPass = mysqli_query("SELECT 'password' FROM 'Account' WHERE 'email' = '"+$email+"';")){
+	if(mysqli_fetch_object($loginPass) == $password){
+		//insert code to do things after auth
+		echo "Login and query sucess";
+	}
+	else
+		{echo "Query sucess, but Password does not match";}
+}
+else
+	{echo "Query failed";}
 ?>
