@@ -1,11 +1,8 @@
 package com.example.payback;
 
-<<<<<<< HEAD
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
-=======
->>>>>>> origin/master
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -17,11 +14,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-<<<<<<< HEAD
 import android.widget.RadioButton;
 import android.widget.Toast;
-=======
->>>>>>> origin/master
 
 public class Transaction3Activity extends Activity {
 
@@ -89,16 +83,6 @@ public class Transaction3Activity extends Activity {
 	void updateButtonState() {
 		EditText transCost= (EditText) findViewById(R.id.lenderamount);
 
-<<<<<<< HEAD
-=======
-	private boolean checkEditText(EditText edit) {
-	    return edit.getText().length() == 0;
-	}
-	
-	void updateButtonState() {
-		EditText transCost= (EditText) findViewById(R.id.editText1);
-
->>>>>>> origin/master
         Button button=(Button) findViewById(R.id.tran3buttonnext);
 		
 	    if(checkEditText(transCost)) 
@@ -107,7 +91,6 @@ public class Transaction3Activity extends Activity {
 	    	button.setEnabled(true);
 	}
 	
-<<<<<<< HEAD
 	public void onRadioButtonClick(View view){
 	    RadioButton button = (RadioButton) view;
 	    if ( button.getId() == R.id.radio1) {
@@ -124,8 +107,6 @@ public class Transaction3Activity extends Activity {
 	}
 	
 	
-=======
->>>>>>> origin/master
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
