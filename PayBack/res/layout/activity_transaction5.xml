@@ -43,7 +43,18 @@
         android:layout_alignLeft="@+id/textView2"
         android:layout_below="@+id/textView2"
         android:layout_marginTop="28dp"
-        android:text="TextView"
+        android:text="PLACEHOLDER"
         android:textColor="@color/White" />
+
+    <ListView
+        android:id="@+id/listviewforplaceholderdata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Button01"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:cacheColorHint="#00000000" >
+
+    </ListView>
 
 </RelativeLayout>
