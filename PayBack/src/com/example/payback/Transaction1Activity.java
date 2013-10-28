@@ -20,8 +20,7 @@ public class Transaction1Activity extends TitleActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		modifyTitle("Create Transaction",R.layout.activity_transaction1);
-		
+		modifyTitle("Create Transaction",R.layout.activity_transaction1);		
 		
 		EditText text = (EditText)findViewById(R.id.editText1);  
 

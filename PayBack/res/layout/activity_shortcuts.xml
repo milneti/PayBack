@@ -16,6 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="54dp"
+        android:onClick="Return"
         android:text="Return" />
 
  	<Button
@@ -25,6 +26,7 @@
  	    android:layout_below="@+id/button1"
  	    android:layout_centerHorizontal="true"
  	    android:layout_marginTop="40dp"
+ 	    android:onClick="showMainMenu"
  	    android:text="Main Menu" />
  	
  	<Button
@@ -34,6 +36,7 @@
  	    android:layout_below="@+id/button2"
  	    android:layout_centerHorizontal="true"
  	    android:layout_marginTop="20dp"
+ 	    android:onClick="showCreateTransaction"
  	    android:text="Create Transaction" />
  	
  	<Button
@@ -43,6 +46,7 @@
  	    android:layout_below="@+id/button3"
  	    android:layout_centerHorizontal="true"
  	    android:layout_marginTop="20dp"
+ 	    android:onClick="showContacts"
  	    android:text="Contact List" />
  	
  	<Button
@@ -52,6 +56,7 @@
  	    android:layout_below="@+id/button4"
  	    android:layout_centerHorizontal="true"
  	    android:layout_marginTop="20dp"
+ 	    android:onClick="showLogout"
  	    android:text="Logout" />
  
 </RelativeLayout>

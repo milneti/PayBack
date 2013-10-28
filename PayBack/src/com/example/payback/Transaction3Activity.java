@@ -25,7 +25,7 @@ public class Transaction3Activity extends TitleActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		modifyTitle("Select Contacts",R.layout.activity_transaction3);
+		modifyTitle("Lender's Share",R.layout.activity_transaction3);
 
 		EditText transCost = (EditText) findViewById(R.id.lenderamount);
 		EditText text = (EditText) findViewById(R.id.lenderamount);  
@@ -68,7 +68,6 @@ public class Transaction3Activity extends TitleActivity {
 			}
 			
 		});
-		]
 	}
 
 	private boolean checkEditText(EditText edit) {

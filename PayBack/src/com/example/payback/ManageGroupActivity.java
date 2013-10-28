@@ -9,7 +9,7 @@ public class ManageGroupActivity extends TitleActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		modifyTitle("Select Contacts",R.layout.activity_manage_group);
+		modifyTitle("Manage Groups",R.layout.activity_manage_group);
 	}
 
 	@Override

@@ -13,28 +13,9 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/transaction5_SummaryHeader" 
+        android:text="@string/transaction5_SummaryHeader"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/White" />
-
-    <Button
-        android:id="@+id/Button01"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:onClick="showMainMenu"
-        android:text="@string/Done" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:longClickable="true"
-        android:onClick="showTrans4"
-        android:text="@string/Previous"/>
 
     <TextView
         android:id="@+id/textView1"
@@ -50,11 +31,63 @@
         android:id="@+id/listviewforplaceholderdata"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/Button01"
+        android:layout_above="@+id/Layout2"
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
         android:cacheColorHint="#00000000" >
 
     </ListView>
+
+    <LinearLayout
+        android:id="@+id/Layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="-10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0"
+            android:max="100"
+            android:progress="100" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_weight="0" >
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
+                android:onClick="showTrans4"
+                android:text="@string/Previous" />
+
+            <TextView
+                android:id="@+id/progressText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="-20dp"
+                android:text="Progress"
+                android:textColor="@color/White" />
+
+            <Button
+                android:id="@+id/button01"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:onClick="showMainMenu"
+                android:text="@string/Next" />
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

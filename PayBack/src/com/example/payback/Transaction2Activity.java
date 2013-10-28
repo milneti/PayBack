@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
-public class Transaction2Activity extends Activity  {
+public class Transaction2Activity extends TitleActivity  {
 
     private List<String> listHeader;
     private HashMap<String, List<Friend>> listChild;
@@ -22,7 +22,7 @@ public class Transaction2Activity extends Activity  {
 		 super.onCreate(savedInstanceState);
 				 
 		    super.onCreate(savedInstanceState);
-		    setContentView(R.layout.activity_transaction2_expandablecontactlist_main);
+			modifyTitle("Create Transaction",R.layout.activity_transaction2_expandablecontactlist_main);
 		    ExpandableListView expListView = (ExpandableListView) findViewById(R.id.expandlistView);
 
 		    createData();

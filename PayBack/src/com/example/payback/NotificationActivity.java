@@ -9,7 +9,7 @@ public class NotificationActivity extends TitleActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		modifyTitle("Select Contacts",R.layout.activity_notification);
+		modifyTitle("Notifications",R.layout.activity_notification);
 	}
 
 	@Override

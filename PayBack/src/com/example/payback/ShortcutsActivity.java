@@ -20,7 +20,11 @@ public class ShortcutsActivity extends Activity {
 		getMenuInflater().inflate(R.menu.shortcuts, menu);
 		return true;
 	}
-	
+	public void Return(View view)
+    {
+		setResult(Activity.RESULT_OK);
+        this.finish();
+    }
 	public void showMainMenu(View view)
     {
     	Intent intent = new Intent(this, MainActivity.class);

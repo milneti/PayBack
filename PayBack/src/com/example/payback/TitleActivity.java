@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 public class TitleActivity extends Activity {
 
+	private static final int MY_REQUEST_CODE = 0;
+
 	public void modifyTitle(String name, int layout) {
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);  
 		setContentView(layout);
@@ -22,7 +24,7 @@ public class TitleActivity extends Activity {
 	public void ShowShortcuts(View view)
 	{
 		Intent intent = new Intent(this, ShortcutsActivity.class);
-        startActivity(intent);
+		startActivityForResult(intent, MY_REQUEST_CODE);
         this.finish();
 	}
 

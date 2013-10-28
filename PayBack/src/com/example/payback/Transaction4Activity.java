@@ -22,7 +22,7 @@ public class Transaction4Activity extends TitleActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		modifyTitle("Select Contacts",R.layout.activity_transaction4);
+		modifyTitle("Borrowers' Share",R.layout.activity_transaction4);
 //		
 //		 data.add("Hello World");
 //		 data.add("Hello World2");
