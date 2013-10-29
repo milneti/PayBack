@@ -38,7 +38,8 @@
 	        android:id="@+id/Listofselected"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:descendantFocusability="beforeDescendants" >
+	        android:descendantFocusability="beforeDescendants"
+            android:cacheColorHint="#00000000" >
 
 	    </ListView>
     </LinearLayout>
@@ -46,7 +47,6 @@
      <LinearLayout
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:layout_alignParentBottom="true"
          android:gravity="center_horizontal"
          android:orientation="vertical" >
 

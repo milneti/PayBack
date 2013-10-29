@@ -51,9 +51,6 @@ public class Transaction4Activity extends TitleActivity {
 	    int transCostInt = oldbundle.getInt("Transaction1transCost");
 	    String transCommentString = oldbundle.getString("Transaction1transComment");
 	    ArrayList<Friend> transselected = oldbundle.getParcelableArrayList("Transaction2selected");
-	    int translenderamountInt = oldbundle.getInt("Transaction3lenderamount");
-	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
-	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
 
     	Intent intent = new Intent(this, Transaction3Activity.class);
         Bundle Bundle = new Bundle();
@@ -61,9 +58,6 @@ public class Transaction4Activity extends TitleActivity {
         Bundle.putInt("Transaction1transCost", transCostInt);
         Bundle.putString("Transaction1transComment", transCommentString);
         Bundle.putParcelableArrayList("Transaction2selected", transselected);
-        Bundle.putInt("Transaction3lenderamount", translenderamountInt);
-        Bundle.putBoolean("Transaction3button1Selected", button1Selected);
-        Bundle.putBoolean("Transaction3button2Selected", button2Selected);
         
         intent.putExtras(Bundle);
         startActivity(intent);
@@ -71,16 +65,15 @@ public class Transaction4Activity extends TitleActivity {
 	
 	public void showTrans5(View view)
     {
-		//NOT FINISHED TODO
-		
 	    Bundle oldbundle = getIntent().getExtras();
 	    
 	    int transCostInt = oldbundle.getInt("Transaction1transCost");
 	    String transCommentString = oldbundle.getString("Transaction1transComment");
 	    ArrayList<Friend> transselected = oldbundle.getParcelableArrayList("Transaction2selected");
-//	    int translenderamountInt = oldbundle.getInt("Transaction3lenderamount");
-//	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
-//	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
+	    int translenderamountInt = oldbundle.getInt("Transaction3lenderamount");
+	    ArrayList<Integer> lendsharelist = oldbundle.getIntegerArrayList("Transaction3borroweramountlist");
+	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
+	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
 
     	Intent intent = new Intent(this, Transaction5Activity.class);
         Bundle Bundle = new Bundle();
@@ -88,9 +81,11 @@ public class Transaction4Activity extends TitleActivity {
         Bundle.putInt("Transaction1transCost", transCostInt);
         Bundle.putString("Transaction1transComment", transCommentString);
         Bundle.putParcelableArrayList("Transaction2selected", transselected);
-//        Bundle.putInt("Transaction3lenderamount", translenderamountInt);
-//        Bundle.putBoolean("Transaction3button1Selected", button1Selected);
-//        Bundle.putBoolean("Transaction3button2Selected", button2Selected);
+        
+        Bundle.putInt("Transaction3lenderamount", translenderamountInt);
+        Bundle.putIntegerArrayList("Transaction3borroweramountlist", lendsharelist);
+        Bundle.putBoolean("Transaction3button1Selected", button1Selected);
+        Bundle.putBoolean("Transaction3button2Selected", button2Selected);
         
         //put in new data here from this transaction page
         

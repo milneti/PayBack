@@ -107,7 +107,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="18dp"
-                android:onClick="showTrans3"
+                android:onClick="checktomoveontotrans3"
                 android:text="@string/Next" />
         </LinearLayout>
 

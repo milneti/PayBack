@@ -80,6 +80,7 @@ public class User extends Account{
 
 class Friend extends Account implements Parcelable {
 	boolean selected;
+	int amounttosel;
 	
 	Friend(String fName, String lName, String email){
 		this.fName = fName;
@@ -98,6 +99,7 @@ class Friend extends Account implements Parcelable {
 		this.lName = lName;
 		this.email = "";
 		this.selected = false;
+		this.amounttosel = 0;
 		
 		if(!sendNewFriendToServer())
 			throw new IllegalArgumentException();
@@ -113,6 +115,15 @@ class Friend extends Account implements Parcelable {
 		  this.selected = selected;
 	  }
 	
+	  public int getamounttosel() {
+		    return amounttosel;
+		  }
+
+	  public void setamounttosel(int amounttosel) {
+		  this.amounttosel = amounttosel;
+	  }
+	  
+	  
 	//Methods
 	static boolean sendNewFriendToServer()
 	{
@@ -122,7 +133,7 @@ class Friend extends Account implements Parcelable {
 	}
 
 	public String toString() {
-		return  getfName() + " " + getlName();
+		return  getfName() + " " + getlName() + " (" + getEmail() + ")";
 	}
 
 	@Override
