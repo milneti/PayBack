@@ -9,10 +9,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Transaction2Activity_expandablecontactlist_adapter extends BaseExpandableListAdapter {
 
@@ -53,8 +51,8 @@ public Transaction2Activity_expandablecontactlist_adapter(Context context, List<
       final String childText = getChild(groupPosition, childPosition).toString();
 
       if (convertView == null) {
-          LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-          convertView = infalInflater.inflate(R.layout.activity_transaction2_expandablecontactlist_item, null);
+          LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+          convertView = inflater.inflate(R.layout.activity_transaction2_expandablecontactlist_item, null);
       }
       
       final CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);      
@@ -83,8 +81,6 @@ public Transaction2Activity_expandablecontactlist_adapter(Context context, List<
       return convertView;
     
   }
-  
-  
 
   @Override
   public int getChildrenCount(int groupPosition) {
