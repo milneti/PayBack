@@ -100,6 +100,29 @@ public class Transaction4Activity extends TitleActivity {
         startActivity(intent);
     }
 	
+	public void checktomoveontotrans5(View view){
+	    Bundle oldbundle = getIntent().getExtras();
+	    int transCostInt = oldbundle.getInt("Transaction1transCost");
+	    int translenderamountInt = oldbundle.getInt("Transaction3lenderamount");
+
+
+
+        int counting = 0;
+        for(int i = 0; i < data.size(); i++){
+        	counting = counting + Integer.parseInt(data.get(i).get("data"));
+        }
+        if(counting != (transCostInt - translenderamountInt)){
+			Toast.makeText(getApplicationContext(), "("+String.valueOf((transCostInt - translenderamountInt)-counting) 
+					+ ") Placeholder Money ERROR", Toast.LENGTH_SHORT).show();
+        }
+        else{
+        	showTrans5(view);
+        }
+        
+		
+		
+	}
+	
 	public void showTrans5(View view)
     {
 	    Bundle oldbundle = getIntent().getExtras();
@@ -126,17 +149,12 @@ public class Transaction4Activity extends TitleActivity {
         for(int i = 0; i < data.size(); i++){
         	lendsharelist.add(Integer.parseInt(data.get(i).get("data")));
         }
-        
-        
-//		Toast.makeText(getApplicationContext(), String.valueOf(Integer.parseInt(data.get(1).get("data"))), Toast.LENGTH_LONG).show();
 
         Bundle.putIntegerArrayList("Transaction3borroweramountlist", lendsharelist);
         
         Bundle.putBoolean("Transaction3button1Selected", button1Selected);
         Bundle.putBoolean("Transaction3button2Selected", button2Selected);
-        
-        //put in new data here from this transaction page
-        
+                
         intent.putExtras(Bundle);
         startActivity(intent);
     }

@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="-20dp"
-                android:text="Progress"
+                android:text="@string/progress"
                 android:textColor="@color/White" />
 
             <Button
@@ -90,7 +90,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="18dp"
-                android:onClick="showTrans5"
+                android:onClick="checktomoveontotrans5"
                 android:text="@string/Next" />
         </LinearLayout>
 
