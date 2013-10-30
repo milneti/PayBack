@@ -20,6 +20,7 @@ import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Transaction4Activity extends TitleActivity {
 
@@ -27,8 +28,7 @@ public class Transaction4Activity extends TitleActivity {
 	 EditText editing;
 	 TextView text;
 
-	 List<String> data = new ArrayList<String>();
-
+	 ArrayList<Map<String, String>> data;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +39,11 @@ public class Transaction4Activity extends TitleActivity {
 		    text = (TextView) findViewById(R.id.borrowername);
 		    editing = (EditText) findViewById(R.id.borroweramount);
 		
-		    ArrayList<Map<String, String>> list = buildData();
+		    data = buildData();
 		    String[] from = { "friendname", "data" };
 		    int[] to = { R.id.borrowername, R.id.borroweramount };
 
-		    Transaction4_listview_adapter adapter = new Transaction4_listview_adapter(this, list,
+		    Transaction4_listview_adapter adapter = new Transaction4_listview_adapter(this, data,
 		        R.layout.activity_transaction4_listviewitem, from, to);
 		    
 		   listView.setAdapter(adapter);
@@ -108,7 +108,9 @@ public class Transaction4Activity extends TitleActivity {
 	    String transCommentString = oldbundle.getString("Transaction1transComment");
 	    ArrayList<Friend> transselected = oldbundle.getParcelableArrayList("Transaction2selected");
 	    int translenderamountInt = oldbundle.getInt("Transaction3lenderamount");
-	    ArrayList<Integer> lendsharelist = oldbundle.getIntegerArrayList("Transaction3borroweramountlist");
+	    
+//	    ArrayList<Integer> lendsharelist = oldbundle.getIntegerArrayList("Transaction3borroweramountlist");
+	    
 	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
 	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
 
@@ -118,9 +120,18 @@ public class Transaction4Activity extends TitleActivity {
         Bundle.putInt("Transaction1transCost", transCostInt);
         Bundle.putString("Transaction1transComment", transCommentString);
         Bundle.putParcelableArrayList("Transaction2selected", transselected);
-        
         Bundle.putInt("Transaction3lenderamount", translenderamountInt);
+
+        ArrayList<Integer> lendsharelist = new ArrayList<Integer>();
+        for(int i = 0; i < data.size(); i++){
+        	lendsharelist.add(Integer.parseInt(data.get(i).get("data")));
+        }
+        
+        
+//		Toast.makeText(getApplicationContext(), String.valueOf(Integer.parseInt(data.get(1).get("data"))), Toast.LENGTH_LONG).show();
+
         Bundle.putIntegerArrayList("Transaction3borroweramountlist", lendsharelist);
+        
         Bundle.putBoolean("Transaction3button1Selected", button1Selected);
         Bundle.putBoolean("Transaction3button2Selected", button2Selected);
         
