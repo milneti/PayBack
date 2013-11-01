@@ -75,9 +75,7 @@ public class Transaction5Activity extends TitleActivity {
 	}
 
 	public void showTrans4(View view)
-    {
-		//NOT FINISHED TODO
-		
+    {		
 	    Bundle oldbundle = getIntent().getExtras();
 	    
 	    int transCostInt = oldbundle.getInt("Transaction1transCost");
@@ -110,7 +108,6 @@ public class Transaction5Activity extends TitleActivity {
 	        Bundle.putIntegerArrayList("Transaction3borroweramountlist", lendsharelist);
 	        Bundle.putBoolean("Transaction3button1Selected", button1Selected);
 	        Bundle.putBoolean("Transaction3button2Selected", button2Selected);
-	        
 	        
 	        intent.putExtras(Bundle);
 	        startActivity(intent);
