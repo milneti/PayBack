@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class Transaction5Activity extends TitleActivity {
 	ListView listView;
@@ -98,8 +99,17 @@ public class Transaction5Activity extends TitleActivity {
 	
 	public void showMainMenu(View view)
     {
-    	Intent intent = new Intent(this, MainActivity.class);
+		//Send transaction object data to server
+		
+		/*
+		if(server return Success)
+			Toast.makeText(getApplicationContext(),"Transaction Completed", Toast.LENGTH_LONG).show();
+		else
+			Toast.makeText(getApplicationContext(),"Transaction Failed", Toast.LENGTH_LONG).show();
+    	*/
+		
+		Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        this.finish();
+        this.finish(); //kill app page history
     }
 }

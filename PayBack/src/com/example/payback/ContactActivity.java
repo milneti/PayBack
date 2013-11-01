@@ -24,7 +24,7 @@ public class ContactActivity extends TitleActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		modifyTitle("Select Contacts",R.layout.activity_contact);
+		modifyTitle("Contact List",R.layout.activity_contact);
 
 		contactlistview = (ListView) findViewById(R.id.listofselected);
 		ArrayList<String> friendList = buildFriendList();
@@ -135,18 +135,26 @@ public class ContactActivity extends TitleActivity {
 		       });
 		Dialog dialog = builder2.create();
 		dialog.show();
+
+		/*send email to server. return first and last name of this email account.
+		
+		if (name != NULL)
+			((TextView)findViewById(R.id.firstView)).setText(first);
+			((TextView)findViewById(R.id.lastView)).setText(last);		
+		*/
+		
+		
+		((TextView)findViewById(R.id.emailConfirmView)).setText(email);
 	}
 	
 	public void sendContact(String email){
-//		setContentView(R.layout.activity_contact);
-//		TextView textView2 = (TextView)findViewById(R.id.textView2);
-//		textView2.setText(email);
-		Context context = getApplicationContext();
-		CharSequence text = "I found this string =' " + email + " '";
-		int duration = Toast.LENGTH_SHORT;
+		
+		//send email to server to add as friend of current account.
+		
+		CharSequence text = email + " Added as a Friend";
 		
 		
-		Toast toast = Toast.makeText(context, text, duration);
+		Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
 		toast.show();
 	}
 	

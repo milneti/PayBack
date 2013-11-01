@@ -24,7 +24,7 @@
                 android:textColor="@color/White" />
 
             <TextView
-                android:id="@+id/titleName"
+                android:id="@+id/emailConfirmView"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
@@ -47,7 +47,7 @@
                 android:textColor="@color/White" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/firstView"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="25dp"
@@ -69,7 +69,7 @@
                 android:textColor="@color/White" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/lastView"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="25dp"

@@ -19,12 +19,17 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.message.BasicNameValuePair;
 
+//import org.json.JSONObject;
+//import org.json.JSONArray;
+//import org.json.JSONException;
+import org.json.*;
+
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateAccountActivity extends Activity {
+public class CreateAccountActivity extends TitleActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,16 +51,23 @@ public class CreateAccountActivity extends Activity {
 		String email = ((EditText)findViewById(R.id.email)).getText().toString();
 		String password = ((EditText)findViewById(R.id.password)).getText().toString();
 		
+		String Url = "http://chase.mamatey.com/PayBack/AccountCreation.php";
+		
 		HttpClient httpclient = new DefaultHttpClient();
-   	    HttpPost httppost = new HttpPost("http://chase.mamatey.com/PayBack/AccountCreation.php");
-	   	try {
-	   		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+   	    HttpPost httppost = new HttpPost(Url);
+
+   	    try {
+	   		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);	   		
 	   		nameValuePairs.add(new BasicNameValuePair("fname",fName));
 	   		nameValuePairs.add(new BasicNameValuePair("lname",lName));
 	   		nameValuePairs.add(new BasicNameValuePair("email",email));
 	   		nameValuePairs.add(new BasicNameValuePair("password",password));
-	   		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-	   		HttpResponse response = httpclient.execute(httppost);
+	   		
+	   		JSONStringer jParser = new JSONStringer();
+	   		JSONObject json = jParser.makeHttpRequest(Url, "POST", nameValuePairs);
+	   		
+	   		//httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+	   		//HttpResponse response = httpclient.execute(httppost);
 	   		//response.getEntity().toString();
    			Toast.makeText(getApplicationContext(), response.getEntity().toString(), Toast.LENGTH_SHORT).show();
 //
@@ -71,7 +83,7 @@ public class CreateAccountActivity extends Activity {
 	    	 System.out.println("General I/O exception: " + e.getMessage());
 			Toast.makeText(getApplicationContext(), "IOException", Toast.LENGTH_SHORT).show();
 	    }
-	   	*/
+	  	*/
 	}
 	
 	public void Login(View view) {

@@ -6,7 +6,9 @@
 
         <LinearLayout
             style="@style/LoginFormContainer"
+            android:layout_height="442dp"
             android:layout_marginTop="200dp"
+            android:onClick="hideSoftKeyboard"
             android:orientation="vertical" >
 
             <EditText

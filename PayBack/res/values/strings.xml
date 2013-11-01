@@ -52,5 +52,6 @@
     <string name="shortcuts">Shortcuts</string>
     <string name="title_activity_title">TitleActivity</string>
     <string name="title_activity_shortcuts">ShortcutsActivity</string>
+    <string name="Goodbye">Goodbye</string>
 
 </resources>
