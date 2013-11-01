@@ -80,7 +80,8 @@
         <activity
             android:name="com.example.payback.Transaction4Activity"
             android:label="@string/title_activity_transaction4" 
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
             android:name="com.example.payback.Transaction5Activity"

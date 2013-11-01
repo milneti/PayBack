@@ -38,7 +38,8 @@
 	        android:id="@+id/Listofselected"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:descendantFocusability="beforeDescendants" >
+	        android:descendantFocusability="beforeDescendants"
+            android:cacheColorHint="#00000000" >
 
 	    </ListView>
     </LinearLayout>
@@ -46,7 +47,6 @@
      <LinearLayout
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:layout_alignParentBottom="true"
          android:gravity="center_horizontal"
          android:orientation="vertical" >
 
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="-20dp"
-                android:text="Progress"
+                android:text="@string/progress"
                 android:textColor="@color/White" />
 
             <Button
@@ -90,7 +90,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="18dp"
-                android:onClick="showTrans5"
+                android:onClick="checktomoveontotrans5"
                 android:text="@string/Next" />
         </LinearLayout>
 
