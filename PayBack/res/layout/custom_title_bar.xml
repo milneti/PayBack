@@ -24,7 +24,7 @@
             android:src="@drawable/payback" />
 
         <TextView
-            android:id="@+id/titleName"
+            android:id="@+id/titleNameView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

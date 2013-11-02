@@ -17,7 +17,7 @@ import android.widget.Toast;
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends TitleActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +55,7 @@ public class LoginActivity extends Activity {
 //			e.printStackTrace();
 //		}
 		Intent intent = new Intent(this, MainActivity.class);
-		Toast.makeText(getApplicationContext(),
-                "Welcome", Toast.LENGTH_SHORT)
-                .show();
+		Toast.makeText(getApplicationContext(),"Welcome", Toast.LENGTH_SHORT).show();
         startActivity(intent);
 	}
 	

@@ -2,6 +2,8 @@ package com.example.payback;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -74,7 +76,7 @@ public class Transaction3Activity extends TitleActivity {
 		String stringnumber = edit.getText().toString().substring(1);
 		Float floatnumber = Float.parseFloat(stringnumber);
 		int intnumber = (int) (floatnumber * 100F);
-	    return intnumber == 0;
+	    return intnumber < 0;
 	}
 	
 	void updateButtonState() {
@@ -132,13 +134,21 @@ public class Transaction3Activity extends TitleActivity {
 				{
 					EditText transCost = (EditText)findViewById(R.id.lenderamount);
 					transCost.setText(lenderText);
+					
+			    	button1Selected = true;
+				    button2Selected = false;
 				}
 				break;
 			case R.id.radio2:
 				if (checked)
 				{
+					//There's a bug where if you hit manual and then type it'll change the front rather then the back
+					//For example. hit manual. edittext = $0.00. hit "1". expected is $0.01. actually is $10.00.
 					EditText transCost = (EditText)findViewById(R.id.lenderamount);
 					transCost.setText("$0.00");
+
+			    	button1Selected = false;
+			    	button2Selected = true;
 				}
 				break;
 		}
@@ -153,7 +163,7 @@ public class Transaction3Activity extends TitleActivity {
 		int translenderamountInt = (int) (floatnumber * 100F);
 		
 		if(translenderamountInt <= transCostInt){
-			showTrans4(view);
+			showTrans4or5(view);
 		}
 		else{
 			Toast.makeText(getApplicationContext(), "Lent amount is greater then the transaction", Toast.LENGTH_SHORT).show();
@@ -178,7 +188,7 @@ public class Transaction3Activity extends TitleActivity {
 		
     }
 	
-	public void showTrans4(View view)
+	public void showTrans4or5(View view)
     {
 	    Bundle oldbundle = getIntent().getExtras();
 	    
@@ -186,25 +196,59 @@ public class Transaction3Activity extends TitleActivity {
 	    String transCommentString = oldbundle.getString("Transaction1transComment");
 	    ArrayList<Friend> transselected = oldbundle.getParcelableArrayList("Transaction2selected");
 
-    	Intent intent = new Intent(this, Transaction4Activity.class);
-        Bundle Bundle = new Bundle();
-        
-        Bundle.putInt("Transaction1transCost", transCostInt);
-        Bundle.putString("Transaction1transComment", transCommentString);
-        Bundle.putParcelableArrayList("Transaction2selected", transselected);
-        
-    	EditText translenderamount = (EditText)findViewById(R.id.lenderamount);
-    	String stringnumber = translenderamount.getText().toString().substring(1);
-		Float floatnumber = Float.parseFloat(stringnumber);
-		int translenderamountInt = (int) (floatnumber * 100F);
-        Bundle.putInt("Transaction3lenderamount", translenderamountInt);
-        
-        Bundle.putBoolean("Transaction3button1Selected", button1Selected);
-        Bundle.putBoolean("Transaction3button2Selected", button2Selected);
-        
-        intent.putExtras(Bundle);
-        startActivity(intent);
-		
+	    ArrayList<Integer> lendsharelist = new ArrayList<Integer>();
+
+	    if(button1Selected){
+	    	Intent intent = new Intent(this, Transaction5Activity.class);
+	        Bundle Bundle = new Bundle();
+	        
+	        Bundle.putInt("Transaction1transCost", transCostInt);
+	        Bundle.putString("Transaction1transComment", transCommentString);
+	        Bundle.putParcelableArrayList("Transaction2selected", transselected);
+	        Bundle.putBoolean("Transaction3button1Selected", button1Selected);
+	        Bundle.putBoolean("Transaction3button2Selected", button2Selected);
+	        
+	        
+			int numContacts = oldbundle.getParcelableArrayList("Transaction2selected").size();
+			int lenderShare = transCostInt/(numContacts+1);
+			for(int i = 0; i < numContacts; i ++){
+				lendsharelist.add(lenderShare);
+			}
+			Bundle.putIntegerArrayList("Transaction3borroweramountlist", lendsharelist);
+			Bundle.putInt("Transaction3lenderamount", lenderShare);
+
+	        intent.putExtras(Bundle);
+	        startActivity(intent);
+	    }
+	    else if(button2Selected){
+	    	Intent intent = new Intent(this, Transaction4Activity.class);
+	        Bundle Bundle = new Bundle();
+	        
+	        Bundle.putInt("Transaction1transCost", transCostInt);
+	        Bundle.putString("Transaction1transComment", transCommentString);
+	        Bundle.putParcelableArrayList("Transaction2selected", transselected);
+	        Bundle.putBoolean("Transaction3button1Selected", button1Selected);
+	        Bundle.putBoolean("Transaction3button2Selected", button2Selected);
+	        
+	        EditText translenderamount = (EditText)findViewById(R.id.lenderamount);
+	    	String stringnumber = translenderamount.getText().toString().substring(1);
+			Float floatnumber = Float.parseFloat(stringnumber);
+			int translenderamountInt = (int) (floatnumber * 100F);
+			Bundle.putInt("Transaction3lenderamount", translenderamountInt);
+	        
+			int numContacts = oldbundle.getParcelableArrayList("Transaction2selected").size();
+			int lenderShare = (transCostInt-translenderamountInt)/(numContacts);
+			for(int i = 0; i < numContacts; i ++){
+				lendsharelist.add(lenderShare);
+			}
+			Bundle.putIntegerArrayList("Transaction3borroweramountlist", lendsharelist);
+
+	        
+	        intent.putExtras(Bundle);
+	        startActivity(intent);
+	    }
+
+	    	
     }
 	
 }
