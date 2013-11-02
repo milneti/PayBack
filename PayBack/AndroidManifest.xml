@@ -7,7 +7,8 @@
     <uses-sdk
         android:minSdkVersion="9"
         android:targetSdkVersion="18" />
-
+    <protected-broadcast />
+	<uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/payback"
