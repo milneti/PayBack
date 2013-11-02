@@ -5,24 +5,17 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
-import android.text.Layout;
-import android.view.Menu;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class TitleActivity extends Activity {
 
@@ -47,7 +40,7 @@ public class TitleActivity extends Activity {
 		((InputMethodManager)this.getSystemService(Service.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
 	}
 	
-	public boolean callServer(final String className, final String parameters, final URL url, final boolean success){
+	public void callServer(final String className, final String parameters, final URL url){
 		Logger CONLOG = Logger.getLogger(className);
 		CONLOG.setLevel(Level.INFO);
 		
@@ -77,7 +70,6 @@ public class TitleActivity extends Activity {
 						wr.flush();
 						wr.close();
 						CANLOG.info("Data send success!");
-						success = true;
 					} catch (IOException e){
 						CANLOG.warning("IOException on HTTP connection send to server: "+connection.getResponseMessage());
 						e.printStackTrace();
