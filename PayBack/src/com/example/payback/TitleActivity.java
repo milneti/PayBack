@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,7 +41,25 @@ public class TitleActivity extends Activity {
 		((InputMethodManager)this.getSystemService(Service.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
 	}
 	
-	public void callServer(final String className, final String parameters, final URL url){
+	
+	/*
+	public boolean checkAlpha(){
+		//check for textbox to only have Letters
+	}
+	public boolean checkEmail(){
+		//check for textbox to have valid email format --> XX@yy.com
+	}
+	public boolean checkNumber(){
+		//check for textbox to only have numbers
+	}	
+	public boolean checkPassword(){
+		//check for textbox to have >6 characters
+		//must contain 3 categories of character types: 
+		//i.e letter,number,symbol,uppercaseLetter,etc.
+	}
+	*/
+	
+	public void sendServer(final String className, final String parameters, final String urlName){
 		Logger CONLOG = Logger.getLogger(className);
 		CONLOG.setLevel(Level.INFO);
 		
@@ -50,6 +69,12 @@ public class TitleActivity extends Activity {
 				//view.invalidate();//uncommenting this will render the button into an app crasher
 				Logger CANLOG = Logger.getLogger(className);
 				CANLOG.setLevel(Level.INFO);
+				URL url = null;
+				try {
+					url = new URL(urlName);
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
 				CANLOG.info("Able to set url and params: "+parameters);
 				HttpURLConnection connection;
 				try {
