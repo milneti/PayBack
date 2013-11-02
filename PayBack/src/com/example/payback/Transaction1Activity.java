@@ -23,7 +23,7 @@ public class Transaction1Activity extends TitleActivity {
 		modifyTitle("Create Transaction",R.layout.activity_transaction1);		
 		
 		EditText text = (EditText)findViewById(R.id.editText1);  
-
+	    text.requestFocus();
 	    text.setRawInputType(Configuration.KEYBOARD_12KEY);    
 
 	    text.addTextChangedListener(new TextWatcher(){
@@ -47,8 +47,7 @@ public class Transaction1Activity extends TitleActivity {
 	        }
 	    });
 		
-		EditText transCost = (EditText) findViewById(R.id.editText1);
-		transCost.addTextChangedListener(new TextWatcher() {
+	    text.addTextChangedListener(new TextWatcher() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
         	    updateButtonState();
             }
