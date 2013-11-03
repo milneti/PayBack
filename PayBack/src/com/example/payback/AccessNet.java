@@ -1,17 +1,8 @@
 package com.example.payback;
 
-import android.os.Bundle;
-import android.content.Intent;
-import android.view.Menu;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
-
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -25,7 +16,6 @@ import java.net.URL;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.os.AsyncTask;
 
 class AccessNet{
 
