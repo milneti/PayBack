@@ -66,7 +66,7 @@ class AccessNet{
 							BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
 							line = reader.readLine();
-							if(line.equalsIgnoreCase("1")||line.equalsIgnoreCase("true")||line.equalsIgnoreCase("success")||line.equalsIgnoreCase("Login and query sucess"))
+							if(line.equalsIgnoreCase("1")||line.equalsIgnoreCase("true")||line.equalsIgnoreCase("success")||line.equalsIgnoreCase("Login and query success"))
 								items[0]="success";
 							CANLOG.info("Data in: "+line);
 
@@ -78,7 +78,7 @@ class AccessNet{
 						}
 
 						connection.disconnect();
-						CANLOG.info("Created new account in system: "+items[0]);
+						CANLOG.info("Performed action and server returned: "+items[0]);
 						//Toast.makeText(getApplicationContext(), "Account Created!", Toast.LENGTH_SHORT).show();
 
 					} catch (IOException e) {
