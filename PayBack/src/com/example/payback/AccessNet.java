@@ -171,7 +171,7 @@ class AccessNet{
 						}
 
 						connection.disconnect();
-						CANLOG.info("Created new account in system: "+items[0]);
+						CANLOG.info("Executed process and server returned: "+items[0]);
 						//Toast.makeText(getApplicationContext(), "Account Created!", Toast.LENGTH_SHORT).show();
 
 					} catch (IOException e) {

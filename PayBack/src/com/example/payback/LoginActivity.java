@@ -33,7 +33,7 @@ public class LoginActivity extends TitleActivity {
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
 	}
-	
+
 	public void Login(View view) throws InterruptedException {
 		//for log in, url stub is AccountLogin.php
 		Logger CONLOG = Logger.getLogger(LoginActivity.class .getName());
@@ -43,12 +43,12 @@ public class LoginActivity extends TitleActivity {
 				"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
 		final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 		final Matcher matcher;
-		
+
 		String email = ((EditText)findViewById(R.id.email)).getText().toString();
 		String password = ((EditText)findViewById(R.id.password)).getText().toString();
 		CONLOG.info("Login info: <"+email+", "+password+">");
 		matcher = pattern.matcher(email);
-		
+
 		if(email.isEmpty()){
 			Toast.makeText(getApplicationContext(), "Email field is empty", Toast.LENGTH_SHORT).show();
 		}else if(password.isEmpty()){
@@ -56,29 +56,29 @@ public class LoginActivity extends TitleActivity {
 		}else if(!matcher.matches()){
 			Toast.makeText(getApplicationContext(), "Email: \""+email+"\" is not a valid email address!", Toast.LENGTH_SHORT).show();
 		}else{
-		
-		String status  ="fail";
-		AccessNet caller = new AccessNet();
-		
-		String params = "email="+email+"&password="+password;
-		String urlstub = "AccountLogin.php";
-		
-		CONLOG.info("Attempting to call server at: "+urlstub+", "+params);
-		status = caller.simpleServerCall(urlstub, params);
-		
-		if(status.equalsIgnoreCase("success")){
-			CONLOG.info("Server call successful and logged in!");
-			Intent intent = new Intent(this, MainActivity.class);
-			Toast.makeText(getApplicationContext(),"Welcome", Toast.LENGTH_SHORT).show();
-			startActivity(intent);
-		}else{
-			CONLOG.info("Server call successful but user failed login.");
-			Toast.makeText(getApplicationContext(),"Incorrect username or password", Toast.LENGTH_SHORT).show();
+
+			String status  ="fail";
+			AccessNet caller = new AccessNet();
+
+			String params = "email="+email+"&password="+password;
+			String urlstub = "AccountLogin.php";
+
+			CONLOG.info("Attempting to call server at: "+urlstub+", "+params);
+			status = caller.simpleServerCall(urlstub, params);
+
+			if(status.equalsIgnoreCase("success")){
+				CONLOG.info("Server call successful and logged in!");
+				Intent intent = new Intent(this, MainActivity.class);
+				Toast.makeText(getApplicationContext(),"Welcome", Toast.LENGTH_SHORT).show();
+				startActivity(intent);
+			}else{
+				CONLOG.info("Server call successful but user failed login.");
+				Toast.makeText(getApplicationContext(),"Incorrect username or password", Toast.LENGTH_SHORT).show();
+			}
 		}
-		}
-		
+
 	}
-	
+
 	public void CreateAccount(View view) {
 		Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
         startActivity(intent);
