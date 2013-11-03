@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -58,10 +59,12 @@ public class TitleActivity extends Activity {
 		//i.e letter,number,symbol,uppercaseLetter,etc.
 	}
 	*/
-	
-	public void sendServer(final String className, final String parameters, final String urlName){
+	/*
+	public boolean sendServer(final String className, final String parameters, final String urlName){
 		Logger CONLOG = Logger.getLogger(className);
 		CONLOG.setLevel(Level.INFO);
+		final boolean success[] = new boolean[1];
+		final CountDownLatch latch = new CountDownLatch(1);
 		
 		new Thread (new Runnable() {
 			@Override
@@ -104,11 +107,15 @@ public class TitleActivity extends Activity {
 						String line;
 				   		BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-				   		while ((line = reader.readLine()) != null) {
+				   		/*while ((line = reader.readLine()) != null) {
 				   		    //System.out.println(line);
 				   			CANLOG.info("Data in: "+line);
 				   			//Toast.makeText(getApplicationContext(), line, Toast.LENGTH_SHORT).show();
-				   		}
+				   		}/
+				   		line = reader.readLine();
+				   		if(line.equalsIgnoreCase("1"));
+				   			success[0] = true;
+				   		CANLOG.info("Data in: "+line);
 				   		reader.close();
 				   		CANLOG.info("Data receive success!");
 					} catch (IOException e){
@@ -121,6 +128,8 @@ public class TitleActivity extends Activity {
 					e.printStackTrace();
 				}	   		    
 			}
+			//latch.countDown();
 		}).start();	
-	}
+		return success[0];
+	}*/
 }
