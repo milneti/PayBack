@@ -55,5 +55,7 @@
     <string name="Goodbye">Goodbye</string>
     <string name="progress">Progress</string>
     <string name="Logout">Logout</string>
+    <string name="Back">Back</string>
+    <string name="DeleteContact">Delete Contact</string>
 
 </resources>
