@@ -49,6 +49,11 @@ public class TitleActivity extends Activity {
 		//i.e letter,number,symbol,uppercaseLetter,etc.
 	}
 	*/
+	
+	
+	
+	
+	
 	/*
 	public boolean sendServer(final String className, final String parameters, final String urlName){
 		Logger CONLOG = Logger.getLogger(className);
