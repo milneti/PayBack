@@ -109,7 +109,6 @@ public class ContactActivity extends TitleActivity {
 	public boolean onContextItemSelected(MenuItem item){
 		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
 		int menuItemIndex = item.getItemId();
-		String[] menuItems = getResources().getStringArray(R.array.ContactsMenu);
 		
 		Friend user = new Friend(null,null,null);
 		final String toDelete = user.extractEmail(friendList.get(info.position));

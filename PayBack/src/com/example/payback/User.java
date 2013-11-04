@@ -46,7 +46,7 @@ public class User extends Account{
 		this.fName = fName;
 		this.lName = lName;
 		this.email = email;
-		friends = new ArrayList<Friend>();
+		this.friends = new ArrayList<Friend>();
 		boolean worked = sendNewUserToServer();
 		if(!worked)
 			throw new IllegalArgumentException();
@@ -62,9 +62,9 @@ public class User extends Account{
 	User(String email)
 	{
 		this.email = email;
-		fName = firstNameLookup(email);
-		lName = lastNameLookup(email);
-		friends = friendsLookup(email);
+		this.fName = firstNameLookup(email);
+		this.lName = lastNameLookup(email);
+		this.friends = friendsLookup(email);
 	}
 	private String firstNameLookup(String email)
 	{

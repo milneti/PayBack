@@ -85,11 +85,13 @@ public class CreateAccountActivity extends TitleActivity {
 				Toast.makeText(getApplicationContext(), "Error account could not be created", Toast.LENGTH_SHORT).show();
 			}
 		}
+		this.finish();
 	}
 	
 	public void Login(View view) {
 		Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
+        this.finish();
 	}
 
 }
