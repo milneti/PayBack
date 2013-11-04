@@ -22,8 +22,7 @@ public class ShortcutsActivity extends Activity {
 	}
 	public void Return(View view)
     {
-		setResult(Activity.RESULT_OK);
-        this.finish();
+        finish();
     }
 	public void showMainMenu(View view)
     {
