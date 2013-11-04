@@ -23,7 +23,7 @@
                 android:id="@+id/CreateTrsnB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="100dp"
+                android:height="80dp"
                 android:onClick="CreateTrsn"
                 android:text="@string/title_activity_create_transaction" />
 
@@ -31,7 +31,7 @@
                 android:id="@+id/ResolveTrsnB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="100dp"
+                android:height="80dp"
                 android:onClick="ResolveTrsn"
                 android:text="@string/title_activity_resolve_transaction" />
 
@@ -39,23 +39,49 @@
                 android:id="@+id/ContactB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="100dp"
+                android:height="80dp"
                 android:onClick="Contact"
                 android:text="@string/title_activity_contact" />
 
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
 
-                <Button android:id="@+id/ManageGroupB" android:layout_width="143dp" android:layout_height="wrap_content" android:minHeight="100dp" android:minWidth="100dp" android:onClick="ManageGroup" android:text="@string/title_activity_manage_group" />
+                <Button
+                    android:id="@+id/ManageGroupB"
+                    android:layout_width="143dp"
+                    android:layout_height="wrap_content"
+                    android:height="80dp"
+                    android:minWidth="100dp"
+                    android:onClick="ManageGroup"
+                    android:text="@string/title_activity_manage_group" />
 
-                <Button android:id="@+id/NotificationB" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="100dp" android:onClick="Notification" android:text="@string/title_activity_notification" />
+                <Button
+                    android:id="@+id/NotificationB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:height="80dp"
+                    android:onClick="Notification"
+                    android:text="@string/title_activity_notification" />
 
             </LinearLayout>
 
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
 
-                <Button android:id="@+id/SettingB" android:layout_width="143dp" android:layout_height="wrap_content" android:minHeight="100dp" android:onClick="Setting" android:text="@string/action_settings" />
+                <Button
+                    android:id="@+id/SettingB"
+                    android:layout_width="143dp"
+                    android:layout_height="wrap_content"
+                    android:height="80dp"
+                    android:maxWidth="143dp"
+                    android:onClick="Setting"
+                    android:text="@string/action_settings" />
 
-                <Button android:id="@+id/StatisticB" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="100dp" android:onClick="Statistic" android:text="@string/title_activity_statistic" />
+                <Button
+                    android:id="@+id/StatisticB"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:height="80dp"
+                    android:onClick="Statistic"
+                    android:text="@string/title_activity_statistic" />
 
             </LinearLayout>
 
@@ -68,7 +94,6 @@
     android:layout_height="wrap_content"
     android:layout_alignParentRight="true"
     android:layout_below="@+id/scrollView1"
-    android:minHeight="100dp"
     android:onClick="MainLogout"
     android:text="@string/Logout" />
 
