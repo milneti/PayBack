@@ -48,14 +48,14 @@
     <string name="create_account_here">New user? Register here</string>
     <string name="login_here">Have an account? Login here</string>
     <string name="activity_contact_create">Enter Email Address</string>
-    <string name="Back">Back</string>
+    <string name="back">Back</string>
     <string name="shortcuts">Shortcuts</string>
     <string name="title_activity_title">TitleActivity</string>
     <string name="title_activity_shortcuts">ShortcutsActivity</string>
     <string name="Goodbye">Goodbye</string>
     <string name="progress">Progress</string>
     <string name="Logout">Logout</string>
-    <string name="Back">Back</string>
+    <string name="save_changes">Save Changes</string>
     <string name="DeleteContact">Delete Contact</string>
 
 </resources>
