@@ -2,15 +2,17 @@ package com.example.payback;
 
 import java.util.ArrayList;
 import android.os.Bundle;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -20,33 +22,42 @@ import android.widget.Toast;
 public class ContactActivity extends TitleActivity {
 
 	  private ListView contactlistview;	  
-	
+	  private ArrayList<String> friendList;
+	  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		modifyTitle("Select Contacts",R.layout.activity_contact);
+		modifyTitle("Contact List",R.layout.activity_contact);
 
 		contactlistview = (ListView) findViewById(R.id.listofselected);
-		ArrayList<String> friendList = buildFriendList();
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.activity_contact_iteminlist,
-				friendList);
+		friendList = buildFriendList();
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.activity_contact_iteminlist, friendList);
 		contactlistview.setAdapter(adapter);
-		    
+		registerForContextMenu(contactlistview);
+		/*
+		contactlistview.setOnItemLongClickListener(new OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parentList, View view,
+					int position, long rowId) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		});
+		  */  
 	}
-
 
 	private ArrayList<String> buildFriendList() {
 	    ArrayList<String> list = new ArrayList<String>();
 	    
 	    //dummy friends
-	    Friend test1 = new Friend("Price", "Gutierrez");
+	    Friend test1 = new Friend("Price", "Gutierrez","test@yahoo.com");
 	    Friend test2 = new Friend("Vanna", "Mccullough");
 	    Friend test3 = new Friend("Wyatt", "Paul");
 	    Friend test4 = new Friend("Thaddeus", "Robbins");
 	    Friend test5 = new Friend("Rooney", "Dejesus");
 	    Friend test6 = new Friend("Xavier", "Wolfe");
 	    Friend test7 = new Friend("Byron", "Raymond");
-	    Friend test8 = new Friend("Quinn", "Whitfield");
+	    Friend test8 = new Friend("Quinn", "Whitfield","test2@yahoo.com");
 	    Friend test9 = new Friend("Farrah", "Moon");
 	    Friend test10 = new Friend("Ainsley", "Whitehead");
 	    Friend test11 = new Friend("Josephine", "Patton");
@@ -82,9 +93,73 @@ public class ContactActivity extends TitleActivity {
 
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.contact, menu);
+	public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo menuInfo) {
+		if (view.getId() == R.id.listofselected) {
+			AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+			menu.setHeaderTitle(friendList.get(info.position));
+			String[] menuItems = getResources().getStringArray(R.array.ContactsMenu);
+			for (int i = 0; i<menuItems.length; i++) {
+				menu.add(Menu.NONE, i, i, menuItems[i]);
+			}
+			Toast.makeText(getApplicationContext(),"menu up", Toast.LENGTH_SHORT).show();
+		}
+		
+	}
+	@Override
+	public boolean onContextItemSelected(MenuItem item){
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+		int menuItemIndex = item.getItemId();
+		
+		Friend user = new Friend(null,null,null);
+		final String toDelete = user.extractEmail(friendList.get(info.position));
+
+		switch (menuItemIndex)
+		{
+			case 0:
+				LayoutInflater inflater = this.getLayoutInflater();
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				
+				Toast.makeText(getApplicationContext(),"Opened Show Contact", Toast.LENGTH_SHORT).show();
+				//TextView one = (TextView)findViewById(R.id.emailConfirmView);
+				//one.setText("hh");
+				builder.setTitle("User Information")
+				       .setView(inflater.inflate(R.layout.dialog_user_info, null))
+				       .setPositiveButton(R.string.Back, new DialogInterface.OnClickListener() {
+				           public void onClick(DialogInterface dialog, int id) {
+				        	   Toast.makeText(getApplicationContext(),"Back", Toast.LENGTH_SHORT).show();				        	   
+				        	   dialog.dismiss();
+				           }
+				       })
+				       .setNegativeButton(R.string.DeleteContact, new DialogInterface.OnClickListener() {
+				           public void onClick(DialogInterface dialog, int id) {
+				        	   deleteContact(toDelete);
+				        	   Toast.makeText(getApplicationContext(),"ToDelete", Toast.LENGTH_SHORT).show();
+				        	   dialog.cancel();
+				           }
+				       });
+				Dialog dialog = builder.create();
+				dialog.show();
+				return false;
+			case 1:
+				AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+		 	    builder2.setTitle("Confirm Delete?")
+				       .setPositiveButton(R.string.Confirm, new DialogInterface.OnClickListener() {
+				    	   public void onClick(DialogInterface dialog, int id) {
+				        	   dialog.dismiss();	     
+				        	   confirmDelete(toDelete);		        	   
+				           }
+				       })
+				       .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
+				           public void onClick(DialogInterface dialog, int id) {
+				        	   dialog.cancel();
+				           }
+				       });
+				Dialog dialog2 = builder2.create();
+				dialog2.show();
+				return false;
+			case 2:
+				return false;
+		}
 		return true;
 	}
 	
@@ -112,7 +187,6 @@ public class ContactActivity extends TitleActivity {
 		       });
 		Dialog dialog = builder.create();
 		dialog.show();
-		
     }
 	
 	public void confirmContact(final String email){
@@ -120,7 +194,7 @@ public class ContactActivity extends TitleActivity {
 		AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
 		
 		builder2.setTitle("Confirm Add Contact?")
-		       .setView(inflater.inflate(R.layout.dialog_confirm_contact, null))
+		       .setView(inflater.inflate(R.layout.dialog_user_info, null))
 
 		       .setPositiveButton(R.string.Confirm, new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
@@ -135,19 +209,50 @@ public class ContactActivity extends TitleActivity {
 		       });
 		Dialog dialog = builder2.create();
 		dialog.show();
+
+		/*send email to server. return first and last name of this email account.
+		
+		if (name != NULL)
+			((TextView)findViewById(R.id.firstView)).setText(first);
+			((TextView)findViewById(R.id.lastView)).setText(last);		
+		*/
+		
+		((TextView)findViewById(R.id.emailConfirmView)).setText(email);
 	}
 	
 	public void sendContact(String email){
-//		setContentView(R.layout.activity_contact);
-//		TextView textView2 = (TextView)findViewById(R.id.textView2);
-//		textView2.setText(email);
-		Context context = getApplicationContext();
-		CharSequence text = "I found this string =' " + email + " '";
-		int duration = Toast.LENGTH_SHORT;
+		
+		//send email to server to add as friend of current account.
+		
+		CharSequence text = email + " Added as a Friend";
 		
 		
-		Toast toast = Toast.makeText(context, text, duration);
+		Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
 		toast.show();
+	}
+	
+	public void deleteContact(final String email){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+ 	    builder.setTitle("Confirm Delete?")
+		       .setPositiveButton(R.string.Confirm, new DialogInterface.OnClickListener() {
+		    	   public void onClick(DialogInterface dialog, int id) {
+		        	   dialog.dismiss();	     
+		        	   confirmDelete(email);		        	   
+		           }
+		       })
+		       .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		        	   dialog.cancel();
+		           }
+		       });
+		Dialog dialog = builder.create();
+		dialog.show();
+	}
+	
+	public void confirmDelete(String email){
+		//server call to delete friend
+		String msg = email + " succesfully deleted";
+		Toast.makeText(getApplicationContext(),msg, Toast.LENGTH_SHORT).show();
 	}
 	
 	public void showMainMenu(View view)

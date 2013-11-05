@@ -8,89 +8,94 @@
         android:minSdkVersion="9"
         android:targetSdkVersion="18" />
 
+    <protected-broadcast />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/payback"
         android:label="PayBack" >
         <activity
-            android:name="com.example.payback.LoginActivity" 
+            android:name="com.example.payback.LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/DefaultAppTheme" 
+            android:theme="@style/DefaultAppTheme"
             android:windowSoftInputMode="adjustResize|stateVisible" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.payback.MainActivity" 
-		    android:theme="@style/AppTheme"
-            android:label="@string/app_name" >
+            android:name="com.example.payback.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name="com.example.payback.CreateTransactionActivity"
-            android:label="@string/title_activity_create_transaction" 
-            android:theme="@style/AppTheme">
+            android:label="@string/title_activity_create_transaction"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name="com.example.payback.ContactActivity"
-            android:label="@string/title_activity_contact" 
-            android:theme="@style/AppTheme">
+            android:label="@string/title_activity_contact"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name="com.example.payback.ManageGroupActivity"
-            android:label="@string/title_activity_manage_group" 
-            android:theme="@style/AppTheme">
+            android:label="@string/title_activity_manage_group"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name="com.example.payback.ResolveTransactionActivity"
-            android:label="@string/title_activity_resolve_transaction" 
-            android:theme="@style/AppTheme">
+            android:label="@string/title_activity_resolve_transaction"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name="com.example.payback.NotificationActivity"
             android:label="@string/title_activity_notification"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name="com.example.payback.StatisticActivity"
-            android:label="@string/title_activity_statistic" 
-            android:theme="@style/AppTheme">
+            android:label="@string/title_activity_statistic"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name="com.example.payback.SettingsActivity"
-            android:label="@string/title_activity_settings" 
-            android:theme="@style/AppTheme">
+            android:label="@string/title_activity_settings"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name="com.example.payback.Transaction2Activity"
-            android:label="@string/title_activity_transaction2" 
-            android:theme="@style/AppTheme">
+            android:label="@string/title_activity_transaction2"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name="com.example.payback.Transaction1Activity"
-            android:label="@string/title_activity_transaction1" 
-            android:theme="@style/AppTheme">
+            android:label="@string/title_activity_transaction1"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name="com.example.payback.Transaction3Activity"
-            android:label="@string/title_activity_transaction3" 
-            android:theme="@style/AppTheme">
+            android:label="@string/title_activity_transaction3"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name="com.example.payback.Transaction4Activity"
-            android:label="@string/title_activity_transaction4" 
+            android:label="@string/title_activity_transaction4"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="com.example.payback.Transaction5Activity"
-            android:label="@string/title_activity_transaction5" 
-            android:theme="@style/AppTheme">
+            android:label="@string/title_activity_transaction5"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name="com.example.payback.CreateAccountActivity"
-            android:label="@string/title_activity_create_account" 
+            android:label="@string/title_activity_create_account"
             android:theme="@style/DefaultAppTheme" >
         </activity>
         <activity
@@ -100,8 +105,9 @@
         <activity
             android:name="com.example.payback.ShortcutsActivity"
             android:label="@string/title_activity_shortcuts"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"  >
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
         </activity>
+
     </application>
 
 </manifest>
