@@ -70,12 +70,12 @@ public class LoginActivity extends TitleActivity {
 				Intent intent = new Intent(this, MainActivity.class);
 				Toast.makeText(getApplicationContext(),"Welcome", Toast.LENGTH_SHORT).show();
 				startActivity(intent);
+				this.finish();
 			}else{
 				CONLOG.info("Server call successful but user failed login.");
 				Toast.makeText(getApplicationContext(),"Incorrect username or password", Toast.LENGTH_SHORT).show();
 			}
 		}
-		this.finish();
 	}
 
 	public void CreateAccount(View view) {
