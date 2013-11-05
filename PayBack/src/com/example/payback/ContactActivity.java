@@ -124,7 +124,7 @@ public class ContactActivity extends TitleActivity {
 				//one.setText("hh");
 				builder.setTitle("User Information")
 				       .setView(inflater.inflate(R.layout.dialog_user_info, null))
-				       .setPositiveButton(R.string.Back, new DialogInterface.OnClickListener() {
+				       .setPositiveButton(R.string.back, new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
 				        	   Toast.makeText(getApplicationContext(),"Back", Toast.LENGTH_SHORT).show();				        	   
 				        	   dialog.dismiss();
