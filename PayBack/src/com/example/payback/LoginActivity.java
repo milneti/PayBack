@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -76,11 +75,18 @@ public class LoginActivity extends TitleActivity {
 				Toast.makeText(getApplicationContext(),"Incorrect username or password", Toast.LENGTH_SHORT).show();
 			}
 		}
-
+		this.finish();
 	}
 
 	public void CreateAccount(View view) {
 		Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
         startActivity(intent);
+        this.finish();
+	}
+	
+	public void bypass(View view) {
+		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        this.finish();
 	}
 }

@@ -97,7 +97,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/devB"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:height="85dp"

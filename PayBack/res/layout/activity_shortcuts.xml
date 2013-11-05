@@ -10,7 +10,7 @@
     tools:context=".ShortcutsActivity" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/devB"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -23,7 +23,7 @@
  	    android:id="@+id/button2"
  	    android:layout_width="150dp"
  	    android:layout_height="wrap_content"
- 	    android:layout_below="@+id/button1"
+ 	    android:layout_below="@+id/devB"
  	    android:layout_centerHorizontal="true"
  	    android:layout_marginTop="40dp"
  	    android:onClick="showMainMenu"
