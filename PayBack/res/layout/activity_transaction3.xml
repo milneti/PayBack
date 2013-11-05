@@ -9,27 +9,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android1:clipChildren="true"
+    android1:onClick="hideSoftKeyboard"
     tools:context=".Transaction3Activity" >
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:longClickable="true"
-        android:onClick="showTrans2"
-        android:text="@string/Previous" />
-
-    <Button
-        android:id="@+id/tran3buttonnext"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:onClick="checktomoveontotrans4"
-        android:text="@string/Next"
-        android:enabled="false"
-        />
 
     <TextView
         android:id="@+id/textView2"
@@ -84,5 +65,59 @@
             />
 
     </RadioGroup>
+        
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android1:gravity="center_horizontal" >
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="-10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0"
+            android:max="100"
+            android:progress="50" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_weight="0" >
+
+            <Button
+                android:id="@+id/devB"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18dp"
+                android:onClick="showTrans2"
+                android:text="@string/Previous" />
+
+            <TextView
+                android:id="@+id/progressText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="-20dp"
+                android:text="Progress"
+                android:textColor="@color/White" />
+
+            <Button
+                android:id="@+id/tran3buttonnext"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:onClick="checktomoveontotrans4"
+                android:enabled= "false"
+                android:text="@string/Next" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

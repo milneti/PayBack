@@ -1,15 +1,14 @@
 package com.example.payback;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
 
-public class ResolveTransactionActivity extends Activity {
+public class ResolveTransactionActivity extends TitleActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_resolve_transaction);
+		modifyTitle("Resolve Transaction",R.layout.activity_resolve_transaction);
 	}
 
 	@Override

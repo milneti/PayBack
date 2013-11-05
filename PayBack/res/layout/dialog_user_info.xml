@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    android:background="@drawable/activitybackground"
     android:orientation="horizontal" >
 
     <LinearLayout
@@ -24,12 +23,12 @@
                 android:textColor="@color/White" />
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/emailConfirmView"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="0.02"
-                android:text="Not Available"
+                android:text="Not AvailableXXXX"
                 android:textColor="@color/White" />
         </LinearLayout>
 
@@ -47,7 +46,7 @@
                 android:textColor="@color/White" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/firstView"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="25dp"
@@ -69,7 +68,7 @@
                 android:textColor="@color/White" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/lastView"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="25dp"

@@ -41,6 +41,7 @@ $password = mysqli_real_escape_string($mysqli, $password);
 //auth
 if($queryResult = mysqli_query($mysqli, "SELECT `password` FROM `Account` WHERE `email` = '$email';")){
 	if(mysqli_fetch_object($queryResult)->password == $password){
+
 		//insert code to do things after auth
 		//check that attribute is one of the following: email, fname, lname
 		if($attribute=="email" || $attribute == "fname" || $attribute == "lname"){

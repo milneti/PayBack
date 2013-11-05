@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
-public class Transaction2Activity extends Activity  {
+public class Transaction2Activity extends TitleActivity  {
 
     private List<String> listHeader;
     private HashMap<String, List<Friend>> listChild;
@@ -22,7 +21,7 @@ public class Transaction2Activity extends Activity  {
 		 super.onCreate(savedInstanceState);
 				 
 		    super.onCreate(savedInstanceState);
-		    setContentView(R.layout.activity_transaction2_expandablecontactlist_main);
+			modifyTitle("Create Transaction",R.layout.activity_transaction2_expandablecontactlist_main);
 		    ExpandableListView expListView = (ExpandableListView) findViewById(R.id.expandlistView);
 
 		    createData();
@@ -106,12 +105,6 @@ public class Transaction2Activity extends Activity  {
 		
     }
 	
-	public void showTrans1(View view)
-    {
-    	Intent intent = new Intent(this, Transaction1Activity.class);
-        startActivity(intent);
-    }
-	
 	public void checktomoveontotrans3(View view){
 		int onetoast = 1;
 		for(int i = 0; i < listHeader.size(); i++){
@@ -142,13 +135,10 @@ public class Transaction2Activity extends Activity  {
         Bundle.putString("Transaction1transComment", transCommentString);
         
         ArrayList<Friend> selectedContacts = new ArrayList<Friend>();
-        for(int i = 0; i < listHeader.size(); i++)
-        {
+        for(int i = 0; i < listHeader.size(); i++){
 			String currentheader = listHeader.get(i);
-			for(int j = 0; j < listChild.get(currentheader).size(); j++)
-			{
-				if(listChild.get(currentheader).get(j).isSelected())
-				{
+			for(int j = 0; j < listChild.get(currentheader).size(); j++){
+				if(listChild.get(currentheader).get(j).isSelected()){
 					selectedContacts.add(listChild.get(currentheader).get(j));
 				}
 			}
@@ -159,5 +149,11 @@ public class Transaction2Activity extends Activity  {
         intent.putExtras(Bundle);
         startActivity(intent);
     }
+
+	public void showTrans1(View view)
+	{
+		Intent intent = new Intent(this, Transaction1Activity.class);
+	    startActivity(intent);
+	}
 	
 }

@@ -9,6 +9,7 @@ abstract class Account
 	String fName;
 	String lName;
 	String email;
+	String displayName;
 	
 	public String getfName() {
 		return fName;
@@ -28,7 +29,14 @@ abstract class Account
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getDisplayName() {
+		return displayName;
+	}
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
 }
+
 public class User extends Account{
 	private ArrayList<Friend> friends; //updated when the User logs in
 	
@@ -38,7 +46,7 @@ public class User extends Account{
 		this.fName = fName;
 		this.lName = lName;
 		this.email = email;
-		friends = new ArrayList<Friend>();
+		this.friends = new ArrayList<Friend>();
 		boolean worked = sendNewUserToServer();
 		if(!worked)
 			throw new IllegalArgumentException();
@@ -54,9 +62,9 @@ public class User extends Account{
 	User(String email)
 	{
 		this.email = email;
-		fName = firstNameLookup(email);
-		lName = lastNameLookup(email);
-		friends = friendsLookup(email);
+		this.fName = firstNameLookup(email);
+		this.lName = lastNameLookup(email);
+		this.friends = friendsLookup(email);
 	}
 	private String firstNameLookup(String email)
 	{
@@ -73,23 +81,42 @@ public class User extends Account{
 		ArrayList<Friend> f = new ArrayList<Friend>();
 		//TODO: Pull information about each friend from the server: first name, last name, email. 
 		return f;
-	}
-	
-	
+	}	
 }
 
 class Friend extends Account implements Parcelable {
 	boolean selected;
+	int amounttosel;
+	
+	//default constructor
+	Friend(){
+		this.fName = null;
+		this.lName = null;
+		this.email = null;
+		this.selected = false;
+		this.amounttosel = 0;
+	}
 	
 	Friend(String fName, String lName, String email){
 		this.fName = fName;
 		this.lName = lName;
 		this.email = email;
+		this.displayName = fName + " " + lName;
 		this.selected = false;
 		
 		if(!sendNewFriendToServer())
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException();		
+	}
+	
+	Friend(String fName, String lName, String email, String displayName){
+		this.fName = fName;
+		this.lName = lName;
+		this.email = email;
+		this.displayName = displayName;
+		this.selected = false;
 		
+		if(!sendNewFriendToServer())
+			throw new IllegalArgumentException();		
 	}
 	
 	//blank friend. FOR TESTING ONLY
@@ -98,21 +125,30 @@ class Friend extends Account implements Parcelable {
 		this.lName = lName;
 		this.email = "";
 		this.selected = false;
+		this.amounttosel = 0;
 		
 		if(!sendNewFriendToServer())
 			throw new IllegalArgumentException();
-		
 	}
 	
 	//Getters and Setters
-	  public boolean isSelected() {
-		    return selected;
-		  }
+	public boolean isSelected() {
+		return selected;
+	}
 
-	  public void setSelected(boolean selected) {
-		  this.selected = selected;
-	  }
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
 	
+	public int getamounttosel() {
+	    return amounttosel;
+	}
+
+	public void setamounttosel(int amounttosel) {
+		this.amounttosel = amounttosel;
+	}
+	  
+	  
 	//Methods
 	static boolean sendNewFriendToServer()
 	{
@@ -121,8 +157,17 @@ class Friend extends Account implements Parcelable {
 		return true;
 	}
 
+	public String extractEmail(String friend){
+		int startID = friend.indexOf("(");
+		int endID = friend.indexOf(")");
+		return friend.substring(startID+1, endID);
+	}
+	
 	public String toString() {
-		return  getfName() + " " + getlName();
+		return  getfName() + " " + getlName() + " (" + getEmail() + ")";
+	}
+	public String getDisplayName(){
+		return displayName;
 	}
 
 	@Override
@@ -156,8 +201,4 @@ class Friend extends Account implements Parcelable {
             return new Friend[size];
         }
     };
-    
-    
-    
-	
 }
