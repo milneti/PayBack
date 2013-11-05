@@ -9,11 +9,21 @@
     tools:context=".SettingsActivity" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/devB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:text="@string/Cancel" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/devB"
+        android:layout_alignBottom="@+id/devB"
+        android:layout_alignParentLeft="true"
+        android:text="@string/save_changes" 
+        android:enabled="false" />
 
 </RelativeLayout>
