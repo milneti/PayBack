@@ -7,6 +7,13 @@ public class Transaction {
 	int lenderId, borrowerId;
 	double amount;
 	String comment;
+	
+	Transaction() {
+		this.lenderId = 0;
+		this.borrowerId = 0;
+		this.amount = 0;
+		this.comment = "";
+	}
 	Transaction(int lenderId, int borrowerId, double amount, String comment)
 	{
 		this.lenderId = lenderId;
@@ -14,6 +21,7 @@ public class Transaction {
 		this.amount = amount;
 		this.comment = comment;
 	}
+	
 	//Example for outside code: t.sendTransToServer();
 	void sendTransactionToServer()
 	{

@@ -1,15 +1,14 @@
 package com.example.payback;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
 
-public class ManageGroupActivity extends Activity {
+public class ManageGroupActivity extends TitleActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_manage_group);
+		modifyTitle("Manage Groups",R.layout.activity_manage_group);
 	}
 
 	@Override

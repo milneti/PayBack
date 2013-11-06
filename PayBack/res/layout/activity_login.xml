@@ -2,90 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".LoginActivity" >
 
-    <!-- Login progress -->
-
-    <LinearLayout
-        android:id="@+id/login_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:visibility="gone" >
-
-        <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp" />
-
-        <TextView
-            android:id="@+id/login_status_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="sans-serif-light"
-            android:text="@string/login_progress_signing_in"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
-
     <!-- Login form -->
-
-    <ScrollView
-        android:id="@+id/login_form"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:onClick="Login" >
 
         <LinearLayout
             style="@style/LoginFormContainer"
+            android:layout_height="400dp"
             android:layout_marginTop="200dp"
+            android:onClick="hideSoftKeyboard"
             android:orientation="vertical" >
-
-            <TabHost
-                android:id="@android:id/tabhost"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical" >
-
-                    <TabWidget
-                        android:id="@android:id/tabs"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" >
-                    </TabWidget>
-
-                    <FrameLayout
-                        android:id="@android:id/tabcontent"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
-
-                        <LinearLayout
-                            android:id="@+id/tab1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" 
-                   			android:orientation="vertical" >
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/tab2"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" 
-                    		android:orientation="vertical" >
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/tab3"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" 
-                    		android:orientation="vertical" >
-                        </LinearLayout>
-                    </FrameLayout>
-                </LinearLayout>
-            </TabHost>
 
             <EditText
                 android:id="@+id/email"
@@ -117,22 +41,28 @@
                 android:onClick="Login"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                android:text="@string/action_sign_in_register" />
+                android:text="@string/action_sign_in_short" />
+            
+            <TextView
+                android:id="@+id/link_to_register"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dip"
+                android:layout_marginTop="20dip"
+                android:gravity="center"
+                android:onClick="CreateAccount"
+                android:clickable="true"
+                android:text="@string/create_account_here"
+                android:textColor="#0b84aa"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/devB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="bypass"
+                android:text="Developer Mode" />
+
         </LinearLayout>
-    </ScrollView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="186dp"
-        android:orientation="vertical" >
-
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:baselineAlignBottom="false"
-            android:scaleType="fitCenter"
-            android:src="@drawable/payback" />
-    </LinearLayout>
 
 </merge>
