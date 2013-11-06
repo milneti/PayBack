@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -75,9 +74,7 @@ public class Transaction5Activity extends TitleActivity {
 	}
 
 	public void showTrans4(View view)
-    {
-		//NOT FINISHED TODO
-		
+    {		
 	    Bundle oldbundle = getIntent().getExtras();
 	    
 	    int transCostInt = oldbundle.getInt("Transaction1transCost");
@@ -111,7 +108,6 @@ public class Transaction5Activity extends TitleActivity {
 	        Bundle.putBoolean("Transaction3button1Selected", button1Selected);
 	        Bundle.putBoolean("Transaction3button2Selected", button2Selected);
 	        
-	        
 	        intent.putExtras(Bundle);
 	        startActivity(intent);
 	    }
@@ -119,8 +115,17 @@ public class Transaction5Activity extends TitleActivity {
 	
 	public void showMainMenu(View view)
     {
-    	Intent intent = new Intent(this, MainActivity.class);
+		//Send transaction object data to server
+		
+		/*
+		if(server return Success)
+			Toast.makeText(getApplicationContext(),"Transaction Completed", Toast.LENGTH_LONG).show();
+		else
+			Toast.makeText(getApplicationContext(),"Transaction Failed", Toast.LENGTH_LONG).show();
+    	*/
+		
+		Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        this.finish();
+        this.finish(); //kill app page history
     }
 }

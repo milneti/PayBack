@@ -2,11 +2,8 @@ package com.example.payback;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
-
 import android.os.Bundle;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.text.Editable;

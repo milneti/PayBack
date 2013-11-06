@@ -1,7 +1,6 @@
 package com.example.payback;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Transaction4_listview_adapter extends SimpleAdapter{
 	List<Map<String, String>> data;

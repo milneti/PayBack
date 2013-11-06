@@ -65,7 +65,7 @@
             android:layout_weight="0" >
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/devB"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="18dp"
