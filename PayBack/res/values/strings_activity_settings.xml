@@ -1,7 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <!-- Strings related to Settings -->
-
+	<string name="change_password">Edit Password</string>
+	<string name="change_email">Edit Email</string>
+	<string name="change_name">Edit Display Name</string>
 
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>
