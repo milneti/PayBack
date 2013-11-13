@@ -15,5 +15,11 @@
             android:onClick="lineGraphHandler"
             android:layout_width="fill_parent"
             android:text="Line Graph"/>
+	<Button
+            android:id="@+id/BarGraph"
+            android:layout_height="wrap_content"
+            android:onClick="barGraphHandler"
+            android:layout_width="fill_parent"
+            android:text="Bar Graph"/>
 
 </RelativeLayout>

@@ -23,7 +23,14 @@ public class StatisticActivity extends TitleActivity {
     public void lineGraphHandler (View view)
     {
     	LineGraph line = new LineGraph();
-    	Intent lineIntent = line.getIntent(this);
+    	Intent lineIntent = line.getTestIntent(this);
+        startActivity(lineIntent);
+    }
+    
+    public void barGraphHandler (View view)
+    {
+    	BarGraph bar = new BarGraph();
+    	Intent lineIntent = bar.getTestIntent(this);
         startActivity(lineIntent);
     }
 
