@@ -1,7 +1,9 @@
 package com.example.payback;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 
 public class StatisticActivity extends TitleActivity {
 
@@ -17,5 +19,12 @@ public class StatisticActivity extends TitleActivity {
 		getMenuInflater().inflate(R.menu.statistic, menu);
 		return true;
 	}
+    
+    public void lineGraphHandler (View view)
+    {
+    	LineGraph line = new LineGraph();
+    	Intent lineIntent = line.getIntent(this);
+        startActivity(lineIntent);
+    }
 
 }

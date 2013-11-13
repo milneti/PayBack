@@ -107,6 +107,7 @@
             android:label="@string/title_activity_shortcuts"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
         </activity>
+        <activity android:name="org.achartengine.GraphicalActivity" />
 
     </application>
 

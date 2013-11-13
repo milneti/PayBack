@@ -9,9 +9,11 @@
     android:background="@drawable/activitybackground"
     tools:context=".StatisticActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Statistics page" />
+    <Button
+            android:id="@+id/lineGraph"
+            android:layout_height="wrap_content"
+            android:onClick="lineGraphHandler"
+            android:layout_width="fill_parent"
+            android:text="Line Graph"/>
 
 </RelativeLayout>
