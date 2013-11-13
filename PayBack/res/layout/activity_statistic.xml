@@ -9,29 +9,40 @@
     android:background="@drawable/activitybackground"
     tools:context=".StatisticActivity" >
 
-    <Button
-            android:id="@+id/lineGraph"
-            android:layout_height="wrap_content"
-            android:onClick="lineGraphHandler"
-            android:layout_width="fill_parent"
-            android:text="Line Graph"/>
-	<Button
-            android:id="@+id/BarGraph"
-            android:layout_height="wrap_content"
-            android:onClick="barGraphHandler"
-            android:layout_width="fill_parent"
-            android:text="Bar Graph"/>
-	<Button
-            android:id="@+id/PieGraph"
-            android:layout_height="wrap_content"
-            android:onClick="pieGraphHandler"
-            android:layout_width="fill_parent"
-            android:text="Pie Graph"/>
-	<Button
-            android:id="@+id/ScatterGraph"
-            android:layout_height="wrap_content"
-            android:onClick="scatterGraphHandler"
-            android:layout_width="fill_parent"
-            android:text="Scatter Graph"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="hideSoftKeyboard"
+        android:orientation="vertical" >
 
+	    <Button
+	            android:id="@+id/lineGraph"
+	            android:layout_height="wrap_content"
+	            android:onClick="lineGraphHandler"
+	            android:layout_width="fill_parent"
+	            android:text="Line Graph"/>
+		<Button
+	            android:id="@+id/BarGraph"
+	            android:layout_height="wrap_content"
+	            android:onClick="barGraphHandler"
+	            android:layout_width="fill_parent"
+	            android:text="Bar Graph"/>
+		<Button
+	            android:id="@+id/PieGraph"
+	            android:layout_height="wrap_content"
+	            android:onClick="pieGraphHandler"
+	            android:layout_width="fill_parent"
+	            android:text="Pie Graph"/>
+		<Button
+	            android:id="@+id/ScatterGraph"
+	            android:layout_height="wrap_content"
+	            android:onClick="scatterGraphHandler"
+	            android:layout_width="fill_parent"
+	            android:text="Scatter Graph"/>
+		<LinearLayout 
+		    android:id="@+id/chart"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:orientation="vertical" />
+	</LinearLayout>
 </RelativeLayout>

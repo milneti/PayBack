@@ -1,9 +1,12 @@
 package com.example.payback;
 
+import org.achartengine.GraphicalView;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.LinearLayout;
 
 public class StatisticActivity extends TitleActivity {
 
@@ -22,9 +25,17 @@ public class StatisticActivity extends TitleActivity {
     
     public void lineGraphHandler (View view)
     {
+    	
     	LineGraph line = new LineGraph();
-    	Intent lineIntent = line.getTestIntent(this);
-        startActivity(lineIntent);
+    	//Open a new activity to display the graph
+//    	Intent lineIntent = line.getTestIntent(this);
+//      startActivity(lineIntent);
+    	
+    	//Display the graph in the current view
+    	GraphicalView gView = line.getTestView(this);
+    	
+    	LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
+    	layout.addView(gView);
     }
     
     public void barGraphHandler (View view)
