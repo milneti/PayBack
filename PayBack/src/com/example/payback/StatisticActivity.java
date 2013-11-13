@@ -33,5 +33,19 @@ public class StatisticActivity extends TitleActivity {
     	Intent lineIntent = bar.getTestIntent(this);
         startActivity(lineIntent);
     }
+    
+    public void pieGraphHandler (View view)
+    {
+    	PieGraph pie = new PieGraph();
+    	Intent lineIntent = pie.getTestIntent(this);
+        startActivity(lineIntent);
+    }
+    
+    public void scatterGraphHandler (View view)
+    {
+    	ScatterGraph scatter = new ScatterGraph();
+    	Intent lineIntent = scatter.getIntent(this);
+        startActivity(lineIntent);
+    }
 
 }

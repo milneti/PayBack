@@ -21,5 +21,17 @@
             android:onClick="barGraphHandler"
             android:layout_width="fill_parent"
             android:text="Bar Graph"/>
+	<Button
+            android:id="@+id/PieGraph"
+            android:layout_height="wrap_content"
+            android:onClick="pieGraphHandler"
+            android:layout_width="fill_parent"
+            android:text="Pie Graph"/>
+	<Button
+            android:id="@+id/ScatterGraph"
+            android:layout_height="wrap_content"
+            android:onClick="scatterGraphHandler"
+            android:layout_width="fill_parent"
+            android:text="Scatter Graph"/>
 
 </RelativeLayout>
