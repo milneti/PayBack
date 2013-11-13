@@ -44,7 +44,7 @@ public class StatisticActivity extends TitleActivity {
     public void scatterGraphHandler (View view)
     {
     	ScatterGraph scatter = new ScatterGraph();
-    	Intent lineIntent = scatter.getIntent(this);
+    	Intent lineIntent = scatter.getTestIntent(this);
         startActivity(lineIntent);
     }
 
