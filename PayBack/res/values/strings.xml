@@ -57,5 +57,6 @@
     <string name="Logout">Logout</string>
     <string name="save_changes">Save Changes</string>
     <string name="DeleteContact">Delete Contact</string>
+    <string name="pagename">PageName</string>
 
 </resources>
