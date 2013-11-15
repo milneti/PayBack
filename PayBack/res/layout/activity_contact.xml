@@ -27,7 +27,7 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/devB"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -52,6 +52,7 @@
 	        android:cacheColorHint="#00000000"
 	        android:dividerHeight="0.05dp"
 	        android:focusableInTouchMode="true"
+	        android:longClickable="true"
 	        android:smoothScrollbar="true" >
 	
 	    </ListView>
