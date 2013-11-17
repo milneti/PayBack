@@ -1,4 +1,4 @@
-//this is the script to lookup an notification to mySQL db
+//this is the script to delete any tuple in DB given proper rights to mySQL db
 //for source please go to: http://www.php.net/manual/en/mysqli.quickstart.dual-interface.php
 
 //function:
@@ -6,18 +6,19 @@
 		//user $email
 		//$password
 		//$attribute
-		//$value
+		//$value1
+		//$value2
 	//action
-		//makes a select query to mySQL database with given data
+		//makes a deletes a tuple in mySQL database with given data
 		//$attribute decides the function taken. Currently there are three functions:
-			//date:			query by date where $value is constraint date
-			//emailsent:	query by email where $value is the constraint receive email
-			//emailin:		query by email where $value is the constraint send email.
+			//trans:		Deletes tuples that match LenderID and user $email where the attribute $value1 == $value2
+			//note:			Deletes tuples that match ReceiveID and user $email where the attribute $value1 == $value2
+			//account:		Deletes tuple for account. Account tuple will be gone permanently after action.
+										//if Email and $email match, account will be deleted.
 	//output
 		//JSON object on success, error message in JSON object on fail.
 
-//by Hohyun Jeon @10/27/2013
-//Updated by Hohyun Jeon @11/17/2013
+//by Hohyun Jeon @11/17/2013
 //Ready to add
 
 <?php
@@ -32,9 +33,11 @@ $sacct = mysqli_query($mysqli, "SELECT * as _msg FROM ACCOUNT ");
 
 //input
 $attribute = $_POST['attribute'];
-$value = $_POST['value'];
+$value1 = $_POST['value1'];
+$value2 = $_POST['value2'];
 $attribute = mysql_real_escape_string($attribute);
-$value = mysql_real_escape_string($value);
+$value1 = mysql_real_escape_string($value1);
+$value2 = mysql_real_escape_string($value2);
 $email = $_POST['email'];
 $password = $_POST['password'];
 $email = mysql_real_escape_string($email);
@@ -45,7 +48,7 @@ if($loginPass = mysqli_query("SELECT `password` FROM `Account` WHERE `email` = \
 	if(mysqli_fetch_object($loginPass) == $password){
 		//insert code to do things after auth
 		//check that attribute is one of the following: date, email
-		if($attribute == "date"){
+		if($attribute == "trans"){
 			if(preg_match('/\d{4}-\d{2}-\d{2}/',$value)){
 				//Date needs to be in YYYY-MM-DD format
 				if($lookup = mysqli_query("SELECT `Email`, `Fname`, `Lname`, `SendInfo`, `NoteDate`  FROM (Select AccountID AS SendID, Email, Fname, Lname  FROM `Account` WHERE `Email`=`"+$email+"` UNION SELECT * FROM Notification) WHERE `NoteDate`=`"+$value+"`;");){
@@ -56,14 +59,14 @@ if($loginPass = mysqli_query("SELECT `password` FROM `Account` WHERE `email` = \
 			}else{
 				echo json_encode("Inputs data but format invalid. Must be YYYY-MM-DD");
 			}
-		}else if($attribute == "emailsent"){
+		}else if($attribute == "note"){
 			if($lookup = mysqli_query("SELECT `Email`, `Fname`, `Lname`, `SendInfo`, `NoteDate` FROM (Select AccountID AS SendID, Email, Fname, Lname  FROM `Account` WHERE `Email`=`"+$email+"` UNION SELECT * FROM Notification) WHERE `ReceiveID`=`"+$value+"`;");){
 			$data = mysqli_fetch_all($lookup);
 			echo json_encode($data);
 				//echo $lookup;
 			}
 			
-		}else if($attribute == "emailin"){
+		}else if($attribute == "account"){
 			if($lookup = mysqli_query("SELECT `Email`, `Fname`, `Lname`, `SendInfo`, `NoteDate` FROM (Select AccountID AS ReceiveID, Email, Fname, Lname  FROM `Account` WHERE `Email`=`"+$email+"` UNION SELECT * FROM Notification) WHERE `SendID`=`"+$value+"`;");){
 			$data = mysqli_fetch_all($lookup);
 			echo json_encode($data);
@@ -72,7 +75,7 @@ if($loginPass = mysqli_query("SELECT `password` FROM `Account` WHERE `email` = \
 		}else
 			echo "Query failed due to attribute name =" + $attribute;
 		
-		
+			//echo "Login and query success";
 		else
 			
 	}
