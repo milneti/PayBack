@@ -10,7 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 public class TitleActivity extends Activity {
-
+	protected static User user;
 	private static final int MY_REQUEST_CODE = 0;
     public final boolean success = false;
 	public void modifyTitle(String name, int layout) {
