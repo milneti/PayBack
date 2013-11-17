@@ -116,6 +116,11 @@ public class LineGraph {
 		mRenderer.addSeriesRenderer(renderer);
 		mRenderer.addSeriesRenderer(renderer2);
 		
+		mRenderer.setBackgroundColor(Color.BLACK);
+		mRenderer.setGridColor(Color.BLACK);
+		mRenderer.setMarginsColor(Color.BLACK);
+		mRenderer.setPanEnabled(false);
+		
 		// Customization time for line 1!
 		renderer.setColor(Color.WHITE);
 		renderer.setPointStyle(PointStyle.SQUARE);
