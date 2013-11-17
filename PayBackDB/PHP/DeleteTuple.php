@@ -6,13 +6,12 @@
 		//user $email
 		//$password
 		//$attribute
-		//$value1
-		//$value2
+		//$value
 	//action
 		//makes a deletes a tuple in mySQL database with given data
 		//$attribute decides the function taken. Currently there are three functions:
-			//trans:		Deletes tuples that match LenderID and user $email where the attribute $value1 == $value2
-			//note:			Deletes tuples that match ReceiveID and user $email where the attribute $value1 == $value2
+			//trans:		Deletes tuples that match LenderID and user $email where Borrower = $value
+			//note:			Deletes tuples that match ReceiveID and user $email where Send == $value
 			//account:		Deletes tuple for account. Account tuple will be gone permanently after action.
 										//if Email and $email match, account will be deleted.
 	//output
@@ -33,11 +32,9 @@ $sacct = mysqli_query($mysqli, "SELECT * as _msg FROM ACCOUNT ");
 
 //input
 $attribute = $_POST['attribute'];
-$value1 = $_POST['value1'];
-$value2 = $_POST['value2'];
+$value = $_POST['value'];
 $attribute = mysql_real_escape_string($attribute);
-$value1 = mysql_real_escape_string($value1);
-$value2 = mysql_real_escape_string($value2);
+$value = mysql_real_escape_string($value);
 $email = $_POST['email'];
 $password = $_POST['password'];
 $email = mysql_real_escape_string($email);
@@ -49,25 +46,25 @@ if($loginPass = mysqli_query("SELECT `password` FROM `Account` WHERE `email` = \
 		//insert code to do things after auth
 		//check that attribute is one of the following: date, email
 		if($attribute == "trans"){
-			if(preg_match('/\d{4}-\d{2}-\d{2}/',$value)){
-				//Date needs to be in YYYY-MM-DD format
-				if($lookup = mysqli_query("SELECT `Email`, `Fname`, `Lname`, `SendInfo`, `NoteDate`  FROM (Select AccountID AS SendID, Email, Fname, Lname  FROM `Account` WHERE `Email`=`"+$email+"` UNION SELECT * FROM Notification) WHERE `NoteDate`=`"+$value+"`;");){
+			//if($value1=="BorrowerID"||$value1==""){
+				if($lookup = mysqli_query("DELETE FROM Transaction WHERE TransID = (SELECT TransID FROM (SELECT AccountID AS LenderID FROM Account WHERE Email ="+$email+" UNION SELECT * FROM Transaction) WHERE BorrowerID =(SELECT AccountID FROM Account WHERE AccountID= "+$value+");"){
 				$data = mysqli_fetch_all($lookup);
 				echo json_encode($data);
 				//echo $lookup;
-				}
-			}else{
-				echo json_encode("Inputs data but format invalid. Must be YYYY-MM-DD");
-			}
+			//	}
+			//}else{
+			//	echo json_encode("Inputs data but format invalid. Must be YYYY-MM-DD");
+			//}
 		}else if($attribute == "note"){
-			if($lookup = mysqli_query("SELECT `Email`, `Fname`, `Lname`, `SendInfo`, `NoteDate` FROM (Select AccountID AS SendID, Email, Fname, Lname  FROM `Account` WHERE `Email`=`"+$email+"` UNION SELECT * FROM Notification) WHERE `ReceiveID`=`"+$value+"`;");){
-			$data = mysqli_fetch_all($lookup);
-			echo json_encode($data);
-				//echo $lookup;
-			}
+			//if($value1 == "NoteDate"||$value1 == "SendID"){
+				if($lookup = mysqli_query("DELETE FROM Notification WHERE NoteID = (SELECT NoteID FROM (SELECT AccountID AS ReceiveID FROM Account WHERE Email = "+$email+" UNION SELECT * FROM Notification) WHERE SendID=(SELECT AccountID FROM Account WHERE AccountID= "+$value+");"){
+				$data = mysqli_fetch_all($lookup);
+				echo json_encode($data);
+			}	//echo $lookup;
+			//}
 			
 		}else if($attribute == "account"){
-			if($lookup = mysqli_query("SELECT `Email`, `Fname`, `Lname`, `SendInfo`, `NoteDate` FROM (Select AccountID AS ReceiveID, Email, Fname, Lname  FROM `Account` WHERE `Email`=`"+$email+"` UNION SELECT * FROM Notification) WHERE `SendID`=`"+$value+"`;");){
+			if($lookup = mysqli_query("DELETE FROM Account WHERE `Email`=`"+$email+"` LIMIT 1;"){
 			$data = mysqli_fetch_all($lookup);
 			echo json_encode($data);
 				//echo $lookup;
@@ -76,7 +73,7 @@ if($loginPass = mysqli_query("SELECT `password` FROM `Account` WHERE `email` = \
 			echo "Query failed due to attribute name =" + $attribute;
 		
 			//echo "Login and query success";
-		else
+		
 			
 	}
 	else

@@ -48,7 +48,7 @@ if($loginPass = mysqli_query("SELECT `password` FROM `Account` WHERE `email` = \
 		if($attribute == "date"){
 			if(preg_match('/\d{4}-\d{2}-\d{2}/',$value)){
 				//Date needs to be in YYYY-MM-DD format
-				if($lookup = mysqli_query("SELECT `Email`, `Fname`, `Lname`, `SendInfo`, `NoteDate`  FROM (Select AccountID AS SendID, Email, Fname, Lname  FROM `Account` WHERE `Email`=`"+$email+"` UNION SELECT * FROM Notification) WHERE `NoteDate`=`"+$value+"`;");){
+				if($lookup = mysqli_query("SELECT `Email`, `Fname`, `Lname`, `SendInfo`, `NoteDate`  FROM (Select AccountID AS SendID, Email, Fname, Lname  FROM `Account` WHERE `Email`=`"+$email+"` UNION SELECT * FROM Notification) WHERE `NoteDate`=`"+$value+"`);"){
 				$data = mysqli_fetch_all($lookup);
 				echo json_encode($data);
 				//echo $lookup;
@@ -57,24 +57,21 @@ if($loginPass = mysqli_query("SELECT `password` FROM `Account` WHERE `email` = \
 				echo json_encode("Inputs data but format invalid. Must be YYYY-MM-DD");
 			}
 		}else if($attribute == "emailsent"){
-			if($lookup = mysqli_query("SELECT `Email`, `Fname`, `Lname`, `SendInfo`, `NoteDate` FROM (Select AccountID AS SendID, Email, Fname, Lname  FROM `Account` WHERE `Email`=`"+$email+"` UNION SELECT * FROM Notification) WHERE `ReceiveID`=`"+$value+"`;");){
+			if($lookup = mysqli_query("SELECT `Email`, `Fname`, `Lname`, `SendInfo`, `NoteDate` FROM (Select AccountID AS SendID, Email, Fname, Lname  FROM `Account` WHERE `Email`=`"+$email+"` UNION SELECT * FROM Notification) WHERE `ReceiveID`=(SELECT AccountID FROM Account WHERE AccountID= "+$value+");"){
 			$data = mysqli_fetch_all($lookup);
 			echo json_encode($data);
 				//echo $lookup;
 			}
 			
 		}else if($attribute == "emailin"){
-			if($lookup = mysqli_query("SELECT `Email`, `Fname`, `Lname`, `SendInfo`, `NoteDate` FROM (Select AccountID AS ReceiveID, Email, Fname, Lname  FROM `Account` WHERE `Email`=`"+$email+"` UNION SELECT * FROM Notification) WHERE `SendID`=`"+$value+"`;");){
+			if($lookup = mysqli_query("SELECT `Email`, `Fname`, `Lname`, `SendInfo`, `NoteDate` FROM (Select AccountID AS ReceiveID, Email, Fname, Lname  FROM `Account` WHERE `Email`=`"+$email+"` UNION SELECT * FROM Notification) WHERE `SendID`=(SELECT AccountID FROM Account WHERE AccountID= "+$value+");"){
 			$data = mysqli_fetch_all($lookup);
 			echo json_encode($data);
 				//echo $lookup;
 			}
 		}else
 			echo "Query failed due to attribute name =" + $attribute;
-		
-		
-		else
-			
+	
 	}
 	else
 		{echo json_encode("Query sucess, but Password does not match");}
