@@ -1,4 +1,4 @@
-//this is the script to lookup an notification to mySQL db
+//this is the script to delete any tuple in DB given proper rights to mySQL db
 //for source please go to: http://www.php.net/manual/en/mysqli.quickstart.dual-interface.php
 
 //function:
@@ -8,16 +8,16 @@
 		//$attribute
 		//$value
 	//action
-		//makes a select query to mySQL database with given data
+		//makes a deletes a tuple in mySQL database with given data
 		//$attribute decides the function taken. Currently there are three functions:
-			//date:			query by date where $value is constraint date
-			//emailsent:	query by email where $value is the constraint receive email
-			//emailin:		query by email where $value is the constraint send email.
+			//trans:		Deletes tuples that match LenderID and user $email where Borrower = $value
+			//note:			Deletes tuples that match ReceiveID and user $email where Send == $value
+			//account:		Deletes tuple for account. Account tuple will be gone permanently after action.
+										//if Email and $email match, account will be deleted.
 	//output
 		//JSON object on success, error message in JSON object on fail.
 
-//by Hohyun Jeon @10/27/2013
-//Updated by Hohyun Jeon @11/17/2013
+//by Hohyun Jeon @11/17/2013
 //Ready to add
 
 <?php
@@ -45,33 +45,36 @@ if($loginPass = mysqli_query("SELECT `password` FROM `Account` WHERE `email` = \
 	if(mysqli_fetch_object($loginPass) == $password){
 		//insert code to do things after auth
 		//check that attribute is one of the following: date, email
-		if($attribute == "date"){
-			if(preg_match('/\d{4}-\d{2}-\d{2}/',$value)){
-				//Date needs to be in YYYY-MM-DD format
-				if($lookup = mysqli_query("SELECT `Email`, `Fname`, `Lname`, `SendInfo`, `NoteDate`  FROM (Select AccountID AS SendID, Email, Fname, Lname  FROM `Account` WHERE `Email`=`"+$email+"` UNION SELECT * FROM Notification) WHERE `NoteDate`=`"+$value+"`);"){
+		if($attribute == "trans"){
+			//if($value1=="BorrowerID"||$value1==""){
+				if($lookup = mysqli_query("DELETE FROM Transaction WHERE TransID = (SELECT TransID FROM (SELECT AccountID AS LenderID FROM Account WHERE Email ="+$email+" UNION SELECT * FROM Transaction) WHERE BorrowerID =(SELECT AccountID FROM Account WHERE AccountID= "+$value+");"){
 				$data = mysqli_fetch_all($lookup);
 				echo json_encode($data);
 				//echo $lookup;
-				}
-			}else{
-				echo json_encode("Inputs data but format invalid. Must be YYYY-MM-DD");
-			}
-		}else if($attribute == "emailsent"){
-			if($lookup = mysqli_query("SELECT `Email`, `Fname`, `Lname`, `SendInfo`, `NoteDate` FROM (Select AccountID AS SendID, Email, Fname, Lname  FROM `Account` WHERE `Email`=`"+$email+"` UNION SELECT * FROM Notification) WHERE `ReceiveID`=(SELECT AccountID FROM Account WHERE AccountID= "+$value+");"){
-			$data = mysqli_fetch_all($lookup);
-			echo json_encode($data);
-				//echo $lookup;
-			}
+			//	}
+			//}else{
+			//	echo json_encode("Inputs data but format invalid. Must be YYYY-MM-DD");
+			//}
+		}else if($attribute == "note"){
+			//if($value1 == "NoteDate"||$value1 == "SendID"){
+				if($lookup = mysqli_query("DELETE FROM Notification WHERE NoteID = (SELECT NoteID FROM (SELECT AccountID AS ReceiveID FROM Account WHERE Email = "+$email+" UNION SELECT * FROM Notification) WHERE SendID=(SELECT AccountID FROM Account WHERE AccountID= "+$value+");"){
+				$data = mysqli_fetch_all($lookup);
+				echo json_encode($data);
+			}	//echo $lookup;
+			//}
 			
-		}else if($attribute == "emailin"){
-			if($lookup = mysqli_query("SELECT `Email`, `Fname`, `Lname`, `SendInfo`, `NoteDate` FROM (Select AccountID AS ReceiveID, Email, Fname, Lname  FROM `Account` WHERE `Email`=`"+$email+"` UNION SELECT * FROM Notification) WHERE `SendID`=(SELECT AccountID FROM Account WHERE AccountID= "+$value+");"){
+		}else if($attribute == "account"){
+			if($lookup = mysqli_query("DELETE FROM Account WHERE `Email`=`"+$email+"` LIMIT 1;"){
 			$data = mysqli_fetch_all($lookup);
 			echo json_encode($data);
 				//echo $lookup;
 			}
 		}else
 			echo "Query failed due to attribute name =" + $attribute;
-	
+		
+			//echo "Login and query success";
+		
+			
 	}
 	else
 		{echo json_encode("Query sucess, but Password does not match");}
