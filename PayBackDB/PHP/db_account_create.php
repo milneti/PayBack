@@ -40,12 +40,15 @@ $email = mysqli_real_escape_string($link, $email);
 $password = mysqli_real_escape_string($link, $password);
 
 // query to add account
+if ((strlen($email)>0) && (strlen($fname)>0) && (strlen($lname)>0) && (strlen($password)>0)) {
+    $insertuser = mysqli_query($link, "INSERT INTO `Account` (`email`,`fname`,`lname`,`password`) VALUES ('$email','$fname','$lname','$password');");
 
-$insertuser = mysqli_query($link, "INSERT INTO `Account` (`email`,`fname`,`lname`,`password`) VALUES ('$email','$fname','$lname','$password');");
-
-// output
-
-echo $insertuser;
+    // output
+    echo $insertuser;
+}
+else {
+    echo "Email, password, first name and last name cannot be blank";
+}
 
 $link->close();
 

@@ -13,7 +13,7 @@ require_once dirname(__FILE__) . '/db_config.php';
 $link = mysqli_connect(DB_SERVER, DB_READ, DB_READ_PASS, DB_DATABASE) or die("Failed to connect to MySQL: " . mysqli_error($link));
 
 // get all accounts from Account table
-$result = mysqli_query($link, "SELECT * FROM Account;") or die(mysqli_error($link));
+$result = mysqli_query($link, "SELECT * FROM Friend_Of;") or die(mysqli_error($link));
 
 $link->close();
 
@@ -21,19 +21,16 @@ $link->close();
 if (mysqli_num_rows($result) > 0) {
     // looping through all results
     $response["rows"] = mysqli_num_rows($result);
-    $response["accounts"] = array();
+    $response["contacts"] = array();
 
     while ($row = mysqli_fetch_array($result)) {
         // temp user array
-        $account = array();
-        $account["AccountID"] = $row["AccountID"];
-        $account["Email"] = $row["Email"];
-        $account["Password"] = $row["Password"];
-        $account["Fname"] = $row["Fname"];
-        $account["Lname"] = $row["Lname"];
+        $tuple = array();
+        $tuple["UserID"] = $row["UserID"];
+        $tuple["FriendID"] = $row["FriendID"];
 
         // push single account into final response array
-        array_push($response["accounts"], $account);
+        array_push($response["contacts"], $tuple);
     }
     // success
     $response["result"] = 1;
@@ -44,7 +41,7 @@ if (mysqli_num_rows($result) > 0) {
 else {
     // no accounts found
     $response["result"] = 0;
-    $response["message"] = "No accounts found";
+    $response["message"] = "No contacts found";
 
     // echo no users JSON
     echo json_encode($response);

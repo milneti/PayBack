@@ -79,7 +79,7 @@ else {
                 }
                 else if (mysqli_num_rows($IDquery) > 1) {
                     $response["result"] = -4;
-                    $response["message"] = "Failed: Lender Email matched >1 Account";
+                    $response["message"] = "Failed: Lender Email '$lenderEmail' matched >1 Account";
                     $response["lenderIDmatches"] = array();
                     while ($row = mysqli_fetch_array($IDquery)) {
                         // temp array
@@ -89,12 +89,12 @@ else {
                         // push match into response array
                         array_push($response["lenderIDmatches"], $account);
                     }
-                    echo json_encode($response);
+                //    echo json_encode($response);
                 }
                 else {
                     $response["result"] = -5;
-                    $response["message"] = "Failed: Lender Email matched no Account";
-                    echo json_encode($response);
+                    $response["message"] = "Failed: Lender (ID: ".$_POST['lenderID'].", Email: $lenderEmail) matched no Account";
+                //    echo json_encode($response);
                 }
             }
             
@@ -113,7 +113,7 @@ else {
                 }
                 else if (mysqli_num_rows($IDquery) > 1) {
                     $response["result"] = -6;
-                    $response["message"] = "Failed: Borrower Email matched >1 Account";
+                    $response["message"] = "Failed: Borrower Email '$borrowerEmail' matched >1 Account";
                     $response["borrowerIDmatches"] = array();
                     while ($row = mysqli_fetch_array($IDquery)) {
                         // temp array
@@ -123,13 +123,25 @@ else {
                         // push match into response array
                         array_push($response["borrowerIDmatches"], $account);
                     }
-                    echo json_encode($response);
+                //    echo json_encode($response);
                 }
                 else {
                     $response["result"] = -7;
-                    $response["message"] = "Failed: Borrower Email matched no Account";
-                    echo json_encode($response);
+                    $response["message"] = "Failed: Borrower (ID: ".$_POST['borrowerID'].", Email: $borrowerEmail) matched no Account";
+                //    echo json_encode($response);
                 }
+            }
+
+            // validate amount range
+            if ($amount < 0.01) {
+                $response["result"] = -8;
+                $response["message"] = "Failed: Amount (\$$amount) cannot be less than $0.01";
+                $amount = false;
+            }
+            else if ($amount > 999999.99) {
+                $response["result"] = -8;
+                $response["message"] = "Failed: Amount (\$$amount) cannot be greater than $999,999.99";
+                $amount = false;
             }
 
             // validate transDate, set to current server time if invalid
@@ -154,7 +166,7 @@ else {
                     $response["message"] = "Transaction created successfully";
                 }
                 else {
-                    $response["result"] = -8;
+                    $response["result"] = -9;
                     $response["message"] = "Transaction creation query failed";
                 }
                 // add query data to response
