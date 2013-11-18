@@ -39,6 +39,7 @@ abstract class Account
 
 public class User extends Account{
 	private ArrayList<Friend> friends; //updated when the User logs in
+	private ArrayList<Notification> notifications;
 	
 	/* Only called when creating a brand new account! */
 	User(String fName, String lName, String email) 
@@ -47,9 +48,10 @@ public class User extends Account{
 		this.lName = lName;
 		this.email = email;
 		this.friends = new ArrayList<Friend>();
+		this.notifications = new ArrayList<Notification>();
 		boolean worked = sendNewUserToServer();
 		if(!worked)
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Error creating a new account.");
 	}
 	static private boolean sendNewUserToServer()
 	{
@@ -64,26 +66,37 @@ public class User extends Account{
 		this.email = email;
 		this.fName = firstNameLookup(email);
 		this.lName = lastNameLookup(email);
-		this.friends = friendsLookup(email);
+		this.friends = Friend.updateFriends(email);
+		this.notifications = Notification.updateNotifications(email);
 	}
-	private String firstNameLookup(String email)
+	public ArrayList<Friend> getFriends() {
+		return friends;
+	}
+	public void setFriends(ArrayList<Friend> friends) {
+		this.friends = friends;
+	}
+	public ArrayList<Notification> getNotifications() {
+		return notifications;
+	}
+	public void setNotifications(ArrayList<Notification> notifications) {
+		this.notifications = notifications;
+	}
+	User() {
+		friends = new ArrayList<Friend>();
+		notifications = new ArrayList<Notification>();
+	}
+	
+	public static String firstNameLookup(String email)
 	{
 		//TODO: Pull user's first name from server
 		return "John";
 	}
-	private String lastNameLookup(String email)
+	public static String lastNameLookup(String email)
 	{
 		//TODO: Pull user's last name from server
 		return "Doe";
 	}
-	private ArrayList<Friend> friendsLookup(String email) // Used for existing users
-	{
-		ArrayList<Friend> f = new ArrayList<Friend>();
-		//TODO: Pull information about each friend from the server: first name, last name, email. 
-		return f;
-	}	
 }
-
 class Friend extends Account implements Parcelable {
 	boolean selected;
 	int amounttosel;
@@ -147,7 +160,13 @@ class Friend extends Account implements Parcelable {
 	public void setamounttosel(int amounttosel) {
 		this.amounttosel = amounttosel;
 	}
-	  
+	
+	static ArrayList<Friend> updateFriends(String email) // Used for existing users
+	{
+		ArrayList<Friend> f = new ArrayList<Friend>();
+		//TODO: Pull information about each friend from the server: first name, last name, email. 
+		return f;
+	}
 	  
 	//Methods
 	static boolean sendNewFriendToServer()
@@ -166,6 +185,7 @@ class Friend extends Account implements Parcelable {
 	public String toString() {
 		return  getfName() + " " + getlName() + " (" + getEmail() + ")";
 	}
+
 	public String getDisplayName(){
 		return displayName;
 	}

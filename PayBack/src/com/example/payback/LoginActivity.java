@@ -68,7 +68,21 @@ public class LoginActivity extends TitleActivity {
 			if(status.equalsIgnoreCase("success")){
 				CONLOG.info("Server call successful and logged in!");
 				Intent intent = new Intent(this, MainActivity.class);
+				
+				/* Will's new additions */
+				user = new User(email); //user is declared in TitleActivity, which every activity extends
+				
+				/* Will's old additions */
+				/*
+				SharedPreferences prefs = this.getSharedPreferences("com.example.payback", Context.MODE_PRIVATE);
+				User u = new User(email); //the rest is looked up from the server
+				String userKey = "com.example.payback.user";
+				String userVal = u.userToString();
+				prefs.edit().putString(userKey, userVal).commit();
+				*/
+				
 				Toast.makeText(getApplicationContext(),"Welcome", Toast.LENGTH_SHORT).show();
+
 				startActivity(intent);
 				this.finish();
 			}else{
@@ -86,6 +100,7 @@ public class LoginActivity extends TitleActivity {
 	
 	public void bypass(View view) {
 		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+		user = new User();
         startActivity(intent);
         this.finish();
 	}
