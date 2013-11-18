@@ -1,7 +1,7 @@
 <?php
 
 /*
-* Following code will list all the products
+* Following code will list all the accounts
 */
 
 // array for JSON response
@@ -20,7 +20,7 @@ $link->close();
 // check for empty result
 if (mysqli_num_rows($result) > 0) {
     // looping through all results
-    // accounts node
+
     $response["rows"] = mysqli_num_rows($result);
     $response["accounts"] = array();
 
@@ -33,18 +33,18 @@ if (mysqli_num_rows($result) > 0) {
         $account["Fname"] = $row["Fname"];
         $account["Lname"] = $row["Lname"];
 
-        // push single product into final response array
+        // push single account into final response array
         array_push($response["accounts"], $account);
     }
     // success
-    $response["success"] = 1;
+    $response["result"] = 1;
 
     // echoing JSON response
     echo json_encode($response);
 }
 else {
     // no accounts found
-    $response["success"] = 0;
+    $response["result"] = 0;
     $response["message"] = "No accounts found";
 
     // echo no users JSON

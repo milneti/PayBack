@@ -14,10 +14,12 @@
 //we would want this script to run whenever they login to the system as user
 //by Hohyun Jeon @10/27/2013
 
+// include db config class
+require_once dirname(__FILE__) . '/db_config.php';
+
 //Connect to DB
-//Please contact Chase for proper admin login info
-$mysqli = mysqli_connect("localhost", "Admin", "password", "database");
-if (mysqli_connect_errno($mysqli)) {
+$link = mysqli_connect(DB_SERVER, DB_READ, DB_READ_PASS, DB_DATABASE);
+if (mysqli_connect_errno($link)) {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
@@ -28,8 +30,8 @@ $email = mysqli_real_escape_string($mysqli, $email);
 $password = mysqli_real_escape_string($mysqli, $password);
 
 //query to lookup password account
-if($queryResult = mysqli_query($mysqli, "SELECT `password` FROM `Account` WHERE `email` = \"$email\";")){
-	if(mysqli_fetch_object($queryResult)->password == $password){
+if($loginPass = mysqli_query($mysqli, "SELECT `password` FROM `Account` WHERE `email` = '$email';")){
+	if(mysqli_fetch_object($loginPass)->password == $password){
 		//insert code to do things after auth
 		echo "Login and query success";
 	}
