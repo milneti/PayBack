@@ -19,7 +19,8 @@ CREATE TABLE IF NOT EXISTS `Account` (
   `Password` VARCHAR(16) NOT NULL,
   `Fname` VARCHAR(16) NOT NULL,
   `Lname` VARCHAR(16) NOT NULL,
-  PRIMARY KEY (`AccountID`))
+  PRIMARY KEY (`AccountID`),
+  UNIQUE (`Email`))
 ENGINE = InnoDB;
 
 SHOW WARNINGS;

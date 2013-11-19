@@ -64,6 +64,8 @@ public class Transaction5Activity extends TitleActivity {
 	    listView = (ListView) findViewById(R.id.listviewforplaceholderdata);
 	    listView.setAdapter(new ArrayAdapter<String>(this, R.layout.activity_contact_iteminlist, data));
 
+	    
+	    //TODO: send out a new notification here?
 	}
 
 	@Override
