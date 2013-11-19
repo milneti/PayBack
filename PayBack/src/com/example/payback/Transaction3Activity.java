@@ -26,47 +26,47 @@ public class Transaction3Activity extends TitleActivity {
 		super.onCreate(savedInstanceState);
 		modifyTitle("Lender's Share",R.layout.activity_transaction3);
 
-		EditText transCost = (EditText) findViewById(R.id.lenderamount);
-		EditText text = (EditText) findViewById(R.id.lenderamount);  
+//		EditText transCost = (EditText) findViewById(R.id.lenderamount);
+//		EditText text = (EditText) findViewById(R.id.lenderamount);  
 		
-	    text.setRawInputType(Configuration.KEYBOARD_12KEY);
-	    
-	    text.addTextChangedListener(new TextWatcher(){
-	        EditText text = (EditText)findViewById(R.id.lenderamount);
-	        DecimalFormat dec = new DecimalFormat("0.00");
-	        public void afterTextChanged(Editable arg0) {
-	        }
-	        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-	        }
-	        public void onTextChanged(CharSequence s, int start, int before, int count) {
-	            if(!s.toString().matches("^\\$(\\d{1,3}(\\,\\d{3})*|(\\d+))(\\.\\d{2})?$"))
-	            {
-	                String userInput= ""+ s.toString().replaceAll("[^\\d]", "");
-	                if (userInput.length() > 0) {
-	                    Float in=Float.parseFloat(userInput);
-	                    float percen = in/100;
-	                    text.setText("$"+dec.format(percen));
-	                    text.setSelection(text.getText().length());
-	                }
-	            }
-	        }
-	    });
+//	    text.setRawInputType(Configuration.KEYBOARD_12KEY);
+//	    
+//	    text.addTextChangedListener(new TextWatcher(){
+//	        EditText text = (EditText)findViewById(R.id.lenderamount);
+//	        DecimalFormat dec = new DecimalFormat("0.00");
+//	        public void afterTextChanged(Editable arg0) {
+//	        }
+//	        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//	        }
+//	        public void onTextChanged(CharSequence s, int start, int before, int count) {
+//	            if(!s.toString().matches("^\\$(\\d{1,3}(\\,\\d{3})*|(\\d+))(\\.\\d{2})?$"))
+//	            {
+//	                String userInput= ""+ s.toString().replaceAll("[^\\d]", "");
+//	                if (userInput.length() > 0) {
+//	                    Float in=Float.parseFloat(userInput);
+//	                    float percen = in/100;
+//	                    text.setText("$"+dec.format(percen));
+//	                    text.setSelection(text.getText().length());
+//	                }
+//	            }
+//	        }
+//	    });
 		
 		
-		transCost.addTextChangedListener(new TextWatcher() {
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//		transCost.addTextChangedListener(new TextWatcher() {
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
         	    updateButtonState();
-            }
-
-			@Override
-			public void afterTextChanged(Editable s) {
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {		
-			}
-			
-		});
+//            }
+//
+//			@Override
+//			public void afterTextChanged(Editable s) {
+//			}
+//
+//			@Override
+//			public void beforeTextChanged(CharSequence s, int start, int count, int after) {		
+//			}
+//			
+//		});
 	}
 
 	private boolean checkEditText(EditText edit) {
@@ -77,13 +77,13 @@ public class Transaction3Activity extends TitleActivity {
 	}
 	
 	void updateButtonState() {
-		EditText transCost= (EditText) findViewById(R.id.lenderamount);
-
+//		EditText transCost = (EditText) findViewById(R.id.lenderamount);
+//
         Button button=(Button) findViewById(R.id.tran3buttonnext);
-		
-	    if(checkEditText(transCost)) 
-	    	button.setEnabled(false);
-	    else 
+//		
+//	    if(checkEditText(transCost)) 
+//	    	button.setEnabled(false);
+//	    else 
 	    	button.setEnabled(true);
 	}
 	
@@ -129,8 +129,8 @@ public class Transaction3Activity extends TitleActivity {
 			case R.id.radio1:
 				if (checked)
 				{
-					EditText transCost = (EditText)findViewById(R.id.lenderamount);
-					transCost.setText(lenderText);
+//					EditText transCost = (EditText)findViewById(R.id.lenderamount);
+//					transCost.setText(lenderText);
 					
 			    	button1Selected = true;
 				    button2Selected = false;
@@ -141,8 +141,8 @@ public class Transaction3Activity extends TitleActivity {
 				{
 					//There's a bug where if you hit manual and then type it'll change the front rather then the back
 					//For example. hit manual. edittext = $0.00. hit "1". expected is $0.01. actually is $10.00.
-					EditText transCost = (EditText)findViewById(R.id.lenderamount);
-					transCost.setText("$0.00");
+//					EditText transCost = (EditText)findViewById(R.id.lenderamount);
+//					transCost.setText("$0.00");
 
 			    	button1Selected = false;
 			    	button2Selected = true;
@@ -154,17 +154,17 @@ public class Transaction3Activity extends TitleActivity {
 	    Bundle oldbundle = getIntent().getExtras();
 	    int transCostInt = oldbundle.getInt("Transaction1transCost");
 	    
-    	EditText translenderamount = (EditText)findViewById(R.id.lenderamount);
-    	String stringnumber = translenderamount.getText().toString().substring(1);
-		Float floatnumber = Float.parseFloat(stringnumber);
-		int translenderamountInt = (int) (floatnumber * 100F);
+//    	EditText translenderamount = (EditText)findViewById(R.id.lenderamount);
+//    	String stringnumber = translenderamount.getText().toString().substring(1);
+//		Float floatnumber = Float.parseFloat(stringnumber);
+//		int translenderamountInt = (int) (floatnumber * 100F);
 		
-		if(translenderamountInt <= transCostInt){
-			showTrans4or5(view);
-		}
-		else{
-			Toast.makeText(getApplicationContext(), "Lent amount is greater then the transaction", Toast.LENGTH_SHORT).show();
-		}
+//		if(translenderamountInt <= transCostInt){
+			showTrans4(view);
+//		}
+//		else{
+//			Toast.makeText(getApplicationContext(), "Lent amount is greater then the transaction", Toast.LENGTH_SHORT).show();
+//		}
 		
 	}
 
@@ -185,7 +185,7 @@ public class Transaction3Activity extends TitleActivity {
 		
     }
 	
-	public void showTrans4or5(View view)
+	public void showTrans4(View view)
     {
 	    Bundle oldbundle = getIntent().getExtras();
 	    
@@ -208,9 +208,15 @@ public class Transaction3Activity extends TitleActivity {
 	        
 			int numContacts = oldbundle.getParcelableArrayList("Transaction2selected").size();
 			int lenderShare = transCostInt/(numContacts+1);
+			int totaltrans = lenderShare;
 			for(int i = 0; i < numContacts; i ++){
 				lendsharelist.add(lenderShare);
+				totaltrans = totaltrans + lenderShare;
 			}
+			if(totaltrans != transCostInt){
+				lenderShare = lenderShare + (transCostInt - totaltrans);
+			}
+			
 			Bundle.putIntegerArrayList("Transaction3borroweramountlist", lendsharelist);
 			Bundle.putInt("Transaction3lenderamount", lenderShare);
 
@@ -227,17 +233,17 @@ public class Transaction3Activity extends TitleActivity {
 	        Bundle.putBoolean("Transaction3button1Selected", button1Selected);
 	        Bundle.putBoolean("Transaction3button2Selected", button2Selected);
 	        
-	        EditText translenderamount = (EditText)findViewById(R.id.lenderamount);
-	    	String stringnumber = translenderamount.getText().toString().substring(1);
-			Float floatnumber = Float.parseFloat(stringnumber);
-			int translenderamountInt = (int) (floatnumber * 100F);
-			Bundle.putInt("Transaction3lenderamount", translenderamountInt);
+//	        EditText translenderamount = (EditText)findViewById(R.id.lenderamount);
+//	    	String stringnumber = translenderamount.getText().toString().substring(1);
+//			Float floatnumber = Float.parseFloat(stringnumber);
+//			int translenderamountInt = (int) (floatnumber * 100F);
+//			Bundle.putInt("Transaction3lenderamount", translenderamountInt);
 	        
 			int numContacts = oldbundle.getParcelableArrayList("Transaction2selected").size();
-			int lenderShare = (transCostInt-translenderamountInt)/(numContacts);
-			for(int i = 0; i < numContacts; i ++){
-				lendsharelist.add(lenderShare);
-			}
+//			int lenderShare = (transCostInt-translenderamountInt)/(numContacts);
+//			for(int i = 0; i < numContacts; i ++){
+//				lendsharelist.add(lenderShare);
+//			}
 			Bundle.putIntegerArrayList("Transaction3borroweramountlist", lendsharelist);
 
 	        

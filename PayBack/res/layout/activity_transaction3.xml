@@ -23,7 +23,7 @@
         android:textColor="@color/White"
         android:textStyle="bold" />
 
-    <EditText
+    <!-- <EditText
         android1:id="@+id/lenderamount"
         android1:layout_width="wrap_content"
         android1:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         tools:ignore="HardcodedText" >
 
         <requestFocus />
-    </EditText>
+    </EditText> -->
 
     <RadioGroup
         android1:id="@+id/radioGroup1"
