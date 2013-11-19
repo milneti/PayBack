@@ -2,10 +2,12 @@ package com.example.payback;
 
 import java.util.ArrayList;
 import android.os.Bundle;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -24,10 +26,20 @@ public class ContactActivity extends TitleActivity {
 	  private ListView contactlistview;	  
 	  private ArrayList<String> friendList;
 	  
+	  static Activity activityInstance;	//these are variables
+	  static PageKillReceiver pkr;		//used for PageKillReceiver.java
+	  static IntentFilter filter;
+	  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		modifyTitle("Contact List",R.layout.activity_contact);
+		
+		activityInstance = this;
+		pkr = new PageKillReceiver(); pkr.setActivityInstance(activityInstance);
+		filter = new IntentFilter();
+		filter.addAction("com.Payback.Logout_Intent");
+		registerReceiver(pkr, filter);
 
 		contactlistview = (ListView) findViewById(R.id.listofselected);
 		friendList = buildFriendList();
