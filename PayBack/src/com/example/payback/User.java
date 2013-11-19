@@ -40,7 +40,7 @@ abstract class Account
 public class User extends Account{
 	private ArrayList<Friend> friends; //updated when the User logs in
 	private ArrayList<Notification> notifications;
-	
+	private String password;
 	/* Only called when creating a brand new account! */
 	User(String fName, String lName, String email) 
 	{
@@ -61,11 +61,11 @@ public class User extends Account{
 	}
 	
 	/* Used for the rest of the time, when the user logs in */
-	User(String email)
+	User(String email, String password)
 	{
 		this.email = email;
-		this.fName = firstNameLookup(email);
-		this.lName = lastNameLookup(email);
+		this.password = password;
+		this.updateName(email);
 		this.friends = Friend.updateFriends(email);
 		this.notifications = Notification.updateNotifications(email);
 	}
@@ -81,20 +81,13 @@ public class User extends Account{
 	public void setNotifications(ArrayList<Notification> notifications) {
 		this.notifications = notifications;
 	}
-	User() {
-		friends = new ArrayList<Friend>();
-		notifications = new ArrayList<Notification>();
-	}
 	
-	public static String firstNameLookup(String email)
-	{
-		//TODO: Pull user's first name from server
-		return "John";
+	public void updateName(String email){
+		this.fName ="john";
+		this.lName ="doe";
 	}
-	public static String lastNameLookup(String email)
-	{
-		//TODO: Pull user's last name from server
-		return "Doe";
+	public String getPassword(){
+		return password;
 	}
 }
 class Friend extends Account implements Parcelable {
