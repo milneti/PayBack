@@ -68,16 +68,17 @@ public class LoginActivity extends TitleActivity {
 			Toast.makeText(getApplicationContext(), "Email: \""+email+"\" is not a valid email address!", Toast.LENGTH_SHORT).show();
 		}else{
 
-			String status  ="fail";
+//			No longer necesary call the .AccountLogin method
+//			String status  ="fail";
 			AccessNet caller = new AccessNet();
+//
+//			String params = "email="+email+"&password="+password;
+//			String urlstub = "AccountLogin.php";
+//
+//			CONLOG.info("Attempting to call server at: "+urlstub+", "+params);
+//			status = caller.simpleServerCall(urlstub, params);
 
-			String params = "userEmail="+email+"&password="+password;
-			String urlstub = " db_verify_login.php";
-
-			CONLOG.info("Attempting to call server at: "+urlstub+", "+params);
-			status = caller.simpleServerCall(urlstub, params);
-
-			if(status.equalsIgnoreCase("success")){
+			if(caller.AccountLogin(email, password)){
 				
 				if (((CheckBox)findViewById(R.id.rememberLogin)).isChecked())
 					rememberLogin();
