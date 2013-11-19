@@ -72,7 +72,7 @@ public class LoginActivity extends TitleActivity {
 			AccessNet caller = new AccessNet();
 
 			String params = "userEmail="+email+"&password="+password;
-			String urlstub = " db_verify_login.php";
+			String urlstub = "db_verify_login.php";
 
 			CONLOG.info("Attempting to call server at: "+urlstub+", "+params);
 			status = caller.simpleServerCall(urlstub, params);
