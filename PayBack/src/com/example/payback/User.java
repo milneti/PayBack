@@ -40,6 +40,8 @@ abstract class Account
 public class User extends Account{
 	private ArrayList<Friend> friends; //updated when the User logs in
 	private ArrayList<Notification> notifications;
+	private ArrayList<ResolveTransaction> transactions;
+
 	private String password;
 	/* Only called when creating a brand new account! */
 	User(String fName, String lName, String email) 
@@ -49,6 +51,7 @@ public class User extends Account{
 		this.email = email;
 		this.friends = new ArrayList<Friend>();
 		this.notifications = new ArrayList<Notification>();
+		this.transactions = new ArrayList<ResolveTransaction>();
 		boolean worked = sendNewUserToServer();
 		if(!worked)
 			throw new IllegalArgumentException("Error creating a new account.");
@@ -68,6 +71,7 @@ public class User extends Account{
 		this.updateName(email);
 		this.friends = Friend.updateFriends(email);
 		this.notifications = Notification.updateNotifications(email);
+		this.transactions = ResolveTransaction.updateTransactions(email);
 	}
 	public ArrayList<Friend> getFriends() {
 		return friends;
@@ -80,6 +84,12 @@ public class User extends Account{
 	}
 	public void setNotifications(ArrayList<Notification> notifications) {
 		this.notifications = notifications;
+	}
+	public ArrayList<ResolveTransaction> getTransactions() {
+		return transactions;
+	}
+	public void setTransactions(ArrayList<ResolveTransaction> transactions) {
+		this.transactions = transactions;
 	}
 	
 	public void updateName(String email){
