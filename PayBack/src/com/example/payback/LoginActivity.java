@@ -71,8 +71,8 @@ public class LoginActivity extends TitleActivity {
 			String status  ="fail";
 			AccessNet caller = new AccessNet();
 
-			String params = "email="+email+"&password="+password;
-			String urlstub = "AccountLogin.php";
+			String params = "userEmail="+email+"&password="+password;
+			String urlstub = " db_verify_login.php";
 
 			CONLOG.info("Attempting to call server at: "+urlstub+", "+params);
 			status = caller.simpleServerCall(urlstub, params);
@@ -86,7 +86,7 @@ public class LoginActivity extends TitleActivity {
 				Intent intent = new Intent(this, MainActivity.class);
 				
 				/* Will's new additions */
-				user = new User(email); //user is declared in TitleActivity, which every activity extends
+				user = new User(email,password); //user is declared in TitleActivity, which every activity extends
 				
 				/* Will's old additions */
 				/*
@@ -162,7 +162,6 @@ public class LoginActivity extends TitleActivity {
 	
 	public void bypass(View view) {
 		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-		user = new User();
         startActivity(intent);
         this.finish();
 	}

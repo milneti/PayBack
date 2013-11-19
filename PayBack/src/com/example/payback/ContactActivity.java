@@ -1,6 +1,9 @@
 package com.example.payback;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import android.os.Bundle;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -173,11 +176,15 @@ public class ContactActivity extends TitleActivity {
 		       .setView(emailinput)
 		       .setPositiveButton(R.string.Add, new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
-		        	   
-		        	   //InputMethodManager inputManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE); 
-		        	   //inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_IMPLICIT_ONLY);
-		        	   dialog.dismiss();	     
-		        	   confirmContact(emailinput.getText().toString());		        	   
+		        	   //confirmContact(emailinput.getText().toString());	
+		        	    try {
+		        		   sendContact(emailinput.getText().toString());
+						} catch (InterruptedException e) {
+							
+						}
+						
+		        	   Toast.makeText(getApplicationContext(),"sent email", Toast.LENGTH_SHORT).show();
+		        	   dialog.dismiss();	        	   
 		           }
 		       })
 		       .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
@@ -188,18 +195,21 @@ public class ContactActivity extends TitleActivity {
 		Dialog dialog = builder.create();
 		dialog.show();
     }
-	
+/*
 	public void confirmContact(final String email){
 		LayoutInflater inflater = this.getLayoutInflater();
 		AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
 		
 		builder2.setTitle("Confirm Add Contact?")
 		       .setView(inflater.inflate(R.layout.dialog_user_info, null))
-
 		       .setPositiveButton(R.string.Confirm, new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
 		        	   dialog.dismiss();
-		        	   sendContact(email);
+		        	   try {
+		        		   sendContact(email);
+						} catch (InterruptedException e) {
+							
+						}
 		           }
 		       })
 		       .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
@@ -210,25 +220,44 @@ public class ContactActivity extends TitleActivity {
 		Dialog dialog = builder2.create();
 		dialog.show();
 
-		/*send email to server. return first and last name of this email account.
+		//send email to server. return first and last name of this email account.
 		
 		if (name != NULL)
 			((TextView)findViewById(R.id.firstView)).setText(first);
 			((TextView)findViewById(R.id.lastView)).setText(last);		
-		*/
 		
-		((TextView)findViewById(R.id.emailConfirmView)).setText(email);
+		
+		//((TextView)findViewById(R.id.emailConfirmView)).setText(email);
 	}
+*/
+	public void sendContact(String email) throws InterruptedException{
+		
+		 Toast.makeText(getApplicationContext(),"In Send", Toast.LENGTH_SHORT).show();
+		 
+		final String EMAIL_PATTERN = 
+				"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
+		final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+		final Matcher matcher;
+		matcher = pattern.matcher(email);
+		
+		if(!matcher.matches()){
+			Toast.makeText(getApplicationContext(), "Email: \""+email+"\" is not a valid email address!", Toast.LENGTH_SHORT).show();
+		}else{
+			Toast.makeText(getApplicationContext(),"calling add", Toast.LENGTH_SHORT).show();
+			String status = "fail";
+			AccessNet caller = new AccessNet();
+			String params = "userEmail="+user.getEmail()+"&password="+user.getPassword()+"&newFriendEmail="+email;
+			String urlstub = "db_friendof_create.php";
+			status = caller.simpleServerCall(urlstub, params);
+
+			if(status.equalsIgnoreCase("success")){
+				Toast.makeText(getApplicationContext(),email + " Added as a Friend!", Toast.LENGTH_SHORT).show();
+				
+			}else{
+				Toast.makeText(getApplicationContext(),"Error adding friend", Toast.LENGTH_SHORT).show();
+			}
+		}
 	
-	public void sendContact(String email){
-		
-		//send email to server to add as friend of current account.
-		
-		CharSequence text = email + " Added as a Friend";
-		
-		
-		Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
-		toast.show();
 	}
 	
 	public void deleteContact(final String email){
