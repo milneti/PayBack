@@ -1,15 +1,24 @@
 package com.example.payback;
 
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -24,6 +33,9 @@ public class LoginActivity extends TitleActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		setTitle("PayBack");
+		Toast.makeText(getApplicationContext(),"opened", Toast.LENGTH_SHORT).show();
+		checkCache();
+		
 	}
 
 	@Override
@@ -32,7 +44,7 @@ public class LoginActivity extends TitleActivity {
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
 	}
-
+	
 	public void Login(View view) throws InterruptedException {
 		//for log in, url stub is AccountLogin.php
 		Logger CONLOG = Logger.getLogger(LoginActivity.class .getName());
@@ -59,18 +71,22 @@ public class LoginActivity extends TitleActivity {
 			String status  ="fail";
 			AccessNet caller = new AccessNet();
 
-			String params = "email="+email+"&password="+password;
-			String urlstub = "AccountLogin.php";
+			String params = "userEmail="+email+"&password="+password;
+			String urlstub = " db_verify_login.php";
 
 			CONLOG.info("Attempting to call server at: "+urlstub+", "+params);
 			status = caller.simpleServerCall(urlstub, params);
 
 			if(status.equalsIgnoreCase("success")){
+				
+				if (((CheckBox)findViewById(R.id.rememberLogin)).isChecked())
+					rememberLogin();
+				
 				CONLOG.info("Server call successful and logged in!");
 				Intent intent = new Intent(this, MainActivity.class);
 				
 				/* Will's new additions */
-				user = new User(email); //user is declared in TitleActivity, which every activity extends
+				user = new User(email,password); //user is declared in TitleActivity, which every activity extends
 				
 				/* Will's old additions */
 				/*
@@ -91,6 +107,52 @@ public class LoginActivity extends TitleActivity {
 			}
 		}
 	}
+	
+	public void checkCache(){
+		Toast.makeText(getApplicationContext(),"inCache", Toast.LENGTH_SHORT).show();
+		try {
+			FileInputStream fis = openFileInput("login_info");
+			//Toast.makeText(getApplicationContext(),fis.read(), Toast.LENGTH_SHORT).show();
+			String fileData = "";
+			String line = "";
+			BufferedReader reader = new BufferedReader(new InputStreamReader(fis,fileData));
+			StringBuilder builder = new StringBuilder();
+			while(( line = reader.readLine()) != null ) {
+		         builder.append( line );
+		         builder.append( '\n' );
+		      }
+			fileData = builder.toString();
+			
+			Toast.makeText(getApplicationContext(),fileData, Toast.LENGTH_LONG).show();
+			
+		} catch (FileNotFoundException e) {
+			Toast.makeText(getApplicationContext(),"FileError", Toast.LENGTH_SHORT).show();
+		} catch (IOException e) {
+			Toast.makeText(getApplicationContext(),"IOError", Toast.LENGTH_SHORT).show();
+		}
+	}
+	
+	public void rememberLogin(){
+		String filename = "login_info";
+		String storeData = "";
+	 
+		String email = ((EditText)findViewById(R.id.email)).getText().toString();
+		String password = ((EditText)findViewById(R.id.password)).getText().toString();
+		storeData = "email " + email.toString() + " password " + password.toString();
+		Toast.makeText(getApplicationContext(),storeData, Toast.LENGTH_LONG).show();
+
+		try {
+			FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
+			fos.write(storeData.getBytes());
+			String msg = storeData + " written!";
+			Toast.makeText(getApplicationContext(),msg, Toast.LENGTH_LONG).show();
+			fos.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void CreateAccount(View view) {
 		Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
@@ -100,7 +162,6 @@ public class LoginActivity extends TitleActivity {
 	
 	public void bypass(View view) {
 		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-		user = new User();
         startActivity(intent);
         this.finish();
 	}

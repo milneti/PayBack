@@ -22,7 +22,6 @@ public class ShortcutsActivity extends Activity {
 	}
 	public void Return(View view)
     {
-        finish();
     }
 	public void showMainMenu(View view)
     {

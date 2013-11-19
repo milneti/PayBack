@@ -70,7 +70,7 @@ public class CreateAccountActivity extends TitleActivity {
 			
 			String params = "fname="+fName+"&lname="+lName+"&email="+email+"&password="+password;
 			String status = "fail";
-			String urlstub = "AccountCreation.php";
+			String urlstub = "db_account_create.php";
 			//calling server
 			AccessNet caller = new AccessNet();
 			status = caller.simpleServerCall(urlstub, params);
