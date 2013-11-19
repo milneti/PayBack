@@ -47,8 +47,8 @@ else {
     $userID = mysqli_real_escape_string($link, $userID);
     $userEmail = mysqli_real_escape_string($link, $userEmail);
     $password = mysqli_real_escape_string($link, $password);
-    $friendID = mysqli_real_escape_string($link, $friendID);
-    $friendEmail = mysqli_real_escape_string($link, $friendEmail);
+    $FriendID = mysqli_real_escape_string($link, $friendID);
+    $FriendEmail = mysqli_real_escape_string($link, $friendEmail);
 
     // authorize
     $loginPass = mysqli_query($link, "SELECT `password` FROM `Account` WHERE `accountID` = '$userID';");
@@ -93,6 +93,7 @@ else {
     }
     // userID and password should now be validated, otherwise $userID is false
 
+
     // validate friendID
     if ($friendID != false) {
         $IDquery = mysqli_query($link, "SELECT `AccountID` FROM Account WHERE `AccountID` = '$friendID';");
@@ -124,17 +125,49 @@ else {
             $response["message"] = "Failed: New Friend (ID: ".$_POST['friendID'].", Email: $friendEmail) matched no Account";
         }
     }
-    //query to add transaction
-    if (($response["result"] == null) && ($userID != false) && ($friendID != false)) {
-        $friend = mysqli_query($link, "INSERT INTO `Friend_Of` (`UserID`,`FriendID`) VALUES ('$userID','$friendID');");
 
-        if ($friend) {
-            $response["result"] = 1;
-            $response["message"] = "Contact added successfully";
+    //query to add transaction
+    if (($response["result"] == null) && ($userID != false)&& ($friendID != false)) {
+        $friend = mysqli_query($link, "SELECT Account.AccountID, Account.Email, Account.Fname, Account.Lname FROM Account WHERE Account.AccountID = ANY(SELECT Friend_Of.FriendID FROM Friend_Of WHERE Friend_Of.UserID = '$userID' AND Friend_Of.FriendID = '$friendID');");
+        if (mysqli_num_rows($friend) == 1) {
+            $row = mysqli_fetch_array($friend);
+            // temp array
+            $account = array();
+            $account["AccountID"] = $row["AccountID"];
+            $account["Email"] = $row["Email"];
+            $account["Fname"] = $row["Fname"];
+            $account["Lname"] = $row["Lname"];
+            
+            $friend = mysqli_query($link, "DELETE FROM Friend_Of WHERE Friend_Of.UserID = '$userID' AND Friend_Of.FriendID = '$friendID';");
+            if ($friend) {
+                $response["result"] = 1;
+                $response["message"] = "Successfully deleted friend (ID: $friendID)";
+            }
+            else {
+                $response["result"] = -10;
+                $response["message"] = "Failed to delete friend (ID: $friendID)";
+            }
+            
+            // push match into response array
+            $response["friendOfMatches"] = array();
+            array_push($response["friendOfMatches"], $account);
+        }
+        else if (mysqli_num_rows($friend) > 1) {
+            $response["result"] = -9;
+            $response["message"] = "Failed: friend (ID: $friendID) matched >1 Contact";
+            $response["friendIDmatches"] = array();
+            while ($row = mysqli_fetch_array($friend)) {
+                // temp array
+                $account = array();
+                $account["UserID"] = $row["UserID"];
+                $account["FriendID"] = $row["FriendID"];
+                // push match into response array
+                array_push($response["friendIDmatches"], $account);
+            }
         }
         else {
             $response["result"] = -8;
-            $response["message"] = "Add Contact query failed";
+            $response["message"] = "Search query failed; friend (ID: $friendID) not found in Contacts";
         }
     }
 }

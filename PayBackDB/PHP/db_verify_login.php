@@ -33,11 +33,9 @@ $ID_options = array("options" => array("min_range"=>00000000, "max_range"=>99999
 $userID = filter_input(INPUT_POST, 'userID',FILTER_VALIDATE_INT, $ID_options);
 $userEmail = $_POST['userEmail'];
 $password = $_POST['password'];
-$friendID = filter_input(INPUT_POST, 'friendID',FILTER_VALIDATE_INT, $ID_options);
-$friendEmail = $_POST['friendEmail'];
 
 // connect to db
-$link = mysqli_connect(DB_SERVER, DB_WRITE, DB_WRITE_PASS, DB_DATABASE);
+$link = mysqli_connect(DB_SERVER, DB_READ, DB_READ_PASS, DB_DATABASE);
 if (mysqli_connect_errno($link)) {
     $response["result"] = -1;
     $response["message"] = "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -47,8 +45,6 @@ else {
     $userID = mysqli_real_escape_string($link, $userID);
     $userEmail = mysqli_real_escape_string($link, $userEmail);
     $password = mysqli_real_escape_string($link, $password);
-    $friendID = mysqli_real_escape_string($link, $friendID);
-    $friendEmail = mysqli_real_escape_string($link, $friendEmail);
 
     // authorize
     $loginPass = mysqli_query($link, "SELECT `password` FROM `Account` WHERE `accountID` = '$userID';");
@@ -93,49 +89,9 @@ else {
     }
     // userID and password should now be validated, otherwise $userID is false
 
-    // validate friendID
-    if ($friendID != false) {
-        $IDquery = mysqli_query($link, "SELECT `AccountID` FROM Account WHERE `AccountID` = '$friendID';");
-        if (mysqli_fetch_object($IDquery)->AccountID != $friendID) {
-            $friendID = false;
-        }
-    }
-    // if invalid friendID, get friendID from friendEmail
-    if ($friendID == false) {
-        $IDquery = mysqli_query($link, "SELECT `AccountID`,`Email` FROM Account WHERE `Email` = '$friendEmail';");
-        if (mysqli_num_rows($IDquery) == 1) {
-            $friendID = mysqli_fetch_object($IDquery)->AccountID;
-        }
-        else if (mysqli_num_rows($IDquery) > 1) {
-            $response["result"] = -6;
-            $response["message"] = "Failed: New Friend Email '$friendEmail' matched >1 Account";
-            $response["friendIDmatches"] = array();
-            while ($row = mysqli_fetch_array($IDquery)) {
-                // temp array
-                $account = array();
-                $account["FriendID"] = $row["AccountID"];
-                $account["FriendEmail"] = $row["Email"];
-                // push match into response array
-                array_push($response["friendIDmatches"], $account);
-            }
-        }
-        else {
-            $response["result"] = -7;
-            $response["message"] = "Failed: New Friend (ID: ".$_POST['friendID'].", Email: $friendEmail) matched no Account";
-        }
-    }
-    //query to add transaction
-    if (($response["result"] == null) && ($userID != false) && ($friendID != false)) {
-        $friend = mysqli_query($link, "INSERT INTO `Friend_Of` (`UserID`,`FriendID`) VALUES ('$userID','$friendID');");
-
-        if ($friend) {
-            $response["result"] = 1;
-            $response["message"] = "Contact added successfully";
-        }
-        else {
-            $response["result"] = -8;
-            $response["message"] = "Add Contact query failed";
-        }
+    if ($userID != false) {
+        $response["result"] = 1;
+        $response["message"] = "Sign-in successful";
     }
 }
 
