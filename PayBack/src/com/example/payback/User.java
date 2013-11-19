@@ -43,7 +43,6 @@ public class User extends Account{
 	private ArrayList<ResolveTransaction> transactions;
 
 	private String password;
-
 	/* Only called when creating a brand new account! */
 	User(String fName, String lName, String email) 
 	{
