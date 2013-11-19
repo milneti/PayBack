@@ -16,7 +16,7 @@ public class StatisticActivity extends TitleActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		modifyTitle("Transaction Statistics",R.layout.activity_statistic);
-		displayTestValue();
+		displayValue();
 	}
 
 	@Override
@@ -28,10 +28,13 @@ public class StatisticActivity extends TitleActivity {
     
     public void lineGraphHandler (View view)
     {
+    	double totalPayables = getTotalPayables();
+    	double totalReceivables = getTotalReceivables();
+    	
     	LineGraph line = new LineGraph();
     	//Open a new activity to display the graph
     	Intent lineIntent = line.getTestIntent(this);
-      startActivity(lineIntent);
+    	startActivity(lineIntent);
     }
     
     public void barGraphHandler (View view)
@@ -55,10 +58,12 @@ public class StatisticActivity extends TitleActivity {
         startActivity(lineIntent);
     }
     
-    public void displayTestValue ()
+    public void displayValue ()
     {    	
     	double totalPayables = getTotalPayables();
     	double totalReceivables = getTotalReceivables();
+    	
+    	//Append value to textview
     	TextView payableTextView = (TextView) findViewById(R.id.totalPayables);
     	payableTextView.append(String.format("$%.2f", totalPayables));
     	TextView receivableTextView = (TextView) findViewById(R.id.totalReceivables);
@@ -70,20 +75,21 @@ public class StatisticActivity extends TitleActivity {
 //    	LinearLayout chartView = (LinearLayout) findViewById(R.id.chart);
 //    	chartView.addView(gView); 
     	
+    	//Display Pie Graph
     	PieGraph pie = new PieGraph();
-    	GraphicalView gView = pie.getTestView(this);
+    	GraphicalView gView = pie.getTwoSectionView(this, totalPayables, totalReceivables);
     	LinearLayout chartView = (LinearLayout) findViewById(R.id.chart);
     	chartView.addView(gView);
     }
     
     public double getTotalPayables ()
     {
-    	return 5.00;
+    	return 5;
     }
     
     public double getTotalReceivables ()
     {
-    	return 10.00;
+    	return 10;
     }
     
     public double getPayablesOverTime ()

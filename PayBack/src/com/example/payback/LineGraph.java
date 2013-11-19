@@ -67,12 +67,12 @@ public class LineGraph {
 		XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
 		dataset.addSeries(series);
 		
-		Intent intent = createIntent(context, dataset);
+		Intent intent = createOneLineIntent(context, dataset);
 		return intent;
 		
 	}
 
-	public Intent createIntent(Context context, XYMultipleSeriesDataset dataset) {
+	public Intent createOneLineIntent(Context context, XYMultipleSeriesDataset dataset) {
 		XYMultipleSeriesRenderer mRenderer = new XYMultipleSeriesRenderer(); // Holds a collection of XYSeriesRenderer and customizes the graph
 		XYSeriesRenderer renderer = new XYSeriesRenderer(); // This will be used to customize line 1
 		mRenderer.addSeriesRenderer(renderer);

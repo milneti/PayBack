@@ -60,4 +60,25 @@ public class PieGraph {
 
 		return ChartFactory.getPieChartView(context, series, renderer);
 	}
+	
+	public GraphicalView getTwoSectionView(Context context, double standingPayables, double standingReceivables) {
+
+		CategorySeries series = new CategorySeries("Payables and Receivables");
+		series.add("Standing Payable", standingPayables);
+		series.add("Standing Receivables", standingReceivables);
+
+		int[] colors = new int[] { Color.BLUE, Color.GREEN };
+
+		DefaultRenderer renderer = new DefaultRenderer();
+		for (int color : colors) {
+			SimpleSeriesRenderer r = new SimpleSeriesRenderer();
+			r.setColor(color);
+			renderer.addSeriesRenderer(r);
+		}
+		renderer.setChartTitle("Payables versus Receivables");
+		renderer.setChartTitleTextSize(7);
+		renderer.setZoomButtonsVisible(true);
+
+		return ChartFactory.getPieChartView(context, series, renderer);
+	}
 }
