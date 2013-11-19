@@ -6,7 +6,9 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -17,23 +19,36 @@ import android.widget.Toast;
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
-public class LoginActivity extends TitleActivity {
+public class LoginActivity extends TitleActivity
+{
+	/*static Activity activityInstance;	//these are variables
+	static MustLogoutReceiver mlr;		//used for MustLogoutReceiver.java
+	static IntentFilter filter;*/
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		setTitle("PayBack");
+		
+		/*activityInstance = this;
+		mlr = new MustLogoutReceiver(); mlr.setActivityInstance(activityInstance);
+		filter = new IntentFilter();
+		filter.addAction("com.Payback.StayLoggedIn_Intent");
+		registerReceiver(mlr, filter);*/
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
 		super.onCreateOptionsMenu(menu);
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
 	}
 
-	public void Login(View view) throws InterruptedException {
+	public void Login(View view) throws InterruptedException
+	{
 		//for log in, url stub is AccountLogin.php
 		Logger CONLOG = Logger.getLogger(LoginActivity.class .getName());
 		CONLOG.setLevel(Level.INFO);
@@ -48,14 +63,20 @@ public class LoginActivity extends TitleActivity {
 		CONLOG.info("Login info: <"+email+", "+password+">");
 		matcher = pattern.matcher(email);
 
-		if(email.isEmpty()){
+		if(email.isEmpty())
+		{
 			Toast.makeText(getApplicationContext(), "Email field is empty", Toast.LENGTH_SHORT).show();
-		}else if(password.isEmpty()){
+		}
+		else if(password.isEmpty())
+		{
 			Toast.makeText(getApplicationContext(), "Password field is empty", Toast.LENGTH_SHORT).show();
-		}else if(!matcher.matches()){
+		}
+		else if(!matcher.matches())
+		{
 			Toast.makeText(getApplicationContext(), "Email: \""+email+"\" is not a valid email address!", Toast.LENGTH_SHORT).show();
-		}else{
-
+		}
+		else
+		{
 			String status  ="fail";
 			AccessNet caller = new AccessNet();
 
@@ -65,26 +86,33 @@ public class LoginActivity extends TitleActivity {
 			CONLOG.info("Attempting to call server at: "+urlstub+", "+params);
 			status = caller.simpleServerCall(urlstub, params);
 
-			if(status.equalsIgnoreCase("success")){
+			if(status.equalsIgnoreCase("success"))
+			{
+				//Successful login, going to main menu
+
 				CONLOG.info("Server call successful and logged in!");
 				Intent intent = new Intent(this, MainActivity.class);
-				Toast.makeText(getApplicationContext(),"Welcome", Toast.LENGTH_SHORT).show();
 				startActivity(intent);
+				Toast.makeText(getApplicationContext(),"Welcome", Toast.LENGTH_SHORT).show();
 				this.finish();
-			}else{
+			}
+			else
+			{
 				CONLOG.info("Server call successful but user failed login.");
 				Toast.makeText(getApplicationContext(),"Incorrect username or password", Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
 
-	public void CreateAccount(View view) {
+	public void CreateAccount(View view)
+	{
 		Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
         startActivity(intent);
         this.finish();
 	}
 	
-	public void bypass(View view) {
+	public void bypass(View view)
+	{
 		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         this.finish();
