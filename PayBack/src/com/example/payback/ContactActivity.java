@@ -37,16 +37,7 @@ public class ContactActivity extends TitleActivity {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.activity_contact_iteminlist, friendList);
 		contactlistview.setAdapter(adapter);
 		registerForContextMenu(contactlistview);
-		/*
-		contactlistview.setOnItemLongClickListener(new OnItemLongClickListener() {
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parentList, View view,
-					int position, long rowId) {
-				// TODO Auto-generated method stub
-				return false;
-			}
-		});
-		  */  
+
 	}
 
 	private ArrayList<String> buildFriendList() {
@@ -149,7 +140,11 @@ public class ContactActivity extends TitleActivity {
 				       .setPositiveButton(R.string.Confirm, new DialogInterface.OnClickListener() {
 				    	   public void onClick(DialogInterface dialog, int id) {
 				        	   dialog.dismiss();	     
-				        	   confirmDelete(toDelete);		        	   
+					        	try {
+									confirmDelete(toDelete);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}		        	   
 				           }
 				       })
 				       .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
@@ -232,7 +227,7 @@ public class ContactActivity extends TitleActivity {
 */
 	public void sendContact(String email) throws InterruptedException{
 		
-		 Toast.makeText(getApplicationContext(),"In Send", Toast.LENGTH_SHORT).show();
+		Toast.makeText(getApplicationContext(),"In Send", Toast.LENGTH_SHORT).show();
 		 
 		final String EMAIL_PATTERN = 
 				"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
@@ -266,7 +261,11 @@ public class ContactActivity extends TitleActivity {
 		       .setPositiveButton(R.string.Confirm, new DialogInterface.OnClickListener() {
 		    	   public void onClick(DialogInterface dialog, int id) {
 		        	   dialog.dismiss();	     
-		        	   confirmDelete(email);		        	   
+		        	   try {
+		        		   confirmDelete(email);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}		        	   
 		           }
 		       })
 		       .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
@@ -278,10 +277,20 @@ public class ContactActivity extends TitleActivity {
 		dialog.show();
 	}
 	
-	public void confirmDelete(String email){
-		//server call to delete friend
-		String msg = email + " succesfully deleted";
-		Toast.makeText(getApplicationContext(),msg, Toast.LENGTH_SHORT).show();
+	public void confirmDelete(String email) throws InterruptedException{
+		Toast.makeText(getApplicationContext(),"calling delete", Toast.LENGTH_SHORT).show();
+		String status = "fail";
+		AccessNet caller = new AccessNet();
+		String params = "userEmail="+user.getEmail()+"&password="+user.getPassword()+"&friendEmail="+email;
+		String urlstub = "db_friendof_deleteOne.php";
+		status = caller.simpleServerCall(urlstub, params);
+
+		if(status.equalsIgnoreCase("success")){
+			Toast.makeText(getApplicationContext(),email + " Deleted from friends!", Toast.LENGTH_SHORT).show();
+			
+		}else{
+			Toast.makeText(getApplicationContext(),"Error deleting friend", Toast.LENGTH_SHORT).show();
+		}
 	}
 	
 	public void showMainMenu(View view)
