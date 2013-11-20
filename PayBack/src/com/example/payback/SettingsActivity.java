@@ -137,5 +137,6 @@ public class SettingsActivity extends TitleActivity
 	public void showMainMenu(View view) {
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
+		this.finish();
 	}
 }

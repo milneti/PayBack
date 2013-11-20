@@ -1,5 +1,6 @@
 package com.example.payback;
 
+import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,12 +24,13 @@ class AccessNet{
 		boolean retval = false;
 		Logger CONLOG = Logger.getLogger(AccessNet.class .getName());
 
-		String params = "email="+Email+"&password="+Password;
-		String urlstub = "AccountLogin.php";
+		String params = "userEmail="+Email+"&password="+Password;
+		String urlstub = "db_verify_login.php";
 		//if you go around renaming these urlstubs the app will not work and Hohyun will hate you.
 		CONLOG.info("Attempting to call server at: "+urlstub+", "+params);
 		status = simpleServerCall(urlstub, params);
-		if(status.equalsIgnoreCase("success"))
+		//CONLOG.info("Server Returned "+status);
+		if(status.equalsIgnoreCase("success")||status.equalsIgnoreCase("1")||status.equalsIgnoreCase("true"))
 			retval = true;
 		return retval;
 	}
@@ -37,11 +39,84 @@ class AccessNet{
 		boolean retval = false;
 		String params = "fname="+FName+"&lname="+LName+"&email="+Email+"&password="+Password;
 		String status = "fail";
-		String urlstub = "AccountCreation.php";
+		String urlstub = "db_account_create.php";
 		//calling server
 		status = simpleServerCall(urlstub, params);
-		if(status.equalsIgnoreCase("success"))
+		if(status.equalsIgnoreCase("success")||status.equalsIgnoreCase("1")||status.equalsIgnoreCase("true"))
 			retval=true;
+		return retval;
+	}
+	
+	public static boolean AddFriend(String femail, String uemail, String password) throws InterruptedException{
+		boolean retval = false;
+		String params = "friendEmail="+uemail+"&userEmail="+uemail+"&password="+password;
+		String status = "fail";
+		String urlstub = "db_friendof_create.php";
+		//calling server
+		status = simpleServerCall(urlstub, params);
+		if(status.equalsIgnoreCase("success")||status.equalsIgnoreCase("1")||status.equalsIgnoreCase("true"))
+			retval=true;
+		return retval;
+	}
+	
+	public static boolean DeleteFriend(String femail, String uemail, String password) throws InterruptedException, JSONException{
+		//$attribute decides the function taken. Currently there are three functions:
+        //trans:                Deletes tuples that match LenderID and user $email where Borrower = $value
+        //note:                        Deletes tuples that match ReceiveID and user $email where Send == $value
+        //account:                Deletes tuple for account. Account tuple will be gone permanently after action.
+		String attribute = "note";
+		boolean retval = false;
+		String params = "email="+uemail+"&password="+password+"&attribute="+attribute+"&value"+femail;
+		//String status = "fail";
+		String urlstub = "DeleteTuple.php";
+		//calling server
+		JSONObject status = jsonServerCall(urlstub, params);
+		if(status.has("1")||status.has("true")||status.has("success"))
+			retval=true;
+		return retval;
+	}
+	
+	public static boolean DeleteAccount(String uemail, String password) throws InterruptedException, JSONException{
+		//$attribute decides the function taken. Currently there are three functions:
+        //trans:                Deletes tuples that match LenderID and user $email where Borrower = $value
+        //note:                        Deletes tuples that match ReceiveID and user $email where Send == $value
+        //account:                Deletes tuple for account. Account tuple will be gone permanently after action.
+		String value = "null" , attribute = "account";
+		boolean retval = false;
+		String params = "email="+uemail+"&password="+password+"&attribute="+attribute+"&value"+value;
+		
+		String urlstub = "DeleteTuple.php";
+		//calling server
+		JSONObject status = jsonServerCall(urlstub, params);
+		if(status.has("1")||status.has("true")||status.has("success"))
+			retval=true;
+		return retval;
+	}
+	
+	public static boolean DeleteTrans(String femail, String uemail, String password) throws InterruptedException, JSONException{
+		//$attribute decides the function taken. Currently there are three functions:
+        //trans:                Deletes tuples that match LenderID and user $email where Borrower = $value
+        //note:                        Deletes tuples that match ReceiveID and user $email where Send == $value
+        //account:                Deletes tuple for account. Account tuple will be gone permanently after action.
+		String attribute = "trans";
+		boolean retval = false;
+		String params = "email="+uemail+"&password="+password+"&attribute="+attribute+"&value"+femail;
+		//String status = "fail";
+		String urlstub = "DeleteTuple.php";
+		//calling server
+		JSONObject status = jsonServerCall(urlstub, params);
+		if(status.has("1")||status.has("true")||status.has("success"))
+			retval=true;
+		return retval;
+	}
+	
+	
+	
+	public boolean AddTrans(String email, String password, double amount, String description, String transdate, String lemail, String bemail){
+		boolean retval = false;
+		String params = "email="+email+"&password="+password+"&amount="+amount+"";
+		//String status = "fail";
+		String urlstub = "DeleteTuple.php";
 		return retval;
 	}
 	
@@ -96,7 +171,7 @@ class AccessNet{
 							if(line.equalsIgnoreCase("1")||line.equalsIgnoreCase("true")||line.equalsIgnoreCase("success")||line.equalsIgnoreCase("Login and query success")||line.equalsIgnoreCase("{\"result\":1,\"message\":\"Sign-in successful\"}"))
 								items[0]="success";
 							CANLOG.info("Data in: "+line);
-
+							
 							reader.close();
 							CANLOG.info("Data receive success!");
 						} catch (IOException e){
@@ -125,7 +200,7 @@ class AccessNet{
 		return items[0];
 	}
 	
-	public JSONObject jsonServerCall(String urlstub, String params) throws InterruptedException, JSONException{
+	public static JSONObject jsonServerCall(String urlstub, String params) throws InterruptedException, JSONException{
 		Logger AXNLOG = Logger.getLogger(AccessNet.class .getName());
 		AXNLOG.setLevel(Level.INFO);
 		String url = "http://chase.mamatey.com/PayBack/"+urlstub;

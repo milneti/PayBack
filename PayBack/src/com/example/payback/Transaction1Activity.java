@@ -1,9 +1,10 @@
 package com.example.payback;
 
 import java.text.DecimalFormat;
-
+import java.util.ArrayList;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
@@ -12,6 +13,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -29,7 +31,7 @@ public class Transaction1Activity extends TitleActivity
 		super.onCreate(savedInstanceState);
 
 		modifyTitle("Create Transaction",R.layout.activity_transaction1);		
-		
+
 		activityInstance = this;
 		
 		pkr = new PageKillReceiver(); pkr.setActivityInstance(activityInstance);
@@ -42,10 +44,36 @@ public class Transaction1Activity extends TitleActivity
 		filterNBR.addAction("com.Payback.MainActivity_Intent");
 		registerReceiver(nbr, filterNBR);
 		
+
 		EditText text = (EditText)findViewById(R.id.editText1);  
+		Bundle oldbundle = getIntent().getExtras();
+	    
+		int transCostInt = oldbundle.getInt("Transaction1transCost");
+		String transCoststring;
+		if(transCostInt == 0){
+			transCoststring = "";
+		}
+		else{
+	        DecimalFormat dec = new DecimalFormat("0.00");
+			transCoststring = Integer.toString(transCostInt);
+            Float in=Float.parseFloat(transCoststring);
+            float percen = in/100;
+
+            text.setText("$"+dec.format(percen));
+            text.setSelection(text.getText().length());
+            
+	        Button button=(Button) findViewById(R.id.tran1buttonnext);
+	    	button.setEnabled(true);
+		}
+		
+		String transCommentString = oldbundle.getString("Transaction1transComment");
+		
+		EditText text2 = (EditText)findViewById(R.id.editText2); 
+		text2.setText(transCommentString);
+		
 	    text.requestFocus();
 	    text.setRawInputType(Configuration.KEYBOARD_12KEY);    
-
+	    
 	    text.addTextChangedListener(new TextWatcher(){
 	        EditText text = (EditText)findViewById(R.id.editText1);
 	        DecimalFormat dec = new DecimalFormat("0.00");
@@ -116,20 +144,35 @@ public class Transaction1Activity extends TitleActivity
 	
 	public void showTrans2(View view)
     {	
+    	Bundle oldbundle = getIntent().getExtras();
+		
     	EditText transCost = (EditText)findViewById(R.id.editText1);
     	EditText transComment = (EditText)findViewById(R.id.editText2);
     	
 		String stringnumber = transCost.getText().toString().substring(1);
 		Float floatnumber = Float.parseFloat(stringnumber);
 		int transCostInt = (int) (floatnumber * 100F);
-
+		
     	String transCommentString = transComment.getText().toString();
+	    
+	    ArrayList<Friend> transselected = oldbundle.getParcelableArrayList("Transaction2selected");
+	    int translenderamountInt = oldbundle.getInt("Transaction3lenderamount");
+	    ArrayList<Integer> lendsharelist = oldbundle.getIntegerArrayList("Transaction3borroweramountlist");
+	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
+	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
     	
+	    
         Intent intent = new Intent(getApplicationContext(), Transaction2Activity.class);
         Bundle Bundle = new Bundle();
         
         Bundle.putInt("Transaction1transCost", transCostInt);
         Bundle.putString("Transaction1transComment", transCommentString);
+        Bundle.putParcelableArrayList("Transaction2selected", transselected);
+        Bundle.putInt("Transaction3lenderamount", translenderamountInt);
+        Bundle.putIntegerArrayList("Transaction3borroweramountlist", lendsharelist);
+        Bundle.putBoolean("Transaction3button1Selected", button1Selected);
+        Bundle.putBoolean("Transaction3button2Selected", button2Selected);
+        
         
         intent.putExtras(Bundle);
         startActivity(intent);

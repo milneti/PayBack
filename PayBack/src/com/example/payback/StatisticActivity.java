@@ -154,5 +154,10 @@ public class StatisticActivity extends TitleActivity
 		
     	return 5.00;
     }
+    public void showMainMenu(View view) {
+		Intent intent = new Intent(this, MainActivity.class);
+		startActivity(intent);
+		this.finish();
+	}
 
 }

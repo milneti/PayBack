@@ -5,10 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.view.Menu;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
@@ -45,10 +48,12 @@ public class Transaction2Activity extends TitleActivity  {
 			registerReceiver(nbr, filterNBR);
 		    
 		    createData();
-
+		    
 		    final Transaction2Activity_expandablecontactlist_adapter listAdapter = new Transaction2Activity_expandablecontactlist_adapter(this, listHeader, listChild);
 		    expListView.setAdapter(listAdapter);
-
+		    expListView.expandGroup(1);
+		    
+		    
 	}
 	
 	public void createData() {
@@ -60,23 +65,7 @@ public class Transaction2Activity extends TitleActivity  {
     	Friend tests1 = new Friend("Place", "Ment");
     	Friend tests2 = new Friend("For", "Later");
     	Friend tests3 = new Friend("Sprints", "Lname");
-	    Friend test1 = new Friend("Price", "Gutierrez");
-	    Friend test2 = new Friend("Vanna", "Mccullough");
-	    Friend test3 = new Friend("Wyatt", "Paul");
-	    Friend test4 = new Friend("Thaddeus", "Robbins");
-	    Friend test5 = new Friend("Rooney", "Dejesus");
-	    Friend test6 = new Friend("Xavier", "Wolfe");
-	    Friend test7 = new Friend("Byron", "Raymond");
-	    Friend test8 = new Friend("Quinn", "Whitfield");
-	    Friend test9 = new Friend("Farrah", "Moon");
-	    Friend test10 = new Friend("Ainsley", "Whitehead");
-	    Friend test11 = new Friend("Josephine", "Patton");
-	    Friend test12 = new Friend("Mariko", "Patton");
-	    Friend test13 = new Friend("Raphael", "Fitzgerald");
-	    Friend test14 = new Friend("Deacon", "Daniels");
-	    Friend test15 = new Friend("Delilah", "Fletcher");
-	    Friend test16 = new Friend("Robin", "Andrews");
-	    Friend test17 = new Friend("Melvin", "Price");
+    	
 
         
         listHeader.add("Groups");
@@ -89,25 +78,7 @@ public class Transaction2Activity extends TitleActivity  {
         listChild.put(listHeader.get(0), child0);
         
         listHeader.add("Individual");
-        List<Friend> child1 = new ArrayList<Friend>();
-        
-        child1.add(test1);
-        child1.add(test2);
-        child1.add(test3);
-        child1.add(test4);
-        child1.add(test5);
-        child1.add(test6);
-        child1.add(test7);
-        child1.add(test8);
-        child1.add(test9);
-        child1.add(test10);
-        child1.add(test11);
-        child1.add(test12);
-        child1.add(test13);
-        child1.add(test14);
-        child1.add(test15);
-        child1.add(test16);
-        child1.add(test17);
+        List<Friend> child1 = user.getFriends();
         
         listChild.put(listHeader.get(1), child1);
         
@@ -142,12 +113,43 @@ public class Transaction2Activity extends TitleActivity  {
 		}
 	}
 	
+	public void showTrans1(View view)
+	{
+    	Bundle oldbundle = getIntent().getExtras();
+		
+	    int transCostInt = oldbundle.getInt("Transaction1transCost");
+	    String transCommentString = oldbundle.getString("Transaction1transComment");	    
+	    ArrayList<Friend> transselected = oldbundle.getParcelableArrayList("Transaction2selected");
+	    int translenderamountInt = oldbundle.getInt("Transaction3lenderamount");
+	    ArrayList<Integer> lendsharelist = oldbundle.getIntegerArrayList("Transaction3borroweramountlist");
+	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
+	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
+    	  
+		Intent intent = new Intent(this, Transaction1Activity.class);
+        Bundle Bundle = new Bundle();
+        
+        Bundle.putInt("Transaction1transCost", transCostInt);
+        Bundle.putString("Transaction1transComment", transCommentString);
+        Bundle.putParcelableArrayList("Transaction2selected", transselected);
+        Bundle.putInt("Transaction3lenderamount", translenderamountInt);
+        Bundle.putIntegerArrayList("Transaction3borroweramountlist", lendsharelist);
+        Bundle.putBoolean("Transaction3button1Selected", button1Selected);
+        Bundle.putBoolean("Transaction3button2Selected", button2Selected);
+        
+        intent.putExtras(Bundle);
+	    startActivity(intent);
+	}
+	
 	public void showTrans3(View view)
     {
 	    Bundle oldbundle = getIntent().getExtras();
 	    int transCostInt = oldbundle.getInt("Transaction1transCost");
 	    String transCommentString = oldbundle.getString("Transaction1transComment");
-
+	    int translenderamountInt = oldbundle.getInt("Transaction3lenderamount");
+	    ArrayList<Integer> lendsharelist = oldbundle.getIntegerArrayList("Transaction3borroweramountlist");
+	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
+	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
+	    
     	Intent intent = new Intent(this, Transaction3Activity.class);
         Bundle Bundle = new Bundle();
         
@@ -165,15 +167,15 @@ public class Transaction2Activity extends TitleActivity  {
 		}
         
         Bundle.putParcelableArrayList("Transaction2selected", selectedContacts);
-
+        Bundle.putInt("Transaction3lenderamount", translenderamountInt);
+        Bundle.putIntegerArrayList("Transaction3borroweramountlist", lendsharelist);
+        Bundle.putBoolean("Transaction3button1Selected", button1Selected);
+        Bundle.putBoolean("Transaction3button2Selected", button2Selected);
+        
         intent.putExtras(Bundle);
         startActivity(intent);
     }
 
-	public void showTrans1(View view)
-	{
-		Intent intent = new Intent(this, Transaction1Activity.class);
-	    startActivity(intent);
-	}
+
 	
 }
