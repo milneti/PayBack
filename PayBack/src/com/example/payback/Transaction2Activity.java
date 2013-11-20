@@ -91,12 +91,38 @@ public class Transaction2Activity extends TitleActivity  {
 		}
 	}
 	
+	public void showTrans1(View view)
+	{
+    	Bundle oldbundle = getIntent().getExtras();
+		
+	    int transCostInt = oldbundle.getInt("Transaction1transCost");
+	    String transCommentString = oldbundle.getString("Transaction1transComment");	    
+	    ArrayList<Friend> transselected = oldbundle.getParcelableArrayList("Transaction2selected");
+	    int translenderamountInt = oldbundle.getInt("Transaction3lenderamount");
+	    ArrayList<Integer> lendsharelist = oldbundle.getIntegerArrayList("Transaction3borroweramountlist");
+	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
+	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
+    	  
+		Intent intent = new Intent(this, Transaction1Activity.class);
+        Bundle Bundle = new Bundle();
+        
+        Bundle.putInt("Transaction1transCost", transCostInt);
+        Bundle.putString("Transaction1transComment", transCommentString);
+        Bundle.putParcelableArrayList("Transaction2selected", transselected);
+        Bundle.putInt("Transaction3lenderamount", translenderamountInt);
+        Bundle.putIntegerArrayList("Transaction3borroweramountlist", lendsharelist);
+        Bundle.putBoolean("Transaction3button1Selected", button1Selected);
+        Bundle.putBoolean("Transaction3button2Selected", button2Selected);
+        
+        intent.putExtras(Bundle);
+	    startActivity(intent);
+	}
+	
 	public void showTrans3(View view)
     {
 	    Bundle oldbundle = getIntent().getExtras();
 	    int transCostInt = oldbundle.getInt("Transaction1transCost");
 	    String transCommentString = oldbundle.getString("Transaction1transComment");
-
 	    int translenderamountInt = oldbundle.getInt("Transaction3lenderamount");
 	    ArrayList<Integer> lendsharelist = oldbundle.getIntegerArrayList("Transaction3borroweramountlist");
 	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
@@ -128,31 +154,6 @@ public class Transaction2Activity extends TitleActivity  {
         startActivity(intent);
     }
 
-	public void showTrans1(View view)
-	{
-    	Bundle oldbundle = getIntent().getExtras();
-		
-	    int transCostInt = oldbundle.getInt("Transaction1transCost");
-	    String transCommentString = oldbundle.getString("Transaction1transComment");	    
-	    ArrayList<Friend> transselected = oldbundle.getParcelableArrayList("Transaction2selected");
-	    int translenderamountInt = oldbundle.getInt("Transaction3lenderamount");
-	    ArrayList<Integer> lendsharelist = oldbundle.getIntegerArrayList("Transaction3borroweramountlist");
-	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
-	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
-    	  
-		Intent intent = new Intent(this, Transaction1Activity.class);
-        Bundle Bundle = new Bundle();
-        
-        Bundle.putInt("Transaction1transCost", transCostInt);
-        Bundle.putString("Transaction1transComment", transCommentString);
-        Bundle.putParcelableArrayList("Transaction2selected", transselected);
-        Bundle.putInt("Transaction3lenderamount", translenderamountInt);
-        Bundle.putIntegerArrayList("Transaction3borroweramountlist", lendsharelist);
-        Bundle.putBoolean("Transaction3button1Selected", button1Selected);
-        Bundle.putBoolean("Transaction3button2Selected", button2Selected);
-        
-        intent.putExtras(Bundle);
-	    startActivity(intent);
-	}
+
 	
 }

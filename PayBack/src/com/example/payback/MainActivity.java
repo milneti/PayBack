@@ -24,7 +24,7 @@ public class MainActivity extends TitleActivity{
     	ArrayList<Friend> transselected = new ArrayList<Friend>();
  	    int translenderamountInt = 0;
  	    ArrayList<Integer> lendsharelist = new ArrayList<Integer>();
- 	    boolean button1Selected = false;
+ 	    boolean button1Selected = true;
  	    boolean button2Selected = false;
     	
     	Intent intent = new Intent(this, Transaction1Activity.class);

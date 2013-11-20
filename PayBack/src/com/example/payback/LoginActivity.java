@@ -72,7 +72,7 @@ public class LoginActivity extends TitleActivity {
 			AccessNet caller = new AccessNet();
 
 			String params = "userEmail="+email+"&password="+password;
-			String urlstub = " db_verify_login.php";
+			String urlstub = "db_verify_login.php";
 
 			CONLOG.info("Attempting to call server at: "+urlstub+", "+params);
 			status = caller.simpleServerCall(urlstub, params);
@@ -82,11 +82,12 @@ public class LoginActivity extends TitleActivity {
 				if (((CheckBox)findViewById(R.id.rememberLogin)).isChecked())
 					rememberLogin();
 				
+
 				CONLOG.info("Server call successful and logged in!");
 				Intent intent = new Intent(this, MainActivity.class);
 				
 				/* Will's new additions */
-				user = new User(email,password); //user is declared in TitleActivity, which every activity extends
+				user = new User(email, password); //user is declared in TitleActivity, which every activity extends
 				
 				/* Will's old additions */
 				/*
@@ -101,7 +102,8 @@ public class LoginActivity extends TitleActivity {
 
 				startActivity(intent);
 				this.finish();
-			}else{
+			}
+			else{
 				CONLOG.info("Server call successful but user failed login.");
 				Toast.makeText(getApplicationContext(),"Incorrect username or password", Toast.LENGTH_SHORT).show();
 			}
@@ -162,6 +164,7 @@ public class LoginActivity extends TitleActivity {
 	
 	public void bypass(View view) {
 		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+		
         startActivity(intent);
         this.finish();
 	}
