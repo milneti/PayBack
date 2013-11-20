@@ -54,44 +54,9 @@ public class ContactActivity extends TitleActivity
 
 	private ArrayList<String> buildFriendList() {
 	    ArrayList<String> list = new ArrayList<String>();
-	    
-	    //dummy friends
-	    Friend test1 = new Friend("Price", "Gutierrez","test@yahoo.com");
-	    Friend test2 = new Friend("Vanna", "Mccullough");
-	    Friend test3 = new Friend("Wyatt", "Paul");
-	    Friend test4 = new Friend("Thaddeus", "Robbins");
-	    Friend test5 = new Friend("Rooney", "Dejesus");
-	    Friend test6 = new Friend("Xavier", "Wolfe");
-	    Friend test7 = new Friend("Byron", "Raymond");
-	    Friend test8 = new Friend("Quinn", "Whitfield","test2@yahoo.com");
-	    Friend test9 = new Friend("Farrah", "Moon");
-	    Friend test10 = new Friend("Ainsley", "Whitehead");
-	    Friend test11 = new Friend("Josephine", "Patton");
-	    Friend test12 = new Friend("Mariko", "Patton");
-	    Friend test13 = new Friend("Raphael", "Fitzgerald");
-	    Friend test14 = new Friend("Deacon", "Daniels");
-	    Friend test15 = new Friend("Delilah", "Fletcher");
-	    Friend test16 = new Friend("Robin", "Andrews");
-	    Friend test17 = new Friend("Melvin", "Price");
-	    
-	    for(int x = 0; x < 2;x++){
-		    list.add(test1.toString());
-		    list.add(test2.toString());
-		    list.add(test3.toString());
-		    list.add(test4.toString());
-		    list.add(test5.toString());
-		    list.add(test6.toString());
-		    list.add(test7.toString());
-		    list.add(test8.toString());
-		    list.add(test9.toString());
-		    list.add(test10.toString());
-		    list.add(test11.toString());
-		    list.add(test12.toString());
-		    list.add(test13.toString());
-		    list.add(test14.toString());
-		    list.add(test15.toString());
-		    list.add(test16.toString());
-		    list.add(test17.toString());
+	    ArrayList<Friend> userfriends = user.getFriends();
+	    for(int i =0; i < userfriends.size(); i++){
+	    	list.add(userfriends.get(i).toString());
 	    }
 
 	    return list;

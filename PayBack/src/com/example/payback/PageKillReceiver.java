@@ -16,7 +16,7 @@ public class PageKillReceiver extends BroadcastReceiver
 		
 		Activity a = PageKillReceiver.getActivityInstance();		//Gets the activity to kill
 		
-		Toast.makeText(context, "Test Toast", Toast.LENGTH_LONG).show();
+//		Toast.makeText(context, "Test Toast", Toast.LENGTH_LONG).show();
 		//Acts like a print statement when testing
 		
 		Intent intentToStart = new Intent(a.getApplicationContext(), LoginActivity.class);

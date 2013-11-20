@@ -1,5 +1,6 @@
 package com.example.payback;
 
+import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -125,7 +126,7 @@ class AccessNet{
 		return items[0];
 	}
 	
-	public JSONObject jsonServerCall(String urlstub, String params) throws InterruptedException, JSONException{
+	public static JSONObject jsonServerCall(String urlstub, String params) throws InterruptedException, JSONException{
 		Logger AXNLOG = Logger.getLogger(AccessNet.class .getName());
 		AXNLOG.setLevel(Level.INFO);
 		String url = "http://chase.mamatey.com/PayBack/"+urlstub;

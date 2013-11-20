@@ -71,11 +71,14 @@ public class Transaction4Activity extends TitleActivity
 	private ArrayList<Map<String, String>> buildData()
 	{
 	    Bundle oldbundle = getIntent().getExtras();		//get extras from old bundle
+	    Friend mainuser = new Friend(user.fName, user.lName, user.email, user.displayName);
 	    ArrayList<Friend> transselected = oldbundle.getParcelableArrayList("Transaction2selected");			//List of borrowers
+	    int translenderamountInt = oldbundle.getInt("Transaction3lenderamount");
 	    ArrayList<Integer> lendsharelist = oldbundle.getIntegerArrayList("Transaction3borroweramountlist");	//Default borrower share
 		
 	    ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>();		//New ArrayList
 	    
+	    list.add(putData(mainuser.toString(), String.valueOf(translenderamountInt)));
 	    for(int i = 0; i < transselected.size(); i++)		//for each borrower
 	    {
 	    	list.add(putData(transselected.get(i).toString(), String.valueOf(lendsharelist.get(i))));		//add borrower's share into ArrayList
@@ -133,7 +136,6 @@ public class Transaction4Activity extends TitleActivity
 	{
 	    Bundle oldbundle = getIntent().getExtras();		//get extras from old bundle
 	    int transCostInt = oldbundle.getInt("Transaction1transCost");	//get total cost
-	    int translenderamountInt = oldbundle.getInt("Transaction3lenderamount");	//get lender amount
 
         int counting = 0;
         for(int i = 0; i < data.size(); i++)	//go through the array list
@@ -141,9 +143,9 @@ public class Transaction4Activity extends TitleActivity
         	counting = counting + Integer.parseInt(data.get(i).get("data"));
         }
         
-        if(counting != (transCostInt - translenderamountInt))
+        if(counting != transCostInt)
         {
-			Toast.makeText(getApplicationContext(), "("+String.valueOf((transCostInt - translenderamountInt)-counting) 
+			Toast.makeText(getApplicationContext(), "("+String.valueOf((transCostInt)-counting) 
 					+ ") Placeholder Money ERROR", Toast.LENGTH_SHORT).show();
         }
         else
@@ -159,7 +161,6 @@ public class Transaction4Activity extends TitleActivity
 	    int transCostInt = oldbundle.getInt("Transaction1transCost");
 	    String transCommentString = oldbundle.getString("Transaction1transComment");
 	    ArrayList<Friend> transselected = oldbundle.getParcelableArrayList("Transaction2selected");
-	    int translenderamountInt = oldbundle.getInt("Transaction3lenderamount");	    
 	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
 	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
 
@@ -169,13 +170,14 @@ public class Transaction4Activity extends TitleActivity
         Bundle.putInt("Transaction1transCost", transCostInt);
         Bundle.putString("Transaction1transComment", transCommentString);
         Bundle.putParcelableArrayList("Transaction2selected", transselected);
-        Bundle.putInt("Transaction3lenderamount", translenderamountInt);
 
         ArrayList<Integer> lendsharelist = new ArrayList<Integer>();
         for(int i = 0; i < data.size(); i++){
         	lendsharelist.add(Integer.parseInt(data.get(i).get("data")));
         }
-
+        int translenderamountInt = lendsharelist.remove(0);        
+        
+        Bundle.putInt("Transaction3lenderamount", translenderamountInt);
         Bundle.putIntegerArrayList("Transaction3borroweramountlist", lendsharelist);
         
         Bundle.putBoolean("Transaction3button1Selected", button1Selected);

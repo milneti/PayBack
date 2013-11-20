@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.json.JSONException;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -54,7 +56,7 @@ public class LoginActivity extends TitleActivity
 		return true;
 	}
 	
-	public void Login(View view) throws InterruptedException 
+	public void Login(View view) throws InterruptedException, JSONException 
 	{
 
 		//for log in, url stub is AccountLogin.php

@@ -146,7 +146,7 @@ class Friend extends Account implements Parcelable {
 	Friend(String fName, String lName){
 		this.fName = fName;
 		this.lName = lName;
-		this.email = "dummydata@youdidntremoveme.yet";
+		this.email = "warandpeace@lotr.pre";
 		this.selected = false;
 		this.amounttosel = 0;
 		
