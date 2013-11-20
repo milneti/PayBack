@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.json.JSONException;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -54,7 +56,7 @@ public class LoginActivity extends TitleActivity
 		return true;
 	}
 	
-	public void Login(View view) throws InterruptedException 
+	public void Login(View view) throws InterruptedException, JSONException 
 	{
 
 		//for log in, url stub is AccountLogin.php
@@ -89,11 +91,12 @@ public class LoginActivity extends TitleActivity
 				if (((CheckBox)findViewById(R.id.rememberLogin)).isChecked())
 					rememberLogin();
 				
+
 				CONLOG.info("Server call successful and logged in!");
 				Intent intent = new Intent(this, MainActivity.class);
 				
 				/* Will's new additions */
-				user = new User(email,password); //user is declared in TitleActivity, which every activity extends
+				user = new User(email, password); //user is declared in TitleActivity, which every activity extends
 				
 				/* Will's old additions */
 				/*
@@ -110,6 +113,7 @@ public class LoginActivity extends TitleActivity
 				Toast.makeText(getApplicationContext(),"Welcome", Toast.LENGTH_SHORT).show();
 				this.finish();
 			}
+
 			else
 			{
 				CONLOG.info("Server call successful but user failed login.");
@@ -186,6 +190,7 @@ public class LoginActivity extends TitleActivity
 	public void bypass(View view)
 	{
 		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+		
         startActivity(intent);
         this.finish();
 	}

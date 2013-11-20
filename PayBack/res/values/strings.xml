@@ -23,7 +23,7 @@
     <string name="transaction3_LenderShareHeader">Lender\'s Share</string>
     <string name="transaction3_LenderEven">Split Evenly</string>
     <string name="transaction3_LenderCustom">Custom Value</string>
-    <string name="transaction4_BorrowersShare">Borrower\'s Share</string>
+    <string name="transaction4_BorrowersShare">Transaction allotment</string>
     <string name="transaction5_SummaryHeader">Summary</string>
     <string name="Home">Home</string>
     <string name="Next">Next</string>

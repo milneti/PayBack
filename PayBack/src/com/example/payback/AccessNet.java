@@ -1,5 +1,6 @@
 package com.example.payback;
 
+import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -169,7 +170,7 @@ class AccessNet{
 							if(line.equalsIgnoreCase("1")||line.equalsIgnoreCase("true")||line.equalsIgnoreCase("success")||line.equalsIgnoreCase("Login and query success")||line.equalsIgnoreCase("{\"result\":1,\"message\":\"Sign-in successful\"}"))
 								items[0]="success";
 							CANLOG.info("Data in: "+line);
-
+							
 							reader.close();
 							CANLOG.info("Data receive success!");
 						} catch (IOException e){
