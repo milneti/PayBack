@@ -67,15 +67,18 @@ public class LineGraph {
 		mRenderer.setPanEnabled(false); 
 		
 		// Customization time for line 1!
-		renderer.setColor(Color.WHITE);
+		renderer.setColor(Color.RED);
 		renderer.setPointStyle(PointStyle.SQUARE);
 		renderer.setFillPoints(true);
 		// Customization time for line 2!
-		renderer2.setColor(Color.YELLOW);
+		renderer2.setColor(Color.BLUE);
 		renderer2.setPointStyle(PointStyle.DIAMOND);
 		renderer2.setFillPoints(true);
 		
-		Intent intent = ChartFactory.getLineChartIntent(context, dataset, mRenderer, "Transactions History");
+		mRenderer.setPanEnabled(false);
+		mRenderer.setZoomButtonsVisible(false);
+		
+		Intent intent = ChartFactory.getLineChartIntent(context, dataset, mRenderer, title);
 		return intent;
 		
 	}

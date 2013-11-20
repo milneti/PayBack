@@ -47,7 +47,7 @@ public class StatisticActivity extends TitleActivity
     	TimeSeries receivableSeries = getReceivableSeries("Receivable");
     	
     	//Open a new activity to display the graph
-    	Intent lineIntent = line.getTwoLineIntent(this, payableSeries, receivableSeries, "Transaction History");
+    	Intent lineIntent = line.getTwoLineIntent(this, payableSeries, receivableSeries, "Transactions History");
     	startActivity(lineIntent);
     }    
     
