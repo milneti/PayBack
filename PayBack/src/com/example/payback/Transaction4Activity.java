@@ -34,7 +34,7 @@ public class Transaction4Activity extends TitleActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		modifyTitle("Borrowers' Share",R.layout.activity_transaction4);	//change title
+		modifyTitle("Transaction allotment",R.layout.activity_transaction4);	//change title
 
 		activityInstance = this;
 
@@ -106,7 +106,6 @@ public class Transaction4Activity extends TitleActivity
     {
 	    Bundle oldbundle = getIntent().getExtras();
 	    
-<<<<<<< HEAD
 	    int transCostInt = oldbundle.getInt("Transaction1transCost");
 	    String transCommentString = oldbundle.getString("Transaction1transComment");
 	    ArrayList<Friend> transselected = oldbundle.getParcelableArrayList("Transaction2selected");
@@ -114,11 +113,6 @@ public class Transaction4Activity extends TitleActivity
 	    ArrayList<Integer> lendsharelist = oldbundle.getIntegerArrayList("Transaction3borroweramountlist");
 	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
 	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
-=======
-	    int transCostInt = oldbundle.getInt("Transaction1transCost");		//get total cost
-	    String transCommentString = oldbundle.getString("Transaction1transComment");	//get comments
-	    ArrayList<Friend> transselected = oldbundle.getParcelableArrayList("Transaction2selected");	//get list of friends
->>>>>>> origin/master
 
     	Intent intent = new Intent(this, Transaction3Activity.class);
         Bundle Bundle = new Bundle();

@@ -1,11 +1,7 @@
 package com.example.payback;
 
-<<<<<<< HEAD
-import java.util.ArrayList;
 
-import android.os.Bundle;
-=======
->>>>>>> origin/master
+import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;

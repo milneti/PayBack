@@ -111,12 +111,9 @@ public class LoginActivity extends TitleActivity
 				Toast.makeText(getApplicationContext(),"Welcome", Toast.LENGTH_SHORT).show();
 				this.finish();
 			}
-<<<<<<< HEAD
-			else{
-=======
+
 			else
 			{
->>>>>>> origin/master
 				CONLOG.info("Server call successful but user failed login.");
 				Toast.makeText(getApplicationContext(),"Incorrect username or password", Toast.LENGTH_SHORT).show();
 			}

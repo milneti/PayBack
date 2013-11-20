@@ -1,20 +1,10 @@
 package com.example.payback;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
 import android.os.Bundle;
 import android.content.Intent;
-=======
-
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
->>>>>>> origin/master
 import android.view.Menu;
 import android.view.View;
 import android.widget.RadioButton;
@@ -23,26 +13,28 @@ public class Transaction3Activity extends TitleActivity {
 	boolean button1Selected;
 	boolean button2Selected;
 
-<<<<<<< HEAD
-=======
-	private boolean button1Selected = false;
-    private boolean button2Selected = true;
-
 	static Activity activityInstance;	
 	static PageKillReceiver pkr;		//these are the variables
 	static IntentFilter filterPKR;		//used for PageKillReceiver.java
 	static NoBackingReceiver nbr;		//these are the variables
 	static IntentFilter filterNBR;		//used for NoBackingReceiver.java
     
-	@SuppressLint("CutPasteId")
->>>>>>> origin/master
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		modifyTitle("Lender's Share",R.layout.activity_transaction3);
+		
+		RadioButton radio1 = (RadioButton) findViewById(R.id.radio1);
+		RadioButton radio2 = (RadioButton) findViewById(R.id.radio2);
 
-<<<<<<< HEAD
-=======
+		Bundle oldbundle = getIntent().getExtras();
+	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
+	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
+
+		radio1.setChecked(button1Selected);
+		radio2.setChecked(button2Selected);
+		
 		activityInstance = this;
 
 		pkr = new PageKillReceiver(); pkr.setActivityInstance(activityInstance);
@@ -54,55 +46,10 @@ public class Transaction3Activity extends TitleActivity {
 		filterNBR = new IntentFilter();
 		filterNBR.addAction("com.Payback.MainActivity_Intent");
 		registerReceiver(nbr, filterNBR);
-		
-		EditText transCost = (EditText) findViewById(R.id.lenderamount);
-		EditText text = (EditText) findViewById(R.id.lenderamount);  
-		
-	    text.setRawInputType(Configuration.KEYBOARD_12KEY);
-	    
-	    text.addTextChangedListener(new TextWatcher(){
-	        EditText text = (EditText)findViewById(R.id.lenderamount);
-	        DecimalFormat dec = new DecimalFormat("0.00");
-	        public void afterTextChanged(Editable arg0) {
-	        }
-	        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-	        }
-	        public void onTextChanged(CharSequence s, int start, int before, int count) {
-	            if(!s.toString().matches("^\\$(\\d{1,3}(\\,\\d{3})*|(\\d+))(\\.\\d{2})?$"))
-	            {
-	                String userInput= ""+ s.toString().replaceAll("[^\\d]", "");
-	                if (userInput.length() > 0) {
-	                    Float in=Float.parseFloat(userInput);
-	                    float percen = in/100;
-	                    text.setText("$"+dec.format(percen));
-	                    text.setSelection(text.getText().length());
-	                }
-	            }
-	        }
-	    });
-		
-		
-		transCost.addTextChangedListener(new TextWatcher() {
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-        	    updateButtonState();
-            }
->>>>>>> origin/master
 
-		RadioButton radio1 = (RadioButton) findViewById(R.id.radio1);
-		RadioButton radio2 = (RadioButton) findViewById(R.id.radio2);
 
-		Bundle oldbundle = getIntent().getExtras();
-	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
-	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
-
-		radio1.setChecked(button1Selected);
-		radio2.setChecked(button2Selected);
 
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -113,15 +60,15 @@ public class Transaction3Activity extends TitleActivity {
 	
 	public void onRadioButtonClicked(View view)
 	{
-		Bundle oldbundle = getIntent().getExtras();
-		int transCostInt = oldbundle.getInt("Transaction1transCost");
-		int numContacts = oldbundle.getParcelableArrayList("Transaction2selected").size();
-		int lenderShare = transCostInt/(numContacts+1);
-		String evenLenderShare = Integer.toString(lenderShare);
-		
-		evenLenderShare = "$" + evenLenderShare;
-		int elsLength = evenLenderShare.length();
-		String lenderText = evenLenderShare.substring(0, elsLength-2) + "." + evenLenderShare.substring(elsLength-2, elsLength);
+//		Bundle oldbundle = getIntent().getExtras();
+//		int transCostInt = oldbundle.getInt("Transaction1transCost");
+//		int numContacts = oldbundle.getParcelableArrayList("Transaction2selected").size();
+//		int lenderShare = transCostInt/(numContacts+1);
+//		String evenLenderShare = Integer.toString(lenderShare);
+//		
+//		evenLenderShare = "$" + evenLenderShare;
+//		int elsLength = evenLenderShare.length();
+//		String lenderText = evenLenderShare.substring(0, elsLength-2) + "." + evenLenderShare.substring(elsLength-2, elsLength);
 				
 		boolean checked = ((RadioButton) view).isChecked();
 		
@@ -151,31 +98,13 @@ public class Transaction3Activity extends TitleActivity {
 				break;
 		}
 	}
-<<<<<<< HEAD
-=======
-	public void checktomoveontotrans4(View view)
-	{
-	    Bundle oldbundle = getIntent().getExtras();
-	    int transCostInt = oldbundle.getInt("Transaction1transCost");
-	    
-    	EditText translenderamount = (EditText)findViewById(R.id.lenderamount);
-    	String stringnumber = translenderamount.getText().toString().substring(1);
-		Float floatnumber = Float.parseFloat(stringnumber);
-		int translenderamountInt = (int) (floatnumber * 100F);
-		
-		if(translenderamountInt <= transCostInt){
-			showTrans4or5(view);
-		}
-		else{
-			Toast.makeText(getApplicationContext(), "Lent amount is greater then the transaction", Toast.LENGTH_SHORT).show();
-		}
-		
-	}
->>>>>>> origin/master
+
 
 	public void showTrans2(View view)
     {
     	Intent intent = new Intent(this, Transaction2Activity.class);
+    	
+    	
 
 		Bundle oldbundle = getIntent().getExtras();
 		int transCostInt = oldbundle.getInt("Transaction1transCost");
@@ -184,6 +113,11 @@ public class Transaction3Activity extends TitleActivity {
 	    int translenderamountInt = oldbundle.getInt("Transaction3lenderamount");
 	    ArrayList<Integer> lendsharelist = oldbundle.getIntegerArrayList("Transaction3borroweramountlist");
 		
+	    if(!(button1Selected ^ button2Selected)){
+		    button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
+		    button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
+	    }
+	    
 	    Bundle Bundle = new Bundle();
 	    
 	    Bundle.putInt("Transaction1transCost", transCostInt);
@@ -247,16 +181,11 @@ public class Transaction3Activity extends TitleActivity {
 	    	Intent intent = new Intent(this, Transaction4Activity.class);
 	        Bundle Bundle = new Bundle();
 	        
-	        Toast.makeText(this.getApplicationContext(), "Test Toast A", Toast.LENGTH_LONG).show();
-	        
-	        //Place values in the bundle
-	        Bundle.putInt("Transaction1transCost", transCostInt);				//total transaction cost
+	        Bundle.putInt("Transaction1transCost", transCostInt);
 	        Bundle.putString("Transaction1transComment", transCommentString);
 	        Bundle.putParcelableArrayList("Transaction2selected", transselected);
 	        Bundle.putBoolean("Transaction3button1Selected", button1Selected);
 	        Bundle.putBoolean("Transaction3button2Selected", button2Selected);
-	        
-<<<<<<< HEAD
 	        
 			int numContacts = oldbundle.getParcelableArrayList("Transaction2selected").size();
 			int lenderShare = transCostInt/(numContacts+1);
@@ -267,28 +196,11 @@ public class Transaction3Activity extends TitleActivity {
 			}
 			if(totaltrans != transCostInt){
 				lenderShare = lenderShare + (transCostInt - totaltrans);
-=======
-	        EditText translenderamount = (EditText)findViewById(R.id.lenderamount);
-	    	String stringnumber = translenderamount.getText().toString().substring(1);
-			Float floatnumber = Float.parseFloat(stringnumber);
-			int translenderamountInt = (int) (floatnumber * 100F);
-			Bundle.putInt("Transaction3lenderamount", translenderamountInt);	//the lender's share
-	        
-			int numContacts = oldbundle.getParcelableArrayList("Transaction2selected").size();	//number of contacts
-			int lenderShare = (transCostInt-translenderamountInt)/(numContacts);	//shouldn't this be borrowerShare
-			for(int i = 0; i < numContacts; i++)
-			{
-				lendsharelist.add(lenderShare);		//add each borrower's share into the list
->>>>>>> origin/master
 			}
-			
 			Bundle.putIntegerArrayList("Transaction3borroweramountlist", lendsharelist);
 			Bundle.putInt("Transaction3lenderamount", lenderShare);
 
 	        intent.putExtras(Bundle);
-	        
-	        Toast.makeText(this.getApplicationContext(), "Test Toast B", Toast.LENGTH_LONG).show();
-	        
 	        startActivity(intent);
 	    }
 

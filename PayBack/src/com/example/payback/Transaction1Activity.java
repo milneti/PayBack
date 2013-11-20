@@ -1,11 +1,7 @@
 package com.example.payback;
 
 import java.text.DecimalFormat;
-<<<<<<< HEAD
 import java.util.ArrayList;
-=======
->>>>>>> origin/master
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -33,14 +29,7 @@ public class Transaction1Activity extends TitleActivity
 		super.onCreate(savedInstanceState);
 
 		modifyTitle("Create Transaction",R.layout.activity_transaction1);		
-<<<<<<< HEAD
 
-		Bundle oldbundle = getIntent().getExtras();
-		    
-		int transCostInt = oldbundle.getInt("Transaction1transCost");
-		String transCoststring;
-=======
-		
 		activityInstance = this;
 		
 		pkr = new PageKillReceiver(); pkr.setActivityInstance(activityInstance);
@@ -53,9 +42,12 @@ public class Transaction1Activity extends TitleActivity
 		filterNBR.addAction("com.Payback.MainActivity_Intent");
 		registerReceiver(nbr, filterNBR);
 		
->>>>>>> origin/master
-		EditText text = (EditText)findViewById(R.id.editText1);  
 
+		EditText text = (EditText)findViewById(R.id.editText1);  
+		Bundle oldbundle = getIntent().getExtras();
+	    
+		int transCostInt = oldbundle.getInt("Transaction1transCost");
+		String transCoststring;
 		if(transCostInt == 0){
 			transCoststring = "";
 		}
