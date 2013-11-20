@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.json.JSONException;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -156,6 +158,8 @@ public class ContactActivity extends TitleActivity
 									confirmDelete(toDelete);
 								} catch (InterruptedException e) {
 									e.printStackTrace();
+								} catch (JSONException e) {
+									e.printStackTrace();
 								}		        	   
 				           }
 				       })
@@ -251,13 +255,8 @@ public class ContactActivity extends TitleActivity
 			Toast.makeText(getApplicationContext(), "Email: \""+email+"\" is not a valid email address!", Toast.LENGTH_SHORT).show();
 		}else{
 			Toast.makeText(getApplicationContext(),"calling add", Toast.LENGTH_SHORT).show();
-			String status = "fail";
-			AccessNet caller = new AccessNet();
-			String params = "userEmail="+user.getEmail()+"&password="+user.getPassword()+"&newFriendEmail="+email;
-			String urlstub = "db_friendof_create.php";
-			status = caller.simpleServerCall(urlstub, params);
 
-			if(status.equalsIgnoreCase("success")){
+			if(AccessNet.AddFriend(email, user.getEmail(), user.getPassword())){
 				Toast.makeText(getApplicationContext(),email + " Added as a Friend!", Toast.LENGTH_SHORT).show();
 				
 			}else{
@@ -273,9 +272,13 @@ public class ContactActivity extends TitleActivity
 		       .setPositiveButton(R.string.Confirm, new DialogInterface.OnClickListener() {
 		    	   public void onClick(DialogInterface dialog, int id) {
 		        	   dialog.dismiss();	     
-		        	   try {
-		        		   confirmDelete(email);
-						} catch (InterruptedException e) {
+
+	        		   try {
+							confirmDelete(email);
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+	        		    catch (InterruptedException e) {
 							e.printStackTrace();
 						}		        	   
 		           }
@@ -289,15 +292,10 @@ public class ContactActivity extends TitleActivity
 		dialog.show();
 	}
 	
-	public void confirmDelete(String email) throws InterruptedException{
+	public void confirmDelete(String email) throws InterruptedException, JSONException{
 		Toast.makeText(getApplicationContext(),"calling delete", Toast.LENGTH_SHORT).show();
-		String status = "fail";
-		AccessNet caller = new AccessNet();
-		String params = "userEmail="+user.getEmail()+"&password="+user.getPassword()+"&friendEmail="+email;
-		String urlstub = "db_friendof_deleteOne.php";
-		status = caller.simpleServerCall(urlstub, params);
 
-		if(status.equalsIgnoreCase("success")){
+		if(AccessNet.DeleteFriend(email, user.getEmail(), user.getPassword())){
 			Toast.makeText(getApplicationContext(),email + " Deleted from friends!", Toast.LENGTH_SHORT).show();
 			
 		}else{
