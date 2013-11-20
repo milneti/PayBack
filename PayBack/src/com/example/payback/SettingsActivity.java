@@ -64,15 +64,10 @@ public class SettingsActivity extends TitleActivity {
 		LayoutInflater inflater = this.getLayoutInflater();
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		
-		/*TextView o = (TextView) findViewById(R.id.oldPassView);
-			o.setText("Old Email:");
-		TextView n = (TextView) findViewById(R.id.newPassView);
-			n.setText("New Email:");
-		TextView c = (TextView) findViewById(R.id.confirmPassView);
-			c.setText("Confirm New Email:");*/
+		final View dialoglayout = inflater.inflate(R.layout.dialog_settings_password, null);
 		
 		builder.setTitle("Edit Email")
-			   .setView(inflater.inflate(R.layout.dialog_settings_password, null))
+			   .setView(dialoglayout)
 			   .setPositiveButton(R.string.back, new DialogInterface.OnClickListener() {
 				   public void onClick(DialogInterface dialog, int id) {
 					   Toast.makeText(getApplicationContext(),"Back", Toast.LENGTH_SHORT).show();				        	   
@@ -85,6 +80,14 @@ public class SettingsActivity extends TitleActivity {
 					   editEmail();
 				   }
 			   });
+		
+		TextView o = (TextView) dialoglayout.findViewById(R.id.oldPassView);
+			o.setText("Old Email:");
+		TextView n = (TextView) dialoglayout.findViewById(R.id.newPassView);
+			n.setText("New Email:");
+		TextView c = (TextView) dialoglayout.findViewById(R.id.confirmPassView);
+			c.setText("Confirm New Email:");
+		
 		Dialog dialog = builder.create();
 		dialog.show();
 	}
