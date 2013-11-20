@@ -1,14 +1,11 @@
 package com.example.payback;
 
-<<<<<<< HEAD
-import android.app.Activity;
-import android.content.IntentFilter;
-=======
 import org.achartengine.GraphicalView;
 import org.achartengine.model.TimeSeries;
 
+import android.app.Activity;
 import android.content.Intent;
->>>>>>> origin/master
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -25,16 +22,15 @@ public class StatisticActivity extends TitleActivity
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		modifyTitle("Transaction Statistics",R.layout.activity_statistic);
-<<<<<<< HEAD
 		
 		activityInstance = this;
 		pkr = new PageKillReceiver(); pkr.setActivityInstance(activityInstance);
 		filter = new IntentFilter();
 		filter.addAction("com.Payback.Logout_Intent");
 		registerReceiver(pkr, filter);
-=======
+		
 		displayValue();
->>>>>>> origin/master
+
 	}
 
 	@Override
