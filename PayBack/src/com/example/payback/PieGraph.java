@@ -64,8 +64,8 @@ public class PieGraph {
 	public GraphicalView getTwoSectionView(Context context, double standingPayables, double standingReceivables) {
 
 		CategorySeries series = new CategorySeries("Payables and Receivables");
-		series.add("Standing Payable", standingPayables);
-		series.add("Standing Receivables", standingReceivables);
+		series.add("Payables", standingPayables);
+		series.add("Receivables", standingReceivables);
 
 		int[] colors = new int[] { Color.BLUE, Color.GREEN };
 

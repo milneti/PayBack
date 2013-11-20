@@ -26,48 +26,34 @@ public class StatisticActivity extends TitleActivity {
 		return true;
 	}
     
-    public void lineGraphHandler (View view)
+    public void displayTransactionsHistory (View view)
     {
-    	double totalPayables = getTotalPayables();
-    	double totalReceivables = getTotalReceivables();
-    	
     	LineGraph line = new LineGraph();
+    	TimeSeries payableSeries = getPayableSeries("Payable");
+    	TimeSeries receivableSeries = getReceivableSeries("Receivable");
+    	
     	//Open a new activity to display the graph
-    	Intent lineIntent = line.getTestIntent(this);
+    	Intent lineIntent = line.getTwoLineIntent(this, payableSeries, receivableSeries, "Transaction History");
     	startActivity(lineIntent);
-    }
-    
-    public void barGraphHandler (View view)
-    {
-    	BarGraph bar = new BarGraph();
-    	Intent lineIntent = bar.getTestIntent(this);
-        startActivity(lineIntent);
-    }
-    
-    public void pieGraphHandler (View view)
-    {
-    	PieGraph pie = new PieGraph();
-    	Intent lineIntent = pie.getTestIntent(this);
-        startActivity(lineIntent);
-    }
-    
-    public void scatterGraphHandler (View view)
-    {
-    	ScatterGraph scatter = new ScatterGraph();
-    	Intent lineIntent = scatter.getTestIntent(this);
-        startActivity(lineIntent);
-    }
+    }    
     
     public void displayValue ()
     {    	
+    	double standingPayables = getStandingPayables();
+    	double standingReceivables = getStandingReceivables();
+    	
     	double totalPayables = getTotalPayables();
     	double totalReceivables = getTotalReceivables();
     	
     	//Append value to textview
-    	TextView payableTextView = (TextView) findViewById(R.id.totalPayables);
-    	payableTextView.append(String.format("$%.2f", totalPayables));
-    	TextView receivableTextView = (TextView) findViewById(R.id.totalReceivables);
-    	receivableTextView.append(String.format("$%.2f", totalReceivables));
+    	TextView standingPayableTextView = (TextView) findViewById(R.id.standingPayables);
+    	standingPayableTextView.append(String.format("$%.2f", standingPayables));
+    	TextView StandingReceivableTextView = (TextView) findViewById(R.id.standingReceivables);
+    	StandingReceivableTextView.append(String.format("$%.2f", standingReceivables));
+    	TextView TotalPayableTextView = (TextView) findViewById(R.id.totalPayables);
+    	TotalPayableTextView.append(String.format("$%.2f", totalPayables));
+    	TextView TotalReceivableTextView = (TextView) findViewById(R.id.totalReceivables);
+    	TotalReceivableTextView.append(String.format("$%.2f", totalReceivables));
     	
 //    	LineGraph line = new LineGraph();
 //    	//Display graph in view
@@ -82,15 +68,52 @@ public class StatisticActivity extends TitleActivity {
     	chartView.addView(gView);
     }
     
-    public double getTotalPayables ()
+    public double getStandingPayables ()
     {
     	return 5;
     }
     
-    public double getTotalReceivables ()
+    public double getTotalPayables ()
+    {
+    	return 50;
+    }
+    
+    public double getStandingReceivables ()
     {
     	return 10;
     }
+    
+    public double getTotalReceivables ()
+    {
+    	return 100;
+    }
+        
+    public TimeSeries getPayableSeries (String seriesName)
+    {
+    	int[] x = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }; // x values!
+		int[] y =  { 30, 34, 45, 57, 77, 89, 100, 111 ,123 ,145 }; // y values!
+		TimeSeries series = new TimeSeries(seriesName); 
+		for( int i = 0; i < x.length; i++)
+		{
+			series.add(x[i], y[i]);
+		}
+		
+		return series;
+    }
+    
+	public TimeSeries getReceivableSeries (String seriesName)
+	{
+		int[] x = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }; // x values!
+		int[] y =  { 145, 123, 111, 100, 89, 77, 57, 45, 34, 30}; // y values!
+		TimeSeries series = new TimeSeries(seriesName); 
+		for( int i = 0; i < x.length; i++)
+		{
+			series.add(x[i], y[i]);
+		}
+		
+		return series;
+		
+	}
     
     public double getPayablesOverTime ()
     {
