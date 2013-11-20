@@ -24,11 +24,12 @@ class AccessNet{
 		boolean retval = false;
 		Logger CONLOG = Logger.getLogger(AccessNet.class .getName());
 
-		String params = "email="+Email+"&password="+Password;
-		String urlstub = "AccountLogin.php";
+		String params = "userEmail="+Email+"&password="+Password;
+		String urlstub = "db_verify_login.php";
 		//if you go around renaming these urlstubs the app will not work and Hohyun will hate you.
 		CONLOG.info("Attempting to call server at: "+urlstub+", "+params);
 		status = simpleServerCall(urlstub, params);
+		//CONLOG.info("Server Returned "+status);
 		if(status.equalsIgnoreCase("success")||status.equalsIgnoreCase("1")||status.equalsIgnoreCase("true"))
 			retval = true;
 		return retval;
