@@ -33,6 +33,7 @@ public class ShortcutsActivity extends Activity
 	}
 	public void Return(View view)
     {
+		this.finish();
     }
 	public void showMainMenu(View view)
     {
