@@ -29,9 +29,9 @@ public class SettingsActivity extends TitleActivity {
 	public void showEditPassword(View view) {
 		LayoutInflater inflater = this.getLayoutInflater();
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		
+		final View dialoglayout = inflater.inflate(R.layout.dialog_settings_password, null);
 		builder.setTitle("Edit Password")
-			   .setView(inflater.inflate(R.layout.dialog_settings_password, null))
+			   .setView(dialoglayout)
 			   .setPositiveButton(R.string.back, new DialogInterface.OnClickListener() {
 				   public void onClick(DialogInterface dialog, int id) {
 					   Toast.makeText(getApplicationContext(),"Back", Toast.LENGTH_SHORT).show();				        	   
@@ -45,12 +45,12 @@ public class SettingsActivity extends TitleActivity {
 				   }
 			   });
 		
-		/*TextView o = (TextView) findViewById(R.id.oldPassView);
+		TextView o = (TextView) dialoglayout.findViewById(R.id.oldPassView);
 			o.setText("Old Password:");
-		TextView n = (TextView) findViewById(R.id.newPassView);
+		TextView n = (TextView) dialoglayout.findViewById(R.id.newPassView);
 			n.setText("New Password:");
-		TextView c = (TextView) findViewById(R.id.confirmPassView);
-			c.setText("Confirm New Password:");*/
+		TextView c = (TextView) dialoglayout.findViewById(R.id.confirmPassView);
+			c.setText("Confirm New Password:");
 		
 		Dialog dialog = builder.create();
 		dialog.show();
