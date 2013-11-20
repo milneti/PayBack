@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import android.os.Bundle;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -16,6 +18,12 @@ public class Transaction2Activity extends TitleActivity  {
     private List<String> listHeader;
     private HashMap<String, List<Friend>> listChild;
     
+	static Activity activityInstance;	
+	static PageKillReceiver pkr;		//these are the variables
+	static IntentFilter filterPKR;		//used for PageKillReceiver.java
+	static NoBackingReceiver nbr;		//these are the variables
+	static IntentFilter filterNBR;		//used for NoBackingReceiver.java
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -25,6 +33,18 @@ public class Transaction2Activity extends TitleActivity  {
 			modifyTitle("Create Transaction",R.layout.activity_transaction2_expandablecontactlist_main);
 		    ExpandableListView expListView = (ExpandableListView) findViewById(R.id.expandlistView);
 
+			activityInstance = this;
+
+			pkr = new PageKillReceiver(); pkr.setActivityInstance(activityInstance);
+			filterPKR = new IntentFilter();
+			filterPKR.addAction("com.Payback.Logout_Intent");
+			registerReceiver(pkr, filterPKR);
+			
+			nbr = new NoBackingReceiver(); nbr.setActivityInstance(activityInstance);
+			filterNBR = new IntentFilter();
+			filterNBR.addAction("com.Payback.MainActivity_Intent");
+			registerReceiver(nbr, filterNBR);
+		    
 		    createData();
 		    
 		    final Transaction2Activity_expandablecontactlist_adapter listAdapter = new Transaction2Activity_expandablecontactlist_adapter(this, listHeader, listChild);

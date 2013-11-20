@@ -1,10 +1,15 @@
 package com.example.payback;
 
 import java.text.DecimalFormat;
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+>>>>>>> origin/master
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,7 +19,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class Transaction1Activity extends TitleActivity {
+public class Transaction1Activity extends TitleActivity
+{
+	static Activity activityInstance;	
+	static PageKillReceiver pkr;		//these are the variables
+	static IntentFilter filterPKR;		//used for PageKillReceiver.java
+	static NoBackingReceiver nbr;		//these are the variables
+	static IntentFilter filterNBR;		//used for NoBackingReceiver.java
 	
 	@SuppressLint("CutPasteId")
 	@Override
@@ -22,11 +33,27 @@ public class Transaction1Activity extends TitleActivity {
 		super.onCreate(savedInstanceState);
 
 		modifyTitle("Create Transaction",R.layout.activity_transaction1);		
+<<<<<<< HEAD
 
 		Bundle oldbundle = getIntent().getExtras();
 		    
 		int transCostInt = oldbundle.getInt("Transaction1transCost");
 		String transCoststring;
+=======
+		
+		activityInstance = this;
+		
+		pkr = new PageKillReceiver(); pkr.setActivityInstance(activityInstance);
+		filterPKR = new IntentFilter();
+		filterPKR.addAction("com.Payback.Logout_Intent");
+		registerReceiver(pkr, filterPKR);
+		
+		nbr = new NoBackingReceiver(); nbr.setActivityInstance(activityInstance);
+		filterNBR = new IntentFilter();
+		filterNBR.addAction("com.Payback.MainActivity_Intent");
+		registerReceiver(nbr, filterNBR);
+		
+>>>>>>> origin/master
 		EditText text = (EditText)findViewById(R.id.editText1);  
 
 		if(transCostInt == 0){

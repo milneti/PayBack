@@ -1,18 +1,27 @@
 package com.example.payback;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 
 import android.os.Bundle;
+=======
+>>>>>>> origin/master
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends TitleActivity{
+public class MainActivity extends TitleActivity
+{
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	 {
 		super.onCreate(savedInstanceState);
 		modifyTitle("Main Menu",R.layout.activity_main);
-
+		
+		Intent broadcastIntent = new Intent();
+    	broadcastIntent.setAction("com.Payback.StayLoggedIn_Intent");
+    	sendBroadcast(broadcastIntent);
 	}
 
     public void CreateTrsn(View view)
@@ -74,9 +83,11 @@ public class MainActivity extends TitleActivity{
     
     public void MainLogout(View view)
     {
-    	Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        this.finish();
+    	Intent broadcastIntent = new Intent();
+    	broadcastIntent.setAction("com.Payback.Logout_Intent");
+    	sendBroadcast(broadcastIntent);
+
+        this.finish();									//activity is done and should be closed
     }
     
     public void Setting(View view)
