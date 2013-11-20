@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -104,6 +106,10 @@ public class Transaction5Activity extends TitleActivity
 	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
 	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
 
+	    InputMethodManager im = (InputMethodManager) this.getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        im.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        
+	    
 	    if(button1Selected){
 	    	Intent intent = new Intent(this, Transaction3Activity.class);
 	        Bundle Bundle = new Bundle();

@@ -5,11 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SeekBar;
@@ -128,6 +130,10 @@ public class Transaction4Activity extends TitleActivity
         Bundle.putBoolean("Transaction3button1Selected", button1Selected);
         Bundle.putBoolean("Transaction3button2Selected", button2Selected);
         
+        InputMethodManager im = (InputMethodManager) this.getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        im.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        
+        
         intent.putExtras(Bundle);
         startActivity(intent);
     }
@@ -182,7 +188,10 @@ public class Transaction4Activity extends TitleActivity
         
         Bundle.putBoolean("Transaction3button1Selected", button1Selected);
         Bundle.putBoolean("Transaction3button2Selected", button2Selected);
-                
+        
+        InputMethodManager im = (InputMethodManager) this.getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        im.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        
         intent.putExtras(Bundle);
         startActivity(intent);
     }
