@@ -2,7 +2,6 @@ package com.example.payback;
 
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -69,18 +68,9 @@ public class LoginActivity extends TitleActivity {
 		}else{
 
 //			No longer necesary call the .AccountLogin method
-//			String status  ="fail";
+			String status  ="fail";
 			AccessNet caller = new AccessNet();
-//
-//			String params = "email="+email+"&password="+password;
-//			String urlstub = "AccountLogin.php";
-//
-//			CONLOG.info("Attempting to call server at: "+urlstub+", "+params);
-//			status = caller.simpleServerCall(urlstub, params);
 
-<<<<<<< HEAD
-			if(caller.AccountLogin(email, password)){
-=======
 			String params = "userEmail="+email+"&password="+password;
 			String urlstub = "db_verify_login.php";
 
@@ -88,7 +78,6 @@ public class LoginActivity extends TitleActivity {
 			status = caller.simpleServerCall(urlstub, params);
 
 			if(status.equalsIgnoreCase("success")){
->>>>>>> d91db35af57cd06ce67061936e33b0ca8fcbc15c
 				
 				if (((CheckBox)findViewById(R.id.rememberLogin)).isChecked())
 					rememberLogin();
