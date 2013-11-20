@@ -37,7 +37,7 @@ $friendID = filter_input(INPUT_POST, 'friendID',FILTER_VALIDATE_INT, $ID_options
 $friendEmail = $_POST['friendEmail'];
 
 // connect to db
-$link = mysqli_connect(DB_SERVER, DB_WRITE, DB_WRITE_PASS, DB_DATABASE);
+$link = mysqli_connect(DB_SERVER, DB_READ, DB_READ_PASS, DB_DATABASE);
 if (mysqli_connect_errno($link)) {
     $response["result"] = -1;
     $response["message"] = "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -47,8 +47,8 @@ else if (strlen($password) > 0) {
     $userID = mysqli_real_escape_string($link, $userID);
     $userEmail = mysqli_real_escape_string($link, $userEmail);
     $password = mysqli_real_escape_string($link, $password);
-    $friendID = mysqli_real_escape_string($link, $friendID);
-    $friendEmail = mysqli_real_escape_string($link, $friendEmail);
+    $FriendID = mysqli_real_escape_string($link, $friendID);
+    $FriendEmail = mysqli_real_escape_string($link, $friendEmail);
 
     // authorize
     $loginPass = mysqli_query($link, "SELECT `password` FROM `Account` WHERE `accountID` = '$userID';");
@@ -93,6 +93,7 @@ else if (strlen($password) > 0) {
     }
     // userID and password should now be validated, otherwise $userID is false
 
+
     // validate friendID
     if ($friendID != false) {
         $IDquery = mysqli_query($link, "SELECT `AccountID` FROM Account WHERE `AccountID` = '$friendID';");
@@ -124,22 +125,26 @@ else if (strlen($password) > 0) {
             $response["message"] = "Failed: New Friend (ID: ".$_POST['friendID'].", Email: $friendEmail) matched no Account";
         }
     }
-    //query to add transaction
-    if (($response["result"] == null) && ($userID != false) && ($friendID != false)) {
-        $friend = mysqli_query($link, "INSERT INTO `Friend_Of` (`UserID`,`FriendID`) VALUES ('$userID','$friendID');");
 
-        if ($friend) {
-            $response["result"] = 1;
-            $response["message"] = "Contact added successfully";
-        }
-        else {
-            $response["result"] = -8;
-            $response["message"] = "Add Contact query failed";
+    //query to add transaction
+    if (($response["result"] == null) && ($userID != false)&& ($friendID != false)) {
+        if ($friend = mysqli_query($link, "SELECT Account.AccountID, Account.Email, Account.Fname, Account.Lname FROM Account WHERE Account.AccountID = ANY(SELECT Friend_Of.FriendID FROM Friend_Of WHERE Friend_Of.UserID = '$userID' AND Friend_Of.FriendID = '$friendID');")) {
+            $response["friendOfMatches"] = array();
+            while ($row = mysqli_fetch_array($friend)) {
+                // temp array
+                $account = array();
+                $account["AccountID"] = $row["AccountID"];
+                $account["Email"] = $row["Email"];
+                $account["Fname"] = $row["Fname"];
+                $account["Lname"] = $row["Lname"];
+                // push match into response array
+                array_push($response["friendOfMatches"], $account);
+            }
         }
     }
 }
 else {
-    $response["result"] = -9;
+    $response["result"] = -8;
     $response["message"] = "Password cannot be blank";
 }
 
