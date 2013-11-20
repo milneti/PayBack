@@ -31,20 +31,20 @@
         android:id="@+id/editEmailButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/editEmailButton"
-        android:layout_alignRight="@id/editEmailButton"
-        android:layout_below="@id/editEmailButton"
-        android:text="@string/change_email"
-        android:onClick="showEditEmail" />
+        android:layout_alignLeft="@+id/editPassButton"
+        android:layout_alignRight="@+id/editPassButton"
+        android:layout_below="@+id/editPassButton"
+        android:onClick="showEditEmail"
+        android:text="@string/change_email" />
 
     <Button
         android:id="@+id/editNameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/editNameButton"
-        android:layout_alignRight="@id/editNameButton"
-        android:layout_below="@id/editNameButton"
-        android:text="@string/change_name"
-        android:onClick="showEditDisplayName" />
+        android:layout_alignLeft="@+id/editEmailButton"
+        android:layout_alignRight="@+id/editEmailButton"
+        android:layout_below="@+id/editEmailButton"
+        android:onClick="showEditDisplayName"
+        android:text="@string/change_name" />
 
 </RelativeLayout>

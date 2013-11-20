@@ -13,67 +13,39 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:orientation="horizontal">
-
             <TextView
-                android:id="@+id/oldPassView"
+                android:id="@+id/firstNameView"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0"
-                android:text=""
+                android:text="First Name:"
                 android:textColor="@color/White" />
-
             <EditText
-                android:id="@+id/oldPass"
+                android:id="@+id/firstName"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="0.02"
-                android:inputType="textPassword" />
-            
+                android:inputType="text" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:orientation="horizontal">
-            
-            <TextView
-                android:id="@+id/newPassView"
+            <TextView 
+                android:id="@+id/lastNameView"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0"
-                android:text=""
+                android:text="Last Name:"
                 android:textColor="@color/White" />
-            
             <EditText
-                android:id="@+id/newPass"
+                android:id="@+id/lastName"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="0.02"
-                android:inputType="textPassword" />
-            
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
-            
-            <TextView
-                android:id="@+id/confirmPassView"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0"
-                android:text=""
-                android:textColor="@color/White" />
-            
-            <EditText
-                android:id="@+id/confirmPass"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="0.02"
-                android:inputType="textPassword" />
-            
-        </LinearLayout>
-    </LinearLayout>
+                android:inputType="text" />
+        </LinearLayout>    
+	</LinearLayout>
 </LinearLayout>

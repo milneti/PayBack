@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.LayoutInflater;
 import android.content.Intent;
 import android.content.DialogInterface;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SettingsActivity extends TitleActivity {
@@ -43,12 +44,79 @@ public class SettingsActivity extends TitleActivity {
 					   editPassword();
 				   }
 			   });
+		
+		/*TextView o = (TextView) findViewById(R.id.oldPassView);
+			o.setText("Old Password:");
+		TextView n = (TextView) findViewById(R.id.newPassView);
+			n.setText("New Password:");
+		TextView c = (TextView) findViewById(R.id.confirmPassView);
+			c.setText("Confirm New Password:");*/
+		
 		Dialog dialog = builder.create();
 		dialog.show();
 	}
 	
 	public void editPassword() {
 		//server call to edit password
+	}
+	
+	public void showEditEmail(View view) {
+		LayoutInflater inflater = this.getLayoutInflater();
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		
+		/*TextView o = (TextView) findViewById(R.id.oldPassView);
+			o.setText("Old Email:");
+		TextView n = (TextView) findViewById(R.id.newPassView);
+			n.setText("New Email:");
+		TextView c = (TextView) findViewById(R.id.confirmPassView);
+			c.setText("Confirm New Email:");*/
+		
+		builder.setTitle("Edit Email")
+			   .setView(inflater.inflate(R.layout.dialog_settings_password, null))
+			   .setPositiveButton(R.string.back, new DialogInterface.OnClickListener() {
+				   public void onClick(DialogInterface dialog, int id) {
+					   Toast.makeText(getApplicationContext(),"Back", Toast.LENGTH_SHORT).show();				        	   
+		        	   dialog.dismiss();
+				   }
+			   })
+			   .setNegativeButton(R.string.save_changes, new DialogInterface.OnClickListener() {
+				   public void onClick(DialogInterface dialog, int id) {
+					   Toast.makeText(getApplicationContext(), "Email Changed", Toast.LENGTH_SHORT).show();
+					   editEmail();
+				   }
+			   });
+		Dialog dialog = builder.create();
+		dialog.show();
+	}
+	
+	public void editEmail() {
+		//server call to edit email
+	}
+	
+	public void showEditDisplayName(View view) {
+		LayoutInflater inflater = this.getLayoutInflater();
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		
+		builder.setTitle("Edit Name")
+			   .setView(inflater.inflate(R.layout.dialog_settings_name, null))
+			   .setPositiveButton(R.string.back, new DialogInterface.OnClickListener() {
+				   public void onClick(DialogInterface dialog, int id) {
+					   Toast.makeText(getApplicationContext(),"Back", Toast.LENGTH_SHORT).show();				        	   
+		        	   dialog.dismiss();
+				   }
+			   })
+			   .setNegativeButton(R.string.save_changes, new DialogInterface.OnClickListener() {
+				   public void onClick(DialogInterface dialog, int id) {
+					   Toast.makeText(getApplicationContext(), "Name Changed", Toast.LENGTH_SHORT).show();
+					   editName();
+				   }
+			   });
+		Dialog dialog = builder.create();
+		dialog.show();
+	}
+	
+	public void editName() {
+		//server call to edit name
 	}
 	
 	public void showMainMenu(View view) {
