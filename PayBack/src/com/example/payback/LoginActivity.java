@@ -2,7 +2,6 @@ package com.example.payback;
 
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -68,6 +67,7 @@ public class LoginActivity extends TitleActivity {
 			Toast.makeText(getApplicationContext(), "Email: \""+email+"\" is not a valid email address!", Toast.LENGTH_SHORT).show();
 		}else{
 
+//			No longer necesary call the .AccountLogin method
 			String status  ="fail";
 			AccessNet caller = new AccessNet();
 
