@@ -78,7 +78,17 @@ public class LoginActivity extends TitleActivity {
 //			CONLOG.info("Attempting to call server at: "+urlstub+", "+params);
 //			status = caller.simpleServerCall(urlstub, params);
 
+<<<<<<< HEAD
 			if(caller.AccountLogin(email, password)){
+=======
+			String params = "userEmail="+email+"&password="+password;
+			String urlstub = "db_verify_login.php";
+
+			CONLOG.info("Attempting to call server at: "+urlstub+", "+params);
+			status = caller.simpleServerCall(urlstub, params);
+
+			if(status.equalsIgnoreCase("success")){
+>>>>>>> d91db35af57cd06ce67061936e33b0ca8fcbc15c
 				
 				if (((CheckBox)findViewById(R.id.rememberLogin)).isChecked())
 					rememberLogin();
