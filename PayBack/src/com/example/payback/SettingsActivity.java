@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.LayoutInflater;
 import android.content.Intent;
 import android.content.DialogInterface;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,8 +53,8 @@ public class SettingsActivity extends TitleActivity
 			   })
 			   .setNegativeButton(R.string.save_changes, new DialogInterface.OnClickListener() {
 				   public void onClick(DialogInterface dialog, int id) {
-					   Toast.makeText(getApplicationContext(), "Password Changed", Toast.LENGTH_SHORT).show();
-					   editPassword();
+					   //Toast.makeText(getApplicationContext(), "Password Changed", Toast.LENGTH_SHORT).show();
+					   editPassword(dialoglayout);
 				   }
 			   });
 		
@@ -68,8 +69,26 @@ public class SettingsActivity extends TitleActivity
 		dialog.show();
 	}
 	
-	public void editPassword() {
-		//server call to edit password
+	public void editPassword(View layout) {
+		EditText oldview = (EditText) layout.findViewById(R.id.oldPass);
+		String oldPassText = oldview.getText().toString();
+		
+		EditText newview = (EditText) layout.findViewById(R.id.newPass);
+		String newPassText = newview.getText().toString();
+		
+		EditText confirmview = (EditText) layout.findViewById(R.id.confirmPass);
+		String confirmPassText = confirmview.getText().toString();
+		
+		if(newPassText.equals(confirmPassText)) {
+			try {
+				String call = AccessNet.simpleServerCall("db_account_userModify.php", "email="+user.email+"&password="+oldPassText+"&attribute=password&value="+newPassText);
+				Toast.makeText(getApplicationContext(), call, Toast.LENGTH_SHORT).show();
+			} catch (InterruptedException e) {
+				
+			}
+		} else {
+			Toast.makeText(getApplicationContext(), "Your new password isn't repeated correctly!", Toast.LENGTH_SHORT).show();
+		}
 	}
 	
 	public void showEditEmail(View view) {
