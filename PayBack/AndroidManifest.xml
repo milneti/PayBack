@@ -7,7 +7,7 @@
     <uses-sdk
         android:minSdkVersion="9"
         android:targetSdkVersion="18" />
-
+    
     <protected-broadcast />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -30,7 +30,8 @@
         <activity
             android:name="com.example.payback.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.payback.CreateTransactionActivity"
@@ -107,6 +108,15 @@
             android:label="@string/title_activity_shortcuts"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
         </activity>
+        
+        <receiver android:name="PageKillReceiver">
+			<intent-filter>
+			    <action android:name="com.Payback.CUSTOM_INTENT">
+	      		</action>
+	      	</intent-filter>
+	   	</receiver>
+
+        <activity android:name="org.achartengine.GraphicalActivity" />
 
     </application>
 

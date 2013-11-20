@@ -2,7 +2,9 @@ package com.example.payback;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,7 +14,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class NotificationActivity extends TitleActivity {
+import com.example.payback.Notification;
+import com.example.payback.PageKillReceiver;
+import com.example.payback.TitleActivity;
+
+public class NotificationActivity extends TitleActivity
+{
+
+	static Activity activityInstance;	//these are variables
+	static PageKillReceiver pkr;		//used for PageKillReceiver.java
+	static IntentFilter filter;
 	
 	static final boolean DEMO = true;
 	
@@ -21,16 +32,12 @@ public class NotificationActivity extends TitleActivity {
 		super.onCreate(savedInstanceState);
 		modifyTitle("Notifications",R.layout.activity_notification);
 		
-		//No longer necessary
-		/*
-		SharedPreferences prefs = this.getSharedPreferences("com.example.payback", Context.MODE_PRIVATE);
-		String userKey = "com.example.payback.user";
-		String s = prefs.getString(userKey, "false"); //false is what's returned if the key is not found
-		if(s.equals("false"))
-			throw new IllegalArgumentException("Shared Preferences failure");
-		User u = User.StringToUser(s);
-		ArrayList<Notification> nots = u.getNotifications();
-		*/
+		activityInstance = this;
+		pkr = new PageKillReceiver(); pkr.setActivityInstance(activityInstance);
+		filter = new IntentFilter();
+		filter.addAction("com.Payback.Logout_Intent");
+		registerReceiver(pkr, filter);
+
 		user.setNotifications(Notification.updateNotifications(user.getEmail())); //notifications updated every time this page is loaded
 		
 		ArrayList<Notification> nots = user.getNotifications();
@@ -46,18 +53,17 @@ public class NotificationActivity extends TitleActivity {
 		NotiAdapter na = new NotiAdapter(this, android.R.layout.simple_list_item_1, nots);
 		listview.setAdapter(na);
 		setContentView(listview);
-		
-		
-		
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu) 
+	{
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.notification, menu);
 		return true;
 	}
 }
+
 class NotiAdapter extends ArrayAdapter<Notification>
 {
 	private final Context context;
@@ -84,7 +90,5 @@ class NotiAdapter extends ArrayAdapter<Notification>
 	    date.setText(al.get(position).getDate());
 	    message.setText(al.get(position).getMessage());
 	    return rowView;
-	    
-
 	}
 }
