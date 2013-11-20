@@ -85,20 +85,7 @@ public class LoginActivity extends TitleActivity
 		}
 		else
 		{
-
-			String status  ="fail";
-
-			AccessNet caller = new AccessNet();
-
-			String params = "userEmail="+email+"&password="+password;
-			String urlstub = "db_verify_login.php";
-
-			CONLOG.info("Attempting to call server at: "+urlstub+", "+params);
-			status = caller.simpleServerCall(urlstub, params);
-
-			if(status.equalsIgnoreCase("success")){
-				
-
+			if(AccessNet.AccountLogin(email,password)){
 				if (((CheckBox)findViewById(R.id.rememberLogin)).isChecked())
 					rememberLogin();
 				

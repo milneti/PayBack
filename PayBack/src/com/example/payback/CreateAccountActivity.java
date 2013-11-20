@@ -85,8 +85,7 @@ public class CreateAccountActivity extends TitleActivity
 		}else{
 			
 			//calling server
-			AccessNet caller = new AccessNet();	
-			if(caller.AccountCreation(email, password, fName, lName)){
+			if(AccessNet.AccountCreation(email, password, fName, lName)){
 				CONLOG.info("Created new account in system: ");
 				Toast.makeText(getApplicationContext(), "Account Created!", Toast.LENGTH_SHORT).show();
 				Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
