@@ -42,7 +42,7 @@ if (mysqli_connect_errno($link)) {
     $response["result"] = -1;
     $response["message"] = "Failed to connect to MySQL: " . mysqli_connect_error();
 }
-else {
+else if (strlen($password) > 0) {
     // escape inputs
     $userID = mysqli_real_escape_string($link, $userID);
     $userEmail = mysqli_real_escape_string($link, $userEmail);
@@ -142,6 +142,10 @@ else {
             }
         }
     }
+}
+else {
+    $response["result"] = -8;
+    $response["message"] = "Password cannot be blank";
 }
 
 // close mysqli connection
