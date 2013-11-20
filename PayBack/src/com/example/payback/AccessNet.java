@@ -45,6 +45,10 @@ class AccessNet{
 		return retval;
 	}
 	
+	//public boolean TransCreation(int amount, String description, String transdate, String lemail, String bemail){
+		
+	//}
+	
 	
 	public static String simpleServerCall(String urlstub, String params) throws InterruptedException{
 		Logger AXNLOG = Logger.getLogger(AccessNet.class .getName());
