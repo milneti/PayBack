@@ -14,16 +14,37 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="@string/Cancel" />
+        android:text="@string/Cancel"
+        android:onClick="showMainMenu" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/editPassButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/devB"
-        android:layout_alignBottom="@+id/devB"
         android:layout_alignParentLeft="true"
-        android:text="@string/save_changes" 
-        android:enabled="false" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/change_password"
+        android:onClick="showEditPassword" />
+
+    <Button
+        android:id="@+id/editEmailButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editPassButton"
+        android:layout_alignRight="@+id/editPassButton"
+        android:layout_below="@+id/editPassButton"
+        android:onClick="showEditEmail"
+        android:text="@string/change_email" />
+
+    <Button
+        android:id="@+id/editNameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editEmailButton"
+        android:layout_alignRight="@+id/editEmailButton"
+        android:layout_below="@+id/editEmailButton"
+        android:onClick="showEditDisplayName"
+        android:text="@string/change_name" />
 
 </RelativeLayout>
