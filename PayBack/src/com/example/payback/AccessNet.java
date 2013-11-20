@@ -66,7 +66,7 @@ class AccessNet{
         //account:                Deletes tuple for account. Account tuple will be gone permanently after action.
 		String attribute = "note";
 		boolean retval = false;
-		String params = "email="+uemail+"&password="+password+"&attribute="+attribute+"&value"+femail;
+		String params = "email="+uemail+"&password="+password+"&attribute="+attribute+"&value="+femail;
 		//String status = "fail";
 		String urlstub = "DeleteTuple.php";
 		//calling server
@@ -83,7 +83,7 @@ class AccessNet{
         //account:                Deletes tuple for account. Account tuple will be gone permanently after action.
 		String value = "null" , attribute = "account";
 		boolean retval = false;
-		String params = "email="+uemail+"&password="+password+"&attribute="+attribute+"&value"+value;
+		String params = "email="+uemail+"&password="+password+"&attribute="+attribute+"&value="+value;
 		
 		String urlstub = "DeleteTuple.php";
 		//calling server
@@ -100,7 +100,7 @@ class AccessNet{
         //account:                Deletes tuple for account. Account tuple will be gone permanently after action.
 		String attribute = "trans";
 		boolean retval = false;
-		String params = "email="+uemail+"&password="+password+"&attribute="+attribute+"&value"+femail;
+		String params = "email="+uemail+"&password="+password+"&attribute="+attribute+"&value="+femail;
 		//String status = "fail";
 		String urlstub = "DeleteTuple.php";
 		//calling server
