@@ -2,7 +2,6 @@ package com.example.payback;
 
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -13,19 +12,19 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-<<<<<<< HEAD
-import android.app.Activity;
-=======
 import android.content.Context;
->>>>>>> master
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.payback.CreateAccountActivity;
+import com.example.payback.MainActivity;
+import com.example.payback.TitleActivity;
+import com.example.payback.User;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -86,10 +85,6 @@ public class LoginActivity extends TitleActivity
 		}
 		else
 		{
-			String status  ="fail";
-		}
-		else
-		{
 
 			String status  ="fail";
 
@@ -101,12 +96,6 @@ public class LoginActivity extends TitleActivity
 			CONLOG.info("Attempting to call server at: "+urlstub+", "+params);
 			status = caller.simpleServerCall(urlstub, params);
 
-			if(status.equalsIgnoreCase("success"))
-			{
-				//Successful login, going to main menu
-
-				CONLOG.info("Server call successful and logged in!");
-				Intent intent = new Intent(this, MainActivity.class);
 			if(status.equalsIgnoreCase("success"))
 			{	
 				if (((CheckBox)findViewById(R.id.rememberLogin)).isChecked())
