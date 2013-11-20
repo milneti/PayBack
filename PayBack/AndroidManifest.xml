@@ -108,6 +108,7 @@
             android:label="@string/title_activity_shortcuts"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
         </activity>
+<<<<<<< HEAD
         
         <receiver android:name="PageKillReceiver">
 			<intent-filter>
@@ -115,6 +116,9 @@
 	      		</action>
 	      	</intent-filter>
 	   	</receiver>
+=======
+        <activity android:name="org.achartengine.GraphicalActivity" />
+>>>>>>> origin/master
 
     </application>
 

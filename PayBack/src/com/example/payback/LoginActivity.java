@@ -88,6 +88,11 @@ public class LoginActivity extends TitleActivity
 
 			String status  ="fail";
 
+<<<<<<< HEAD
+=======
+//			No longer necesary call the .AccountLogin method
+			String status  ="fail";
+>>>>>>> origin/master
 			AccessNet caller = new AccessNet();
 
 			String params = "userEmail="+email+"&password="+password;
@@ -96,8 +101,13 @@ public class LoginActivity extends TitleActivity
 			CONLOG.info("Attempting to call server at: "+urlstub+", "+params);
 			status = caller.simpleServerCall(urlstub, params);
 
+<<<<<<< HEAD
 			if(status.equalsIgnoreCase("success"))
 			{	
+=======
+			if(status.equalsIgnoreCase("success")){
+				
+>>>>>>> origin/master
 				if (((CheckBox)findViewById(R.id.rememberLogin)).isChecked())
 					rememberLogin();
 				
