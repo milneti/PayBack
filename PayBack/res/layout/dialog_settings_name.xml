@@ -13,13 +13,14 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/firstNameView"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0"
-                android:text="First Name:"
-                android:textColor="@color/White" />
+                android:text="@string/set_firstname" />
+
             <EditText
                 android:id="@+id/firstName"
                 android:layout_width="100dp"
@@ -37,8 +38,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0"
-                android:text="Last Name:"
-                android:textColor="@color/White" />
+                android:text="@string/set_lastname"/>
             <EditText
                 android:id="@+id/lastName"
                 android:layout_width="100dp"

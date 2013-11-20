@@ -54,5 +54,7 @@
     <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="set_lastname">Last Name:</string>
+    <string name="set_firstname">First Name:</string>
 
 </resources>
