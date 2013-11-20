@@ -309,5 +309,6 @@ public class ContactActivity extends TitleActivity
     {
     	Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        this.finish();
     }
 }

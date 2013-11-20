@@ -10,10 +10,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".StatisticActivity" >
 
-    <LinearLayout
+   <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/button1"
         android:onClick="hideSoftKeyboard"
         android:orientation="vertical" >
 
@@ -85,8 +86,22 @@
             android:id="@+id/chart"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_marginBottom="30dp"
             android:orientation="vertical" >
+
         </LinearLayout>
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/linearLayout1"
+        android:layout_marginBottom="27dp"
+        android:layout_marginRight="22dp"
+        android:onClick="showMainMenu"
+        android:text="Back" />
 
 </RelativeLayout>

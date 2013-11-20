@@ -59,7 +59,7 @@ public class MainActivity extends TitleActivity
     	broadcastIntent.setAction("com.Payback.Logout_Intent");
     	sendBroadcast(broadcastIntent);
 
-        this.finish();									//activity is done and should be closed
+        this.finish(); //activity is done and should be closed
     }
     
     public void Setting(View view)
