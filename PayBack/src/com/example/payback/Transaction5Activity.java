@@ -13,7 +13,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class Transaction5Activity extends TitleActivity {
+public class Transaction5Activity extends TitleActivity 
+{
 	ListView listView;
 	List<String> data = new ArrayList<String>();
 	
@@ -80,6 +81,8 @@ public class Transaction5Activity extends TitleActivity {
 
 	    listView = (ListView) findViewById(R.id.listviewforplaceholderdata);
 	    listView.setAdapter(new ArrayAdapter<String>(this, R.layout.activity_contact_iteminlist, data));
+
+	    //send out a new notification here?
 	}
 
 	@Override

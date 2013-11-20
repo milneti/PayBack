@@ -37,7 +37,7 @@ $password = mysqli_real_escape_string($mysqli, $password);
 
 //query to add account
 
-$insertuser = mysqli_query($mysqli, "INSERT INTO `Account` (`email`,`fname`,`lname`,`password`) VALUES (\"$email\",\"$fname\",\"$lname\",\"$password\");");
+$insertuser = mysqli_query($mysqli, "INSERT INTO `Account` (`email`,`fname`,`lname`,`password`) VALUES ('$email','$fname','$lname','$password');");
 
 //output
 

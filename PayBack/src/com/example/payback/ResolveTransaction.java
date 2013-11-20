@@ -1,23 +1,22 @@
+//CREDIT TO Will Macfarlane for the template used in Notification.
 package com.example.payback;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Notification {
-	private String fromEmail;
-	private String toEmail;
+public class ResolveTransaction {
+	private String amount;
 	private String message;
 	private String date; //format: "Nov 17 2013, 12:19 AM"
 	
 	
-	Notification (String from, String to, String message)
+	ResolveTransaction (String amount, String message)
 	{
-		this.fromEmail = from;
-		this.toEmail = to;
+		this.amount = amount;
 		this.message = message;
 		this.date = currDateToString();
 	}
-	Notification(){}
+	ResolveTransaction(){}
 	
 	static String currDateToString()
 	{
@@ -51,18 +50,13 @@ public class Notification {
 		return s;
 	}
 	
-	public String getFromEmail() {
-		return fromEmail;
+	public String getAmount() {
+		return amount;
 	}
-	public void setFromEmail(String from) {
-		this.fromEmail = from;
+	public void setAmount(String amount) {
+		this.amount = amount;
 	}
-	public String getToEmail() {
-		return toEmail;
-	}
-	public void setToEmail(String to) {
-		this.toEmail = to;
-	}
+	
 	public String getMessage() {
 		return message;
 	}
@@ -77,16 +71,17 @@ public class Notification {
 		this.date = date;
 	}
 	//TODO:
-	public void sendToServer() //send this notification to server. Server needs to grab the "to" field and send it to them
+	public void sendToServer() //send this transaction to server. Server needs to grab the "to" field and send it to them
 	{
 		
 	}
 	//TODO:
-	public static ArrayList<Notification> updateNotifications(String email)
+	public static ArrayList<ResolveTransaction> updateTransactions(String email)
 	{
-		ArrayList<Notification> nots = new ArrayList<Notification> ();
+		ArrayList<ResolveTransaction> trans = new ArrayList<ResolveTransaction> ();
 		//populates this user's notifications arraylist
-		return nots;
+		return trans;
 		
 	}
+
 }

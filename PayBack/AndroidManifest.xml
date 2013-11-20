@@ -14,8 +14,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/payback"
-        android:label="PayBack" >
+        android:icon="@drawable/ic_launcher"
+        android:label="PayBack" android:logo="@drawable/ic_action_name">
         <activity
             android:name="com.example.payback.LoginActivity"
             android:label="@string/title_activity_login"
@@ -30,7 +30,8 @@
         <activity
             android:name="com.example.payback.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.payback.CreateTransactionActivity"

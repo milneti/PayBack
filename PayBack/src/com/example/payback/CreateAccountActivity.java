@@ -84,14 +84,9 @@ public class CreateAccountActivity extends TitleActivity
 			Toast.makeText(getApplicationContext(), "Email: \""+email+"\" is not a valid email address!", Toast.LENGTH_SHORT).show();
 		}else{
 			
-			String params = "fname="+fName+"&lname="+lName+"&email="+email+"&password="+password;
-			String status = "fail";
-			String urlstub = "AccountCreation.php";
 			//calling server
-			AccessNet caller = new AccessNet();
-			status = caller.simpleServerCall(urlstub, params);
-			
-			if(status.equalsIgnoreCase("success")){
+			AccessNet caller = new AccessNet();	
+			if(caller.AccountCreation(email, password, fName, lName)){
 				CONLOG.info("Created new account in system: ");
 				Toast.makeText(getApplicationContext(), "Account Created!", Toast.LENGTH_SHORT).show();
 				Intent intent = new Intent(getApplicationContext(), LoginActivity.class);

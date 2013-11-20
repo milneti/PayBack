@@ -18,7 +18,34 @@ import org.json.JSONObject;
 
 
 class AccessNet{
+	public boolean AccountLogin(String Email, String Password) throws InterruptedException{
+		String status  ="fail";
+		boolean retval = false;
+		Logger CONLOG = Logger.getLogger(AccessNet.class .getName());
 
+		String params = "email="+Email+"&password="+Password;
+		String urlstub = "AccountLogin.php";
+		//if you go around renaming these urlstubs the app will not work and Hohyun will hate you.
+		CONLOG.info("Attempting to call server at: "+urlstub+", "+params);
+		status = this.simpleServerCall(urlstub, params);
+		if(status.equalsIgnoreCase("success"))
+			retval = true;
+		return retval;
+	}
+	
+	public boolean AccountCreation(String Email, String Password, String FName, String LName) throws InterruptedException{
+		boolean retval = false;
+		String params = "fname="+FName+"&lname="+LName+"&email="+Email+"&password="+Password;
+		String status = "fail";
+		String urlstub = "AccountCreation.php";
+		//calling server
+		status = this.simpleServerCall(urlstub, params);
+		if(status.equalsIgnoreCase("success"))
+			retval=true;
+		return retval;
+	}
+	
+	
 	public String simpleServerCall(String urlstub, String params) throws InterruptedException{
 		Logger AXNLOG = Logger.getLogger(AccessNet.class .getName());
 		AXNLOG.setLevel(Level.INFO);
@@ -66,7 +93,7 @@ class AccessNet{
 							BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
 							line = reader.readLine();
-							if(line.equalsIgnoreCase("1")||line.equalsIgnoreCase("true")||line.equalsIgnoreCase("success")||line.equalsIgnoreCase("Login and query success"))
+							if(line.equalsIgnoreCase("1")||line.equalsIgnoreCase("true")||line.equalsIgnoreCase("success")||line.equalsIgnoreCase("Login and query success")||line.equalsIgnoreCase("{\"result\":1,\"message\":\"Sign-in successful\"}"))
 								items[0]="success";
 							CANLOG.info("Data in: "+line);
 
