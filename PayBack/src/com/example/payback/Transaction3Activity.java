@@ -2,10 +2,13 @@ package com.example.payback;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import android.os.Bundle;
+
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -20,12 +23,30 @@ public class Transaction3Activity extends TitleActivity {
 	private boolean button1Selected = false;
     private boolean button2Selected = true;
 
+	static Activity activityInstance;	
+	static PageKillReceiver pkr;		//these are the variables
+	static IntentFilter filterPKR;		//used for PageKillReceiver.java
+	static NoBackingReceiver nbr;		//these are the variables
+	static IntentFilter filterNBR;		//used for NoBackingReceiver.java
+    
 	@SuppressLint("CutPasteId")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		modifyTitle("Lender's Share",R.layout.activity_transaction3);
 
+		activityInstance = this;
+
+		pkr = new PageKillReceiver(); pkr.setActivityInstance(activityInstance);
+		filterPKR = new IntentFilter();
+		filterPKR.addAction("com.Payback.Logout_Intent");
+		registerReceiver(pkr, filterPKR);
+		
+		nbr = new NoBackingReceiver(); nbr.setActivityInstance(activityInstance);
+		filterNBR = new IntentFilter();
+		filterNBR.addAction("com.Payback.MainActivity_Intent");
+		registerReceiver(nbr, filterNBR);
+		
 		EditText transCost = (EditText) findViewById(R.id.lenderamount);
 		EditText text = (EditText) findViewById(R.id.lenderamount);  
 		
@@ -87,22 +108,6 @@ public class Transaction3Activity extends TitleActivity {
 	    	button.setEnabled(true);
 	}
 	
-	/*public void onRadioButtonClick(View view){
-	    RadioButton button = (RadioButton) view;
-	    if ( button.getId() == R.id.radio1) {
-	    	button1Selected = true;
-		    button2Selected = false;
-		}
-
-	    else if (button.getId() == R.id.radio2) {
-	    	button1Selected = false;
-	    	button2Selected = true;
-
-	    }
-	    
-	}*/
-	
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -150,7 +155,8 @@ public class Transaction3Activity extends TitleActivity {
 				break;
 		}
 	}
-	public void checktomoveontotrans4(View view){
+	public void checktomoveontotrans4(View view)
+	{
 	    Bundle oldbundle = getIntent().getExtras();
 	    int transCostInt = oldbundle.getInt("Transaction1transCost");
 	    
@@ -217,11 +223,15 @@ public class Transaction3Activity extends TitleActivity {
 	        intent.putExtras(Bundle);
 	        startActivity(intent);
 	    }
-	    else if(button2Selected){
+	    else if(button2Selected)
+	    {
 	    	Intent intent = new Intent(this, Transaction4Activity.class);
 	        Bundle Bundle = new Bundle();
 	        
-	        Bundle.putInt("Transaction1transCost", transCostInt);
+	        Toast.makeText(this.getApplicationContext(), "Test Toast A", Toast.LENGTH_LONG).show();
+	        
+	        //Place values in the bundle
+	        Bundle.putInt("Transaction1transCost", transCostInt);				//total transaction cost
 	        Bundle.putString("Transaction1transComment", transCommentString);
 	        Bundle.putParcelableArrayList("Transaction2selected", transselected);
 	        Bundle.putBoolean("Transaction3button1Selected", button1Selected);
@@ -231,17 +241,20 @@ public class Transaction3Activity extends TitleActivity {
 	    	String stringnumber = translenderamount.getText().toString().substring(1);
 			Float floatnumber = Float.parseFloat(stringnumber);
 			int translenderamountInt = (int) (floatnumber * 100F);
-			Bundle.putInt("Transaction3lenderamount", translenderamountInt);
+			Bundle.putInt("Transaction3lenderamount", translenderamountInt);	//the lender's share
 	        
-			int numContacts = oldbundle.getParcelableArrayList("Transaction2selected").size();
-			int lenderShare = (transCostInt-translenderamountInt)/(numContacts);
-			for(int i = 0; i < numContacts; i ++){
-				lendsharelist.add(lenderShare);
+			int numContacts = oldbundle.getParcelableArrayList("Transaction2selected").size();	//number of contacts
+			int lenderShare = (transCostInt-translenderamountInt)/(numContacts);	//shouldn't this be borrowerShare
+			for(int i = 0; i < numContacts; i++)
+			{
+				lendsharelist.add(lenderShare);		//add each borrower's share into the list
 			}
 			Bundle.putIntegerArrayList("Transaction3borroweramountlist", lendsharelist);
 
-	        
 	        intent.putExtras(Bundle);
+	        
+	        Toast.makeText(this.getApplicationContext(), "Test Toast B", Toast.LENGTH_LONG).show();
+	        
 	        startActivity(intent);
 	    }
 
