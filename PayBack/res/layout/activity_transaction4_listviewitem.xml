@@ -21,19 +21,17 @@
 
         <SeekBar
             android:id="@+id/seekBar1"
-            android:layout_width="75dp"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/borroweramount"
+            android:layout_below="@+id/borroweramount"
             android:progress="50" />
 
         <EditText
             android:id="@+id/borroweramount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/seekBar1"
             android:ems="10"
             android:inputType="numberDecimal"
             android:singleLine="true" >

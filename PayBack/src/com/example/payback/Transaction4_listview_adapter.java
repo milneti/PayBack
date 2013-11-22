@@ -22,14 +22,16 @@ public class Transaction4_listview_adapter extends SimpleAdapter
 	List<Map<String, String>> data;
 	Context context;
 	int maxSeekBar = 9999;		//the maximum amount any borrower could borrow
+	int progressLocation = 0;
 	
 	public Transaction4_listview_adapter(Context context,
-			List<Map<String, String>> data, int resource, String[] from, int[] to, int maxForBorrower)
+			List<Map<String, String>> data, int resource, String[] from, int[] to, int maxForBorrower, int thumbLocation)
 	{
 		super(context, data, resource, from, to);
 		this.data = data;
 		this.context = context;
 		this.maxSeekBar = maxForBorrower;	//max amount used for seek bar progress
+		this.progressLocation = thumbLocation;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -101,7 +103,7 @@ public class Transaction4_listview_adapter extends SimpleAdapter
 		
 	    SeekBar sb = (SeekBar) view.findViewById(R.id.seekBar1);	//the seek bar
         sb.setMax(maxSeekBar);										//sets the max as the max amount anyone can borrow
-        sb.setProgress(0);											//starts off at 0
+        sb.setProgress(progressLocation);							//starts off at default
         
         sb.setOnSeekBarChangeListener(new OnSeekBarChangeListener()	//listens for changes in seek bar
         {

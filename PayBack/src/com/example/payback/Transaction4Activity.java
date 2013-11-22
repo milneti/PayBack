@@ -60,9 +60,11 @@ public class Transaction4Activity extends TitleActivity
 		
 		//retrieve total amount for transaction - lender share
 		int maxForBorrower = oldBndl.getInt("Transaction1transCost") - oldBndl.getInt("Transaction3lenderamount");
+		int numContacts = oldBndl.getParcelableArrayList("Transaction2selected").size();
+		int thumbLocation = (int) maxForBorrower/numContacts;
 		
 		Transaction4_listview_adapter adapter = new Transaction4_listview_adapter(this, data,
-		        R.layout.activity_transaction4_listviewitem, from, to, maxForBorrower);
+		        R.layout.activity_transaction4_listviewitem, from, to, maxForBorrower, thumbLocation);
 		    
 		listView.setAdapter(adapter);
 	}	    
