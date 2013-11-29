@@ -2,6 +2,7 @@ package com.example.payback;
 
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -101,7 +102,7 @@ public class LoginActivity extends TitleActivity
 				//user is declared in TitleActivity, which every activity extends
 				user = new User(email, password); 
 				
-				JSONObject friends = AccessNet.lookupFriends(email,password);
+				//JSONObject friends = AccessNet.lookupFriends(email,password);
 				/*
 				ArrayList<Friend> dummy = new ArrayList<Friend>();
 				dummy.add(new Friend());
@@ -127,19 +128,17 @@ public class LoginActivity extends TitleActivity
 	public void checkCache()
 	{
 		Toast.makeText(getApplicationContext(),"inCache", Toast.LENGTH_SHORT).show();
+		File inputFile = new File(getApplicationContext().getFilesDir(),"login_info");
 		try {
-			FileInputStream fis = openFileInput("login_info");
+			FileInputStream fis = new FileInputStream(inputFile);
 			String fileData = "";
-			String line = "";
-			BufferedReader reader = new BufferedReader(new InputStreamReader(fis,fileData));
-			StringBuilder builder = new StringBuilder();
-			while(( line = reader.readLine()) != null )
-			{
-		         builder.append( line );
-		         builder.append( '\n' );
-		    }
-			fileData = builder.toString();
+			int content;
 			
+			while(( content = fis.read()) != -1 )
+			{
+		         fileData+=(char)content;
+		    }
+			fis.close();
 			Toast.makeText(getApplicationContext(),fileData, Toast.LENGTH_LONG).show();		
 		} 
 		catch (FileNotFoundException e) 
@@ -159,15 +158,13 @@ public class LoginActivity extends TitleActivity
 	 
 		String email = ((EditText)findViewById(R.id.email)).getText().toString();
 		String password = ((EditText)findViewById(R.id.password)).getText().toString();
-		storeData = "email " + email.toString() + " password " + password.toString();
-		Toast.makeText(getApplicationContext(),storeData, Toast.LENGTH_LONG).show();
+		storeData = email + " " + password;
 
 		try 
 		{
 			FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
 			fos.write(storeData.getBytes());
-			String msg = storeData + " written!";
-			Toast.makeText(getApplicationContext(),msg, Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(),storeData.getBytes().toString(), Toast.LENGTH_SHORT).show();
 			fos.close();
 		} 
 		catch (FileNotFoundException e) 
