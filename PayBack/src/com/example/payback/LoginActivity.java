@@ -7,12 +7,15 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.Intent;
@@ -95,20 +98,19 @@ public class LoginActivity extends TitleActivity
 				CONLOG.info("Server call successful and logged in!");
 				Intent intent = new Intent(this, MainActivity.class);
 				
-				/* Will's new additions */
-				user = new User(email, password); //user is declared in TitleActivity, which every activity extends
+				//user is declared in TitleActivity, which every activity extends
+				user = new User(email, password); 
 				
-				/* Will's old additions */
+				JSONObject friends = AccessNet.lookupFriends(email,password);
 				/*
-				SharedPreferences prefs = this.getSharedPreferences("com.example.payback", Context.MODE_PRIVATE);
-				User u = new User(email); //the rest is looked up from the server
-				String userKey = "com.example.payback.user";
-				String userVal = u.userToString();
-				prefs.edit().putString(userKey, userVal).commit();
-				*/
+				ArrayList<Friend> dummy = new ArrayList<Friend>();
+				dummy.add(new Friend());
 				
-				Toast.makeText(getApplicationContext(),"Welcome", Toast.LENGTH_SHORT).show();
-
+				if(friends.getString("NULL").equalsIgnoreCase("false"))
+					user.setFriends(dummy);
+				else
+					user.setFriends(parseFriends(friends));
+					*/
 				startActivity(intent);
 				Toast.makeText(getApplicationContext(),"Welcome", Toast.LENGTH_SHORT).show();
 				this.finish();
@@ -127,7 +129,6 @@ public class LoginActivity extends TitleActivity
 		Toast.makeText(getApplicationContext(),"inCache", Toast.LENGTH_SHORT).show();
 		try {
 			FileInputStream fis = openFileInput("login_info");
-			//Toast.makeText(getApplicationContext(),fis.read(), Toast.LENGTH_SHORT).show();
 			String fileData = "";
 			String line = "";
 			BufferedReader reader = new BufferedReader(new InputStreamReader(fis,fileData));
@@ -139,8 +140,7 @@ public class LoginActivity extends TitleActivity
 		    }
 			fileData = builder.toString();
 			
-			Toast.makeText(getApplicationContext(),fileData, Toast.LENGTH_LONG).show();
-			
+			Toast.makeText(getApplicationContext(),fileData, Toast.LENGTH_LONG).show();		
 		} 
 		catch (FileNotFoundException e) 
 		{
@@ -193,5 +193,23 @@ public class LoginActivity extends TitleActivity
 		
         startActivity(intent);
         this.finish();
+	}
+	
+	public ArrayList<Friend> parseFriends(JSONObject friends){
+		ArrayList<Friend> list = new ArrayList<Friend>();	
+		try {
+			JSONArray array = friends.getJSONArray("FriendOfMatches");
+			for(int i = 0; i < array.length(); i++){
+				JSONObject obj = array.getJSONObject(i);
+				Friend f = new Friend();
+				f.setfName(obj.getString("Fname"));
+				f.setlName(obj.getString("Lname"));
+				f.setEmail(obj.getString("Email"));
+				list.add(f);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 }

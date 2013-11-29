@@ -68,7 +68,7 @@ class AccessNet{
 		boolean retval = false;
 		String params = "email="+uemail+"&password="+password+"&attribute="+attribute+"&value"+femail;
 		//String status = "fail";
-		String urlstub = "DeleteTuple.php";
+		String urlstub = "db_friendof_deleteOne.php";
 		//calling server
 		JSONObject status = jsonServerCall(urlstub, params);
 		if(status.has("1")||status.has("true")||status.has("success"))
@@ -112,11 +112,30 @@ class AccessNet{
 	
 	
 	
-	public boolean AddTrans(String email, String password, double amount, String description, String transdate, String lemail, String bemail){
+	public static boolean AddTrans(String uemail, String password, double amount, String description, String lemail, String bemail) throws InterruptedException{
 		boolean retval = false;
-		String params = "email="+email+"&password="+password+"&amount="+amount+"";
-		//String status = "fail";
-		String urlstub = "DeleteTuple.php";
+		String params = "userEmail="+uemail+"&password="+password+"&amount="+amount+"&description="+description+"&lenderEmail"+lemail+"&borrowerEmail="+bemail;
+		String urlstub = "db_transaction_create.php";
+		String status = "fail";
+		//calling server
+		status = simpleServerCall(urlstub, params);
+		if(status.equalsIgnoreCase("success")||status.equalsIgnoreCase("1")||status.equalsIgnoreCase("true"))
+			retval=true;
+		return retval;
+	}
+	public static JSONObject lookupFriends(String uemail, String password) throws InterruptedException, JSONException{
+		JSONObject retval = new JSONObject();
+		String params = "userEmail="+uemail+"&password="+password;
+		String urlstub = "db_friendof_selectAll.php";
+		JSONObject status = jsonServerCall(urlstub, params); //fails in server call.
+		
+		if(status.has("AccountID"))
+			retval = status;
+		else{
+			String JSONString = "{\"NULL\":\"false\"}";
+			retval = new JSONObject(JSONString);
+			
+		}
 		return retval;
 	}
 	
