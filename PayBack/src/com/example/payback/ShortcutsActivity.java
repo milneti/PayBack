@@ -25,12 +25,6 @@ public class ShortcutsActivity extends Activity
 		registerReceiver(pkr, filter);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.shortcuts, menu);
-		return true;
-	}
 	public void Return(View view)
     {
 		this.finish();
@@ -52,7 +46,8 @@ public class ShortcutsActivity extends Activity
     	Intent intent = new Intent(this, ContactActivity.class);
         startActivity(intent);
         this.finish();
-    }public void showLogout(View view)
+    }
+	public void showLogout(View view)
     {
     	Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);

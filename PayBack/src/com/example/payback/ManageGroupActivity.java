@@ -22,12 +22,4 @@ public class ManageGroupActivity extends TitleActivity
 		filter.addAction("com.Payback.Logout_Intent");
 		registerReceiver(pkr, filter);
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.manage_group, menu);
-		return true;
-	}
-
 }

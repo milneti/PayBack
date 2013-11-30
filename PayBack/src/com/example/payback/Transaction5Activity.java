@@ -86,13 +86,6 @@ public class Transaction5Activity extends TitleActivity
 
 	    //send out a new notification here?
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.transaction5, menu);
-		return true;
-	}
 	
 	public void showTrans4(View view)
     {		

@@ -1,13 +1,9 @@
 package com.example.payback;
 
-
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,29 +34,20 @@ import com.example.payback.User;
  */
 public class LoginActivity extends TitleActivity
 {
-	/*static Activity activityInstance;	//these are variables
-	static MustLogoutReceiver mlr;		//used for MustLogoutReceiver.java
-	static IntentFilter filter;*/
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		setTitle("PayBack");
-		Toast.makeText(getApplicationContext(),"opened", Toast.LENGTH_SHORT).show();
-		checkCache();
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		super.onCreateOptionsMenu(menu);
-		getMenuInflater().inflate(R.menu.login, menu);
-		return true;
+		try {
+			checkCache();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void Login(View view) throws InterruptedException, JSONException 
+	public void Login(View view) throws InterruptedException, JSONException, IOException 
 	{
 
 		//for log in, url stub is AccountLogin.php
@@ -134,31 +121,21 @@ public class LoginActivity extends TitleActivity
 			getApplicationContext().deleteFile("login_info");
 		}
 	}
-	public void checkCache()
+	public void checkCache() throws IOException
 	{
 		File inputFile = new File(getApplicationContext().getFilesDir(),"login_info");
 		String fileData = "";
 		if(inputFile.exists()){
-			try {
-				FileInputStream fis = new FileInputStream(inputFile);
-				int content;
-				
-				while(( content = fis.read()) != -1 )
-				{
-			         fileData+=(char)content;
-			    }
-				fis.close();
-				Toast.makeText(getApplicationContext(),fileData, Toast.LENGTH_LONG).show();		
-			} 
-			catch (FileNotFoundException e) 
-			{
-				Toast.makeText(getApplicationContext(),"FileError", Toast.LENGTH_SHORT).show();
-			} 
-			catch (IOException e) 
-			{
-				Toast.makeText(getApplicationContext(),"IOError", Toast.LENGTH_SHORT).show();
-			}
 			
+			FileInputStream fis = new FileInputStream(inputFile);
+			int content;
+			
+			while(( content = fis.read()) != -1 )
+			{
+		         fileData+=(char)content;
+		    }
+			fis.close();
+		
 			CheckBox rememberLogin = (CheckBox)findViewById(R.id.rememberLogin);
 			EditText email = (EditText)findViewById(R.id.email);
 			EditText password = (EditText)findViewById(R.id.password);
@@ -168,7 +145,7 @@ public class LoginActivity extends TitleActivity
 		}
 	}
 	
-	public void rememberLogin()
+	public void rememberLogin() throws IOException
 	{
 		String filename = "login_info";
 		String storeData = "";
@@ -176,22 +153,10 @@ public class LoginActivity extends TitleActivity
 		String email = ((EditText)findViewById(R.id.email)).getText().toString();
 		String password = ((EditText)findViewById(R.id.password)).getText().toString();
 		storeData = email + " " + password;
-
-		try 
-		{
-			FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
-			fos.write(storeData.getBytes());
-			Toast.makeText(getApplicationContext(),storeData.getBytes().toString(), Toast.LENGTH_SHORT).show();
-			fos.close();
-		} 
-		catch (FileNotFoundException e) 
-		{
-			e.printStackTrace();
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
+	
+		FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
+		fos.write(storeData.getBytes());
+		fos.close();
 	}
 
 	public void CreateAccount(View view)

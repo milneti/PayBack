@@ -1,6 +1,5 @@
 package com.example.payback;
 
-import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +15,6 @@ import java.net.URL;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 class AccessNet{
 	public static boolean AccountLogin(String Email, String Password) throws InterruptedException{
@@ -138,7 +136,6 @@ class AccessNet{
 		}
 		return retval;
 	}
-	
 	
 	public static String simpleServerCall(String urlstub, String params) throws InterruptedException{
 		Logger AXNLOG = Logger.getLogger(AccessNet.class .getName());
