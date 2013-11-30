@@ -205,10 +205,7 @@ public class ContactActivity extends TitleActivity
 		//((TextView)findViewById(R.id.emailConfirmView)).setText(email);
 	}
 */
-	public void sendContact(String email) throws InterruptedException{
-		
-		Toast.makeText(getApplicationContext(),"In Send", Toast.LENGTH_SHORT).show();
-		 
+	public void sendContact(String email) throws InterruptedException{	 
 		final String EMAIL_PATTERN = 
 				"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
 		final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
@@ -222,12 +219,11 @@ public class ContactActivity extends TitleActivity
 
 			if(AccessNet.AddFriend(email, user.getEmail(), user.getPassword())){
 				Toast.makeText(getApplicationContext(),email + " Added as a Friend!", Toast.LENGTH_SHORT).show();
-				
+				AccessNet.AddNotif(user.getEmail(), user.getPassword(), user.getEmail() + " Added you as a Friend", email);
 			}else{
 				Toast.makeText(getApplicationContext(),"Error adding friend", Toast.LENGTH_SHORT).show();
 			}
 		}
-	
 	}
 	
 	public void deleteContact(final String email){
