@@ -107,9 +107,7 @@ class AccessNet{
 			retval=true;
 		return retval;
 	}
-	
-	
-	
+
 	public static boolean AddTrans(String uemail, String password, double amount, String description, String lemail, String bemail) throws InterruptedException{
 		boolean retval = false;
 		String params = "userEmail="+uemail+"&password="+password+"&amount="+amount+"&description="+description+"&lenderEmail"+lemail+"&borrowerEmail="+bemail;
@@ -121,6 +119,20 @@ class AccessNet{
 			retval=true;
 		return retval;
 	}
+	
+	public static boolean AddNotif(String uemail, String password, String description, String targetEmail) throws InterruptedException{
+		boolean retval = false;
+		String params = "userEmail="+uemail+"&password="+password+"&description="+description+"&targetEmail"+targetEmail;
+		String urlstub = "db_notification_create.php";
+		String status = "fail";
+		//calling server
+		status = simpleServerCall(urlstub, params);
+		if(status.equalsIgnoreCase("success")||status.equalsIgnoreCase("1")||status.equalsIgnoreCase("true"))
+			retval=true;
+		return retval;
+	}
+	
+	
 	public static JSONObject lookupFriends(String uemail, String password) throws InterruptedException, JSONException{
 		JSONObject retval = new JSONObject();
 		String params = "userEmail="+uemail+"&password="+password;

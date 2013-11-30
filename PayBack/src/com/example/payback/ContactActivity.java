@@ -258,14 +258,10 @@ public class ContactActivity extends TitleActivity
 	}
 	
 	public void confirmDelete(String email) throws InterruptedException, JSONException{
-		Toast.makeText(getApplicationContext(),"calling delete", Toast.LENGTH_SHORT).show();
-
-		if(AccessNet.DeleteFriend(email, user.getEmail(), user.getPassword())){
-			Toast.makeText(getApplicationContext(),email + " Deleted from friends!", Toast.LENGTH_SHORT).show();
-			
-		}else{
+		if(AccessNet.DeleteFriend(email, user.getEmail(), user.getPassword()))
+			Toast.makeText(getApplicationContext(),email + " Deleted from friends!", Toast.LENGTH_SHORT).show();	
+		else
 			Toast.makeText(getApplicationContext(),"Error deleting friend", Toast.LENGTH_SHORT).show();
-		}
 	}
 	
 	public void showMainMenu(View view)
