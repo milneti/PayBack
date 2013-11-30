@@ -94,6 +94,8 @@ public class LoginActivity extends TitleActivity
 			if(AccessNet.AccountLogin(email,password)){
 				if (((CheckBox)findViewById(R.id.rememberLogin)).isChecked())
 					rememberLogin();
+				else
+					removeLoginFile();
 				
 
 				CONLOG.info("Server call successful and logged in!");
@@ -124,30 +126,45 @@ public class LoginActivity extends TitleActivity
 			}
 		}
 	}
-	
+	public void removeLoginFile()
+	{
+		File inputFile = new File(getApplicationContext().getFilesDir(),"login_info");
+		if(inputFile.exists())
+		{
+			getApplicationContext().deleteFile("login_info");
+		}
+	}
 	public void checkCache()
 	{
-		Toast.makeText(getApplicationContext(),"inCache", Toast.LENGTH_SHORT).show();
 		File inputFile = new File(getApplicationContext().getFilesDir(),"login_info");
-		try {
-			FileInputStream fis = new FileInputStream(inputFile);
-			String fileData = "";
-			int content;
-			
-			while(( content = fis.read()) != -1 )
+		String fileData = "";
+		if(inputFile.exists()){
+			try {
+				FileInputStream fis = new FileInputStream(inputFile);
+				int content;
+				
+				while(( content = fis.read()) != -1 )
+				{
+			         fileData+=(char)content;
+			    }
+				fis.close();
+				Toast.makeText(getApplicationContext(),fileData, Toast.LENGTH_LONG).show();		
+			} 
+			catch (FileNotFoundException e) 
 			{
-		         fileData+=(char)content;
-		    }
-			fis.close();
-			Toast.makeText(getApplicationContext(),fileData, Toast.LENGTH_LONG).show();		
-		} 
-		catch (FileNotFoundException e) 
-		{
-			Toast.makeText(getApplicationContext(),"FileError", Toast.LENGTH_SHORT).show();
-		} 
-		catch (IOException e) 
-		{
-			Toast.makeText(getApplicationContext(),"IOError", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(),"FileError", Toast.LENGTH_SHORT).show();
+			} 
+			catch (IOException e) 
+			{
+				Toast.makeText(getApplicationContext(),"IOError", Toast.LENGTH_SHORT).show();
+			}
+			
+			CheckBox rememberLogin = (CheckBox)findViewById(R.id.rememberLogin);
+			EditText email = (EditText)findViewById(R.id.email);
+			EditText password = (EditText)findViewById(R.id.password);
+			rememberLogin.setChecked(true);
+			email.setText(fileData.substring(0,fileData.indexOf(" ")));
+			password.setText(fileData.substring(fileData.indexOf(" ")+1,fileData.length()));			
 		}
 	}
 	
