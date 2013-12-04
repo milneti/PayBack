@@ -132,13 +132,12 @@ class AccessNet{
 		return retval;
 	}
 	
-	
 	public static JSONObject lookupFriends(String uemail, String password) throws InterruptedException, JSONException{
 		JSONObject retval = new JSONObject();
 		String params = "userEmail="+uemail+"&password="+password;
 		String urlstub = "db_friendof_selectAll.php";
 		JSONObject status = jsonServerCall(urlstub, params); //fails in server call.
-		
+		//TODO
 		if(status.has("AccountID"))
 			retval = status;
 		else{
@@ -146,6 +145,56 @@ class AccessNet{
 			retval = new JSONObject(JSONString);
 			
 		}
+		return retval;
+	}
+	
+	public static JSONObject lookupNotifsDate(String uemail, String password, String value) throws InterruptedException, JSONException{
+		return lookupNotifs(uemail, password, value,"date");
+	}
+	public static JSONObject lookupNotifsEmailSent(String uemail, String password, String value) throws InterruptedException, JSONException{
+		return lookupNotifs(uemail, password, value,"emailsent");	
+	}
+	public static JSONObject lookupEmailIn(String uemail, String password, String value) throws InterruptedException, JSONException{
+		return lookupNotifs(uemail, password, value,"emailin");	
+	}
+	public static JSONObject lookupNotifs(String uemail, String password, String value, String attribute) throws InterruptedException, JSONException{
+		JSONObject retval = new JSONObject();
+		JSONObject status;
+		String params = "userEmail="+uemail+"&password="+password+"&attribute="+attribute;
+		String urlstub = "db_friendof_selectAll.php";
+			
+		status = jsonServerCall(urlstub, params);
+		if(status.has("AccountID"))
+			retval = status;
+		else{
+			String JSONString = "{\"NULL\":\"false\"}";
+			retval = new JSONObject(JSONString);
+			
+		}
+		return retval;
+	}
+	
+	public static boolean modifyUserEmail(String uemail, String password, String value, String attribute) throws InterruptedException{
+		return modifyUser(uemail,password,value,"email");
+	}
+	public static boolean modifyUserPassword(String uemail, String password, String value, String attribute) throws InterruptedException{
+		return modifyUser(uemail,password,value,"password");
+	}
+	public static boolean modifyUserFirstName(String uemail, String password, String value, String attribute) throws InterruptedException{
+		return modifyUser(uemail,password,value,"fname");
+	}
+	public static boolean modifyUserLastName(String uemail, String password, String value, String attribute) throws InterruptedException{
+		return modifyUser(uemail,password,value,"lname");
+	}
+	public static boolean modifyUser(String uemail, String password, String value, String attribute) throws InterruptedException{
+		boolean retval = false;
+		String params = "userEmail="+uemail+"&password="+password+"&attribute="+attribute+"&value="+value;
+		String urlstub = "db_account_userModify.php";
+		String status = "fail";
+		//calling server
+		status = simpleServerCall(urlstub, params);
+		if(status.equalsIgnoreCase("success")||status.equalsIgnoreCase("1")||status.equalsIgnoreCase("true"))
+			retval=true;
 		return retval;
 	}
 	
@@ -237,7 +286,7 @@ class AccessNet{
 		items[0] = "400 Bad Request";
 		items[1] = params;
 		final JSONObject[] retval = new JSONObject[1];
-		retval[0].put("ServerResponse", 400);
+		retval[0].put("ServerResponse", "400");
 		final CountDownLatch latch = new CountDownLatch(1);
 		
 		try {
