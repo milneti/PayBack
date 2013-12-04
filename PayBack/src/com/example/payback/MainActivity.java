@@ -29,9 +29,7 @@ public class MainActivity extends TitleActivity
 	}
 	*/
     public void CreateTrsn(View view)
-    {
-    	user.setnoneselected();
-    	
+    {    	
 		int transCostInt = 0;
     	String transCommentString = "";
     	ArrayList<Friend> transselected = new ArrayList<Friend>();

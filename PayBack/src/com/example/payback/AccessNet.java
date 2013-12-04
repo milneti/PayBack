@@ -59,18 +59,12 @@ class AccessNet{
 	}
 	
 	public static boolean DeleteFriend(String femail, String uemail, String password) throws InterruptedException, JSONException{
-		//$attribute decides the function taken. Currently there are three functions:
-        //trans:                Deletes tuples that match LenderID and user $email where Borrower = $value
-        //note:                        Deletes tuples that match ReceiveID and user $email where Send == $value
-        //account:                Deletes tuple for account. Account tuple will be gone permanently after action.
-		String attribute = "note";
 		boolean retval = false;
-		String params = "email="+uemail+"&password="+password+"&attribute="+attribute+"&value"+femail;
-		//String status = "fail";
+		String params = "userEmail="+uemail+"&password="+password+"&friendEmail"+femail;
 		String urlstub = "db_friendof_deleteOne.php";
 		//calling server
-		JSONObject status = jsonServerCall(urlstub, params);
-		if(status.has("1")||status.has("true")||status.has("success"))
+		String status = simpleServerCall(urlstub, params);
+		if(status.equalsIgnoreCase("success")||status.equalsIgnoreCase("1")||status.equalsIgnoreCase("true"))
 			retval=true;
 		return retval;
 	}

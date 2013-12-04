@@ -178,7 +178,7 @@ public class LoginActivity extends TitleActivity
 	public ArrayList<Friend> parseFriends(JSONObject friends){
 		ArrayList<Friend> list = new ArrayList<Friend>();	
 		try {
-			JSONArray array = friends.getJSONArray("FriendOfMatches");
+			JSONArray array = friends.getJSONArray("friendOfMatches");
 			for(int i = 0; i < array.length(); i++){
 				JSONObject obj = array.getJSONObject(i);
 				Friend f = new Friend();
