@@ -1,6 +1,5 @@
 package com.example.payback;
 
-import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,9 +13,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 class AccessNet{
 	public static boolean AccountLogin(String Email, String Password) throws InterruptedException{
@@ -68,7 +67,7 @@ class AccessNet{
 		boolean retval = false;
 		String params = "email="+uemail+"&password="+password+"&attribute="+attribute+"&value"+femail;
 		//String status = "fail";
-		String urlstub = "DeleteTuple.php";
+		String urlstub = "db_friendof_deleteOne.php";
 		//calling server
 		JSONObject status = jsonServerCall(urlstub, params);
 		if(status.has("1")||status.has("true")||status.has("success"))
@@ -109,17 +108,75 @@ class AccessNet{
 			retval=true;
 		return retval;
 	}
-	
-	
-	
-	public boolean AddTrans(String email, String password, double amount, String description, String transdate, String lemail, String bemail){
+
+	public static boolean AddTrans(String uemail, String password, double amount, String description, String lemail, String bemail) throws InterruptedException{
 		boolean retval = false;
-		String params = "email="+email+"&password="+password+"&amount="+amount+"";
-		//String status = "fail";
-		String urlstub = "DeleteTuple.php";
+		String params = "userEmail="+uemail+"&password="+password+"&amount="+amount+"&description="+description+"&lenderEmail"+lemail+"&borrowerEmail="+bemail;
+		String urlstub = "db_transaction_create.php";
+		String status = "fail";
+		//calling server
+		status = simpleServerCall(urlstub, params);
+		if(status.equalsIgnoreCase("success")||status.equalsIgnoreCase("1")||status.equalsIgnoreCase("true"))
+			retval=true;
 		return retval;
 	}
 	
+	public static boolean AddNotif(String uemail, String password, String description, String targetEmail) throws InterruptedException{
+		boolean retval = false;
+		String params = "userEmail="+uemail+"&password="+password+"&description="+description+"&targetEmail"+targetEmail;
+		String urlstub = "db_notification_create.php";
+		String status = "fail";
+		//calling server
+		status = simpleServerCall(urlstub, params);
+		if(status.equalsIgnoreCase("success")||status.equalsIgnoreCase("1")||status.equalsIgnoreCase("true"))
+			retval=true;
+		return retval;
+	}
+	
+	public static JSONObject lookupFriends(String uemail, String password) throws InterruptedException, JSONException{
+		String params = "userEmail="+uemail+"&password="+password;
+		String urlstub = "db_friendof_selectAll.php";
+		return jsonServerCall(urlstub, params); 
+	}
+	
+	public static JSONObject lookupNotifsDate(String uemail, String password, String value) throws InterruptedException, JSONException{
+		return lookupNotifs(uemail, password, value,"date");
+	}
+	public static JSONObject lookupNotifsEmailSent(String uemail, String password, String value) throws InterruptedException, JSONException{
+		return lookupNotifs(uemail, password, value,"emailsent");	
+	}
+	public static JSONObject lookupEmailIn(String uemail, String password, String value) throws InterruptedException, JSONException{
+		return lookupNotifs(uemail, password, value,"emailin");	
+	}
+	public static JSONObject lookupNotifs(String uemail, String password, String value, String attribute) throws InterruptedException, JSONException{
+		String params = "userEmail="+uemail+"&password="+password+"&attribute="+attribute;
+		String urlstub = "db_friendof_selectAll.php";	
+		return jsonServerCall(urlstub, params);
+	}
+	
+	public static boolean modifyUserEmail(String uemail, String password, String value, String attribute) throws InterruptedException{
+		return modifyUser(uemail,password,value,"email");
+	}
+	public static boolean modifyUserPassword(String uemail, String password, String value, String attribute) throws InterruptedException{
+		return modifyUser(uemail,password,value,"password");
+	}
+	public static boolean modifyUserFirstName(String uemail, String password, String value, String attribute) throws InterruptedException{
+		return modifyUser(uemail,password,value,"fname");
+	}
+	public static boolean modifyUserLastName(String uemail, String password, String value, String attribute) throws InterruptedException{
+		return modifyUser(uemail,password,value,"lname");
+	}
+	public static boolean modifyUser(String uemail, String password, String value, String attribute) throws InterruptedException{
+		boolean retval = false;
+		String params = "userEmail="+uemail+"&password="+password+"&attribute="+attribute+"&value="+value;
+		String urlstub = "db_account_userModify.php";
+		String status = "fail";
+		//calling server
+		status = simpleServerCall(urlstub, params);
+		if(status.equalsIgnoreCase("success")||status.equalsIgnoreCase("1")||status.equalsIgnoreCase("true"))
+			retval=true;
+		return retval;
+	}
 	
 	public static String simpleServerCall(String urlstub, String params) throws InterruptedException{
 		Logger AXNLOG = Logger.getLogger(AccessNet.class .getName());
@@ -209,6 +266,7 @@ class AccessNet{
 		items[0] = "400 Bad Request";
 		items[1] = params;
 		final JSONObject[] retval = new JSONObject[1];
+		retval[0] = new JSONObject();
 		retval[0].put("ServerResponse", 400);
 		final CountDownLatch latch = new CountDownLatch(1);
 		

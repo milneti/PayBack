@@ -4,6 +4,7 @@ package com.example.payback;
 import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 
 public class MainActivity extends TitleActivity
@@ -19,7 +20,14 @@ public class MainActivity extends TitleActivity
     	broadcastIntent.setAction("com.Payback.StayLoggedIn_Intent");
     	sendBroadcast(broadcastIntent);
 	}
-
+	/*
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) 
+	{
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	*/
     public void CreateTrsn(View view)
     {
     	user.setnoneselected();

@@ -1,18 +1,18 @@
 package com.example.payback;
 
-
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.Intent;
@@ -34,29 +34,20 @@ import com.example.payback.User;
  */
 public class LoginActivity extends TitleActivity
 {
-	/*static Activity activityInstance;	//these are variables
-	static MustLogoutReceiver mlr;		//used for MustLogoutReceiver.java
-	static IntentFilter filter;*/
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		setTitle("PayBack");
-		Toast.makeText(getApplicationContext(),"opened", Toast.LENGTH_SHORT).show();
-		checkCache();
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		super.onCreateOptionsMenu(menu);
-		getMenuInflater().inflate(R.menu.login, menu);
-		return true;
+		try {
+			checkCache();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void Login(View view) throws InterruptedException, JSONException 
+	public void Login(View view) throws InterruptedException, JSONException, IOException 
 	{
 
 		//for log in, url stub is AccountLogin.php
@@ -90,25 +81,27 @@ public class LoginActivity extends TitleActivity
 			if(AccessNet.AccountLogin(email,password)){
 				if (((CheckBox)findViewById(R.id.rememberLogin)).isChecked())
 					rememberLogin();
+				else
+					removeLoginFile();
 				
 
 				CONLOG.info("Server call successful and logged in!");
 				Intent intent = new Intent(this, MainActivity.class);
 				
-				/* Will's new additions */
-				user = new User(email, password); //user is declared in TitleActivity, which every activity extends
-				
-				/* Will's old additions */
-				/*
-				SharedPreferences prefs = this.getSharedPreferences("com.example.payback", Context.MODE_PRIVATE);
-				User u = new User(email); //the rest is looked up from the server
-				String userKey = "com.example.payback.user";
-				String userVal = u.userToString();
-				prefs.edit().putString(userKey, userVal).commit();
-				*/
-				
-				Toast.makeText(getApplicationContext(),"Welcome", Toast.LENGTH_SHORT).show();
+				//user is declared in TitleActivity, which every activity extends
+				user = new User(email, password); 
 
+				JSONObject friends = AccessNet.lookupFriends(email,password);
+				user.setFriends(parseFriends(friends));
+				/*
+				ArrayList<Friend> dummy = new ArrayList<Friend>();
+				dummy.add(new Friend());
+				
+				if(friends.getString("NULL").equalsIgnoreCase("false"))
+					user.setFriends(dummy);
+				else
+					user.setFriends(parseFriends(friends));
+					*/
 				startActivity(intent);
 				Toast.makeText(getApplicationContext(),"Welcome", Toast.LENGTH_SHORT).show();
 				this.finish();
@@ -121,63 +114,50 @@ public class LoginActivity extends TitleActivity
 			}
 		}
 	}
-	
-	public void checkCache()
+	public void removeLoginFile()
 	{
-		Toast.makeText(getApplicationContext(),"inCache", Toast.LENGTH_SHORT).show();
-		try {
-			FileInputStream fis = openFileInput("login_info");
-			//Toast.makeText(getApplicationContext(),fis.read(), Toast.LENGTH_SHORT).show();
-			String fileData = "";
-			String line = "";
-			BufferedReader reader = new BufferedReader(new InputStreamReader(fis,fileData));
-			StringBuilder builder = new StringBuilder();
-			while(( line = reader.readLine()) != null )
+		File inputFile = new File(getApplicationContext().getFilesDir(),"login_info");
+		if(inputFile.exists())
+		{
+			getApplicationContext().deleteFile("login_info");
+		}
+	}
+	public void checkCache() throws IOException
+	{
+		File inputFile = new File(getApplicationContext().getFilesDir(),"login_info");
+		String fileData = "";
+		if(inputFile.exists()){
+			
+			FileInputStream fis = new FileInputStream(inputFile);
+			int content;
+			
+			while(( content = fis.read()) != -1 )
 			{
-		         builder.append( line );
-		         builder.append( '\n' );
+		         fileData+=(char)content;
 		    }
-			fileData = builder.toString();
-			
-			Toast.makeText(getApplicationContext(),fileData, Toast.LENGTH_LONG).show();
-			
-		} 
-		catch (FileNotFoundException e) 
-		{
-			Toast.makeText(getApplicationContext(),"FileError", Toast.LENGTH_SHORT).show();
-		} 
-		catch (IOException e) 
-		{
-			Toast.makeText(getApplicationContext(),"IOError", Toast.LENGTH_SHORT).show();
+			fis.close();
+		
+			CheckBox rememberLogin = (CheckBox)findViewById(R.id.rememberLogin);
+			EditText email = (EditText)findViewById(R.id.email);
+			EditText password = (EditText)findViewById(R.id.password);
+			rememberLogin.setChecked(true);
+			email.setText(fileData.substring(0,fileData.indexOf(" ")));
+			password.setText(fileData.substring(fileData.indexOf(" ")+1,fileData.length()));			
 		}
 	}
 	
-	public void rememberLogin()
+	public void rememberLogin() throws IOException
 	{
 		String filename = "login_info";
 		String storeData = "";
 	 
 		String email = ((EditText)findViewById(R.id.email)).getText().toString();
 		String password = ((EditText)findViewById(R.id.password)).getText().toString();
-		storeData = "email " + email.toString() + " password " + password.toString();
-		Toast.makeText(getApplicationContext(),storeData, Toast.LENGTH_LONG).show();
-
-		try 
-		{
-			FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
-			fos.write(storeData.getBytes());
-			String msg = storeData + " written!";
-			Toast.makeText(getApplicationContext(),msg, Toast.LENGTH_LONG).show();
-			fos.close();
-		} 
-		catch (FileNotFoundException e) 
-		{
-			e.printStackTrace();
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
+		storeData = email + " " + password;
+	
+		FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
+		fos.write(storeData.getBytes());
+		fos.close();
 	}
 
 	public void CreateAccount(View view)
@@ -193,5 +173,23 @@ public class LoginActivity extends TitleActivity
 		
         startActivity(intent);
         this.finish();
+	}
+	
+	public ArrayList<Friend> parseFriends(JSONObject friends){
+		ArrayList<Friend> list = new ArrayList<Friend>();	
+		try {
+			JSONArray array = friends.getJSONArray("FriendOfMatches");
+			for(int i = 0; i < array.length(); i++){
+				JSONObject obj = array.getJSONObject(i);
+				Friend f = new Friend();
+				f.setfName(obj.getString("Fname"));
+				f.setlName(obj.getString("Lname"));
+				f.setEmail(obj.getString("Email"));
+				list.add(f);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 }

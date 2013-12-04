@@ -38,11 +38,11 @@
 
                 <CheckBox
                     android:id="@+id/rememberLogin"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:layout_weight="0.73"
-                    android:text="Remember Me?" />
+                    android:text="@string/remember" />
 
                 <Button
                     android:id="@+id/sign_in_button"
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="bypass"
-                android:text="Developer Mode" />
+                android:text="@string/developerMode" />
 
         </LinearLayout>
 

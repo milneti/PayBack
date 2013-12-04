@@ -5,16 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -96,17 +93,7 @@ public class Transaction4Activity extends TitleActivity
 		item.put("data", data);
 		return item;
 	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.transaction4, menu);
-		return true;
-	}
-	
-	//SeekBar sb = (SeekBar) findViewById(R.id.seekBar1);
-	
+
 	public void showTrans3(View view)
     {
 	    Bundle oldbundle = getIntent().getExtras();
