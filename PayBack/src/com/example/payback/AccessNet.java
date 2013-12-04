@@ -14,6 +14,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -124,19 +125,10 @@ class AccessNet{
 		return retval;
 	}
 	public static JSONObject lookupFriends(String uemail, String password) throws InterruptedException, JSONException{
-		JSONObject retval = new JSONObject();
 		String params = "userEmail="+uemail+"&password="+password;
 		String urlstub = "db_friendof_selectAll.php";
 		JSONObject status = jsonServerCall(urlstub, params); //fails in server call.
-		
-		if(status.has("AccountID"))
-			retval = status;
-		else{
-			String JSONString = "{\"NULL\":\"false\"}";
-			retval = new JSONObject(JSONString);
-			
-		}
-		return retval;
+		return status;
 	}
 	
 	
@@ -228,7 +220,8 @@ class AccessNet{
 		items[0] = "400 Bad Request";
 		items[1] = params;
 		final JSONObject[] retval = new JSONObject[1];
-		retval[0].put("ServerResponse", 400);
+		retval[0] = new JSONObject();
+		retval[0].put("ServerResponse", "400");
 		final CountDownLatch latch = new CountDownLatch(1);
 		
 		try {
