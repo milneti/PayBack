@@ -3,7 +3,9 @@ package com.example.payback;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,15 +15,25 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-		public class ResolveTransactionActivity extends TitleActivity {
-			
-			static final boolean DEMO = true;
-			
-			@Override
+public class ResolveTransactionActivity extends TitleActivity
+{
+	static final boolean DEMO = true;
+	
+	static Activity activityInstance;	//these are variables
+	static PageKillReceiver pkr;		//used for PageKillReceiver.java
+	static IntentFilter filter;
+	
+	@Override
 			protected void onCreate(Bundle savedInstanceState) {
 				super.onCreate(savedInstanceState);
 				modifyTitle("Resolve Transactions",R.layout.activity_resolve_transaction1);
 		
+				activityInstance = this;
+				pkr = new PageKillReceiver(); pkr.setActivityInstance(activityInstance);
+				filter = new IntentFilter();
+				filter.addAction("com.Payback.Logout_Intent");
+				registerReceiver(pkr, filter);
+				
 				user.setTransactions(ResolveTransaction.updateTransactions(user.getEmail())); //transactions updated every time this page is loaded
 				
 				ArrayList<ResolveTransaction> trans = user.getTransactions();
@@ -41,14 +53,12 @@ import android.widget.TextView;
 					//final StableArrayAdapter adapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, al);
 				TransAdapter ta = new TransAdapter(this, android.R.layout.simple_list_item_1, trans);
 				listview.setAdapter(ta);
-				setContentView(listview);
-				
-				
-				
+				setContentView(listview);	
 			}
 
 			@Override
-			public boolean onCreateOptionsMenu(Menu menu) {
+			public boolean onCreateOptionsMenu(Menu menu) 
+			{
 				// Inflate the menu; this adds items to the action bar if it is present.
 				getMenuInflater().inflate(R.menu.resolve_transaction, menu);
 				return true;
@@ -80,9 +90,5 @@ import android.widget.TextView;
 			    date.setText(al.get(position).getDate());
 			    message.setText(al.get(position).getMessage());
 			    return rowView;
-			    
-
 			}
 		}
-
-
