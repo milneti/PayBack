@@ -90,8 +90,9 @@ public class LoginActivity extends TitleActivity
 				
 				//user is declared in TitleActivity, which every activity extends
 				user = new User(email, password); 
-				
-				//JSONObject friends = AccessNet.lookupFriends(email,password);
+
+				JSONObject friends = AccessNet.lookupFriends(email,password);
+				user.setFriends(parseFriends(friends));
 				/*
 				ArrayList<Friend> dummy = new ArrayList<Friend>();
 				dummy.add(new Friend());

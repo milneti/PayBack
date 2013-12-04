@@ -13,6 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -133,19 +134,9 @@ class AccessNet{
 	}
 	
 	public static JSONObject lookupFriends(String uemail, String password) throws InterruptedException, JSONException{
-		JSONObject retval = new JSONObject();
 		String params = "userEmail="+uemail+"&password="+password;
 		String urlstub = "db_friendof_selectAll.php";
-		JSONObject status = jsonServerCall(urlstub, params); //fails in server call.
-		//TODO
-		if(status.has("AccountID"))
-			retval = status;
-		else{
-			String JSONString = "{\"NULL\":\"false\"}";
-			retval = new JSONObject(JSONString);
-			
-		}
-		return retval;
+		return jsonServerCall(urlstub, params); 
 	}
 	
 	public static JSONObject lookupNotifsDate(String uemail, String password, String value) throws InterruptedException, JSONException{
@@ -158,20 +149,9 @@ class AccessNet{
 		return lookupNotifs(uemail, password, value,"emailin");	
 	}
 	public static JSONObject lookupNotifs(String uemail, String password, String value, String attribute) throws InterruptedException, JSONException{
-		JSONObject retval = new JSONObject();
-		JSONObject status;
 		String params = "userEmail="+uemail+"&password="+password+"&attribute="+attribute;
-		String urlstub = "db_friendof_selectAll.php";
-			
-		status = jsonServerCall(urlstub, params);
-		if(status.has("AccountID"))
-			retval = status;
-		else{
-			String JSONString = "{\"NULL\":\"false\"}";
-			retval = new JSONObject(JSONString);
-			
-		}
-		return retval;
+		String urlstub = "db_friendof_selectAll.php";	
+		return jsonServerCall(urlstub, params);
 	}
 	
 	public static boolean modifyUserEmail(String uemail, String password, String value, String attribute) throws InterruptedException{
@@ -286,7 +266,8 @@ class AccessNet{
 		items[0] = "400 Bad Request";
 		items[1] = params;
 		final JSONObject[] retval = new JSONObject[1];
-		retval[0].put("ServerResponse", "400");
+		retval[0] = new JSONObject();
+		retval[0].put("ServerResponse", 400);
 		final CountDownLatch latch = new CountDownLatch(1);
 		
 		try {
