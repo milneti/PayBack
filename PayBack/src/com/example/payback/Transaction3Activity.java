@@ -46,18 +46,8 @@ public class Transaction3Activity extends TitleActivity {
 		filterNBR = new IntentFilter();
 		filterNBR.addAction("com.Payback.MainActivity_Intent");
 		registerReceiver(nbr, filterNBR);
-
-
-
 	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.transaction3, menu);
-		return true;
-	}
-	
+
 	public void onRadioButtonClicked(View view)
 	{
 //		Bundle oldbundle = getIntent().getExtras();

@@ -18,7 +18,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0"
-                android:text="First Name:"
+                android:text="@string/firstNameSettings"
                 android:textColor="@color/White" />
             <EditText
                 android:id="@+id/firstName"
@@ -37,7 +37,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0"
-                android:text="Last Name:"
+                android:text="@string/lastNameSettings"
                 android:textColor="@color/White" />
             <EditText
                 android:id="@+id/lastName"
