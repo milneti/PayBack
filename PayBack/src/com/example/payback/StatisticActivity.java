@@ -45,55 +45,78 @@ public class StatisticActivity extends TitleActivity
     }    
     
     public void displayValue ()
-    {    	
-    	double standingPayables = getStandingPayables();
-    	double standingReceivables = getStandingReceivables();
-    	
-    	double totalPayables = getTotalPayables();
-    	double totalReceivables = getTotalReceivables();
-    	
-    	//Append value to textview
-    	TextView standingPayableTextView = (TextView) findViewById(R.id.standingPayables);
-    	standingPayableTextView.append(String.format("$%.2f", standingPayables));
-    	TextView StandingReceivableTextView = (TextView) findViewById(R.id.standingReceivables);
-    	StandingReceivableTextView.append(String.format("$%.2f", standingReceivables));
-    	TextView TotalPayableTextView = (TextView) findViewById(R.id.totalPayables);
-    	TotalPayableTextView.append(String.format("$%.2f", totalPayables));
-    	TextView TotalReceivableTextView = (TextView) findViewById(R.id.totalReceivables);
-    	TotalReceivableTextView.append(String.format("$%.2f", totalReceivables));
-    	
-//    	LineGraph line = new LineGraph();
-//    	//Display graph in view
-//    	GraphicalView gView = line.getTestView(this);
+    {   
+//    	double currentPayables = getcurrentPayables();
+//    	double currentReceivables = getcurrentReceivables();
+//    	
+//    	double totalPayables = getTotalPayables();
+//    	double totalReceivables = getTotalReceivables();
+//    	
+//    	//Append value to textview
+//    	TextView currentPayableTextView = (TextView) findViewById(R.id.currentPayables);
+//    	currentPayableTextView.append(String.format("$%.2f", currentPayables));
+//    	TextView currentReceivableTextView = (TextView) findViewById(R.id.currentReceivables);
+//    	currentReceivableTextView.append(String.format("$%.2f", currentReceivables));
+//    	TextView TotalPayableTextView = (TextView) findViewById(R.id.totalPayables);
+//    	TotalPayableTextView.append(String.format("$%.2f", totalPayables));
+//    	TextView TotalReceivableTextView = (TextView) findViewById(R.id.totalReceivables);
+//    	TotalReceivableTextView.append(String.format("$%.2f", totalReceivables));
+//    	
+//    	//Display Pie Graph
+//    	PieGraph pie = new PieGraph();
+//    	GraphicalView gView = pie.getTwoSectionView(this, totalPayables, totalReceivables);
 //    	LinearLayout chartView = (LinearLayout) findViewById(R.id.chart);
-//    	chartView.addView(gView); 
-    	
-    	//Display Pie Graph
-    	PieGraph pie = new PieGraph();
-    	GraphicalView gView = pie.getTwoSectionView(this, totalPayables, totalReceivables);
-    	LinearLayout chartView = (LinearLayout) findViewById(R.id.chart);
-    	chartView.addView(gView);
+//    	chartView.addView(gView);
     }
     
-    public double getStandingPayables ()
-    {
-    	return 5;
-    }
+//    public double getcurrentPayables ()
+//    {
+//     	
+//    	/*get JSON*/
+//    	JSONOBJECT jObject = new JSONObject();
+//    	JSONArray transactionJSONArray = JObject.getJSONArray("Transaction");
+//    	
+//    	/*get current payable*/    	
+//    	double currentPayable = getCurrentPayableFromJSONArray(transactionJSONArray);
+//    	
+//    	return currentPayable;
+//    }
     
-    public double getTotalPayables ()
-    {
-    	return 50;
-    }
+//    public double getTotalPayables ()
+//    {
+//    	/*get JSON*/
+//    	JSONOBJECT jObject = new JSONObject();
+//    	JSONArray transactionJSONArray = JObject.getJSONArray("Transaction");
+//    	
+//    	/*get total payable*/
+//    	double totalPayable = getTotalPayableFromJSONArray(transactionJSONArray);
+//    	
+//    	return totalPayable;
+//    }
     
-    public double getStandingReceivables ()
-    {
-    	return 10;
-    }
+//    public double getcurrentReceivables ()
+//    {
+//    	/*get JSON*/
+//    	JSONOBJECT jObject = new JSONObject();
+//    	JSONArray transactionJSONArray = JObject.getJSONArray("Transaction");
+//    	
+//    	/*get current receivable*/
+//    	double currentReceivable = getCurrentRecievableFromJSONArray(transactionJSONArray);
+//    
+//    	return currentReceivable;
+//    }
     
-    public double getTotalReceivables ()
-    {
-    	return 100;
-    }
+//    public double getTotalReceivables ()
+//    {
+//    	/*get JSON*/
+//    	JSONOBJECT jObject = new JSONObject();
+//    	JSONArray transactionJSONArray = JObject.getJSONArray("Transaction");
+//    	
+//    	/*get total receivable*/
+//    	double totalReceivable = getTotalReceivableFromJSONArray(payableJSONArray);
+//    	
+//    	return totalReceivable;
+//    }
         
     public TimeSeries getPayableSeries (String seriesName)
     {
@@ -121,32 +144,7 @@ public class StatisticActivity extends TitleActivity
 		return series;
 		
 	}
-    
-    public double getPayablesOverTime ()
-    {
-		int[] x = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }; // x values!
-		int[] y =  { 30, 34, 45, 57, 77, 89, 100, 111 ,123 ,145 }; // y values!
-		TimeSeries series = new TimeSeries("Line1"); 
-		for( int i = 0; i < x.length; i++)
-		{
-			series.add(x[i], y[i]);
-		}
-		
-    	return 5.00;
-    }
-    
-    public double getReceivablesOverTime ()
-    {
-		int[] x = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }; // x values!
-		int[] y =  { 30, 34, 45, 57, 77, 89, 100, 111 ,123 ,145 }; // y values!
-		TimeSeries series = new TimeSeries("Line1"); 
-		for( int i = 0; i < x.length; i++)
-		{
-			series.add(x[i], y[i]);
-		}
-		
-    	return 5.00;
-    }
+	
     public void showMainMenu(View view) {
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);

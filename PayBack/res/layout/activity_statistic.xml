@@ -19,22 +19,22 @@
         android:orientation="vertical" >
 
 	    <TextView
-	        android:id="@+id/standingPayables"
+	        android:id="@+id/currentPayables"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignLeft="@+id/linearLayout1"
 	        android:padding="5dp"
 	        android:textColor="@color/White"
-	        android:text="Standing Payables: " />
+	        android:text="Current Payables: " />
 
 	    <TextView
-	        android:id="@+id/standingReceivables"
+	        android:id="@+id/currentReceivables"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignLeft="@+id/linearLayout1"
 	        android:padding="5dp"
 	        android:textColor="@color/White"
-	        android:text="Standing Receivables: " />
+	        android:text="Current Receivables: " />
 
 	    <TextView
 	        android:id="@+id/totalPayables"
