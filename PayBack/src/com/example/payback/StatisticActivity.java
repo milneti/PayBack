@@ -166,7 +166,8 @@ public class StatisticActivity extends TitleActivity
 		
 		return series;
     }
-    
+
+/**For implementing the payable line graph*/
 //    public int[] getNumTransactionX()
 //    {
 //    	/*get JSON*/
@@ -181,23 +182,27 @@ public class StatisticActivity extends TitleActivity
 //    	}
 //    }
     
-	 public double[] getPayableY()
-	 {
-		/*get JSON*/
-    	JSONOBJECT jObject = new JSONObject();
-    	JSONArray transactionJSONArray = JObject.getJSONArray("Transaction");
-    	int numTransaction = JObject.getInt("numTransaction");
-		
-    	/*get payable array*/
-    	double[] payableArray = getPayableArray();
-    	
-		/*creating the y axis*/
-    	int[] y = new int[numTransaction];    	
-    	for(int i = 0; i < numTransaction; i++);
-	 	{
-	 		y[i] = i+1;
-	 	}
-	 }
+//	 public double[] getPayableY()
+//	 {
+//		/*get JSON*/
+//    	JSONOBJECT jObject = new JSONObject();
+//    	JSONArray transactionJSONArray = JObject.getJSONArray("Transaction");
+//    	int numTransaction = JObject.getInt("numTransaction");
+//		
+//    	/*get payable array*/
+//    	double[] payableArray = getPayableArray();
+//    	
+//		/*creating the y axis*/
+//    	int[] y = new int[numTransaction];    	
+//    	for(int i = 0; i < numTransaction; i++);
+//	 	{
+//	 		if(int i == 0)
+//	 		{
+//	 			y[i] = payable[1];
+//	 		}
+//	 		y[i] = i+1;
+//	 	}
+//	 }
     
 	public TimeSeries getReceivableSeries (String seriesName)
 	{
