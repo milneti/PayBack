@@ -113,9 +113,45 @@ public class StatisticActivity extends TitleActivity
 //    	JSONArray transactionJSONArray = JObject.getJSONArray("Transaction");
 //    	
 //    	/*get total receivable*/
-//    	double totalReceivable = getTotalReceivableFromJSONArray(payableJSONArray);
+//    	double totalReceivable = getTotalReceivableFromJSONArray(transactionJSONArray);
 //    	
 //    	return totalReceivable;
+//    }
+    
+//    public double getCurrentPayableFromJSONArray(transactionJSONArray)
+//    {
+//    	/*get array of payable*/
+//    	
+//    	/*sum up total not including those already paid off*/
+//    	
+//    	/*return value*/
+//    }
+//    
+//    public double getTotalPayableFromJSONArray(transactionJSONArray)
+//    {
+//    	/*get array of payable*/
+//    	
+//    	/*sum up total*/
+//    	
+//    	/*return value*/
+//    }
+//    
+//    public double getCurrentReceivableFromJSONArray(transactionJSONArray)
+//    {
+//    	/*get array of receivable*/
+//    	
+//    	/*sum up total not including those already paid off*/
+//    	
+//    	/*return value*/
+//    }
+//    
+//    public double getTotalReceivableFromJSONArray(transactionJSONArray)
+//    {
+//    	/*get array of receivable*/
+//    	
+//    	/*sum up total*/
+//    	
+//    	/*return value*/
 //    }
         
     public TimeSeries getPayableSeries (String seriesName)
