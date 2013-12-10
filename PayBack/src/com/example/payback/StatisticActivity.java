@@ -157,7 +157,7 @@ public class StatisticActivity extends TitleActivity
     public TimeSeries getPayableSeries (String seriesName)
     {
     	int[] x = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }; // x values!
-		int[] y =  { 30, 34, 45, 57, 77, 89, 100, 111 ,123 ,145 }; // y values!
+		double[] y =  { 30, 34, 45, 57, 77, 89, 100, 111 ,123 ,145 }; // y values!
 		TimeSeries series = new TimeSeries(seriesName); 
 		for( int i = 0; i < x.length; i++)
 		{
@@ -166,6 +166,38 @@ public class StatisticActivity extends TitleActivity
 		
 		return series;
     }
+    
+//    public int[] getNumTransactionX()
+//    {
+//    	/*get JSON*/
+//    	JSONOBJECT jObject = new JSONObject();
+//    	int numTransaction = JObject.getInt("numTransaction");
+//    	
+//    	/*creating the x axis*/
+//    	int[] x = new int[numTransaction];
+//    	for(int i = 0; i < numTransaction; i++)
+//    	{
+//    		x[i] = i+1;
+//    	}
+//    }
+    
+	 public double[] getPayableY()
+	 {
+		/*get JSON*/
+    	JSONOBJECT jObject = new JSONObject();
+    	JSONArray transactionJSONArray = JObject.getJSONArray("Transaction");
+    	int numTransaction = JObject.getInt("numTransaction");
+		
+    	/*get payable array*/
+    	double[] payableArray = getPayableArray();
+    	
+		/*creating the y axis*/
+    	int[] y = new int[numTransaction];    	
+    	for(int i = 0; i < numTransaction; i++);
+	 	{
+	 		y[i] = i+1;
+	 	}
+	 }
     
 	public TimeSeries getReceivableSeries (String seriesName)
 	{
