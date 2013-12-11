@@ -67,7 +67,7 @@ public class PieGraph {
 		series.add("Payables", standingPayables);
 		series.add("Receivables", standingReceivables);
 
-		int[] colors = new int[] { Color.BLUE, Color.GREEN };
+		int[] colors = new int[] { Color.RED, Color.BLUE };
 
 		DefaultRenderer renderer = new DefaultRenderer();
 		for (int color : colors) {
@@ -75,9 +75,10 @@ public class PieGraph {
 			r.setColor(color);
 			renderer.addSeriesRenderer(r);
 		}
-		renderer.setChartTitle("Payables versus Receivables");
-		renderer.setChartTitleTextSize(7);
-		renderer.setZoomButtonsVisible(true);
+		renderer.setChartTitleTextSize(12);
+		renderer.setLabelsTextSize(12);
+		renderer.setPanEnabled(false);
+		renderer.setZoomButtonsVisible(false);
 
 		return ChartFactory.getPieChartView(context, series, renderer);
 	}

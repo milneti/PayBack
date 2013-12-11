@@ -33,13 +33,6 @@ public class StatisticActivity extends TitleActivity
 
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.statistic, menu);
-		return true;
-	}
-    
     public void displayTransactionsHistory (View view)
     {
     	LineGraph line = new LineGraph();
@@ -47,7 +40,7 @@ public class StatisticActivity extends TitleActivity
     	TimeSeries receivableSeries = getReceivableSeries("Receivable");
     	
     	//Open a new activity to display the graph
-    	Intent lineIntent = line.getTwoLineIntent(this, payableSeries, receivableSeries, "Transaction History");
+    	Intent lineIntent = line.getTwoLineIntent(this, payableSeries, receivableSeries, "Transactions History");
     	startActivity(lineIntent);
     }    
     

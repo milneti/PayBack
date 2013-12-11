@@ -59,5 +59,7 @@
     <string name="DeleteContact">Delete Contact</string>
     <string name="pagename">PageName</string>
     <string name="resolvetransaction_activity_title">Resolve A Transaction</string>
+    <string name="developerMode">Developer Mode</string>
+    <string name="remember">Remember Me?</string>
 
 </resources>

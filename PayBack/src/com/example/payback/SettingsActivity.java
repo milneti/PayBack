@@ -32,13 +32,6 @@ public class SettingsActivity extends TitleActivity
 		registerReceiver(pkr, filter);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.settings, menu);
-		return true;
-	}
-
 	public void showEditPassword(View view) {
 		LayoutInflater inflater = this.getLayoutInflater();
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
