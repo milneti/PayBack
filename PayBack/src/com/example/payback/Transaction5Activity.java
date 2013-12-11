@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONException;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -148,7 +150,12 @@ public class Transaction5Activity extends TitleActivity
 
 	    for(int i = 0; i < borrowers.size(); i++){
 	    	try {
-	    		AccessNet.AddTrans(from, fromPass, borrowAmount.get(i), comment, from, borrowers.get(i).getEmail());
+	    		try {
+					AccessNet.AddTrans(from, fromPass, borrowAmount.get(i), comment, from, borrowers.get(i).getEmail());
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	    		//AccessNet.AddNotif(from, fromPass, "New Transaction From: " + from, borrowers.get(i).getEmail());
 				
 	    	} catch (InterruptedException e) {
