@@ -148,16 +148,16 @@ class AccessNet{
 		return jsonServerCall(urlstub, params);
 	}
 	
-	public static boolean modifyUserEmail(String uemail, String password, String value, String attribute) throws InterruptedException{
+	public static boolean modifyUserEmail(String uemail, String password, String value) throws InterruptedException{
 		return modifyUser(uemail,password,value,"email");
 	}
-	public static boolean modifyUserPassword(String uemail, String password, String value, String attribute) throws InterruptedException{
+	public static boolean modifyUserPassword(String uemail, String password, String value) throws InterruptedException{
 		return modifyUser(uemail,password,value,"password");
 	}
-	public static boolean modifyUserFirstName(String uemail, String password, String value, String attribute) throws InterruptedException{
+	public static boolean modifyUserFirstName(String uemail, String password, String value) throws InterruptedException{
 		return modifyUser(uemail,password,value,"fname");
 	}
-	public static boolean modifyUserLastName(String uemail, String password, String value, String attribute) throws InterruptedException{
+	public static boolean modifyUserLastName(String uemail, String password, String value) throws InterruptedException{
 		return modifyUser(uemail,password,value,"lname");
 	}
 	public static boolean modifyUser(String uemail, String password, String value, String attribute) throws InterruptedException{
@@ -167,8 +167,9 @@ class AccessNet{
 		String status = "fail";
 		//calling server
 		status = simpleServerCall(urlstub, params);
-		if(status.equalsIgnoreCase("success")||status.equalsIgnoreCase("1")||status.equalsIgnoreCase("true"))
+		if(status.equalsIgnoreCase("success")||status.equalsIgnoreCase("1")||status.equalsIgnoreCase("true")) {
 			retval=true;
+		}
 		return retval;
 	}
 	

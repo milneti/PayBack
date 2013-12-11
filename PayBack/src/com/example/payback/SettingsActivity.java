@@ -74,13 +74,17 @@ public class SettingsActivity extends TitleActivity
 		
 		if(newPassText.equals(confirmPassText)) {
 			try {
-				String call = AccessNet.simpleServerCall("db_account_userModify.php", "email="+user.email+"&password="+oldPassText+"&attribute=password&value="+newPassText);
-				Toast.makeText(getApplicationContext(), call, Toast.LENGTH_SHORT).show();
+				boolean success = AccessNet.modifyUserPassword(user.email, oldPassText, newPassText);
+				if(success) {
+					Toast.makeText(getApplicationContext(), "Password changed!", Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(getApplicationContext(), "Incorrect Password!", Toast.LENGTH_SHORT).show();
+				}
 			} catch (InterruptedException e) {
-				
+				Toast.makeText(getApplicationContext(), "Problem with server connection", Toast.LENGTH_SHORT).show();
 			}
 		} else {
-			Toast.makeText(getApplicationContext(), "Your new password isn't repeated correctly!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "Passwords don't match!", Toast.LENGTH_SHORT).show();
 		}
 	}
 	
