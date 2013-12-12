@@ -106,7 +106,7 @@ public class Transaction4Activity extends TitleActivity
 	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
 	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
 
-    	Intent intent = new Intent(this, Transaction3Activity.class);
+    	Intent intent = new Intent(this, Transaction2Activity.class);
         Bundle Bundle = new Bundle();
         
         Bundle.putInt("Transaction1transCost", transCostInt);

@@ -108,7 +108,7 @@ public class Transaction5Activity extends TitleActivity
         
 	    
 	    if(button1Selected){
-	    	Intent intent = new Intent(this, Transaction3Activity.class);
+	    	Intent intent = new Intent(this, Transaction2Activity.class);
 	        Bundle Bundle = new Bundle();
 	        
 	        Bundle.putInt("Transaction1transCost", transCostInt);
