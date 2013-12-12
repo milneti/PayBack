@@ -48,6 +48,12 @@ public class LoginActivity extends TitleActivity
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public void onBackPressed() 
+	{
+		finish();
+        System.exit(0);
+	}
 	
 	public void Login(View view) throws InterruptedException, JSONException, IOException 
 	{

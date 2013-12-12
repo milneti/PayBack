@@ -78,7 +78,10 @@ public class User extends Account{
 			trans.setLenderEmail(uEmail);
 			trans.setBorrowerEmail(arr.getJSONObject(i).get("Email").toString());
 			trans.setAmount(Double.parseDouble(arr.getJSONObject(i).get("Amount").toString()));
-			trans.setComment(arr.getJSONObject(i).get("Comment").toString());
+			if(arr.getJSONObject(i).has("Comment"))
+				trans.setComment(arr.getJSONObject(i).get("Comment").toString());
+			else
+				trans.setComment("No Comment");
 		}
 	}
 	public ArrayList<BaseTransaction> getTransLend(){

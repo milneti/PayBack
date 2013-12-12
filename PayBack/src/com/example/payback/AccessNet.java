@@ -131,22 +131,29 @@ class AccessNet{
 	
 	public static boolean DeleteAllNotif(String uemail, String password) throws InterruptedException, JSONException{
 		boolean retval = false;
+		Logger DELLOG = Logger.getLogger(AccessNet.class .getName());
+		DELLOG.setLevel(Level.INFO);
 		String params = "userEmail="+uemail+"&password="+password;
 		String urlstub = "db_notif_deleteAll.php";
 		//calling server
-		JSONObject obj = jsonServerCall(urlstub, params);
-		if(obj.get("result").toString().equalsIgnoreCase("1"))
+		
+		DELLOG.info("Starting Delete All Note");
+		String status = simpleServerCall(urlstub, params);
+		if(status.equalsIgnoreCase("success")||status.equalsIgnoreCase("1")||status.equalsIgnoreCase("true"))
 			retval=true;
 		return retval;
 	}
 	
 	public static boolean DeleteOneNotif(String uemail, String password, String nID) throws InterruptedException, JSONException{
 		boolean retval = false;
+		Logger DELLOG = Logger.getLogger(AccessNet.class .getName());
+		DELLOG.setLevel(Level.INFO);
 		String params = "userEmail="+uemail+"&password="+password+"&noteID="+nID;
 		String urlstub = "db_notif_deleteOne.php";
 		//calling server
-		JSONObject obj = jsonServerCall(urlstub, params);
-		if(obj.get("result").toString().equalsIgnoreCase("1"))
+		DELLOG.info("Starting Delete one Note");
+		String status = simpleServerCall(urlstub, params);
+		if(status.equalsIgnoreCase("success")||status.equalsIgnoreCase("1")||status.equalsIgnoreCase("true"))
 			retval=true;
 		return retval;
 	}
@@ -169,17 +176,17 @@ class AccessNet{
 		return jsonServerCall(urlstub, params); 
 	}
 	
-	public static JSONObject lookupNotifsDate(String uemail, String password) throws InterruptedException, JSONException{
-		return lookupNotifs(uemail, password, "date");
+	public static JSONObject lookupNotifsDate(String uemail, String password, String date) throws InterruptedException, JSONException{
+		return lookupNotifs(uemail, password, "date", date);
 	}
-	public static JSONObject lookupNotifsEmailSent(String uemail, String password) throws InterruptedException, JSONException{
-		return lookupNotifs(uemail, password, "emailsent");	
+	public static JSONObject lookupNotifsEmailSent(String uemail, String password ) throws InterruptedException, JSONException{
+		return lookupNotifs(uemail, password, "emailsent", uemail);	
 	}
 	public static JSONObject lookupEmailIn(String uemail, String password) throws InterruptedException, JSONException{
-		return lookupNotifs(uemail, password, "emailin");	
+		return lookupNotifs(uemail, password, "emailin", uemail);	
 	}
-	public static JSONObject lookupNotifs(String uemail, String password, String attribute) throws InterruptedException, JSONException{
-		String params = "userEmail="+uemail+"&password="+password+"&attribute="+attribute;
+	public static JSONObject lookupNotifs(String uemail, String password, String attribute, String value) throws InterruptedException, JSONException{
+		String params = "email="+uemail+"&password="+password+"&attribute="+attribute+"&value="+value;
 		String urlstub = "db_notif_lookup.php";	
 		return jsonServerCall(urlstub, params);
 	}

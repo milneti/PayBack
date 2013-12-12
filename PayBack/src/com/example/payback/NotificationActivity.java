@@ -39,9 +39,9 @@ public class NotificationActivity extends TitleActivity
 		filter = new IntentFilter();
 		filter.addAction("com.Payback.Logout_Intent");
 		registerReceiver(pkr, filter);
-	
+	/*TODO*/
 		try {
-			user.setNotifications(user.parseNotifs(AccessNet.lookupNotifsDate(user.getEmail(),user.getPassword()),user.getEmail()));
+			user.setNotifications(user.parseNotifs(AccessNet.lookupNotifsEmailSent(user.getEmail(),user.getPassword()),user.getEmail()));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (JSONException e) {
