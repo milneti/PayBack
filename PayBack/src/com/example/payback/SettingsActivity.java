@@ -185,26 +185,64 @@ public class SettingsActivity extends TitleActivity
 		LayoutInflater inflater = this.getLayoutInflater();
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		
+		final View dialogLayout = inflater.inflate(R.layout.dialog_settings_name, null);
+		
 		builder.setTitle("Edit Name")
-			   .setView(inflater.inflate(R.layout.dialog_settings_name, null))
+			   .setView(dialogLayout)
 			   .setPositiveButton(R.string.back, new DialogInterface.OnClickListener() {
 				   public void onClick(DialogInterface dialog, int id) {
-					   Toast.makeText(getApplicationContext(),"Back", Toast.LENGTH_SHORT).show();				        	   
+					  // Toast.makeText(getApplicationContext(),"Back", Toast.LENGTH_SHORT).show();				        	   
 		        	   dialog.dismiss();
 				   }
 			   })
 			   .setNegativeButton(R.string.save_changes, new DialogInterface.OnClickListener() {
 				   public void onClick(DialogInterface dialog, int id) {
-					   Toast.makeText(getApplicationContext(), "Name Changed", Toast.LENGTH_SHORT).show();
-					   editName();
+					   //Toast.makeText(getApplicationContext(), "Name Changed", Toast.LENGTH_SHORT).show();
+					   editName(dialogLayout);
 				   }
 			   });
 		Dialog dialog = builder.create();
 		dialog.show();
 	}
 	
-	public void editName() {
-		//server call to edit name
+	public void editName(View layout) {
+		EditText fName = (EditText) layout.findViewById(R.id.firstName);
+		String fNameText = fName.getText().toString();
+		
+		EditText lName = (EditText) layout.findViewById(R.id.lastName);
+		String lNameText = lName.getText().toString();
+		
+		if(fNameText.isEmpty() && lNameText.isEmpty()) {
+			Toast.makeText(getApplicationContext(), "No new values were provided", Toast.LENGTH_SHORT).show();
+		} else {
+			try {
+				boolean success1 = false, success2 = false;
+				
+				if(!fNameText.isEmpty()) {
+					success1 = AccessNet.modifyUserFirstName(user.getEmail(), user.getPassword(), fNameText);
+					if(success1) {
+						user.setfName(fNameText);
+					} else {
+						Toast.makeText(getApplicationContext(), "Error editing display name", Toast.LENGTH_SHORT).show();
+					}
+				}
+				
+				if(!lNameText.isEmpty()) {
+					success2 = AccessNet.modifyUserLastName(user.getEmail(), user.getPassword(), lNameText);
+					if(success2) {
+						user.setlName(lNameText);
+					} else {
+						Toast.makeText(getApplicationContext(), "Error editing display name", Toast.LENGTH_SHORT).show();
+					}
+				}
+				
+				if(success1 || success2) {
+					Toast.makeText(getApplicationContext(), "Display name changed", Toast.LENGTH_SHORT).show();
+				}
+			} catch (InterruptedException e) {
+				Toast.makeText(getApplicationContext(), "Error connecting to server", Toast.LENGTH_SHORT).show();
+			}
+		}
 	}
 	
 	public void showMainMenu(View view) {
