@@ -1,5 +1,6 @@
 package com.example.payback;
 
+import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -83,6 +84,12 @@ public class SettingsActivity extends TitleActivity
 					if(success) {
 						Toast.makeText(getApplicationContext(), "Password changed!", Toast.LENGTH_SHORT).show();
 						user.setPassword(newPassText);
+						
+						File inputFile = new File(getApplicationContext().getFilesDir(),"login_info");
+						if(inputFile.exists())
+						{
+							getApplicationContext().deleteFile("login_info");
+						}
 					} else {
 						Toast.makeText(getApplicationContext(), "Incorrect Password!", Toast.LENGTH_SHORT).show();
 					}
