@@ -105,6 +105,12 @@ public class User extends Account{
 	public ArrayList<Friend> getFriends() {
 		return friends;
 	}
+	public ArrayList<Transaction> getTransLend(){
+		return transAsLend;
+	}
+	public ArrayList<Transaction> getTransBorrow(){
+		return transAsBorrow;
+	}
 	public void setFriends(ArrayList<Friend> friends) {
 		this.friends = friends;
 	}
