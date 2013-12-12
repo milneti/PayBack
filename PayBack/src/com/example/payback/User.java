@@ -99,6 +99,9 @@ public class User extends Account{
 	public String getPassword(){
 		return password;
 	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	
 	public void setnoneselected(){
 		for(int i = 0; i < friends.size(); i++){
