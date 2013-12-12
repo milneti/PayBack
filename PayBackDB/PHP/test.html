@@ -121,17 +121,68 @@
  </fieldset>
 </form>
 
-<form action="db_notif_lookup.php" method="post">
+<form action="db_notif_create.php" method="post">
  <fieldset>
- <legend>Lookup Notification Data:</legend>
-  'email': <input type="text" name="email"> <br>
+ <legend>Add Notification:</legend>
+  'userID': <input type="text" name="userID"> (OR) 'userEmail': <input type="text" name="userEmail"> <br>
+   User ID or email required.<br>
   'password': <input type="password" name="password"> <br>
-  'attribute': <br>
-  <input type="radio" name="attribute" value="date"> ='date' 
-  <input type="radio" name="attribute" value="emailsent"> ='emailsent' 
-  <input type="radio" name="attribute" value="emailin"> ='emailin'<br>
-  'value': <input type="text" name="value"> <br>
-  <input type="submit" value="Submit"> (db_notif_lookup.php)
+  'receiveID': <input type="text" name="receiveID"> (OR) 'receiveEmail': <input type="text" name="receiveEmail"> <br>
+   Receiver ID or email required.<br>
+  'transID': <input type="text" name="transID"> Linked transaction ID optional.<br>
+  'sendInfo': <input type="text" name="sendInfo"> Notification text required.<br>
+  <input type="submit" value="Submit"> (db_notif_create.php)
+ </fieldset>
+</form>
+
+<form action="db_notif_selectAll.php" method="post">
+ <fieldset>
+ <legend>Lookup All Notifications for User:</legend>
+  Returns all notifications (w/ sender info) where user is the receiver.<br>
+  'userID': <input type="text" name="userID"> (OR) 'userEmail': <input type="text" name="userEmail"> <br>
+   User ID or email required.<br>
+  'password': <input type="password" name="password"> User password required<br>
+  <input type="submit" value="Submit"> (db_notif_selectAll.php)
+ </fieldset>
+</form>
+
+
+<form action="db_notif_updateFlag.php" method="post">
+ <fieldset>
+ <legend>Update a Notification's ReadFlag by ID:</legend>
+  Updates flag for notification with given ID; user must be the receiver.<br>
+  'userID': <input type="text" name="userID"> (OR) 'userEmail': <input type="text" name="userEmail"> <br>
+   User ID or email required.<br>
+  'password': <input type="password" name="password"> User password required<br>
+  'noteID': <input type="text" name="noteID"> Notification ID required<br>
+  'setFlag': <br>
+  <input type="radio" name="setFlag" value="read"> ='read' (1)
+  <input type="radio" name="setFlag" value="unread"> ='unread' (0)<br>
+  <input type="submit" value="Submit"> (db_notif_updateFlag.php)
+ </fieldset>
+</form>
+
+
+<form action="db_notif_deleteAll.php" method="post">
+ <fieldset>
+ <legend>Delete All Notifications for User:</legend>
+  Deletes all notifications where user is the receiver.<br>
+  'userID': <input type="text" name="userID"> (OR) 'userEmail': <input type="text" name="userEmail"> <br>
+   User ID or email required.<br>
+  'password': <input type="password" name="password"> User password required<br>
+  <input type="submit" value="Submit"> (db_notif_deleteAll.php)
+ </fieldset>
+</form>
+
+<form action="db_notif_deleteOne.php" method="post">
+ <fieldset>
+ <legend>Delete a Notification by ID:</legend>
+  Deletes notification with given ID; user must be the receiver.<br>
+  'userID': <input type="text" name="userID"> (OR) 'userEmail': <input type="text" name="userEmail"> <br>
+   User ID or email required.<br>
+  'password': <input type="password" name="password"> User password required<br>
+  'noteID': <input type="text" name="noteID"> Notification ID required<br>
+  <input type="submit" value="Submit"> (db_notif_deleteOne.php)
  </fieldset>
 </form>
 
@@ -153,6 +204,13 @@
  <fieldset>
  <legend>View Transaction Table:</legend>
   <input type="submit" value="Submit"> (db_test_transactions.php)
+ </fieldset>
+</form>
+
+<form action="db_test_notifications.php" method="post">
+ <fieldset>
+ <legend>View Notification Table:</legend>
+  <input type="submit" value="Submit"> (db_test_notifications.php)
  </fieldset>
 </form>
 
