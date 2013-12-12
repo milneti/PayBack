@@ -103,11 +103,11 @@ class AccessNet{
 		return retval;
 	}
 
-	public static boolean AddTrans(String uemail, String password, double amount, String description, String lemail, String bemail) throws InterruptedException, JSONException{
+	public static boolean AddTrans(String uemail, String password, int amount, String description, String lemail, String bemail) throws InterruptedException, JSONException{
 		Logger TRANLOG = Logger.getLogger(AccessNet.class .getName());
 		TRANLOG.setLevel(Level.INFO);
 		boolean retval = false;
-		String params = "email="+uemail+"&password="+password+"&amount="+amount+"&description="+description+"&lenderEmail"+lemail+"&borrowerEmail="+bemail;
+		String params = "email="+uemail+"&password="+password+"&amount="+amount+"&description="+description+"&lenderEmail="+lemail+"&borrowerEmail="+bemail;
 		String urlstub = "db_transaction_create.php";
 		String status = "fail";
 		//calling server
