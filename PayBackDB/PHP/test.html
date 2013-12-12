@@ -1,0 +1,159 @@
+<html>
+<form action="db_account_create.php" method="post">
+ <fieldset>
+ <legend>Add Account:</legend>
+  First Name: <input type="text" name="fname"><br>
+  Last Name: <input type="text" name="lname"><br>
+  Email: <input type="text" name="email"><br>
+  Password: <input type="text" name="password"><br>
+  <input type="submit" value="Submit"> (db_account_create.php)
+ </fieldset>
+</form>
+
+<form action="db_verify_login.php" method="post">
+ <fieldset>
+ <legend>Sign in:</legend>
+  'userID': <input type="text" name="userID"> (OR) 'userEmail': <input type="text" name="userEmail"> <br>
+   User ID or email required.<br>
+  'password': <input type="password" name="password"> User password required<br>
+  <input type="submit" value="Submit"> (db_verify_login.php)
+ </fieldset>
+</form>
+
+<form action="db_account_userInfo.php" method="post">
+ <fieldset>
+ <legend>Lookup User Info:</legend>
+  'userID': <input type="text" name="userID"> (OR) 'userEmail': <input type="text" name="userEmail"> <br>
+   User ID or email required.<br>
+  'password': <input type="password" name="password"> User password required<br>
+  <input type="submit" value="Submit"> (db_account_userInfo.php)
+ </fieldset>
+</form>
+
+<form action="db_account_userModify.php" method="post">
+ <fieldset>
+ <legend>Modify User Info:</legend>
+  'userID': <input type="text" name="userID"> (OR) 'userEmail': <input type="text" name="userEmail"> <br>
+   User ID or email required.<br>
+  'password': <input type="password" name="password"> User password required<br>
+  'attribute': <br>
+  <input type="radio" name="attribute" value="email"> ='email' 
+  <input type="radio" name="attribute" value="password"> ='password'
+  <input type="radio" name="attribute" value="fname"> ='fname'
+  <input type="radio" name="attribute" value="lname"> ='lname'<br>
+  'value': <input type="text" name="value"> <br>
+  <input type="submit" value="Submit"> (db_account_userModify.php)
+ </fieldset>
+</form>
+
+<form action="db_transaction_create.php" method="post">
+ <fieldset>
+ <legend>Add Transaction:</legend>
+  'email': <input type="text" name="email"> user email (required)<br>
+  'password': <input type="password" name="password"> user password (required)<br>
+  'amount': <input type="text" name="amount"> Amount of transaction, ie 6.75<br>
+  'description': <input type="text" name="description"> Description (optional)<br>
+  'lenderEmail': <input type="text" name="lenderEmail"> Lender Email. Validates presence in Account Table.<br>
+  (OR) 'lenderID': <input type="text" name="lenderID"> Lender ID. Validates presence in Account Table.<br>
+  'borrowerEmail': <input type="text" name="borrowerEmail"> Borrower Email. Validates presence in Account Table. Does not yet validate friendOf lender.<br>
+  (OR) 'borrowerID': <input type="text" name="borrowerID"> Borrower ID. Validates presence in Account Table.<br>
+  'transDate': <input type="text" name="transDate"> Can be omitted (will use current server time). Date MUST be in form <b>yyyy-mm-dd hh:mm:ss</b><br>
+  <input type="submit" value="Submit"> (db_transaction_create.php)
+ </fieldset>
+</form>
+
+<form action="db_transaction_lookup.php" method="post">
+ <fieldset>
+ <legend>Lookup Transactions:</legend>
+  'userID': <input type="text" name="userID"> (OR) 'userEmail': <input type="text" name="userEmail"> <br>
+   User ID or email required.<br>
+  'password': <input type="password" name="password"> User password required<br>
+  'lookupWith': <br>
+  <input type="radio" name="lookupWith" value="userAsLender"> ='userAsLender' 
+  <input type="radio" name="lookupWith" value="userAsBorrower"> ='userAsBorrower'<br>
+  <input type="submit" value="Submit"> (db_transaction_lookup.php)
+ </fieldset>
+</form>
+
+<form action="db_friendof_create.php" method="post">
+ <fieldset>
+ <legend>Add Contact:</legend>
+  'userID': <input type="text" name="userID"> (OR) 'userEmail': <input type="text" name="userEmail"> <br>
+   User ID or email required.<br>
+  'password': <input type="password" name="password"> User password required<br>
+  'friendID': <input type="text" name="friendID"> (OR) 'friendEmail': <input type="text" name="friendEmail"><br>
+  Friend ID or email required. Validates presence in Account Table.<br>
+  <input type="submit" value="Submit"> (db_friendof_create.php)
+ </fieldset>
+</form>
+
+<form action="db_friendof_selectOne.php" method="post">
+ <fieldset>
+ <legend>Lookup One Contact:</legend>
+  'userID': <input type="text" name="userID"> (OR) 'userEmail': <input type="text" name="userEmail"> <br>
+   User ID or email required.<br>
+  'password': <input type="password" name="password"> User password required<br>
+  'friendID': <input type="text" name="friendID"> (OR) 'friendEmail': <input type="text" name="friendEmail"><br>
+  Friend ID or email required.<br>
+  <input type="submit" value="Submit"> (db_friendof_selectOne.php)
+ </fieldset>
+</form>
+
+<form action="db_friendof_selectAll.php" method="post">
+ <fieldset>
+ <legend>Lookup All Contacts:</legend>
+  'userID': <input type="text" name="userID"> (OR) 'userEmail': <input type="text" name="userEmail"> <br>
+   User ID or email required.<br>
+  'password': <input type="password" name="password"> User password required<br>
+  <input type="submit" value="Submit"> (db_friendof_selectAll.php)
+ </fieldset>
+</form>
+
+<form action="db_friendof_deleteOne.php" method="post">
+ <fieldset>
+ <legend>Delete One Contact:</legend>
+  'userID': <input type="text" name="userID"> (OR) 'userEmail': <input type="text" name="userEmail"> <br>
+   User ID or email required.<br>
+  'password': <input type="password" name="password"> User password required<br>
+  'friendID': <input type="text" name="friendID"> (OR) 'friendEmail': <input type="text" name="friendEmail"><br>
+  Friend ID or email required.<br>
+  <input type="submit" value="Submit"> (db_friendof_deleteOne.php)
+ </fieldset>
+</form>
+
+<form action="db_notif_lookup.php" method="post">
+ <fieldset>
+ <legend>Lookup Notification Data:</legend>
+  'email': <input type="text" name="email"> <br>
+  'password': <input type="password" name="password"> <br>
+  'attribute': <br>
+  <input type="radio" name="attribute" value="date"> ='date' 
+  <input type="radio" name="attribute" value="emailsent"> ='emailsent' 
+  <input type="radio" name="attribute" value="emailin"> ='emailin'<br>
+  'value': <input type="text" name="value"> <br>
+  <input type="submit" value="Submit"> (db_notif_lookup.php)
+ </fieldset>
+</form>
+
+<form action="db_test_accounts.php" method="post">
+ <fieldset>
+ <legend>View Account Table:</legend>
+  <input type="submit" value="Submit"> (db_test_accounts.php)
+ </fieldset>
+</form>
+
+<form action="db_test_contacts.php" method="post">
+ <fieldset>
+ <legend>View Friend_Of Table:</legend>
+  <input type="submit" value="Submit"> (db_test_transactions.php)
+ </fieldset>
+</form>
+
+<form action="db_test_transactions.php" method="post">
+ <fieldset>
+ <legend>View Transaction Table:</legend>
+  <input type="submit" value="Submit"> (db_test_transactions.php)
+ </fieldset>
+</form>
+
+</html>

@@ -50,6 +50,8 @@ else if (strlen($password) > 0) {
     $friendID = mysqli_real_escape_string($link, $friendID);
     $friendEmail = mysqli_real_escape_string($link, $friendEmail);
 
+    //echo $userID;
+
     // authorize
     $loginPass = mysqli_query($link, "SELECT `password` FROM `Account` WHERE `accountID` = '$userID';");
     // validate userID 
@@ -129,6 +131,8 @@ else if (strlen($password) > 0) {
     //query to add transaction
     if (($response["result"] == null) && ($userID != false)&& ($friendID != false)) {
         if ($friend = mysqli_query($link, "SELECT Account.AccountID, Account.Email, Account.Fname, Account.Lname FROM Account WHERE Account.AccountID = ANY(SELECT Friend_Of.FriendID FROM Friend_Of WHERE Friend_Of.UserID = '$userID' AND Friend_Of.FriendID = '$friendID');")) {
+            $response["result"] = 1;
+            $response["message"] = "Friend lookup successful";
             $response["friendOfMatches"] = array();
             while ($row = mysqli_fetch_array($friend)) {
                 // temp array

@@ -179,6 +179,7 @@ else {
 // close mysqli connection
 $link->close();
 
-echo json_encode($response);
+if ($response["result"] == 1) echo $response["result"];
+else echo json_encode($response);
 
 ?>
