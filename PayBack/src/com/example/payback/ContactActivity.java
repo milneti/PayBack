@@ -156,13 +156,12 @@ public class ContactActivity extends TitleActivity
 		        	    try {
 		        		   sendContact(emailinput.getText().toString());
 						} catch (InterruptedException e) {
+							e.printStackTrace();
 							
 						} catch (JSONException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						
-		        	   Toast.makeText(getApplicationContext(),"sent email", Toast.LENGTH_SHORT).show();
 		        	   dialog.dismiss();	        	   
 		           }
 		       })
@@ -174,41 +173,7 @@ public class ContactActivity extends TitleActivity
 		Dialog dialog = builder.create();
 		dialog.show();
     }
-/*
-	public void confirmContact(final String email){
-		LayoutInflater inflater = this.getLayoutInflater();
-		AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
-		
-		builder2.setTitle("Confirm Add Contact?")
-		       .setView(inflater.inflate(R.layout.dialog_user_info, null))
-		       .setPositiveButton(R.string.Confirm, new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		        	   dialog.dismiss();
-		        	   try {
-		        		   sendContact(email);
-						} catch (InterruptedException e) {
-							
-						}
-		           }
-		       })
-		       .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		               dialog.cancel();
-		           }
-		       });
-		Dialog dialog = builder2.create();
-		dialog.show();
-
-		//send email to server. return first and last name of this email account.
-		
-		if (name != NULL)
-			((TextView)findViewById(R.id.firstView)).setText(first);
-			((TextView)findViewById(R.id.lastView)).setText(last);		
-		
-		
-		//((TextView)findViewById(R.id.emailConfirmView)).setText(email);
-	}
-*/
+	
 	public void sendContact(String email) throws InterruptedException, JSONException{	 
 		final String EMAIL_PATTERN = 
 				"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
@@ -219,8 +184,6 @@ public class ContactActivity extends TitleActivity
 		if(!matcher.matches() && email == user.getEmail()){
 			Toast.makeText(getApplicationContext(), "Email: \""+email+"\" is not a valid email address!", Toast.LENGTH_SHORT).show();
 		}else{
-			Toast.makeText(getApplicationContext(),"calling add", Toast.LENGTH_SHORT).show();
-
 			if(AccessNet.AddFriend(email, user.getEmail(), user.getPassword())){
 				Toast.makeText(getApplicationContext(),email + " Added as a Friend!", Toast.LENGTH_SHORT).show();
 				AccessNet.AddNotif(user.getEmail(), user.getPassword(), user.getEmail() + " Added you as a Friend", email);
@@ -265,8 +228,10 @@ public class ContactActivity extends TitleActivity
 	}
 	
 	public void confirmDelete(String email) throws InterruptedException, JSONException{
-		if(AccessNet.DeleteFriend(email, user.getEmail(), user.getPassword()))
+		if(AccessNet.DeleteFriend(email, user.getEmail(), user.getPassword())){
 			Toast.makeText(getApplicationContext(),email + " Deleted from friends!", Toast.LENGTH_SHORT).show();	
+			refresh();
+		}
 		else
 			Toast.makeText(getApplicationContext(),"Error deleting friend", Toast.LENGTH_SHORT).show();
 	}

@@ -90,7 +90,7 @@ public class LoginActivity extends TitleActivity
 				
 				//user is declared in TitleActivity, which every activity extends
 				user = new User(email, password); 
-
+				/*
 				JSONObject friends = AccessNet.lookupFriends(email,password);
 				user.setFriends(user.parseFriends(friends));
 				
@@ -99,13 +99,14 @@ public class LoginActivity extends TitleActivity
 				
 				if(transAsBorrower.get("result").toString().equalsIgnoreCase("1"))
 				{
-					user.loadTransBorrowList(transAsBorrower,user.getEmail());
+					user.setTransBorrowList(transAsBorrower,user.getEmail());
 				}
 				if(transAsLender.get("result").toString().equalsIgnoreCase("1"))
 				{
-					user.loadTransLendList(transAsLender,user.getEmail());
+					user.setTransLendList(transAsLender,user.getEmail());
 				}
-				
+				*/
+				refreshServerData();
 				/*
 				ArrayList<Friend> dummy = new ArrayList<Friend>();
 				dummy.add(new Friend());

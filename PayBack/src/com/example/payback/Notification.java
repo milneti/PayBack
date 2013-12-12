@@ -1,6 +1,5 @@
 package com.example.payback;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Notification {
@@ -135,18 +134,5 @@ public class Notification {
 	}
 	public void setDate(String date) {
 		this.date = date;
-	}
-	//TODO:
-	public void sendToServer() //send this notification to server. Server needs to grab the "to" field and send it to them
-	{
-		
-	}
-	//TODO:
-	public static ArrayList<Notification> updateNotifications(String email)
-	{
-		ArrayList<Notification> nots = new ArrayList<Notification> ();
-		//populates this user's notifications arraylist
-		return nots;
-		
 	}
 }

@@ -60,7 +60,7 @@ class AccessNet{
 	
 	public static boolean DeleteFriend(String femail, String uemail, String password) throws InterruptedException, JSONException{
 		boolean retval = false;
-		String params = "userEmail="+uemail+"&password="+password+"&friendEmail"+femail;
+		String params = "userEmail="+uemail+"&password="+password+"&friendEmail="+femail;
 		String urlstub = "db_friendof_deleteOne.php";
 		//calling server
 		String status = simpleServerCall(urlstub, params);
@@ -148,16 +148,16 @@ class AccessNet{
 		return jsonServerCall(urlstub, params); 
 	}
 	
-	public static JSONObject lookupNotifsDate(String uemail, String password, String value) throws InterruptedException, JSONException{
-		return lookupNotifs(uemail, password, value,"date");
+	public static JSONObject lookupNotifsDate(String uemail, String password) throws InterruptedException, JSONException{
+		return lookupNotifs(uemail, password, "date");
 	}
-	public static JSONObject lookupNotifsEmailSent(String uemail, String password, String value) throws InterruptedException, JSONException{
-		return lookupNotifs(uemail, password, value,"emailsent");	
+	public static JSONObject lookupNotifsEmailSent(String uemail, String password) throws InterruptedException, JSONException{
+		return lookupNotifs(uemail, password, "emailsent");	
 	}
-	public static JSONObject lookupEmailIn(String uemail, String password, String value) throws InterruptedException, JSONException{
-		return lookupNotifs(uemail, password, value,"emailin");	
+	public static JSONObject lookupEmailIn(String uemail, String password) throws InterruptedException, JSONException{
+		return lookupNotifs(uemail, password, "emailin");	
 	}
-	public static JSONObject lookupNotifs(String uemail, String password, String value, String attribute) throws InterruptedException, JSONException{
+	public static JSONObject lookupNotifs(String uemail, String password, String attribute) throws InterruptedException, JSONException{
 		String params = "userEmail="+uemail+"&password="+password+"&attribute="+attribute;
 		String urlstub = "db_friendof_selectAll.php";	
 		return jsonServerCall(urlstub, params);

@@ -2,6 +2,8 @@ package com.example.payback;
 
 import java.util.ArrayList;
 
+import org.json.JSONException;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.IntentFilter;
@@ -37,18 +39,25 @@ public class NotificationActivity extends TitleActivity
 		filter = new IntentFilter();
 		filter.addAction("com.Payback.Logout_Intent");
 		registerReceiver(pkr, filter);
+	
+		try {
+			user.setNotifications(user.parseNotifs(AccessNet.lookupNotifsDate(user.getEmail(),user.getPassword()),user.getEmail()));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 
-		user.setNotifications(Notification.updateNotifications(user.getEmail())); //notifications updated every time this page is loaded
-		
 		ArrayList<Notification> nots = user.getNotifications();
 		
 		final ListView listview = (ListView) findViewById(R.id.listview);
-		
+		/*
 		if(DEMO)
 		{
 			nots.add(new Notification("Santa C.", "Will", "Santa added you as a friend."));
 			nots.add(new Notification("Nigerian P.", "Will", "Nigerian has sent you notice of a pending transaction."));
 		}
+		*/
 			//final StableArrayAdapter adapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, al);
 		NotiAdapter na = new NotiAdapter(this, android.R.layout.simple_list_item_1, nots);
 		listview.setAdapter(na);
