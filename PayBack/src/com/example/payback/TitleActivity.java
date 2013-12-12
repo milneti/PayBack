@@ -1,6 +1,9 @@
 package com.example.payback;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
@@ -30,5 +33,27 @@ public class TitleActivity extends Activity {
 	public void hideSoftKeyboard(View view) 
 	{
 		((InputMethodManager)this.getSystemService(Service.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
+	}
+	public void refresh(){
+		finish();
+		startActivity(getIntent());
+	}
+	public void refreshServerData() throws InterruptedException, JSONException{
+		JSONObject obj = AccessNet.lookupFriends(user.getEmail(),user.getPassword());
+		if(obj.get("result").toString().equalsIgnoreCase("1")){
+			user.setFriends(user.parseFriends(obj));
+		}
+		obj = AccessNet.lookupTransBorrower(user.getEmail(),user.getPassword());
+		if(obj.get("result").toString().equalsIgnoreCase("1")){
+			user.setTransBorrowList(obj,user.getEmail());
+		}
+		obj = AccessNet.lookupTransLender(user.getEmail(),user.getPassword());
+		if(obj.get("result").toString().equalsIgnoreCase("1")){
+			user.setTransLendList(obj,user.getEmail());
+		}
+		obj = AccessNet.lookupAllNotifs(user.getEmail(),user.getPassword());
+		if(obj!=null){
+			user.setNotifications(user.parseNotifs(obj,user.getEmail()));
+		}
 	}
 }

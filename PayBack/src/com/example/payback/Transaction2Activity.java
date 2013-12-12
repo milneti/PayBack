@@ -48,34 +48,18 @@ public class Transaction2Activity extends TitleActivity  {
 		    
 		    final Transaction2Activity_expandablecontactlist_adapter listAdapter = new Transaction2Activity_expandablecontactlist_adapter(this, listHeader, listChild);
 		    expListView.setAdapter(listAdapter);
-		    expListView.expandGroup(1);		    
+		    expListView.expandGroup(0);		    
 	}
 	
 	public void createData() {
 		
         listHeader = new ArrayList<String>();
         listChild = new HashMap<String, List<Friend>>();
-
-        //test friends
-    	Friend tests1 = new Friend("Place", "Ment");
-    	Friend tests2 = new Friend("For", "Later");
-    	Friend tests3 = new Friend("Sprints", "Lname");
-    	
-
-        
-        listHeader.add("Groups");
-        List<Friend> child0 = new ArrayList<Friend>();
-        
-        child0.add(tests1);
-        child0.add(tests2);
-        child0.add(tests3);
-        
-        listChild.put(listHeader.get(0), child0);
         
         listHeader.add("Individual");
         List<Friend> child1 = user.getFriends();
         
-        listChild.put(listHeader.get(1), child1);
+        listChild.put(listHeader.get(0), child1);
         
 	}
 
@@ -127,6 +111,7 @@ public class Transaction2Activity extends TitleActivity  {
         
         intent.putExtras(Bundle);
 	    startActivity(intent);
+	    finish();
 	}
 	
 	public void showTrans3(View view)
@@ -134,17 +119,9 @@ public class Transaction2Activity extends TitleActivity  {
 	    Bundle oldbundle = getIntent().getExtras();
 	    int transCostInt = oldbundle.getInt("Transaction1transCost");
 	    String transCommentString = oldbundle.getString("Transaction1transComment");
-	    int translenderamountInt = oldbundle.getInt("Transaction3lenderamount");
-	    ArrayList<Integer> lendsharelist = oldbundle.getIntegerArrayList("Transaction3borroweramountlist");
+	    ArrayList<Integer> lendsharelist = new  ArrayList<Integer>();
 	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
 	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
-	    
-    	Intent intent = new Intent(this, Transaction3Activity.class);
-        Bundle Bundle = new Bundle();
-        
-        Bundle.putInt("Transaction1transCost", transCostInt);
-        Bundle.putString("Transaction1transComment", transCommentString);
-        
         ArrayList<Friend> selectedContacts = new ArrayList<Friend>();
         for(int i = 0; i < listHeader.size(); i++){
 			String currentheader = listHeader.get(i);
@@ -154,15 +131,51 @@ public class Transaction2Activity extends TitleActivity  {
 				}
 			}
 		}
-        
-        Bundle.putParcelableArrayList("Transaction2selected", selectedContacts);
-        Bundle.putInt("Transaction3lenderamount", translenderamountInt);
-        Bundle.putIntegerArrayList("Transaction3borroweramountlist", lendsharelist);
-        Bundle.putBoolean("Transaction3button1Selected", button1Selected);
-        Bundle.putBoolean("Transaction3button2Selected", button2Selected);
-        
-        intent.putExtras(Bundle);
-        startActivity(intent);
+		int numContacts = selectedContacts.size();
+		int lenderShare = transCostInt/(numContacts+1);
+		int totaltrans = lenderShare;
+		for(int i = 0; i < numContacts; i ++){
+			lendsharelist.add(lenderShare);
+			totaltrans = totaltrans + lenderShare;
+		}
+		if(totaltrans != transCostInt){
+			lenderShare = lenderShare + (transCostInt - totaltrans);
+		}
+	    
+	    
+	    
+	    if(button1Selected){
+	    	Intent intent = new Intent(this, Transaction5Activity.class);
+	        Bundle Bundle = new Bundle();
+	        
+	        Bundle.putInt("Transaction1transCost", transCostInt);
+	        Bundle.putString("Transaction1transComment", transCommentString);
+	        Bundle.putParcelableArrayList("Transaction2selected", selectedContacts);
+	        Bundle.putBoolean("Transaction3button1Selected", button1Selected);
+	        Bundle.putBoolean("Transaction3button2Selected", button2Selected);
+			Bundle.putIntegerArrayList("Transaction3borroweramountlist", lendsharelist);
+			Bundle.putInt("Transaction3lenderamount", lenderShare);
+
+	        intent.putExtras(Bundle);
+	        startActivity(intent);
+	    }
+	    else if(button2Selected)
+	    {
+	    	Intent intent = new Intent(this, Transaction4Activity.class);
+	        Bundle Bundle = new Bundle();
+	        
+	        Bundle.putInt("Transaction1transCost", transCostInt);
+	        Bundle.putString("Transaction1transComment", transCommentString);
+	        Bundle.putParcelableArrayList("Transaction2selected", selectedContacts);
+	        Bundle.putBoolean("Transaction3button1Selected", button1Selected);
+	        Bundle.putBoolean("Transaction3button2Selected", button2Selected);
+			Bundle.putIntegerArrayList("Transaction3borroweramountlist", lendsharelist);
+			Bundle.putInt("Transaction3lenderamount", lenderShare);
+
+	        intent.putExtras(Bundle);
+	        startActivity(intent);
+	    }
+	    finish();
     }
 
 

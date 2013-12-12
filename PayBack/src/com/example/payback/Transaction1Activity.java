@@ -14,9 +14,12 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 public class Transaction1Activity extends TitleActivity
 {
+	boolean button1Selected;
+	boolean button2Selected;
 	static Activity activityInstance;	
 	static PageKillReceiver pkr;		//these are the variables
 	static IntentFilter filterPKR;		//used for PageKillReceiver.java
@@ -43,8 +46,18 @@ public class Transaction1Activity extends TitleActivity
 		registerReceiver(nbr, filterNBR);
 		
 
-		EditText text = (EditText)findViewById(R.id.editText1);  
+		RadioButton radio1 = (RadioButton) findViewById(R.id.radioauto);
+		RadioButton radio2 = (RadioButton) findViewById(R.id.radioman);
+
 		Bundle oldbundle = getIntent().getExtras();
+	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
+	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
+
+		radio1.setChecked(button1Selected);
+		radio2.setChecked(button2Selected);
+		
+		
+		EditText text = (EditText)findViewById(R.id.editText1);  
 	    
 		int transCostInt = oldbundle.getInt("Transaction1transCost");
 		String transCoststring;
@@ -68,6 +81,9 @@ public class Transaction1Activity extends TitleActivity
 		
 		EditText text2 = (EditText)findViewById(R.id.editText2); 
 		text2.setText(transCommentString);
+		
+		
+		
 		
 	    text.requestFocus();
 	    text.setRawInputType(Configuration.KEYBOARD_12KEY);    
@@ -127,6 +143,47 @@ public class Transaction1Activity extends TitleActivity
 	    	button.setEnabled(true);
 	}
 	
+	public void onRadioButtonClicked(View view)
+	{
+//		Bundle oldbundle = getIntent().getExtras();
+//		int transCostInt = oldbundle.getInt("Transaction1transCost");
+//		int numContacts = oldbundle.getParcelableArrayList("Transaction2selected").size();
+//		int lenderShare = transCostInt/(numContacts+1);
+//		String evenLenderShare = Integer.toString(lenderShare);
+//		
+//		evenLenderShare = "$" + evenLenderShare;
+//		int elsLength = evenLenderShare.length();
+//		String lenderText = evenLenderShare.substring(0, elsLength-2) + "." + evenLenderShare.substring(elsLength-2, elsLength);
+				
+		boolean checked = ((RadioButton) view).isChecked();
+		
+		switch(view.getId())
+		{
+			case R.id.radioauto:
+				if (checked)
+				{
+//					EditText transCost = (EditText)findViewById(R.id.lenderamount);
+//					transCost.setText(lenderText);
+					
+			    	button1Selected = true;
+				    button2Selected = false;
+				}
+				break;
+			case R.id.radioman:
+				if (checked)
+				{
+					//There's a bug where if you hit manual and then type it'll change the front rather then the back
+					//For example. hit manual. edittext = $0.00. hit "1". expected is $0.01. actually is $10.00.
+//					EditText transCost = (EditText)findViewById(R.id.lenderamount);
+//					transCost.setText("$0.00");
+
+			    	button1Selected = false;
+			    	button2Selected = true;
+				}
+				break;
+		}
+	}
+	
 	public void showMainMenu(View view)
     {
     	Intent intent = new Intent(this, MainActivity.class);
@@ -149,8 +206,11 @@ public class Transaction1Activity extends TitleActivity
 	    ArrayList<Friend> transselected = oldbundle.getParcelableArrayList("Transaction2selected");
 	    int translenderamountInt = oldbundle.getInt("Transaction3lenderamount");
 	    ArrayList<Integer> lendsharelist = oldbundle.getIntegerArrayList("Transaction3borroweramountlist");
-	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
-	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
+	    
+	    if(!(button1Selected ^ button2Selected)){
+		    button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
+		    button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
+	    }
     	
 	    
         Intent intent = new Intent(getApplicationContext(), Transaction2Activity.class);
@@ -167,6 +227,7 @@ public class Transaction1Activity extends TitleActivity
         
         intent.putExtras(Bundle);
         startActivity(intent);
+        finish();
     }
 
 }

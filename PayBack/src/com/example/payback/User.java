@@ -45,9 +45,10 @@ public class User extends Account{
 	private ArrayList<Friend> friends; //updated when the User logs in
 	private ArrayList<Notification> notifications;
 	private ArrayList<ResolveTransaction> transactions;
-	private ArrayList<Transaction> transAsLend;
-	private ArrayList<Transaction> transAsBorrow;
+	private ArrayList<BaseTransaction> transAsLend;
+	private ArrayList<BaseTransaction> transAsBorrow;
 	private String password;
+	
 	/* Only called when creating a brand new account! */
 	User(String fName, String lName, String email) 
 	{
@@ -57,88 +58,112 @@ public class User extends Account{
 		this.friends = new ArrayList<Friend>();
 		this.notifications = new ArrayList<Notification>();
 		this.transactions = new ArrayList<ResolveTransaction>();
-		this.transAsLend = new ArrayList<Transaction>();
-		this.transAsBorrow = new ArrayList<Transaction>();
-		boolean worked = sendNewUserToServer();
-		if(!worked)
-			throw new IllegalArgumentException("Error creating a new account.");
+		this.transAsLend = new ArrayList<BaseTransaction>();
+		this.transAsBorrow = new ArrayList<BaseTransaction>();
 	}
-	static private boolean sendNewUserToServer()
-	{
-		//TODO: send email, fname, lname, pword to database
-		//return success/fail
-		return true;
-	}
-	
-	static void loadTransLendList(JSONObject obj, String uEmail) throws JSONException{
-		JSONArray arr = obj.getJSONArray("transactions");
-		for(int i = 0; i < arr.length(); i++){
-			Transaction trans = new Transaction();
-			trans.setLenderEmail(uEmail);
-			trans.setBorrowerEmail(arr.getJSONObject(i).get("Email").toString());
-			trans.setAmount(Double.parseDouble(arr.getJSONObject(i).get("Amount").toString()));
-			trans.setComment(arr.getJSONObject(i).get("Comment").toString());
-		}
-	}
-	
-	static void loadTransBorrowList(JSONObject obj, String uEmail) throws JSONException{
-		JSONArray arr = obj.getJSONArray("transactions");
-		for(int i = 0; i < arr.length(); i++){
-			Transaction trans = new Transaction();
-			trans.setLenderEmail(arr.getJSONObject(i).get("Email").toString());
-			trans.setBorrowerEmail(uEmail);
-			trans.setAmount(Double.parseDouble(arr.getJSONObject(i).get("Amount").toString()));
-			trans.setComment(arr.getJSONObject(i).get("Comment").toString());
-		}
-	}
-	
-	/* Used for the rest of the time, when the user logs in */
 	User(String email, String password)
 	{
 		this.email = email;
 		this.password = password;
-		this.updateName(email);
-		this.friends = Friend.updateFriends(email);
-		this.notifications = Notification.updateNotifications(email);
-		this.transactions = ResolveTransaction.updateTransactions(email);
+		this.friends = new ArrayList<Friend>();
+		this.notifications = new ArrayList<Notification>();
+		this.transactions = new ArrayList<ResolveTransaction>();
+		this.transAsLend = new ArrayList<BaseTransaction>();
+		this.transAsBorrow = new ArrayList<BaseTransaction>();
+	}
+	static void setTransLendList(JSONObject obj, String uEmail) throws JSONException{
+		JSONArray arr = obj.getJSONArray("transactions");
+		for(int i = 0; i < arr.length(); i++){
+			BaseTransaction trans = new BaseTransaction();
+			trans.setLenderEmail(uEmail);
+			trans.setBorrowerEmail(arr.getJSONObject(i).get("Email").toString());
+			trans.setAmount(Double.parseDouble(arr.getJSONObject(i).get("Amount").toString()));
+			if(arr.getJSONObject(i).has("Comment"))
+				trans.setComment(arr.getJSONObject(i).get("Comment").toString());
+			else
+				trans.setComment("No Comment");
+		}
+	}
+	public ArrayList<BaseTransaction> getTransLend(){
+		return transAsLend;
+	}
+	static void setTransBorrowList(JSONObject obj, String uEmail) throws JSONException{
+		JSONArray arr = obj.getJSONArray("transactions");
+		for(int i = 0; i < arr.length(); i++){
+			BaseTransaction trans = new BaseTransaction();
+			trans.setLenderEmail(arr.getJSONObject(i).get("Email").toString());
+			trans.setBorrowerEmail(uEmail);
+			trans.setAmount(Double.parseDouble(arr.getJSONObject(i).get("Amount").toString()));
+			trans.setComment(arr.getJSONObject(i).get("Description").toString());
+		}
+	}
+	public ArrayList<BaseTransaction> getTransBorrow(){
+		return transAsBorrow;
+	}	
+	public void setFriends(ArrayList<Friend> friends) {
+		this.friends = friends;
 	}
 	public ArrayList<Friend> getFriends() {
 		return friends;
-	}
-	public ArrayList<Transaction> getTransLend(){
-		return transAsLend;
-	}
-	public ArrayList<Transaction> getTransBorrow(){
-		return transAsBorrow;
-	}
-	public void setFriends(ArrayList<Friend> friends) {
-		this.friends = friends;
+	}	
+	public void setNotifications(ArrayList<Notification> notifications) {
+		this.notifications = notifications;
 	}
 	public ArrayList<Notification> getNotifications() {
 		return notifications;
 	}
-	public void setNotifications(ArrayList<Notification> notifications) {
-		this.notifications = notifications;
+	public void setTransactions(ArrayList<ResolveTransaction> transactions) {
+		this.transactions = transactions;
 	}
 	public ArrayList<ResolveTransaction> getTransactions() {
 		return transactions;
 	}
-	public void setTransactions(ArrayList<ResolveTransaction> transactions) {
-		this.transactions = transactions;
+	public ArrayList<Friend> parseFriends(JSONObject friends){
+		ArrayList<Friend> list = new ArrayList<Friend>();	
+		try {
+			JSONArray array = friends.getJSONArray("friendOfMatches");
+			for(int i = 0; i < array.length(); i++){
+				JSONObject obj = array.getJSONObject(i);
+				Friend f = new Friend();
+				f.setfName(obj.getString("Fname"));
+				f.setlName(obj.getString("Lname"));
+				f.setEmail(obj.getString("Email"));
+				list.add(f);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
-	
-	public void updateName(String email){
-		this.fName ="john";
-		this.lName ="doe";
-	}
+
 	public String getPassword(){
 		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	public void setnoneselected(){
 		for(int i = 0; i < friends.size(); i++){
 			friends.get(i).setSelected(false);
 		}
+	}
+	public ArrayList<Notification> parseNotifs(JSONObject obj, String email) {
+		ArrayList<Notification> list = new ArrayList<Notification>();	
+		try {
+			JSONArray array = obj.getJSONArray("notifications");
+			for(int i = 0; i < array.length(); i++){
+				Notification n = new Notification();
+				n.setMessage(array.getJSONObject(i).getString("comment"));
+				n.setToEmail(email);
+				n.setFromEmail(array.getJSONObject(i).getString("email"));
+				n.setDate(array.getJSONObject(i).getString("date"));
+				list.add(n);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}	
 		
 }
@@ -162,8 +187,6 @@ class Friend extends Account implements Parcelable {
 		this.displayName = fName + " " + lName;
 		this.selected = false;
 		
-		if(!sendNewFriendToServer())
-			throw new IllegalArgumentException();		
 	}
 	
 	Friend(String fName, String lName, String email, String displayName){
@@ -172,9 +195,7 @@ class Friend extends Account implements Parcelable {
 		this.email = email;
 		this.displayName = displayName;
 		this.selected = false;
-		
-		if(!sendNewFriendToServer())
-			throw new IllegalArgumentException();		
+
 	}
 	
 	//blank friend. FOR TESTING ONLY
@@ -184,9 +205,7 @@ class Friend extends Account implements Parcelable {
 		this.email = "warandpeace@lotr.pre";
 		this.selected = false;
 		this.amounttosel = 0;
-		
-		if(!sendNewFriendToServer())
-			throw new IllegalArgumentException();
+
 	}
 	
 	//Getters and Setters
@@ -205,7 +224,7 @@ class Friend extends Account implements Parcelable {
 	public void setamounttosel(int amounttosel) {
 		this.amounttosel = amounttosel;
 	}
-	
+	/*
 	static ArrayList<Friend> updateFriends(String email) // Used for existing users
 	{
 	    Friend test1 = new Friend("Price", "Gutierrez");
@@ -245,18 +264,11 @@ class Friend extends Account implements Parcelable {
 		f.add(test15);
 		f.add(test16);
 		f.add(test17);
-
-		//TODO: Pull information about each friend from the server: first name, last name, email. 
+ 
 		return f;
 	}
-	  
+	  */
 	//Methods
-	static boolean sendNewFriendToServer()
-	{
-		//TODO: send email, fname, lname, pword to database
-		//return success/fail
-		return true;
-	}
 
 	public String extractEmail(String friend){
 		int startID = friend.indexOf("(");

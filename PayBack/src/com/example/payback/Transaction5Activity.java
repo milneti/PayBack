@@ -32,6 +32,7 @@ public class Transaction5Activity extends TitleActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		
 		modifyTitle("Transaction Summary",R.layout.activity_transaction5);
 		
 		activityInstance = this;
@@ -108,7 +109,7 @@ public class Transaction5Activity extends TitleActivity
         
 	    
 	    if(button1Selected){
-	    	Intent intent = new Intent(this, Transaction3Activity.class);
+	    	Intent intent = new Intent(this, Transaction2Activity.class);
 	        Bundle Bundle = new Bundle();
 	        
 	        Bundle.putInt("Transaction1transCost", transCostInt);
@@ -150,24 +151,20 @@ public class Transaction5Activity extends TitleActivity
 
 	    for(int i = 0; i < borrowers.size(); i++){
 	    	try {
-	    		try {
-					AccessNet.AddTrans(from, fromPass, borrowAmount.get(i), comment, from, borrowers.get(i).getEmail());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	    		//AccessNet.AddNotif(from, fromPass, "New Transaction From: " + from, borrowers.get(i).getEmail());
-				
-	    	} catch (InterruptedException e) {
+	    		AccessNet.AddTrans(from, fromPass, borrowAmount.get(i), comment, from, borrowers.get(i).getEmail());
+	    	}catch (JSONException e) {
+				e.printStackTrace();
+			}catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 	    }
-
+	    
 		Intent broadcastIntent = new Intent();
     	broadcastIntent.setAction("com.Payback.MainActivity_Intent");
     	sendBroadcast(broadcastIntent);
-		
+		/*
 		Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        startActivity(intent);*/
+        finish();
     }
 }

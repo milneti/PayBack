@@ -27,15 +27,16 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:ems="10"
-            android:inputType="numberDecimal"
-            android:singleLine="true" >
+            android:inputType="number"
+            android:singleLine="true"
+            android:imeOptions="actionDone" >
 
             <requestFocus />
         </EditText>
     </RelativeLayout>
 
     <SeekBar
-        android:id="@+id/seekBar1"
+        android:id="@+id/sliderthing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:progress="50" />

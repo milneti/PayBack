@@ -28,6 +28,13 @@ public class MainActivity extends TitleActivity
 		return true;
 	}
 	*/
+	@Override
+	public void onBackPressed() 
+	{
+		finish();
+        System.exit(0);
+	}
+	
     public void CreateTrsn(View view)
     {    	
 		int transCostInt = 0;
