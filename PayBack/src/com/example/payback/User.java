@@ -2,6 +2,10 @@ package com.example.payback;
 
 import java.util.*;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 abstract class Account
@@ -41,7 +45,8 @@ public class User extends Account{
 	private ArrayList<Friend> friends; //updated when the User logs in
 	private ArrayList<Notification> notifications;
 	private ArrayList<ResolveTransaction> transactions;
-
+	private ArrayList<Transaction> transAsLend;
+	private ArrayList<Transaction> transAsBorrow;
 	private String password;
 	/* Only called when creating a brand new account! */
 	User(String fName, String lName, String email) 
@@ -52,6 +57,8 @@ public class User extends Account{
 		this.friends = new ArrayList<Friend>();
 		this.notifications = new ArrayList<Notification>();
 		this.transactions = new ArrayList<ResolveTransaction>();
+		this.transAsLend = new ArrayList<Transaction>();
+		this.transAsBorrow = new ArrayList<Transaction>();
 		boolean worked = sendNewUserToServer();
 		if(!worked)
 			throw new IllegalArgumentException("Error creating a new account.");
@@ -61,6 +68,28 @@ public class User extends Account{
 		//TODO: send email, fname, lname, pword to database
 		//return success/fail
 		return true;
+	}
+	
+	static void loadTransLendList(JSONObject obj, String uEmail) throws JSONException{
+		JSONArray arr = obj.getJSONArray("transactions");
+		for(int i = 0; i < arr.length(); i++){
+			Transaction trans = new Transaction();
+			trans.setLenderEmail(uEmail);
+			trans.setBorrowerEmail(arr.getJSONObject(i).get("Email").toString());
+			trans.setAmount(Double.parseDouble(arr.getJSONObject(i).get("Amount").toString()));
+			trans.setComment(arr.getJSONObject(i).get("Comment").toString());
+		}
+	}
+	
+	static void loadTransBorrowList(JSONObject obj, String uEmail) throws JSONException{
+		JSONArray arr = obj.getJSONArray("transactions");
+		for(int i = 0; i < arr.length(); i++){
+			Transaction trans = new Transaction();
+			trans.setLenderEmail(arr.getJSONObject(i).get("Email").toString());
+			trans.setBorrowerEmail(uEmail);
+			trans.setAmount(Double.parseDouble(arr.getJSONObject(i).get("Amount").toString()));
+			trans.setComment(arr.getJSONObject(i).get("Comment").toString());
+		}
 	}
 	
 	/* Used for the rest of the time, when the user logs in */
@@ -75,6 +104,12 @@ public class User extends Account{
 	}
 	public ArrayList<Friend> getFriends() {
 		return friends;
+	}
+	public ArrayList<Transaction> getTransLend(){
+		return transAsLend;
+	}
+	public ArrayList<Transaction> getTransBorrow(){
+		return transAsBorrow;
 	}
 	public void setFriends(ArrayList<Friend> friends) {
 		this.friends = friends;

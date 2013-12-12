@@ -5,13 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.view.Menu;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
@@ -51,9 +48,7 @@ public class Transaction2Activity extends TitleActivity  {
 		    
 		    final Transaction2Activity_expandablecontactlist_adapter listAdapter = new Transaction2Activity_expandablecontactlist_adapter(this, listHeader, listChild);
 		    expListView.setAdapter(listAdapter);
-		    expListView.expandGroup(1);
-		    
-		    
+		    expListView.expandGroup(1);		    
 	}
 	
 	public void createData() {
@@ -84,12 +79,6 @@ public class Transaction2Activity extends TitleActivity  {
         
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.transaction2, menu);
-		return true;
-	}
 	
 	public void showCreateContact(View view)
     {

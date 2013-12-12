@@ -39,13 +39,6 @@ public class CreateAccountActivity extends TitleActivity
 		registerReceiver(mlr, filterMLR);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.create_account, menu);
-		return true;
-	}
-	
 	public void Register(final View view) throws InterruptedException {
 		//*
 		Logger CONLOG = Logger.getLogger(CreateAccountActivity.class .getName());

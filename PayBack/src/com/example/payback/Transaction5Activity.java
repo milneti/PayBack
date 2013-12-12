@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONException;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -34,6 +36,7 @@ public class Transaction5Activity extends TitleActivity
 		
 		activityInstance = this;
 
+		//----- broadcasts -----
 		pkr = new PageKillReceiver(); pkr.setActivityInstance(activityInstance);
 		filterPKR = new IntentFilter();
 		filterPKR.addAction("com.Payback.Logout_Intent");
@@ -43,11 +46,13 @@ public class Transaction5Activity extends TitleActivity
 		filterNBR = new IntentFilter();
 		filterNBR.addAction("com.Payback.MainActivity_Intent");
 		registerReceiver(nbr, filterNBR);						
-
+		//----------------------
+		
+		//----- bundle handling for strings ------
 	    Bundle oldbundle = getIntent().getExtras();
 	    
 	    int transCostInt = oldbundle.getInt("Transaction1transCost");
-
+	    String cost = "" + transCostInt; //for server call
 	    DecimalFormat dec = new DecimalFormat("0.00");
         float percen = transCostInt/100F;
         String transCoststring = "$" + dec.format(percen);
@@ -84,14 +89,6 @@ public class Transaction5Activity extends TitleActivity
 	    listView = (ListView) findViewById(R.id.listviewforplaceholderdata);
 	    listView.setAdapter(new ArrayAdapter<String>(this, R.layout.activity_contact_iteminlist, data));
 
-	    //send out a new notification here?
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.transaction5, menu);
-		return true;
 	}
 	
 	public void showTrans4(View view)
@@ -144,21 +141,33 @@ public class Transaction5Activity extends TitleActivity
 	
 	public void showMainMenu(View view)
     {
-		//Send transaction object data to server
-		
-		/*
-		if(server return Success)
-			Toast.makeText(getApplicationContext(),"Transaction Completed", Toast.LENGTH_LONG).show();
-		else
-			Toast.makeText(getApplicationContext(),"Transaction Failed", Toast.LENGTH_LONG).show();
-    	*/
-		
+		Bundle bundle = getIntent().getExtras();
+		String from = user.getEmail();
+		String fromPass = user.getPassword();
+	    String comment = bundle.getString("Transaction1transComment");
+	    ArrayList<Friend> borrowers = bundle.getParcelableArrayList("Transaction2selected");
+	    ArrayList<Integer> borrowAmount = bundle.getIntegerArrayList("Transaction3borroweramountlist");
+
+	    for(int i = 0; i < borrowers.size(); i++){
+	    	try {
+	    		try {
+					AccessNet.AddTrans(from, fromPass, borrowAmount.get(i), comment, from, borrowers.get(i).getEmail());
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	    		//AccessNet.AddNotif(from, fromPass, "New Transaction From: " + from, borrowers.get(i).getEmail());
+				
+	    	} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+	    }
+
 		Intent broadcastIntent = new Intent();
     	broadcastIntent.setAction("com.Payback.MainActivity_Intent");
     	sendBroadcast(broadcastIntent);
 		
-		/*Intent intent = new Intent(this, MainActivity.class);
+		Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        this.finish(); //kill app page history*/
     }
 }

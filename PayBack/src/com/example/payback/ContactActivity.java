@@ -23,7 +23,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class ContactActivity extends TitleActivity 
@@ -206,29 +205,25 @@ public class ContactActivity extends TitleActivity
 		//((TextView)findViewById(R.id.emailConfirmView)).setText(email);
 	}
 */
-	public void sendContact(String email) throws InterruptedException{
-		
-		Toast.makeText(getApplicationContext(),"In Send", Toast.LENGTH_SHORT).show();
-		 
+	public void sendContact(String email) throws InterruptedException{	 
 		final String EMAIL_PATTERN = 
 				"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
 		final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 		final Matcher matcher;
 		matcher = pattern.matcher(email);
 		
-		if(!matcher.matches()){
+		if(!matcher.matches() && email == user.getEmail()){
 			Toast.makeText(getApplicationContext(), "Email: \""+email+"\" is not a valid email address!", Toast.LENGTH_SHORT).show();
 		}else{
 			Toast.makeText(getApplicationContext(),"calling add", Toast.LENGTH_SHORT).show();
 
 			if(AccessNet.AddFriend(email, user.getEmail(), user.getPassword())){
 				Toast.makeText(getApplicationContext(),email + " Added as a Friend!", Toast.LENGTH_SHORT).show();
-				
+				AccessNet.AddNotif(user.getEmail(), user.getPassword(), user.getEmail() + " Added you as a Friend", email);
 			}else{
 				Toast.makeText(getApplicationContext(),"Error adding friend", Toast.LENGTH_SHORT).show();
 			}
 		}
-	
 	}
 	
 	public void deleteContact(final String email){
@@ -259,14 +254,10 @@ public class ContactActivity extends TitleActivity
 	}
 	
 	public void confirmDelete(String email) throws InterruptedException, JSONException{
-		Toast.makeText(getApplicationContext(),"calling delete", Toast.LENGTH_SHORT).show();
-
-		if(AccessNet.DeleteFriend(email, user.getEmail(), user.getPassword())){
-			Toast.makeText(getApplicationContext(),email + " Deleted from friends!", Toast.LENGTH_SHORT).show();
-			
-		}else{
+		if(AccessNet.DeleteFriend(email, user.getEmail(), user.getPassword()))
+			Toast.makeText(getApplicationContext(),email + " Deleted from friends!", Toast.LENGTH_SHORT).show();	
+		else
 			Toast.makeText(getApplicationContext(),"Error deleting friend", Toast.LENGTH_SHORT).show();
-		}
 	}
 	
 	public void showMainMenu(View view)
