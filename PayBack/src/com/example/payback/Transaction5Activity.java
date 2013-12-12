@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONException;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -106,7 +108,7 @@ public class Transaction5Activity extends TitleActivity
         
 	    
 	    if(button1Selected){
-	    	Intent intent = new Intent(this, Transaction3Activity.class);
+	    	Intent intent = new Intent(this, Transaction2Activity.class);
 	        Bundle Bundle = new Bundle();
 	        
 	        Bundle.putInt("Transaction1transCost", transCostInt);
@@ -149,9 +151,9 @@ public class Transaction5Activity extends TitleActivity
 	    for(int i = 0; i < borrowers.size(); i++){
 	    	try {
 	    		AccessNet.AddTrans(from, fromPass, borrowAmount.get(i), comment, from, borrowers.get(i).getEmail());
-	    		//AccessNet.AddNotif(from, fromPass, "New Transaction From: " + from, borrowers.get(i).getEmail());
-				
-	    	} catch (InterruptedException e) {
+	    	}catch (JSONException e) {
+				e.printStackTrace();
+			}catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 	    }

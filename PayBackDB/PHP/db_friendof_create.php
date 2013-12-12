@@ -124,7 +124,7 @@ else if (strlen($password) > 0) {
             $response["message"] = "Failed: New Friend (ID: ".$_POST['friendID'].", Email: $friendEmail) matched no Account";
         }
     }
-    //query to add transaction
+    //query to add contact
     if (($response["result"] == null) && ($userID != false) && ($friendID != false)) {
         $friend = mysqli_query($link, "INSERT INTO `Friend_Of` (`UserID`,`FriendID`) VALUES ('$userID','$friendID');");
 

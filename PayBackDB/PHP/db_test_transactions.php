@@ -19,24 +19,26 @@ $link->close();
 
 // check for empty result
 if (mysqli_num_rows($result) > 0) {
-    // looping through all results
-    $response["rows"] = mysqli_num_rows($result);
-    $response["transactions"] = array();
+    // success
+    $response["result"] = 1;
 
+    // looping through all results
+    $response["quantity"] = mysqli_num_rows($result);
+    $response["transactions"] = array();
+    
     while ($row = mysqli_fetch_array($result)) {
         // temp transaction array
         $trans = array();
         $trans["TransactionID"] = $row["TransID"];
         $trans["LenderID"] = $row["LenderID"];
         $trans["BorrowerID"] = $row["BorrowerID"];
+        $trans["Amount"] = $row["Amount"];
         $trans["Description"] = $row["Description"];
         $trans["TransDate"] = $row["TransDate"];
 
         // push single product into final response array
         array_push($response["transactions"], $trans);
     }
-    // success
-    $response["result"] = 1;
 
     // echoing JSON response
     echo json_encode($response);

@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -15,7 +16,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -86,7 +86,7 @@ public class ContactActivity extends TitleActivity
 		final String toDelete = user.extractEmail(friendList.get(info.position));
 
 		switch (menuItemIndex)
-		{
+		{/*
 			case 0:
 				LayoutInflater inflater = this.getLayoutInflater();
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -111,8 +111,8 @@ public class ContactActivity extends TitleActivity
 				       });
 				Dialog dialog = builder.create();
 				dialog.show();
-				return false;
-			case 1:
+				return false;*/
+			case 0:
 				AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
 		 	    builder2.setTitle("Confirm Delete?")
 				       .setPositiveButton(R.string.Confirm, new DialogInterface.OnClickListener() {
@@ -135,7 +135,7 @@ public class ContactActivity extends TitleActivity
 				Dialog dialog2 = builder2.create();
 				dialog2.show();
 				return false;
-			case 2:
+			case 1:
 				return false;
 		}
 		return true;
@@ -155,10 +155,12 @@ public class ContactActivity extends TitleActivity
 		        	    try {
 		        		   sendContact(emailinput.getText().toString());
 						} catch (InterruptedException e) {
+							e.printStackTrace();
 							
+						} catch (JSONException e) {
+							e.printStackTrace();
 						}
 						
-		        	   Toast.makeText(getApplicationContext(),"sent email", Toast.LENGTH_SHORT).show();
 		        	   dialog.dismiss();	        	   
 		           }
 		       })
@@ -170,56 +172,31 @@ public class ContactActivity extends TitleActivity
 		Dialog dialog = builder.create();
 		dialog.show();
     }
-/*
-	public void confirmContact(final String email){
-		LayoutInflater inflater = this.getLayoutInflater();
-		AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
-		
-		builder2.setTitle("Confirm Add Contact?")
-		       .setView(inflater.inflate(R.layout.dialog_user_info, null))
-		       .setPositiveButton(R.string.Confirm, new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		        	   dialog.dismiss();
-		        	   try {
-		        		   sendContact(email);
-						} catch (InterruptedException e) {
-							
-						}
-		           }
-		       })
-		       .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		               dialog.cancel();
-		           }
-		       });
-		Dialog dialog = builder2.create();
-		dialog.show();
-
-		//send email to server. return first and last name of this email account.
-		
-		if (name != NULL)
-			((TextView)findViewById(R.id.firstView)).setText(first);
-			((TextView)findViewById(R.id.lastView)).setText(last);		
-		
-		
-		//((TextView)findViewById(R.id.emailConfirmView)).setText(email);
-	}
-*/
-	public void sendContact(String email) throws InterruptedException{	 
+	
+	public void sendContact(String email) throws InterruptedException, JSONException{	 
 		final String EMAIL_PATTERN = 
 				"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
 		final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 		final Matcher matcher;
 		matcher = pattern.matcher(email);
 		
-		if(!matcher.matches()){
+		if(!matcher.matches() && email == user.getEmail()){
 			Toast.makeText(getApplicationContext(), "Email: \""+email+"\" is not a valid email address!", Toast.LENGTH_SHORT).show();
 		}else{
-			Toast.makeText(getApplicationContext(),"calling add", Toast.LENGTH_SHORT).show();
-
-			if(AccessNet.AddFriend(email, user.getEmail(), user.getPassword())){
+			if(AccessNet.AddFriend(email, user.getEmail(), user.getPassword())){		
+				if(AccessNet.AddNotif(user.getEmail(), user.getPassword(), user.getEmail() + " Added you as a Friend", email)){
+					Toast.makeText(getApplicationContext(),"Notif sent", Toast.LENGTH_SHORT).show();
+				}
+				else
+					Toast.makeText(getApplicationContext(),"No Notif Made", Toast.LENGTH_SHORT).show();
+				
+				//update list
+				JSONObject friends = AccessNet.lookupFriends(user.getEmail(),user.getPassword());
+				user.setFriends(user.parseFriends(friends));
+				
+				refresh();
+				
 				Toast.makeText(getApplicationContext(),email + " Added as a Friend!", Toast.LENGTH_SHORT).show();
-				AccessNet.AddNotif(user.getEmail(), user.getPassword(), user.getEmail() + " Added you as a Friend", email);
 			}else{
 				Toast.makeText(getApplicationContext(),"Error adding friend", Toast.LENGTH_SHORT).show();
 			}
@@ -254,8 +231,14 @@ public class ContactActivity extends TitleActivity
 	}
 	
 	public void confirmDelete(String email) throws InterruptedException, JSONException{
-		if(AccessNet.DeleteFriend(email, user.getEmail(), user.getPassword()))
+		if(AccessNet.DeleteFriend(email, user.getEmail(), user.getPassword())){
 			Toast.makeText(getApplicationContext(),email + " Deleted from friends!", Toast.LENGTH_SHORT).show();	
+			
+			JSONObject friends = AccessNet.lookupFriends(user.getEmail(),user.getPassword());
+			user.setFriends(user.parseFriends(friends));
+			
+			refresh();
+		}
 		else
 			Toast.makeText(getApplicationContext(),"Error deleting friend", Toast.LENGTH_SHORT).show();
 	}
