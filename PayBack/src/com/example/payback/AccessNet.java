@@ -175,7 +175,7 @@ class AccessNet{
 	public static JSONObject lookupNotifsEmailSent(String uemail, String password) throws InterruptedException, JSONException{
 		return lookupNotifs(uemail, password, "emailsent");	
 	}
-	public static JSONObject lookupEmailIn(String uemail, String password) throws InterruptedException, JSONException{
+	public static JSONObject lookupNotifsEmailIn(String uemail, String password) throws InterruptedException, JSONException{
 		return lookupNotifs(uemail, password, "emailin");	
 	}
 	public static JSONObject lookupNotifs(String uemail, String password, String attribute) throws InterruptedException, JSONException{
