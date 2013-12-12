@@ -234,7 +234,7 @@ class AccessNet{
 							BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
 							line = reader.readLine();
-							if(line.equalsIgnoreCase("1")||line.equalsIgnoreCase("true")||line.equalsIgnoreCase("success")||line.equalsIgnoreCase("Login and query success")||line.equalsIgnoreCase("{\"result\":1,\"message\":\"Sign-in successful\"}"))
+							if(line.equalsIgnoreCase("1")||line.equalsIgnoreCase("true")||line.equalsIgnoreCase("success")||line.equalsIgnoreCase("Login and query success")||line.equalsIgnoreCase("{\"result\":1,\"message\":\"Sign-in successful\"}")||line.equalsIgnoreCase("{\"result\":1,\"message\":\"Contact added successfully\"}"))
 								items[0]="success";
 							CANLOG.info("Data in: "+line);
 							

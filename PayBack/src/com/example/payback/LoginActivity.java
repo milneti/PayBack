@@ -92,7 +92,7 @@ public class LoginActivity extends TitleActivity
 				user = new User(email, password); 
 
 				JSONObject friends = AccessNet.lookupFriends(email,password);
-				user.setFriends(parseFriends(friends));
+				user.setFriends(user.parseFriends(friends));
 				
 				JSONObject transAsBorrower = AccessNet.lookupTransBorrower(user.getEmail(), user.getPassword());
 				JSONObject transAsLender = AccessNet.lookupTransLender(user.getEmail(), user.getPassword());
@@ -188,21 +188,5 @@ public class LoginActivity extends TitleActivity
         this.finish();
 	}
 	
-	public ArrayList<Friend> parseFriends(JSONObject friends){
-		ArrayList<Friend> list = new ArrayList<Friend>();	
-		try {
-			JSONArray array = friends.getJSONArray("friendOfMatches");
-			for(int i = 0; i < array.length(); i++){
-				JSONObject obj = array.getJSONObject(i);
-				Friend f = new Friend();
-				f.setfName(obj.getString("Fname"));
-				f.setlName(obj.getString("Lname"));
-				f.setEmail(obj.getString("Email"));
-				list.add(f);
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
+	
 }

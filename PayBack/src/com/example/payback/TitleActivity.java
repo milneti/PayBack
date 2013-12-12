@@ -31,4 +31,8 @@ public class TitleActivity extends Activity {
 	{
 		((InputMethodManager)this.getSystemService(Service.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
 	}
+	public void refresh(){
+		finish();
+		startActivity(getIntent());
+	}
 }

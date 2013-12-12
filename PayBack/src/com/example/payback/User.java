@@ -91,6 +91,23 @@ public class User extends Account{
 			trans.setComment(arr.getJSONObject(i).get("Comment").toString());
 		}
 	}
+	public ArrayList<Friend> parseFriends(JSONObject friends){
+		ArrayList<Friend> list = new ArrayList<Friend>();	
+		try {
+			JSONArray array = friends.getJSONArray("friendOfMatches");
+			for(int i = 0; i < array.length(); i++){
+				JSONObject obj = array.getJSONObject(i);
+				Friend f = new Friend();
+				f.setfName(obj.getString("Fname"));
+				f.setlName(obj.getString("Lname"));
+				f.setEmail(obj.getString("Email"));
+				list.add(f);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
 	/* Used for the rest of the time, when the user logs in */
 	User(String email, String password)
