@@ -212,7 +212,7 @@ public class ContactActivity extends TitleActivity
 		final Matcher matcher;
 		matcher = pattern.matcher(email);
 		
-		if(!matcher.matches()){
+		if(!matcher.matches() && email == user.getEmail()){
 			Toast.makeText(getApplicationContext(), "Email: \""+email+"\" is not a valid email address!", Toast.LENGTH_SHORT).show();
 		}else{
 			Toast.makeText(getApplicationContext(),"calling add", Toast.LENGTH_SHORT).show();
