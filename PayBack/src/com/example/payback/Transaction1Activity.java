@@ -227,6 +227,7 @@ public class Transaction1Activity extends TitleActivity
         
         intent.putExtras(Bundle);
         startActivity(intent);
+        finish();
     }
 
 }

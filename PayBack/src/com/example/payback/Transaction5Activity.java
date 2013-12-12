@@ -32,6 +32,7 @@ public class Transaction5Activity extends TitleActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		
 		modifyTitle("Transaction Summary",R.layout.activity_transaction5);
 		
 		activityInstance = this;
@@ -157,12 +158,13 @@ public class Transaction5Activity extends TitleActivity
 				e.printStackTrace();
 			}
 	    }
-
+	    
 		Intent broadcastIntent = new Intent();
     	broadcastIntent.setAction("com.Payback.MainActivity_Intent");
     	sendBroadcast(broadcastIntent);
-		
+		/*
 		Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        startActivity(intent);*/
+        finish();
     }
 }

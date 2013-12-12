@@ -131,6 +131,7 @@ public class Transaction4Activity extends TitleActivity
         
         intent.putExtras(Bundle);
         startActivity(intent);
+        finish();
     }
 	
 	public void checktomoveontotrans5(View view)
@@ -202,6 +203,7 @@ public class Transaction4Activity extends TitleActivity
         
         intent.putExtras(Bundle);
         startActivity(intent);
+        finish();
     }
 
 }
