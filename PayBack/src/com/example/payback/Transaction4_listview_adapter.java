@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -36,7 +37,9 @@ public class Transaction4_listview_adapter extends SimpleAdapter
 	public View getView(final int position, View convertView, ViewGroup parent)
 	{
 		View view = super.getView(position, convertView, parent);
-		EditText text = (EditText) view.findViewById(R.id.borroweramount);  
+		EditText text = (EditText) view.findViewById(R.id.borroweramount);
+	    SeekBar sb = (SeekBar) view.findViewById(R.id.sliderthing);	//the seek bar
+        sb.setMax(maxSeekBar);										//sets the max as the max amount anyone can borrow
 	    text.setRawInputType(Configuration.KEYBOARD_12KEY);    
 
 		if(!(((Map<String, String>)getItem(position)).get("data").startsWith("$")))
@@ -47,6 +50,8 @@ public class Transaction4_listview_adapter extends SimpleAdapter
 	        {
 	        	Float in = Float.parseFloat(userInput);
 	            float percen = in/100;
+	            int progress = Integer.parseInt(userInput);
+	            sb.setProgress(progress);						
 	            text.setText("$"+dec.format(percen));
 	            text.setSelection(text.getText().length());
 	        }
@@ -98,9 +103,6 @@ public class Transaction4_listview_adapter extends SimpleAdapter
 	    });
 	
 		
-	    SeekBar sb = (SeekBar) view.findViewById(R.id.seekBar1);	//the seek bar
-        sb.setMax(maxSeekBar);										//sets the max as the max amount anyone can borrow
-        sb.setProgress(0);											//starts off at 0
         
         sb.setOnSeekBarChangeListener(new OnSeekBarChangeListener()	//listens for changes in seek bar
         {

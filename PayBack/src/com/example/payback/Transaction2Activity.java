@@ -48,34 +48,18 @@ public class Transaction2Activity extends TitleActivity  {
 		    
 		    final Transaction2Activity_expandablecontactlist_adapter listAdapter = new Transaction2Activity_expandablecontactlist_adapter(this, listHeader, listChild);
 		    expListView.setAdapter(listAdapter);
-		    expListView.expandGroup(1);		    
+		    expListView.expandGroup(0);		    
 	}
 	
 	public void createData() {
 		
         listHeader = new ArrayList<String>();
         listChild = new HashMap<String, List<Friend>>();
-
-        //test friends
-    	Friend tests1 = new Friend("Place", "Ment");
-    	Friend tests2 = new Friend("For", "Later");
-    	Friend tests3 = new Friend("Sprints", "Lname");
-    	
-
-        
-        listHeader.add("Groups");
-        List<Friend> child0 = new ArrayList<Friend>();
-        
-        child0.add(tests1);
-        child0.add(tests2);
-        child0.add(tests3);
-        
-        listChild.put(listHeader.get(0), child0);
         
         listHeader.add("Individual");
         List<Friend> child1 = user.getFriends();
         
-        listChild.put(listHeader.get(1), child1);
+        listChild.put(listHeader.get(0), child1);
         
 	}
 
@@ -134,7 +118,7 @@ public class Transaction2Activity extends TitleActivity  {
 	    Bundle oldbundle = getIntent().getExtras();
 	    int transCostInt = oldbundle.getInt("Transaction1transCost");
 	    String transCommentString = oldbundle.getString("Transaction1transComment");
-	    ArrayList<Integer> lendsharelist = oldbundle.getIntegerArrayList("Transaction3borroweramountlist");
+	    ArrayList<Integer> lendsharelist = new  ArrayList<Integer>();
 	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
 	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
         ArrayList<Friend> selectedContacts = new ArrayList<Friend>();
