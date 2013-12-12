@@ -184,9 +184,12 @@ public class ContactActivity extends TitleActivity
 		if(!matcher.matches() && email == user.getEmail()){
 			Toast.makeText(getApplicationContext(), "Email: \""+email+"\" is not a valid email address!", Toast.LENGTH_SHORT).show();
 		}else{
-			if(AccessNet.AddFriend(email, user.getEmail(), user.getPassword())){
-				Toast.makeText(getApplicationContext(),email + " Added as a Friend!", Toast.LENGTH_SHORT).show();
-				AccessNet.AddNotif(user.getEmail(), user.getPassword(), user.getEmail() + " Added you as a Friend", email);
+			if(AccessNet.AddFriend(email, user.getEmail(), user.getPassword())){		
+				if(AccessNet.AddNotif(user.getEmail(), user.getPassword(), user.getEmail() + " Added you as a Friend", email)){
+					Toast.makeText(getApplicationContext(),"Notif sent", Toast.LENGTH_SHORT).show();
+				}
+				else
+					Toast.makeText(getApplicationContext(),"No Notif Made", Toast.LENGTH_SHORT).show();
 				
 				//update list
 				JSONObject friends = AccessNet.lookupFriends(user.getEmail(),user.getPassword());
@@ -194,6 +197,7 @@ public class ContactActivity extends TitleActivity
 				
 				refresh();
 				
+				Toast.makeText(getApplicationContext(),email + " Added as a Friend!", Toast.LENGTH_SHORT).show();
 			}else{
 				Toast.makeText(getApplicationContext(),"Error adding friend", Toast.LENGTH_SHORT).show();
 			}
@@ -230,6 +234,10 @@ public class ContactActivity extends TitleActivity
 	public void confirmDelete(String email) throws InterruptedException, JSONException{
 		if(AccessNet.DeleteFriend(email, user.getEmail(), user.getPassword())){
 			Toast.makeText(getApplicationContext(),email + " Deleted from friends!", Toast.LENGTH_SHORT).show();	
+			
+			JSONObject friends = AccessNet.lookupFriends(user.getEmail(),user.getPassword());
+			user.setFriends(user.parseFriends(friends));
+			
 			refresh();
 		}
 		else

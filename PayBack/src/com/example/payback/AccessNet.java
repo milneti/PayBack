@@ -118,14 +118,13 @@ class AccessNet{
 		return retval;
 	}
 	
-	public static boolean AddNotif(String uemail, String password, String description, String targetEmail) throws InterruptedException{
+	public static boolean AddNotif(String uemail, String password, String description, String targetEmail) throws InterruptedException, JSONException{
 		boolean retval = false;
-		String params = "userEmail="+uemail+"&password="+password+"&description="+description+"&targetEmail"+targetEmail;
-		String urlstub = "db_notification_create.php";
-		String status = "fail";
+		String params = "userEmail="+uemail+"&password="+password+"&sendInfo="+description+"&receiveEmail="+targetEmail;
+		String urlstub = "db_notif_create.php";
 		//calling server
-		status = simpleServerCall(urlstub, params);
-		if(status.equalsIgnoreCase("success")||status.equalsIgnoreCase("1")||status.equalsIgnoreCase("true"))
+		JSONObject obj = jsonServerCall(urlstub, params);
+		if(obj.get("result").toString().equalsIgnoreCase("1"))
 			retval=true;
 		return retval;
 	}
@@ -143,7 +142,7 @@ class AccessNet{
 		return lookupTrans(uemail,password,"userAsBorrower");
 	}
 	public static JSONObject lookupTrans(String uemail, String password, String attribute) throws InterruptedException, JSONException{
-		String params = "userEmail="+uemail+"&password="+password;
+		String params = "userEmail="+uemail+"&password="+password+"&lookupWith="+attribute;
 		String urlstub = "db_transaction_lookup.php";
 		return jsonServerCall(urlstub, params); 
 	}

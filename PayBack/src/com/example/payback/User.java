@@ -91,7 +91,7 @@ public class User extends Account{
 			trans.setLenderEmail(arr.getJSONObject(i).get("Email").toString());
 			trans.setBorrowerEmail(uEmail);
 			trans.setAmount(Double.parseDouble(arr.getJSONObject(i).get("Amount").toString()));
-			trans.setComment(arr.getJSONObject(i).get("Comment").toString());
+			trans.setComment(arr.getJSONObject(i).get("Description").toString());
 		}
 	}
 	public ArrayList<BaseTransaction> getTransBorrow(){
