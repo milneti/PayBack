@@ -196,6 +196,16 @@ class AccessNet{
 		String urlstub = "db_notif_selectAll.php";	
 		return jsonServerCall(urlstub, params);
 	}
+	public static boolean noteFlagger(String uemail, String password, String noteID, String setFlag) throws InterruptedException, JSONException{
+		boolean retval = false;
+		String params = "userEmail="+uemail+"&password="+password+"&noteID="+noteID+"&setFlag="+setFlag;//setFlag must be "read" or "unread"
+		String urlstub = "db_notif_updateFlag.php";	
+		JSONObject obj = jsonServerCall(urlstub, params);
+		if(obj.get("result").toString().equalsIgnoreCase("1"))
+			retval=true;
+		return retval;//jsonServerCall(urlstub, params);
+	}
+	
 	public static boolean modifyUserEmail(String uemail, String password, String value) throws InterruptedException{
 		return modifyUser(uemail,password,value,"email");
 	}
