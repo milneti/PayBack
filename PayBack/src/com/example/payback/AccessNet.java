@@ -129,6 +129,28 @@ class AccessNet{
 		return retval;
 	}
 	
+	public static boolean DeleteAllNotif(String uemail, String password) throws InterruptedException, JSONException{
+		boolean retval = false;
+		String params = "userEmail="+uemail+"&password="+password;
+		String urlstub = "db_notif_deleteAll.php";
+		//calling server
+		JSONObject obj = jsonServerCall(urlstub, params);
+		if(obj.get("result").toString().equalsIgnoreCase("1"))
+			retval=true;
+		return retval;
+	}
+	
+	public static boolean DeleteOneNotif(String uemail, String password, String nID) throws InterruptedException, JSONException{
+		boolean retval = false;
+		String params = "userEmail="+uemail+"&password="+password+"&noteID="+nID;
+		String urlstub = "db_notif_deleteOne.php";
+		//calling server
+		JSONObject obj = jsonServerCall(urlstub, params);
+		if(obj.get("result").toString().equalsIgnoreCase("1"))
+			retval=true;
+		return retval;
+	}
+	
 	public static JSONObject lookupFriends(String uemail, String password) throws InterruptedException, JSONException{
 		String params = "userEmail="+uemail+"&password="+password;
 		String urlstub = "db_friendof_selectAll.php";
@@ -158,7 +180,7 @@ class AccessNet{
 	}
 	public static JSONObject lookupNotifs(String uemail, String password, String attribute) throws InterruptedException, JSONException{
 		String params = "userEmail="+uemail+"&password="+password+"&attribute="+attribute;
-		String urlstub = "db_friendof_selectAll.php";	
+		String urlstub = "db_notif_lookup.php";	
 		return jsonServerCall(urlstub, params);
 	}
 	
