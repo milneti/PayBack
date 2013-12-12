@@ -150,15 +150,10 @@ public class Transaction5Activity extends TitleActivity
 
 	    for(int i = 0; i < borrowers.size(); i++){
 	    	try {
-	    		try {
-					AccessNet.AddTrans(from, fromPass, borrowAmount.get(i), comment, from, borrowers.get(i).getEmail());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	    		//AccessNet.AddNotif(from, fromPass, "New Transaction From: " + from, borrowers.get(i).getEmail());
-				
-	    	} catch (InterruptedException e) {
+	    		AccessNet.AddTrans(from, fromPass, borrowAmount.get(i), comment, from, borrowers.get(i).getEmail());
+	    	}catch (JSONException e) {
+				e.printStackTrace();
+			}catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 	    }
