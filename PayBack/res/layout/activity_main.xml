@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/activitybackground"
     android:gravity="center_vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -13,7 +13,8 @@
 <ScrollView
     android:id="@+id/scrollView1"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
+    android:layout_alignParentBottom="true"
     android:layout_alignParentLeft="true"
     android:layout_alignParentRight="true"
     android:layout_alignParentTop="true" >
@@ -27,6 +28,7 @@
                 android:id="@+id/CreateTrsnB"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
+                android:layout_weight="30"
                 android:height="80dp"
                 android:minHeight="95dp"
                 android:onClick="CreateTrsn"
@@ -36,61 +38,65 @@
                 android:id="@+id/ResolveTrsnB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="18"
                 android:height="85dp"
                 android:minHeight="85dp"
                 android:onClick="ResolveTrsn"
                 android:text="@string/title_activity_resolve_transaction" />
 
-            <Button
-                android:id="@+id/ContactB"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:height="85dp"
-                android:minHeight="85dp"
-                android:onClick="Contact"
-                android:text="@string/title_activity_contact" />
-
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+                android:layout_weight="18" >
 
                 <Button
-                    android:id="@+id/ManageGroupB"
-                    android:layout_width="143dp"
+                    android:id="@+id/ContactB"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="50"
                     android:height="90dp"
                     android:minHeight="85dp"
-                    android:minWidth="100dp"
-                    android:onClick="ManageGroup"
-                    android:text="@string/title_activity_manage_group" />
+                    android:minWidth="143dp"
+                    android:onClick="Contact"
+                    android:text="@string/title_activity_contact" />
 
                 <Button
                     android:id="@+id/NotificationB"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="50"
                     android:height="90dp"
                     android:minHeight="85dp"
+                    android:minWidth="143dp"
                     android:onClick="Notification"
                     android:text="@string/title_activity_notification" />
 
             </LinearLayout>
 
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="18" >
 
                 <Button
                     android:id="@+id/SettingB"
-                    android:layout_width="143dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="50"
                     android:height="90dp"
-                    android:maxWidth="143dp"
                     android:minHeight="85dp"
+                    android:minWidth="143dp"
                     android:onClick="Setting"
                     android:text="@string/action_settings" />
 
                 <Button
                     android:id="@+id/StatisticB"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="50"
                     android:height="90dp"
                     android:minHeight="85dp"
+                    android:minWidth="143dp"
                     android:onClick="Statistic"
                     android:text="@string/title_activity_statistic" />
 
@@ -100,6 +106,7 @@
                 android:id="@+id/devB"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
+                android:layout_weight="18"
                 android:height="85dp"
                 android:minHeight="85dp"
                 android:onClick="MainLogout"

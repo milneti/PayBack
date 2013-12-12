@@ -1,11 +1,18 @@
 package com.example.payback;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.json.JSONException;
+
 import android.os.Bundle;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -16,76 +23,41 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class ContactActivity extends TitleActivity {
-
+public class ContactActivity extends TitleActivity 
+{
 	  private ListView contactlistview;	  
 	  private ArrayList<String> friendList;
+	  
+	  static Activity activityInstance;	//these are variables
+	  static PageKillReceiver pkr;		//used for PageKillReceiver.java
+	  static IntentFilter filter;
 	  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		modifyTitle("Contact List",R.layout.activity_contact);
+		
+		activityInstance = this;
+		pkr = new PageKillReceiver(); pkr.setActivityInstance(activityInstance);
+		filter = new IntentFilter();
+		filter.addAction("com.Payback.Logout_Intent");
+		registerReceiver(pkr, filter);
 
 		contactlistview = (ListView) findViewById(R.id.listofselected);
 		friendList = buildFriendList();
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.activity_contact_iteminlist, friendList);
 		contactlistview.setAdapter(adapter);
 		registerForContextMenu(contactlistview);
-		/*
-		contactlistview.setOnItemLongClickListener(new OnItemLongClickListener() {
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parentList, View view,
-					int position, long rowId) {
-				// TODO Auto-generated method stub
-				return false;
-			}
-		});
-		  */  
+
 	}
 
 	private ArrayList<String> buildFriendList() {
 	    ArrayList<String> list = new ArrayList<String>();
-	    
-	    //dummy friends
-	    Friend test1 = new Friend("Price", "Gutierrez","test@yahoo.com");
-	    Friend test2 = new Friend("Vanna", "Mccullough");
-	    Friend test3 = new Friend("Wyatt", "Paul");
-	    Friend test4 = new Friend("Thaddeus", "Robbins");
-	    Friend test5 = new Friend("Rooney", "Dejesus");
-	    Friend test6 = new Friend("Xavier", "Wolfe");
-	    Friend test7 = new Friend("Byron", "Raymond");
-	    Friend test8 = new Friend("Quinn", "Whitfield","test2@yahoo.com");
-	    Friend test9 = new Friend("Farrah", "Moon");
-	    Friend test10 = new Friend("Ainsley", "Whitehead");
-	    Friend test11 = new Friend("Josephine", "Patton");
-	    Friend test12 = new Friend("Mariko", "Patton");
-	    Friend test13 = new Friend("Raphael", "Fitzgerald");
-	    Friend test14 = new Friend("Deacon", "Daniels");
-	    Friend test15 = new Friend("Delilah", "Fletcher");
-	    Friend test16 = new Friend("Robin", "Andrews");
-	    Friend test17 = new Friend("Melvin", "Price");
-	    
-	    for(int x = 0; x < 2;x++){
-		    list.add(test1.toString());
-		    list.add(test2.toString());
-		    list.add(test3.toString());
-		    list.add(test4.toString());
-		    list.add(test5.toString());
-		    list.add(test6.toString());
-		    list.add(test7.toString());
-		    list.add(test8.toString());
-		    list.add(test9.toString());
-		    list.add(test10.toString());
-		    list.add(test11.toString());
-		    list.add(test12.toString());
-		    list.add(test13.toString());
-		    list.add(test14.toString());
-		    list.add(test15.toString());
-		    list.add(test16.toString());
-		    list.add(test17.toString());
+	    ArrayList<Friend> userfriends = user.getFriends();
+	    for(int i =0; i < userfriends.size(); i++){
+	    	list.add(userfriends.get(i).toString());
 	    }
 
 	    return list;
@@ -146,7 +118,13 @@ public class ContactActivity extends TitleActivity {
 				       .setPositiveButton(R.string.Confirm, new DialogInterface.OnClickListener() {
 				    	   public void onClick(DialogInterface dialog, int id) {
 				        	   dialog.dismiss();	     
-				        	   confirmDelete(toDelete);		        	   
+					        	try {
+									confirmDelete(toDelete);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								} catch (JSONException e) {
+									e.printStackTrace();
+								}		        	   
 				           }
 				       })
 				       .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
@@ -173,11 +151,15 @@ public class ContactActivity extends TitleActivity {
 		       .setView(emailinput)
 		       .setPositiveButton(R.string.Add, new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
-		        	   
-		        	   //InputMethodManager inputManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE); 
-		        	   //inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_IMPLICIT_ONLY);
-		        	   dialog.dismiss();	     
-		        	   confirmContact(emailinput.getText().toString());		        	   
+		        	   //confirmContact(emailinput.getText().toString());	
+		        	    try {
+		        		   sendContact(emailinput.getText().toString());
+						} catch (InterruptedException e) {
+							
+						}
+						
+		        	   Toast.makeText(getApplicationContext(),"sent email", Toast.LENGTH_SHORT).show();
+		        	   dialog.dismiss();	        	   
 		           }
 		       })
 		       .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
@@ -188,18 +170,21 @@ public class ContactActivity extends TitleActivity {
 		Dialog dialog = builder.create();
 		dialog.show();
     }
-	
+/*
 	public void confirmContact(final String email){
 		LayoutInflater inflater = this.getLayoutInflater();
 		AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
 		
 		builder2.setTitle("Confirm Add Contact?")
 		       .setView(inflater.inflate(R.layout.dialog_user_info, null))
-
 		       .setPositiveButton(R.string.Confirm, new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
 		        	   dialog.dismiss();
-		        	   sendContact(email);
+		        	   try {
+		        		   sendContact(email);
+						} catch (InterruptedException e) {
+							
+						}
 		           }
 		       })
 		       .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
@@ -210,25 +195,35 @@ public class ContactActivity extends TitleActivity {
 		Dialog dialog = builder2.create();
 		dialog.show();
 
-		/*send email to server. return first and last name of this email account.
+		//send email to server. return first and last name of this email account.
 		
 		if (name != NULL)
 			((TextView)findViewById(R.id.firstView)).setText(first);
 			((TextView)findViewById(R.id.lastView)).setText(last);		
-		*/
 		
-		((TextView)findViewById(R.id.emailConfirmView)).setText(email);
+		
+		//((TextView)findViewById(R.id.emailConfirmView)).setText(email);
 	}
-	
-	public void sendContact(String email){
+*/
+	public void sendContact(String email) throws InterruptedException{	 
+		final String EMAIL_PATTERN = 
+				"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
+		final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+		final Matcher matcher;
+		matcher = pattern.matcher(email);
 		
-		//send email to server to add as friend of current account.
-		
-		CharSequence text = email + " Added as a Friend";
-		
-		
-		Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
-		toast.show();
+		if(!matcher.matches() && email == user.getEmail()){
+			Toast.makeText(getApplicationContext(), "Email: \""+email+"\" is not a valid email address!", Toast.LENGTH_SHORT).show();
+		}else{
+			Toast.makeText(getApplicationContext(),"calling add", Toast.LENGTH_SHORT).show();
+
+			if(AccessNet.AddFriend(email, user.getEmail(), user.getPassword())){
+				Toast.makeText(getApplicationContext(),email + " Added as a Friend!", Toast.LENGTH_SHORT).show();
+				AccessNet.AddNotif(user.getEmail(), user.getPassword(), user.getEmail() + " Added you as a Friend", email);
+			}else{
+				Toast.makeText(getApplicationContext(),"Error adding friend", Toast.LENGTH_SHORT).show();
+			}
+		}
 	}
 	
 	public void deleteContact(final String email){
@@ -237,7 +232,16 @@ public class ContactActivity extends TitleActivity {
 		       .setPositiveButton(R.string.Confirm, new DialogInterface.OnClickListener() {
 		    	   public void onClick(DialogInterface dialog, int id) {
 		        	   dialog.dismiss();	     
-		        	   confirmDelete(email);		        	   
+
+	        		   try {
+							confirmDelete(email);
+						} 
+	        		    catch (JSONException e) {
+							e.printStackTrace();
+						}
+	        		    catch (InterruptedException e) {
+							e.printStackTrace();
+						}		        	   
 		           }
 		       })
 		       .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
@@ -249,15 +253,17 @@ public class ContactActivity extends TitleActivity {
 		dialog.show();
 	}
 	
-	public void confirmDelete(String email){
-		//server call to delete friend
-		String msg = email + " succesfully deleted";
-		Toast.makeText(getApplicationContext(),msg, Toast.LENGTH_SHORT).show();
+	public void confirmDelete(String email) throws InterruptedException, JSONException{
+		if(AccessNet.DeleteFriend(email, user.getEmail(), user.getPassword()))
+			Toast.makeText(getApplicationContext(),email + " Deleted from friends!", Toast.LENGTH_SHORT).show();	
+		else
+			Toast.makeText(getApplicationContext(),"Error deleting friend", Toast.LENGTH_SHORT).show();
 	}
 	
 	public void showMainMenu(View view)
     {
     	Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        this.finish();
     }
 }

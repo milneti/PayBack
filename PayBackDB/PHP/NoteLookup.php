@@ -1,22 +1,24 @@
-//this is the script to lookup an account to mySQL db
+//this is the script to lookup an notification to mySQL db
 //for source please go to: http://www.php.net/manual/en/mysqli.quickstart.dual-interface.php
 
 //function:
 	//input
-		//user email
-		//other email
-		//password
-		//attribute
-		//value
+		//user $email
+		//$password
+		//$attribute
+		//$value
 	//action
 		//makes a select query to mySQL database with given data
+		//$attribute decides the function taken. Currently there are three functions:
+			//date:			query by date where $value is constraint date
+			//emailsent:	query by email where $value is the constraint receive email
+			//emailin:		query by email where $value is the constraint send email.
 	//output
-		//JSON object on success, false on fail.
+		//JSON object on success, error message in JSON object on fail.
 
 //by Hohyun Jeon @10/27/2013
-
-//DO NOT ADD THIS TO THE SERVER!!!!!!!!! THIS IS A WORK IN PROGRESS AND IS MISSING AUTH!!!!!
-//ADDING WOULD CREATE A VERY BIG SECURITY HOLE!!!!!!!
+//Updated by Hohyun Jeon @11/17/2013
+//Ready to add
 
 <?php
 //Connect to DB
@@ -42,24 +44,40 @@ $password = mysql_real_escape_string($password);
 if($loginPass = mysqli_query("SELECT `password` FROM `Account` WHERE `email` = \""+$email+"\";")){
 	if(mysqli_fetch_object($loginPass) == $password){
 		//insert code to do things after auth
-		//check that attribute is one of the following: email, fname, lname
-		if($attribute=="email" || $attribute == "fname" || $attribute == "lname"){
-			//sql query
-			if($lookup = mysqli_query("SELECT `email`, `fname`, `lname` FROM `Account` WHERE `"+$attribute+"` LIKE `%"+$value"%`;");){
+		//check that attribute is one of the following: date, email
+		if($attribute == "date"){
+			if(preg_match('/\d{4}-\d{2}-\d{2}/',$value)){
+				//Date needs to be in YYYY-MM-DD format
+				if($lookup = mysqli_query("SELECT `Email`, `Fname`, `Lname`, `SendInfo`, `NoteDate`  FROM (Select AccountID AS SendID, Email, Fname, Lname  FROM `Account` WHERE `Email`=`"+$email+"` UNION SELECT * FROM Notification) WHERE `NoteDate`=`"+$value+"`);"){
 				$data = mysqli_fetch_all($lookup);
 				echo json_encode($data);
 				//echo $lookup;
+				}
+			}else{
+				echo json_encode("Inputs data but format invalid. Must be YYYY-MM-DD");
 			}
-			//echo "Login and query sucess";
-		}
-		else
+		}else if($attribute == "emailsent"){
+			if($lookup = mysqli_query("SELECT `Email`, `Fname`, `Lname`, `SendInfo`, `NoteDate` FROM (Select AccountID AS SendID, Email, Fname, Lname  FROM `Account` WHERE `Email`=`"+$email+"` UNION SELECT * FROM Notification) WHERE `ReceiveID`=(SELECT AccountID FROM Account WHERE AccountID= "+$value+");"){
+			$data = mysqli_fetch_all($lookup);
+			echo json_encode($data);
+				//echo $lookup;
+			}
+			
+		}else if($attribute == "emailin"){
+			if($lookup = mysqli_query("SELECT `Email`, `Fname`, `Lname`, `SendInfo`, `NoteDate` FROM (Select AccountID AS ReceiveID, Email, Fname, Lname  FROM `Account` WHERE `Email`=`"+$email+"` UNION SELECT * FROM Notification) WHERE `SendID`=(SELECT AccountID FROM Account WHERE AccountID= "+$value+");"){
+			$data = mysqli_fetch_all($lookup);
+			echo json_encode($data);
+				//echo $lookup;
+			}
+		}else
 			echo "Query failed due to attribute name =" + $attribute;
+	
 	}
 	else
-		{echo "Query sucess, but Password does not match";}
+		{echo json_encode("Query sucess, but Password does not match");}
 }
 else
-	{echo "Query for auth failed: user does not exist";}
+	{echo json_encode("Query for auth failed: user does not exist");}
 
 
 ?>

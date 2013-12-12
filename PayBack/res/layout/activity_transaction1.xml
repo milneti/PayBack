@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/activitybackground"
     android:onClick="hideSoftKeyboard"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -11,7 +11,7 @@
     tools:context=".Transaction1Activity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/shortcutsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -69,7 +69,7 @@
             android:id="@+id/progressBar1"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="200dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="-10dp"
             android:layout_marginTop="10dp"
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="-20dp"
-                android:text="Progress"
+                android:text="@string/progress"
                 android:textColor="@color/White" />
 
             <Button

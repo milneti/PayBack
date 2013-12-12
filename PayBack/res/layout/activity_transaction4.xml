@@ -2,8 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/activitybackground"
+    android:gravity="top"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -15,13 +16,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
+        android:gravity="top"
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/shortcutsTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="center|top"
             android:text="@string/transaction4_BorrowersShare"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/White" />
@@ -34,15 +36,15 @@
             android:layout_weight="1"
             android:orientation="vertical" >
 
-	    <ListView
-	        android:id="@+id/Listofselected"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:descendantFocusability="beforeDescendants"
-            android:cacheColorHint="#00000000" >
+            <ListView
+                android:id="@+id/Listofselected"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:cacheColorHint="#00000000"
+                android:descendantFocusability="beforeDescendants" >
 
-	    </ListView>
-    </LinearLayout>
+            </ListView>
+        </LinearLayout>
     
      <LinearLayout
          android:layout_width="match_parent"

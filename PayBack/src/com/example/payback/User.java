@@ -39,7 +39,10 @@ abstract class Account
 
 public class User extends Account{
 	private ArrayList<Friend> friends; //updated when the User logs in
-	
+	private ArrayList<Notification> notifications;
+	private ArrayList<ResolveTransaction> transactions;
+
+	private String password;
 	/* Only called when creating a brand new account! */
 	User(String fName, String lName, String email) 
 	{
@@ -47,9 +50,11 @@ public class User extends Account{
 		this.lName = lName;
 		this.email = email;
 		this.friends = new ArrayList<Friend>();
+		this.notifications = new ArrayList<Notification>();
+		this.transactions = new ArrayList<ResolveTransaction>();
 		boolean worked = sendNewUserToServer();
 		if(!worked)
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Error creating a new account.");
 	}
 	static private boolean sendNewUserToServer()
 	{
@@ -59,31 +64,49 @@ public class User extends Account{
 	}
 	
 	/* Used for the rest of the time, when the user logs in */
-	User(String email)
+	User(String email, String password)
 	{
 		this.email = email;
-		this.fName = firstNameLookup(email);
-		this.lName = lastNameLookup(email);
-		this.friends = friendsLookup(email);
+		this.password = password;
+		this.updateName(email);
+		this.friends = Friend.updateFriends(email);
+		this.notifications = Notification.updateNotifications(email);
+		this.transactions = ResolveTransaction.updateTransactions(email);
 	}
-	private String firstNameLookup(String email)
-	{
-		//TODO: Pull user's first name from server
-		return "John";
+	public ArrayList<Friend> getFriends() {
+		return friends;
 	}
-	private String lastNameLookup(String email)
-	{
-		//TODO: Pull user's last name from server
-		return "Doe";
+	public void setFriends(ArrayList<Friend> friends) {
+		this.friends = friends;
 	}
-	private ArrayList<Friend> friendsLookup(String email) // Used for existing users
-	{
-		ArrayList<Friend> f = new ArrayList<Friend>();
-		//TODO: Pull information about each friend from the server: first name, last name, email. 
-		return f;
+	public ArrayList<Notification> getNotifications() {
+		return notifications;
+	}
+	public void setNotifications(ArrayList<Notification> notifications) {
+		this.notifications = notifications;
+	}
+	public ArrayList<ResolveTransaction> getTransactions() {
+		return transactions;
+	}
+	public void setTransactions(ArrayList<ResolveTransaction> transactions) {
+		this.transactions = transactions;
+	}
+	
+	public void updateName(String email){
+		this.fName ="john";
+		this.lName ="doe";
+	}
+	public String getPassword(){
+		return password;
+	}
+	
+	public void setnoneselected(){
+		for(int i = 0; i < friends.size(); i++){
+			friends.get(i).setSelected(false);
+		}
 	}	
+		
 }
-
 class Friend extends Account implements Parcelable {
 	boolean selected;
 	int amounttosel;
@@ -123,7 +146,7 @@ class Friend extends Account implements Parcelable {
 	Friend(String fName, String lName){
 		this.fName = fName;
 		this.lName = lName;
-		this.email = "";
+		this.email = "warandpeace@lotr.pre";
 		this.selected = false;
 		this.amounttosel = 0;
 		
@@ -147,7 +170,50 @@ class Friend extends Account implements Parcelable {
 	public void setamounttosel(int amounttosel) {
 		this.amounttosel = amounttosel;
 	}
-	  
+	
+	static ArrayList<Friend> updateFriends(String email) // Used for existing users
+	{
+	    Friend test1 = new Friend("Price", "Gutierrez");
+	    Friend test2 = new Friend("Vanna", "Mccullough");
+	    Friend test3 = new Friend("Wyatt", "Paul");
+	    Friend test4 = new Friend("Thaddeus", "Robbins");
+	    Friend test5 = new Friend("Rooney", "Dejesus");
+	    Friend test6 = new Friend("Xavier", "Wolfe");
+	    Friend test7 = new Friend("Byron", "Raymond");
+	    Friend test8 = new Friend("Quinn", "Whitfield");
+	    Friend test9 = new Friend("Farrah", "Moon");
+	    Friend test10 = new Friend("Ainsley", "Whitehead");
+	    Friend test11 = new Friend("Josephine", "Patton");
+	    Friend test12 = new Friend("Mariko", "Patton");
+	    Friend test13 = new Friend("Raphael", "Fitzgerald");
+	    Friend test14 = new Friend("Deacon", "Daniels");
+	    Friend test15 = new Friend("Delilah", "Fletcher");
+	    Friend test16 = new Friend("Robin", "Andrews");
+	    Friend test17 = new Friend("Melvin", "Price");
+		
+		ArrayList<Friend> f = new ArrayList<Friend>();
+		
+		f.add(test1);
+		f.add(test2);
+		f.add(test3);
+		f.add(test4);
+		f.add(test5);
+		f.add(test6);
+		f.add(test7);
+		f.add(test8);
+		f.add(test9);
+		f.add(test10);
+		f.add(test11);
+		f.add(test12);
+		f.add(test13);
+		f.add(test14);
+		f.add(test15);
+		f.add(test16);
+		f.add(test17);
+
+		//TODO: Pull information about each friend from the server: first name, last name, email. 
+		return f;
+	}
 	  
 	//Methods
 	static boolean sendNewFriendToServer()
@@ -166,6 +232,7 @@ class Friend extends Account implements Parcelable {
 	public String toString() {
 		return  getfName() + " " + getlName() + " (" + getEmail() + ")";
 	}
+
 	public String getDisplayName(){
 		return displayName;
 	}
