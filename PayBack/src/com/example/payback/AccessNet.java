@@ -118,14 +118,35 @@ class AccessNet{
 		return retval;
 	}
 	
-	public static boolean AddNotif(String uemail, String password, String description, String targetEmail) throws InterruptedException{
+	public static boolean AddNotif(String uemail, String password, String description, String targetEmail) throws InterruptedException, JSONException{
 		boolean retval = false;
-		String params = "userEmail="+uemail+"&password="+password+"&description="+description+"&targetEmail"+targetEmail;
-		String urlstub = "db_notification_create.php";
-		String status = "fail";
+		String params = "userEmail="+uemail+"&password="+password+"&sendInfo="+description+"&receiveEmail="+targetEmail;
+		String urlstub = "db_notif_create.php";
 		//calling server
-		status = simpleServerCall(urlstub, params);
-		if(status.equalsIgnoreCase("success")||status.equalsIgnoreCase("1")||status.equalsIgnoreCase("true"))
+		JSONObject obj = jsonServerCall(urlstub, params);
+		if(obj.get("result").toString().equalsIgnoreCase("1"))
+			retval=true;
+		return retval;
+	}
+	
+	public static boolean DeleteAllNotif(String uemail, String password) throws InterruptedException, JSONException{
+		boolean retval = false;
+		String params = "userEmail="+uemail+"&password="+password;
+		String urlstub = "db_notif_deleteAll.php";
+		//calling server
+		JSONObject obj = jsonServerCall(urlstub, params);
+		if(obj.get("result").toString().equalsIgnoreCase("1"))
+			retval=true;
+		return retval;
+	}
+	
+	public static boolean DeleteOneNotif(String uemail, String password, String nID) throws InterruptedException, JSONException{
+		boolean retval = false;
+		String params = "userEmail="+uemail+"&password="+password+"&noteID="+nID;
+		String urlstub = "db_notif_deleteOne.php";
+		//calling server
+		JSONObject obj = jsonServerCall(urlstub, params);
+		if(obj.get("result").toString().equalsIgnoreCase("1"))
 			retval=true;
 		return retval;
 	}
@@ -143,7 +164,7 @@ class AccessNet{
 		return lookupTrans(uemail,password,"userAsBorrower");
 	}
 	public static JSONObject lookupTrans(String uemail, String password, String attribute) throws InterruptedException, JSONException{
-		String params = "userEmail="+uemail+"&password="+password;
+		String params = "userEmail="+uemail+"&password="+password+"&lookupWith="+attribute;
 		String urlstub = "db_transaction_lookup.php";
 		return jsonServerCall(urlstub, params); 
 	}
@@ -159,20 +180,20 @@ class AccessNet{
 	}
 	public static JSONObject lookupNotifs(String uemail, String password, String attribute) throws InterruptedException, JSONException{
 		String params = "userEmail="+uemail+"&password="+password+"&attribute="+attribute;
-		String urlstub = "db_friendof_selectAll.php";	
+		String urlstub = "db_notif_lookup.php";	
 		return jsonServerCall(urlstub, params);
 	}
 	
-	public static boolean modifyUserEmail(String uemail, String password, String value, String attribute) throws InterruptedException{
+	public static boolean modifyUserEmail(String uemail, String password, String value) throws InterruptedException{
 		return modifyUser(uemail,password,value,"email");
 	}
-	public static boolean modifyUserPassword(String uemail, String password, String value, String attribute) throws InterruptedException{
+	public static boolean modifyUserPassword(String uemail, String password, String value) throws InterruptedException{
 		return modifyUser(uemail,password,value,"password");
 	}
-	public static boolean modifyUserFirstName(String uemail, String password, String value, String attribute) throws InterruptedException{
+	public static boolean modifyUserFirstName(String uemail, String password, String value) throws InterruptedException{
 		return modifyUser(uemail,password,value,"fname");
 	}
-	public static boolean modifyUserLastName(String uemail, String password, String value, String attribute) throws InterruptedException{
+	public static boolean modifyUserLastName(String uemail, String password, String value) throws InterruptedException{
 		return modifyUser(uemail,password,value,"lname");
 	}
 	public static boolean modifyUser(String uemail, String password, String value, String attribute) throws InterruptedException{
@@ -182,8 +203,9 @@ class AccessNet{
 		String status = "fail";
 		//calling server
 		status = simpleServerCall(urlstub, params);
-		if(status.equalsIgnoreCase("success")||status.equalsIgnoreCase("1")||status.equalsIgnoreCase("true"))
+		if(status.equalsIgnoreCase("success")||status.equalsIgnoreCase("1")||status.equalsIgnoreCase("true")) {
 			retval=true;
+		}
 		return retval;
 	}
 	

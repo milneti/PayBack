@@ -69,7 +69,7 @@
                     android:minHeight="85dp"
                     android:minWidth="143dp"
                     android:onClick="Notification"
-                    android:text="@string/title_activity_notification" />
+                    android:text="Notifications" />
 
             </LinearLayout>
 
@@ -98,7 +98,7 @@
                     android:minHeight="85dp"
                     android:minWidth="143dp"
                     android:onClick="Statistic"
-                    android:text="@string/title_activity_statistic" />
+                    android:text="Statistics" />
 
             </LinearLayout>
 
