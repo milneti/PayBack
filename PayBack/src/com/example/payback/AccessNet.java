@@ -136,6 +136,18 @@ class AccessNet{
 		return jsonServerCall(urlstub, params); 
 	}
 	
+	public static JSONObject lookupTransLender(String uemail, String password) throws InterruptedException, JSONException{
+		return lookupTrans(uemail,password,"userAsLender");
+	}
+	public static JSONObject lookupTransBorrower(String uemail, String password) throws InterruptedException, JSONException{
+		return lookupTrans(uemail,password,"userAsBorrower");
+	}
+	public static JSONObject lookupTrans(String uemail, String password, String attribute) throws InterruptedException, JSONException{
+		String params = "userEmail="+uemail+"&password="+password;
+		String urlstub = "db_transaction_lookup.php";
+		return jsonServerCall(urlstub, params); 
+	}
+	
 	public static JSONObject lookupNotifsDate(String uemail, String password, String value) throws InterruptedException, JSONException{
 		return lookupNotifs(uemail, password, value,"date");
 	}

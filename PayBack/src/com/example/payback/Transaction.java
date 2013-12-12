@@ -4,38 +4,48 @@ import java.util.*;
 
 public class Transaction {
 
-	int lenderId, borrowerId;
+	String lenderEmail, borrowerEmail;
 	double amount;
 	String comment;
 	
 	Transaction() {
-		this.lenderId = 0;
-		this.borrowerId = 0;
+		this.lenderEmail = "";
+		this.borrowerEmail = "";
 		this.amount = 0;
 		this.comment = "";
 	}
-	Transaction(int lenderId, int borrowerId, double amount, String comment)
+	Transaction(String lenderEmail, String borrowerEmail, double amount, String comment)
 	{
-		this.lenderId = lenderId;
-		this.borrowerId = borrowerId;
+		this.lenderEmail = lenderEmail;
+		this.borrowerEmail = borrowerEmail;
 		this.amount = amount;
 		this.comment = comment;
 	}
-	
-	//Example for outside code: t.sendTransToServer();
-	void sendTransactionToServer()
-	{
-		//json + sql magic
+	public String getLenderEmail() {
+		return lenderEmail;
 	}
-	
-	//Example for outside code: Transaction t = getTransFromServer(wmacfarlane@ufl.edu, arnav@ufl.edu)
-	static ArrayList<Transaction> getTransactionsFromServer(String lenderEmail, String borrowerEmail)
-	{
-		//json + sql magic
-		ArrayList<Transaction> a = new ArrayList<Transaction>();
-		//a.add(T1);
-		//a.add(T2);
-		//...
-		return a; //dummy code to silence errors
+	public void setLenderEmail(String lenderEmail) {
+		this.lenderEmail = lenderEmail;
 	}
+	public String getBorrowerEmail() {
+		return borrowerEmail;
+	}
+	public void setBorrowerEmail(String borrowerEmail) {
+		this.borrowerEmail = borrowerEmail;
+	}
+	public double getAmount() {
+		return amount;
+	}
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	
+	
 }

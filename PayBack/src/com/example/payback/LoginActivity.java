@@ -93,6 +93,19 @@ public class LoginActivity extends TitleActivity
 
 				JSONObject friends = AccessNet.lookupFriends(email,password);
 				user.setFriends(parseFriends(friends));
+				
+				JSONObject transAsBorrower = AccessNet.lookupTransBorrower(user.getEmail(), user.getPassword());
+				JSONObject transAsLender = AccessNet.lookupTransLender(user.getEmail(), user.getPassword());
+				
+				if(transAsBorrower.get("result").toString().equalsIgnoreCase("1"))
+				{
+					user.loadTransBorrowList(transAsBorrower,user.getEmail());
+				}
+				if(transAsLender.get("result").toString().equalsIgnoreCase("1"))
+				{
+					user.loadTransLendList(transAsLender,user.getEmail());
+				}
+				
 				/*
 				ArrayList<Friend> dummy = new ArrayList<Friend>();
 				dummy.add(new Friend());
