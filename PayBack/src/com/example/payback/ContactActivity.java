@@ -16,7 +16,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -87,7 +86,7 @@ public class ContactActivity extends TitleActivity
 		final String toDelete = user.extractEmail(friendList.get(info.position));
 
 		switch (menuItemIndex)
-		{
+		{/*
 			case 0:
 				LayoutInflater inflater = this.getLayoutInflater();
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -112,8 +111,8 @@ public class ContactActivity extends TitleActivity
 				       });
 				Dialog dialog = builder.create();
 				dialog.show();
-				return false;
-			case 1:
+				return false;*/
+			case 0:
 				AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
 		 	    builder2.setTitle("Confirm Delete?")
 				       .setPositiveButton(R.string.Confirm, new DialogInterface.OnClickListener() {
@@ -136,7 +135,7 @@ public class ContactActivity extends TitleActivity
 				Dialog dialog2 = builder2.create();
 				dialog2.show();
 				return false;
-			case 2:
+			case 1:
 				return false;
 		}
 		return true;

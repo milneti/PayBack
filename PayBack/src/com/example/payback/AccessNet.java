@@ -158,7 +158,7 @@ class AccessNet{
 	}
 	public static JSONObject lookupNotifs(String uemail, String password, String attribute) throws InterruptedException, JSONException{
 		String params = "userEmail="+uemail+"&password="+password+"&attribute="+attribute;
-		String urlstub = "db_friendof_selectAll.php";	
+		String urlstub = "db_notif_lookup.php";	
 		return jsonServerCall(urlstub, params);
 	}
 	

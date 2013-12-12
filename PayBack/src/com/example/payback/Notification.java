@@ -7,12 +7,14 @@ public class Notification {
 	private String toEmail;
 	private String message;
 	private String date; //format: "Nov 17 2013, 12:19 AM"
+	private boolean read;
 	
 	Notification (String from, String to, String message, String dateToParse)
 	{
 		this.fromEmail = from;
 		this.toEmail = to;
 		this.message = message;
+		this.read = false;
 		//  0123456789012345
 		// "2013-01-08 01:53:36"
 	}
@@ -24,6 +26,7 @@ public class Notification {
 		this.toEmail = to;
 		this.message = message;
 		this.date = currDateToString();
+		this.read = false;
 	}
 	Notification(){}
 	/*
