@@ -19,8 +19,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.payback.CreateAccountActivity;
@@ -49,7 +51,11 @@ public class LoginActivity extends TitleActivity
 	
 	public void Login(View view) throws InterruptedException, JSONException, IOException 
 	{
-
+		Button button = (Button)findViewById(R.id.sign_in_button);
+		button.setVisibility(View.GONE);
+		ProgressBar spin = (ProgressBar)findViewById(R.id.ProgBar);
+		spin.setVisibility(View.VISIBLE);
+		
 		//for log in, url stub is AccountLogin.php
 		Logger CONLOG = Logger.getLogger(LoginActivity.class .getName());
 		CONLOG.setLevel(Level.INFO);
@@ -77,7 +83,7 @@ public class LoginActivity extends TitleActivity
 			Toast.makeText(getApplicationContext(), "Email: \""+email+"\" is not a valid email address!", Toast.LENGTH_SHORT).show();
 		}
 		else
-		{
+		{			
 			if(AccessNet.AccountLogin(email,password)){
 				if (((CheckBox)findViewById(R.id.rememberLogin)).isChecked())
 					rememberLogin();
@@ -125,6 +131,8 @@ public class LoginActivity extends TitleActivity
 			{
 				CONLOG.info("Server call successful but user failed login.");
 				Toast.makeText(getApplicationContext(),"Incorrect username or password", Toast.LENGTH_SHORT).show();
+				spin.setVisibility(View.GONE);
+				button.setVisibility(View.VISIBLE);
 			}
 		}
 	}
@@ -179,15 +187,5 @@ public class LoginActivity extends TitleActivity
 		Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
         startActivity(intent);
         this.finish();
-	}
-	
-	public void bypass(View view)
-	{
-		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-		
-        startActivity(intent);
-        this.finish();
-	}
-	
-	
+	}	
 }
