@@ -47,8 +47,10 @@ else if (strlen($password) > 0) {
     $userID = mysqli_real_escape_string($link, $userID);
     $userEmail = mysqli_real_escape_string($link, $userEmail);
     $password = mysqli_real_escape_string($link, $password);
-    $FriendID = mysqli_real_escape_string($link, $friendID);
-    $FriendEmail = mysqli_real_escape_string($link, $friendEmail);
+    $friendID = mysqli_real_escape_string($link, $friendID);
+    $friendEmail = mysqli_real_escape_string($link, $friendEmail);
+
+    //echo $userID;
 
     // authorize
     $loginPass = mysqli_query($link, "SELECT `password` FROM `Account` WHERE `accountID` = '$userID';");
@@ -109,7 +111,7 @@ else if (strlen($password) > 0) {
         }
         else if (mysqli_num_rows($IDquery) > 1) {
             $response["result"] = -6;
-            $response["message"] = "Failed: New Friend Email '$friendEmail' matched >1 Account";
+            $response["message"] = "Failed: Friend Email '$friendEmail' matched >1 Account";
             $response["friendIDmatches"] = array();
             while ($row = mysqli_fetch_array($IDquery)) {
                 // temp array
@@ -122,13 +124,15 @@ else if (strlen($password) > 0) {
         }
         else {
             $response["result"] = -7;
-            $response["message"] = "Failed: New Friend (ID: ".$_POST['friendID'].", Email: $friendEmail) matched no Account";
+            $response["message"] = "Failed: Friend (ID: ".$_POST['friendID'].", Email: $friendEmail) matched no Account";
         }
     }
 
     //query to add transaction
     if (($response["result"] == null) && ($userID != false)&& ($friendID != false)) {
         if ($friend = mysqli_query($link, "SELECT Account.AccountID, Account.Email, Account.Fname, Account.Lname FROM Account WHERE Account.AccountID = ANY(SELECT Friend_Of.FriendID FROM Friend_Of WHERE Friend_Of.UserID = '$userID' AND Friend_Of.FriendID = '$friendID');")) {
+            $response["result"] = 1;
+            $response["message"] = "Friend lookup successful";
             $response["friendOfMatches"] = array();
             while ($row = mysqli_fetch_array($friend)) {
                 // temp array

@@ -32,7 +32,8 @@ require_once dirname(__FILE__) . '/db_config.php';
 $ID_options = array("options" => array("min_range"=>00000000, "max_range"=>99999999));
 $lenderID = filter_input(INPUT_POST, 'lenderID',FILTER_VALIDATE_INT, $ID_options);
 $borrowerID = filter_input(INPUT_POST, 'borrowerID',FILTER_VALIDATE_INT, $ID_options);
-$amount = filter_input(INPUT_POST, 'amount', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+$amount = filter_input(INPUT_POST, 'amount', FILTER_SANITIZE_NUMBER_FLOAT);
+$amount = $amount/100;
 $description = $_POST['description'];
 $transDate = $_POST['transDate'];
 $lenderEmail = $_POST['lenderEmail'];
@@ -133,14 +134,14 @@ else {
             }
 
             // validate amount range
-            if ($amount < 0.01) {
+            if ($amount < 1) {
                 $response["result"] = -8;
-                $response["message"] = "Failed: Amount (\$$amount) cannot be less than $0.01";
+                $response["message"] = "Failed: Amount cannot be less than $0.01";
                 $amount = false;
             }
-            else if ($amount > 999999.99) {
+            else if ($amount > 99999999) {
                 $response["result"] = -8;
-                $response["message"] = "Failed: Amount (\$$amount) cannot be greater than $999,999.99";
+                $response["message"] = "Failed: Amount cannot be greater than $999,999.99";
                 $amount = false;
             }
 

@@ -1,6 +1,5 @@
 package com.example.payback;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Notification {
@@ -8,12 +7,14 @@ public class Notification {
 	private String toEmail;
 	private String message;
 	private String date; //format: "Nov 17 2013, 12:19 AM"
+	private boolean read;
 	
 	Notification (String from, String to, String message, String dateToParse)
 	{
 		this.fromEmail = from;
 		this.toEmail = to;
 		this.message = message;
+		this.read = false;
 		//  0123456789012345
 		// "2013-01-08 01:53:36"
 	}
@@ -25,6 +26,7 @@ public class Notification {
 		this.toEmail = to;
 		this.message = message;
 		this.date = currDateToString();
+		this.read = false;
 	}
 	Notification(){}
 	/*
@@ -135,18 +137,5 @@ public class Notification {
 	}
 	public void setDate(String date) {
 		this.date = date;
-	}
-	//TODO:
-	public void sendToServer() //send this notification to server. Server needs to grab the "to" field and send it to them
-	{
-		
-	}
-	//TODO:
-	public static ArrayList<Notification> updateNotifications(String email)
-	{
-		ArrayList<Notification> nots = new ArrayList<Notification> ();
-		//populates this user's notifications arraylist
-		return nots;
-		
 	}
 }

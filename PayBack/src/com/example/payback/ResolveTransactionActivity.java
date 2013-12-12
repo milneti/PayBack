@@ -77,7 +77,7 @@ public class ResolveTransactionActivity extends TitleActivity
 			    TextView message = (TextView) rowView.findViewById(R.id.secondLine);
 			    
 			    //TODO: set the following text to the person's first name and last name with a server call, instead of just their email
-			    from.setText(al.get(position).getAmount());
+			    from.setText("" + al.get(position).getAmount());
 			    
 			    date.setText(al.get(position).getDate());
 			    message.setText(al.get(position).getMessage());

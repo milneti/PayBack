@@ -1,5 +1,6 @@
 package com.example.payback;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +35,7 @@ public class Transaction4Activity extends TitleActivity
 	{
 		super.onCreate(savedInstanceState);
 		modifyTitle("Transaction allotment",R.layout.activity_transaction4);	//change title
+		TextView text2 = (TextView) findViewById(R.id.totalfortrans4);
 
 		activityInstance = this;
 
@@ -49,6 +51,8 @@ public class Transaction4Activity extends TitleActivity
 		
 		listView = (ListView) findViewById(R.id.Listofselected);	//list of selected contacts
 		text = (TextView) findViewById(R.id.borrowername);			//Name of the borrower
+		
+		
 		editing = (EditText) findViewById(R.id.borroweramount);		//Amount each borrower will owe back
 		
 		data = buildData();		//data is the ArrayList which maps each borrower to his/her share											
@@ -58,8 +62,15 @@ public class Transaction4Activity extends TitleActivity
 		Bundle oldBndl = getIntent().getExtras();		//get extras
 		
 		//retrieve total amount for transaction - lender share
-		int maxForBorrower = oldBndl.getInt("Transaction1transCost") - oldBndl.getInt("Transaction3lenderamount");
+		int maxForBorrower = oldBndl.getInt("Transaction1transCost");
 		
+		DecimalFormat dec = new DecimalFormat("0.00");
+
+     	Float in = (float) (maxForBorrower);
+        float percen = in/100;	
+        String result = "Total amount = $"+dec.format(percen);
+		text2.setText(result);
+
 		Transaction4_listview_adapter adapter = new Transaction4_listview_adapter(this, data,
 		        R.layout.activity_transaction4_listviewitem, from, to, maxForBorrower);
 		    
@@ -106,7 +117,7 @@ public class Transaction4Activity extends TitleActivity
 	    boolean button1Selected = oldbundle.getBoolean("Transaction3button1Selected");
 	    boolean button2Selected = oldbundle.getBoolean("Transaction3button2Selected");
 
-    	Intent intent = new Intent(this, Transaction3Activity.class);
+    	Intent intent = new Intent(this, Transaction2Activity.class);
         Bundle Bundle = new Bundle();
         
         Bundle.putInt("Transaction1transCost", transCostInt);
@@ -135,8 +146,24 @@ public class Transaction4Activity extends TitleActivity
         
         if(counting != transCostInt)
         {
-			Toast.makeText(getApplicationContext(), "("+String.valueOf((transCostInt)-counting) 
-					+ ") Placeholder Money ERROR", Toast.LENGTH_SHORT).show();
+        	if((transCostInt)-counting <0){
+    	        DecimalFormat dec = new DecimalFormat("0.00");
+
+	        	Float in = (float) (counting-(transCostInt));
+	            float percen = in/100;	
+	            String result = "$"+dec.format(percen);
+    			Toast.makeText(getApplicationContext(), result + " too much money ERROR", Toast.LENGTH_SHORT).show();
+        	}
+        	else{
+    	        DecimalFormat dec = new DecimalFormat("0.00");
+
+	        	Float in = (float) ((transCostInt)-counting);
+	            float percen = in/100;	
+	            String result = "$"+dec.format(percen);
+    			Toast.makeText(getApplicationContext(), result + " not enough money ERROR", Toast.LENGTH_SHORT).show();
+        	}
+
+			
         }
         else
         {
