@@ -2,6 +2,10 @@ package com.example.payback;
 
 import java.util.*;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 abstract class Account
@@ -39,6 +43,11 @@ abstract class Account
 
 public class User extends Account{
 	private ArrayList<Friend> friends; //updated when the User logs in
+	private ArrayList<Notification> notifications;
+	private ArrayList<ResolveTransaction> transactions;
+	private ArrayList<BaseTransaction> transAsLend;
+	private ArrayList<BaseTransaction> transAsBorrow;
+	private String password;
 	
 	/* Only called when creating a brand new account! */
 	User(String fName, String lName, String email) 
@@ -47,43 +56,145 @@ public class User extends Account{
 		this.lName = lName;
 		this.email = email;
 		this.friends = new ArrayList<Friend>();
-		boolean worked = sendNewUserToServer();
-		if(!worked)
-			throw new IllegalArgumentException();
+		this.notifications = new ArrayList<Notification>();
+		this.transactions = new ArrayList<ResolveTransaction>();
+		this.transAsLend = new ArrayList<BaseTransaction>();
+		this.transAsBorrow = new ArrayList<BaseTransaction>();
 	}
-	static private boolean sendNewUserToServer()
-	{
-		//TODO: send email, fname, lname, pword to database
-		//return success/fail
-		return true;
-	}
-	
-	/* Used for the rest of the time, when the user logs in */
-	User(String email)
+	User(String email, String password)
 	{
 		this.email = email;
-		this.fName = firstNameLookup(email);
-		this.lName = lastNameLookup(email);
-		this.friends = friendsLookup(email);
+		this.password = password;
+		this.friends = new ArrayList<Friend>();
+		this.notifications = new ArrayList<Notification>();
+		this.transactions = new ArrayList<ResolveTransaction>();
+		this.transAsLend = new ArrayList<BaseTransaction>();
+		this.transAsBorrow = new ArrayList<BaseTransaction>();
 	}
-	private String firstNameLookup(String email)
-	{
-		//TODO: Pull user's first name from server
-		return "John";
+	static ArrayList<BaseTransaction> makeTransLendList(JSONObject obj, String uEmail) throws JSONException{
+		ArrayList<BaseTransaction> list = new ArrayList<BaseTransaction>();
+		JSONArray arr = obj.getJSONArray("transactions");
+		for(int i = 0; i < arr.length(); i++){
+			BaseTransaction trans = new BaseTransaction();
+			trans.setLenderEmail(uEmail);
+			trans.setBorrowerEmail(arr.getJSONObject(i).get("Email").toString());
+			trans.setAmount(Double.parseDouble(arr.getJSONObject(i).get("Amount").toString()));
+			if(arr.getJSONObject(i).has("Description"))
+				trans.setComment(arr.getJSONObject(i).get("Description").toString());
+			else
+				trans.setComment("No Comment");
+			if(arr.getJSONObject(i).getString("ResolvedFlag").equalsIgnoreCase("0")){
+				trans.setResolved(false);
+			}
+			else
+				trans.setResolved(true);
+			trans.setID(arr.getJSONObject(i).getString("TransID"));
+			list.add(trans);
+		}
+		return list;
 	}
-	private String lastNameLookup(String email)
-	{
-		//TODO: Pull user's last name from server
-		return "Doe";
+	static ArrayList<BaseTransaction> makeTransBorrowList(JSONObject obj, String uEmail) throws JSONException{
+		ArrayList<BaseTransaction> list = new ArrayList<BaseTransaction>();
+		JSONArray arr = obj.getJSONArray("transactions");
+		for(int i = 0; i < arr.length(); i++){
+			BaseTransaction trans = new BaseTransaction();
+			trans.setLenderEmail(arr.getJSONObject(i).get("Email").toString());
+			trans.setBorrowerEmail(uEmail);
+			trans.setAmount(Double.parseDouble(arr.getJSONObject(i).get("Amount").toString()));
+			if(arr.getJSONObject(i).has("Description"))
+				trans.setComment(arr.getJSONObject(i).get("Description").toString());
+			else
+				trans.setComment("No Comment");
+			if(arr.getJSONObject(i).getString("ResolvedFlag").equalsIgnoreCase("0")){
+				trans.setResolved(false);
+			}
+			else
+				trans.setResolved(true);
+			trans.setTransDate(arr.getJSONObject(i).get("TransDate").toString());
+			list.add(trans);
+		}
+		return list;
 	}
-	private ArrayList<Friend> friendsLookup(String email) // Used for existing users
-	{
-		ArrayList<Friend> f = new ArrayList<Friend>();
-		//TODO: Pull information about each friend from the server: first name, last name, email. 
-		return f;
+	public void setTransLendList(ArrayList<BaseTransaction> list){
+		this.transAsLend = list;
+	}
+	public ArrayList<BaseTransaction> getTransLend(){
+		return transAsLend;
+	}
+	public void setTransBorrowList(ArrayList<BaseTransaction> list) throws JSONException{
+		this.transAsBorrow = list;
+	}
+	public ArrayList<BaseTransaction> getTransBorrow(){
+		return transAsBorrow;
 	}	
-}
+	public void setFriends(ArrayList<Friend> friends) {
+		this.friends = friends;
+	}
+	public ArrayList<Friend> getFriends() {
+		return friends;
+	}	
+	public void setNotifications(ArrayList<Notification> notifications) {
+		this.notifications = notifications;
+	}
+	public ArrayList<Notification> getNotifications() {
+		return notifications;
+	}
+	public void setTransactions(ArrayList<ResolveTransaction> transactions) {
+		this.transactions = transactions;
+	}
+	public ArrayList<ResolveTransaction> getTransactions() {
+		return transactions;
+	}
+	public ArrayList<Friend> parseFriends(JSONObject friends){
+		ArrayList<Friend> list = new ArrayList<Friend>();	
+		try {
+			JSONArray array = friends.getJSONArray("friendOfMatches");
+			for(int i = 0; i < array.length(); i++){
+				JSONObject obj = array.getJSONObject(i);
+				Friend f = new Friend();
+				f.setfName(obj.getString("Fname"));
+				f.setlName(obj.getString("Lname"));
+				f.setEmail(obj.getString("Email"));
+				list.add(f);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 
+	public String getPassword(){
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public void setnoneselected(){
+		for(int i = 0; i < friends.size(); i++){
+			friends.get(i).setSelected(false);
+		}
+	}
+	public ArrayList<Notification> parseNotifs(JSONObject obj, String email) {
+		ArrayList<Notification> list = new ArrayList<Notification>();	
+		try {
+			JSONArray array = obj.getJSONArray("notifications");
+			for(int i = 0; i < array.length(); i++){
+				Notification n = new Notification();
+				n.setMessage(array.getJSONObject(i).getString("SendInfo"));
+				n.setToEmail(email);
+				n.setFromEmail(array.getJSONObject(i).getString("Email"));
+				n.setDate(array.getJSONObject(i).getString("NoteDate"));
+				n.setNotid(array.getJSONObject(i).getString("NoteID"));
+				list.add(n);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}	
+		
+}
 class Friend extends Account implements Parcelable {
 	boolean selected;
 	int amounttosel;
@@ -104,8 +215,6 @@ class Friend extends Account implements Parcelable {
 		this.displayName = fName + " " + lName;
 		this.selected = false;
 		
-		if(!sendNewFriendToServer())
-			throw new IllegalArgumentException();		
 	}
 	
 	Friend(String fName, String lName, String email, String displayName){
@@ -114,21 +223,17 @@ class Friend extends Account implements Parcelable {
 		this.email = email;
 		this.displayName = displayName;
 		this.selected = false;
-		
-		if(!sendNewFriendToServer())
-			throw new IllegalArgumentException();		
+
 	}
 	
 	//blank friend. FOR TESTING ONLY
 	Friend(String fName, String lName){
 		this.fName = fName;
 		this.lName = lName;
-		this.email = "";
+		this.email = "warandpeace@lotr.pre";
 		this.selected = false;
 		this.amounttosel = 0;
-		
-		if(!sendNewFriendToServer())
-			throw new IllegalArgumentException();
+
 	}
 	
 	//Getters and Setters
@@ -147,15 +252,51 @@ class Friend extends Account implements Parcelable {
 	public void setamounttosel(int amounttosel) {
 		this.amounttosel = amounttosel;
 	}
-	  
-	  
-	//Methods
-	static boolean sendNewFriendToServer()
+	/*
+	static ArrayList<Friend> updateFriends(String email) // Used for existing users
 	{
-		//TODO: send email, fname, lname, pword to database
-		//return success/fail
-		return true;
+	    Friend test1 = new Friend("Price", "Gutierrez");
+	    Friend test2 = new Friend("Vanna", "Mccullough");
+	    Friend test3 = new Friend("Wyatt", "Paul");
+	    Friend test4 = new Friend("Thaddeus", "Robbins");
+	    Friend test5 = new Friend("Rooney", "Dejesus");
+	    Friend test6 = new Friend("Xavier", "Wolfe");
+	    Friend test7 = new Friend("Byron", "Raymond");
+	    Friend test8 = new Friend("Quinn", "Whitfield");
+	    Friend test9 = new Friend("Farrah", "Moon");
+	    Friend test10 = new Friend("Ainsley", "Whitehead");
+	    Friend test11 = new Friend("Josephine", "Patton");
+	    Friend test12 = new Friend("Mariko", "Patton");
+	    Friend test13 = new Friend("Raphael", "Fitzgerald");
+	    Friend test14 = new Friend("Deacon", "Daniels");
+	    Friend test15 = new Friend("Delilah", "Fletcher");
+	    Friend test16 = new Friend("Robin", "Andrews");
+	    Friend test17 = new Friend("Melvin", "Price");
+		
+		ArrayList<Friend> f = new ArrayList<Friend>();
+		
+		f.add(test1);
+		f.add(test2);
+		f.add(test3);
+		f.add(test4);
+		f.add(test5);
+		f.add(test6);
+		f.add(test7);
+		f.add(test8);
+		f.add(test9);
+		f.add(test10);
+		f.add(test11);
+		f.add(test12);
+		f.add(test13);
+		f.add(test14);
+		f.add(test15);
+		f.add(test16);
+		f.add(test17);
+ 
+		return f;
 	}
+	  */
+	//Methods
 
 	public String extractEmail(String friend){
 		int startID = friend.indexOf("(");
@@ -166,6 +307,7 @@ class Friend extends Account implements Parcelable {
 	public String toString() {
 		return  getfName() + " " + getlName() + " (" + getEmail() + ")";
 	}
+
 	public String getDisplayName(){
 		return displayName;
 	}

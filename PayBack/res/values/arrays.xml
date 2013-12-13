@@ -2,9 +2,6 @@
 <resources>
     <string-array name="ContactsMenu">
         <item>
-            User Info
-        </item>
-        <item>
             Delete Contact
         </item>
         <item>

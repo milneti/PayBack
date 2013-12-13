@@ -17,23 +17,13 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/White" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="28dp"
-        android:text="PLACEHOLDER"
-        android:textColor="@color/White" />
-
     <ListView
         android:id="@+id/listviewforplaceholderdata"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_above="@+id/Layout2"
         android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/textView2"
         android:cacheColorHint="#00000000" >
 
     </ListView>

@@ -23,7 +23,7 @@
     <string name="transaction3_LenderShareHeader">Lender\'s Share</string>
     <string name="transaction3_LenderEven">Split Evenly</string>
     <string name="transaction3_LenderCustom">Custom Value</string>
-    <string name="transaction4_BorrowersShare">Borrower\'s Share</string>
+    <string name="transaction4_BorrowersShare">Transaction allotment</string>
     <string name="transaction5_SummaryHeader">Summary</string>
     <string name="Home">Home</string>
     <string name="Next">Next</string>
@@ -58,5 +58,10 @@
     <string name="save_changes">Save Changes</string>
     <string name="DeleteContact">Delete Contact</string>
     <string name="pagename">PageName</string>
+    <string name="resolvetransaction_activity_title">Resolve A Transaction</string>
+    <string name="developerMode">Developer Mode</string>
+    <string name="remember">Remember Me?</string>
+    <string name="delete_me">Delete</string>
+    
 
 </resources>
