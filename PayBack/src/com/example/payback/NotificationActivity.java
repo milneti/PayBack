@@ -80,7 +80,7 @@ public class NotificationActivity extends TitleActivity
 		listview.setAdapter(na);
 		setContentView(listview);
 	}
-	public void showMainMenu(View view)
+	public void goBack(View view)
 	{
 		Intent intent = new Intent(this, MainActivity.class);
     	startActivity(intent);
