@@ -7,6 +7,8 @@ abstract class Transaction {
 	String lenderEmail, borrowerEmail;
 	double amount;
 	String comment;
+	String transDate;
+	String ID;
 	boolean resolved;
 }
 class BaseTransaction extends Transaction{
@@ -21,6 +23,7 @@ class BaseTransaction extends Transaction{
 		this.amount = 0;
 		this.comment = "";
 		this.resolved = false;
+		this.transDate = "";
 	}
 	BaseTransaction(String lenderEmail, String borrowerEmail, double amount, String comment)
 	{
@@ -29,19 +32,27 @@ class BaseTransaction extends Transaction{
 		this.amount = amount;
 		this.comment = comment;
 	}
-	BaseTransaction(String lenderEmail, String borrowerEmail, double amount, String comment, boolean resolved)
+	BaseTransaction(String lenderEmail, String borrowerEmail, double amount, String comment, boolean resolved, String transDate, String ID)
 	{
 		this.lenderEmail = lenderEmail;
 		this.borrowerEmail = borrowerEmail;
 		this.amount = amount;
 		this.comment = comment;
 		this.resolved = resolved;
+		this.transDate = transDate;
+		this.ID = ID;
 	}
 	public String getLenderEmail() {
 		return lenderEmail;
 	}
 	public void setLenderEmail(String lenderEmail) {
 		this.lenderEmail = lenderEmail;
+	}
+	public String getTransDate() {
+		return transDate;
+	}
+	public void setTransDate(String transDate) {
+		this.transDate = transDate;
 	}
 	public String getBorrowerEmail() {
 		return borrowerEmail;
@@ -61,6 +72,13 @@ class BaseTransaction extends Transaction{
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	public String getID() {
+		return ID;
+	}
+	public void setID(String ID) {
+		this.ID = ID;
+	}
+	
 	public boolean getResolved() {
 		return resolved;
 	}

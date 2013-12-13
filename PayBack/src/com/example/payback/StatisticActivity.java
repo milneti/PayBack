@@ -173,7 +173,8 @@ public class StatisticActivity extends TitleActivity
     		{
     			y[i] = transBorrow.get(i).getAmount();
     		}
-    		y[i] = transBorrow.get(i).getAmount() + y[i-1];
+    		else
+    			y[i] = transBorrow.get(i).getAmount() + y[i-1];
     	}
     	
     	return y;
@@ -225,7 +226,8 @@ public class StatisticActivity extends TitleActivity
     		{
     			y[i] = transLend.get(i).getAmount();
     		}
-    		y[i] = transLend.get(i).getAmount() + y[i-1];
+    		else
+    			y[i] = transLend.get(i).getAmount() + y[i-1];
     	}
     	
     	return y;
