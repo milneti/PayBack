@@ -89,7 +89,6 @@ public class StatisticActivity extends TitleActivity
 //    	
 //    	return currentPayable;
 //    }
-    }
     
 //    public double getcurrentReceivables ()
 //    {
