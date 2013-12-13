@@ -45,14 +45,14 @@ public class TitleActivity extends Activity {
 		}
 		obj = AccessNet.lookupTransBorrower(user.getEmail(),user.getPassword());
 		if(obj.get("result").toString().equalsIgnoreCase("1")){
-			user.setTransBorrowList(obj,user.getEmail());
+			user.setTransBorrowList(user.makeTransBorrowList(obj,user.getEmail()));
 		}
 		obj = AccessNet.lookupTransLender(user.getEmail(),user.getPassword());
 		if(obj.get("result").toString().equalsIgnoreCase("1")){
-			user.setTransLendList(obj,user.getEmail());
+			user.setTransLendList(user.makeTransLendList(obj,user.getEmail()));
 		}
 		obj = AccessNet.lookupAllNotifs(user.getEmail(),user.getPassword());
-		if(obj!=null){
+		if(obj.get("result").toString().equalsIgnoreCase("1")){
 			user.setNotifications(user.parseNotifs(obj,user.getEmail()));
 		}
 	}

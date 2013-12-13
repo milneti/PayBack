@@ -7,6 +7,7 @@ import org.json.JSONException;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -79,6 +80,12 @@ public class NotificationActivity extends TitleActivity
 		listview.setAdapter(na);
 		setContentView(listview);
 	}
+	public void goBack(View view)
+	{
+		Intent intent = new Intent(this, MainActivity.class);
+    	startActivity(intent);
+    	this.finish();
+    }
 	public void deleteThese(View v)
 	{
 		for(int i = cbs.size() - 1; i >= 0; i--) //backwards so that our ordering doesn't get screwed up
