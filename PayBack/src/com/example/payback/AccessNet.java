@@ -182,10 +182,13 @@ class AccessNet{
 	public static JSONObject lookupNotifsEmailSent(String uemail, String password, String semail ) throws InterruptedException, JSONException{
 		return lookupNotifs(uemail, password, "emailsent", semail);	
 	}
-	
-	public static JSONObject lookupEmailIn(String uemail, String password, String iemail) throws InterruptedException, JSONException{
-		return lookupNotifs(uemail, password, "emailin", iemail);	
+	public static JSONObject lookupEmailIn(String uemail, String password) throws InterruptedException, JSONException{
+		return lookupNotifs(uemail, password, "emailin", uemail);	
+
 	}
+//	public static JSONObject lookupNotifsEmailIn(String uemail, String password) throws InterruptedException, JSONException{
+//		return lookupNotifs(uemail, password, "emailin");	
+//	}
 	public static JSONObject lookupNotifs(String uemail, String password, String attribute, String value) throws InterruptedException, JSONException{
 		String params = "email="+uemail+"&password="+password+"&attribute="+attribute+"&value="+value;
 		String urlstub = "db_notif_lookup.php";	
@@ -196,6 +199,16 @@ class AccessNet{
 		String urlstub = "db_notif_selectAll.php";	
 		return jsonServerCall(urlstub, params);
 	}
+	public static boolean noteFlagger(String uemail, String password, String noteID, String setFlag) throws InterruptedException, JSONException{
+		boolean retval = false;
+		String params = "userEmail="+uemail+"&password="+password+"&noteID="+noteID+"&setFlag="+setFlag;//setFlag must be "read" or "unread"
+		String urlstub = "db_notif_updateFlag.php";	
+		JSONObject obj = jsonServerCall(urlstub, params);
+		if(obj.get("result").toString().equalsIgnoreCase("1"))
+			retval=true;
+		return retval;//jsonServerCall(urlstub, params);
+	}
+	
 	public static boolean modifyUserEmail(String uemail, String password, String value) throws InterruptedException{
 		return modifyUser(uemail,password,value,"email");
 	}

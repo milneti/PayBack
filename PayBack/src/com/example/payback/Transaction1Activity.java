@@ -188,6 +188,7 @@ public class Transaction1Activity extends TitleActivity
     {
     	Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 	
 	public void showTrans2(View view)

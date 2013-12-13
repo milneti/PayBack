@@ -21,7 +21,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="524dp"
+            android:layout_height="fill_parent"
             android:orientation="vertical" >
 
             <Button
@@ -69,7 +69,8 @@
                     android:minHeight="85dp"
                     android:minWidth="143dp"
                     android:onClick="Notification"
-                    android:text="Notifications" />
+                    android:text="Notifications"
+                    android:textSize="12dp" />
 
             </LinearLayout>
 
