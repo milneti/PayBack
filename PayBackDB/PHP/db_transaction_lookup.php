@@ -72,7 +72,7 @@ else if (strlen($password) > 0) {
     if ($userID != false) {
 	    //check that lookupWith is one of the following: userAsBorrower, userAsLender
 	    if ($lookupWith == "userAsBorrower"){
-		    $lookup = mysqli_query($link, "SELECT `TransID`, `LenderID` AS `AccountID`, `Email`, `Fname`, `Lname`, `Amount`, `Description`, `TransDate` FROM `Transaction` JOIN `Account` ON `AccountID` = `LenderID` WHERE `BorrowerID` = $userID ORDER BY `TransID`;");
+		    $lookup = mysqli_query($link, "SELECT `TransID`, `LenderID` AS `AccountID`, `Email`, `Fname`, `Lname`, `Amount`, `Description`, `ResolvedFlag`, `TransDate` FROM `Transaction` JOIN `Account` ON `AccountID` = `LenderID` WHERE `BorrowerID` = $userID ORDER BY `TransID`;");
             if ($lookup) {
                 $response["result"] = 1;
                 $response["message"] = "Transaction lookup successful with User as Borrower.";
@@ -88,6 +88,7 @@ else if (strlen($password) > 0) {
                     $transaction["Lname"] = $row["Lname"];
                     $transaction["Amount"] = $row["Amount"];
                     $transaction["Description"] = $row["Description"];
+                    $transaction["ResolvedFlag"] = $row["ResolvedFlag"];
                     $transaction["TransDate"] = $row["TransDate"];
                     array_push($response["transactions"], $transaction);
                 }
@@ -98,7 +99,7 @@ else if (strlen($password) > 0) {
             }
 	    }
 	    else if($lookupWith == "userAsLender"){
-	        $lookup = mysqli_query($link, "SELECT `TransID`, `BorrowerID` AS `AccountID`, `Email`, `Fname`, `Lname`, `Amount`, `Description`, `TransDate` FROM `Transaction` JOIN `Account` ON `AccountID` = `BorrowerID` WHERE `LenderID` = $userID ORDER BY `TransID`;");
+	        $lookup = mysqli_query($link, "SELECT `TransID`, `BorrowerID` AS `AccountID`, `Email`, `Fname`, `Lname`, `Amount`, `Description`, `ResolvedFlag`, `TransDate` FROM `Transaction` JOIN `Account` ON `AccountID` = `BorrowerID` WHERE `LenderID` = $userID ORDER BY `TransID`;");
             if ($lookup) {
                 $response["result"] = 1;
                 $response["message"] = "Transaction lookup successful with User as Lender.";
@@ -114,6 +115,7 @@ else if (strlen($password) > 0) {
                     $transaction["Lname"] = $row["Lname"];
                     $transaction["Amount"] = $row["Amount"];
                     $transaction["Description"] = $row["Description"];
+                    $transaction["ResolvedFlag"] = $row["ResolvedFlag"];
                     $transaction["TransDate"] = $row["TransDate"];
                     array_push($response["transactions"], $transaction);
                 }

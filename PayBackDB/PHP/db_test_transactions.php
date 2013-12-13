@@ -34,6 +34,7 @@ if (mysqli_num_rows($result) > 0) {
         $trans["BorrowerID"] = $row["BorrowerID"];
         $trans["Amount"] = $row["Amount"];
         $trans["Description"] = $row["Description"];
+        $trans["ResolvedFlag"] = $row["ResolvedFlag"];
         $trans["TransDate"] = $row["TransDate"];
 
         // push single product into final response array
