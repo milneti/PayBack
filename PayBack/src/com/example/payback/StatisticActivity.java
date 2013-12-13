@@ -41,8 +41,8 @@ public class StatisticActivity extends TitleActivity
 	    ArrayList<BaseTransaction> transBorrow = user.getTransBorrow();
 	    ArrayList<BaseTransaction> transLend = user.getTransLend();
 	    
-//    	double currentPayable = getcurrentPayables(transBorrow);
-//    	double currentReceivable = getcurrentReceivables(transLend);
+    	double currentPayable = getcurrentPayable(transBorrow);
+    	double currentReceivable = getcurrentReceivable(transLend);
 //    	
     	double totalPayable = getTotalPayable(transBorrow);
     	double totalReceivable = getTotalReceivable(transLend);
@@ -53,26 +53,23 @@ public class StatisticActivity extends TitleActivity
     	//Append value to textview
     	TextView numTransactionTextView = (TextView) findViewById(R.id.numTransaction);
     	numTransactionTextView.append(Integer.toString(numTransaction));
-//    	TextView currentPayableTextView = (TextView) findViewById(R.id.currentPayables);
-//    	currentPayableTextView.append(String.format("$%.2f", currentPayables));
-//    	TextView currentReceivableTextView = (TextView) findViewById(R.id.currentReceivables);
-//    	currentReceivableTextView.append(String.format("$%.2f", currentReceivables));
-    	TextView TotalPayableTextView = (TextView) findViewById(R.id.totalPayables);
+    	TextView currentPayableTextView = (TextView) findViewById(R.id.currentPayable);
+    	currentPayableTextView.append(String.format("$%.2f", currentPayable));
+    	TextView currentReceivableTextView = (TextView) findViewById(R.id.currentReceivable);
+    	currentReceivableTextView.append(String.format("$%.2f", currentReceivable));
+    	TextView TotalPayableTextView = (TextView) findViewById(R.id.totalPayable);
     	TotalPayableTextView.append(String.format("$%.2f", totalPayable));
-    	TextView TotalReceivableTextView = (TextView) findViewById(R.id.totalReceivables);
+    	TextView TotalReceivableTextView = (TextView) findViewById(R.id.totalReceivable);
     	TotalReceivableTextView.append(String.format("$%.2f", totalReceivable));
-   	
-    	if(totalPayable <= 0 && totalReceivable <= 0)
-    	{
-	    	//Display Pie Graph
-	    	PieGraph pie = new PieGraph();
-	    	GraphicalView gView = pie.getTwoSectionView(this, totalPayable, totalReceivable);
-	    	LinearLayout chartView = (LinearLayout) findViewById(R.id.chart);
-	    	chartView.addView(gView);
-    	}
+    	
+    	//Display Pie Graph
+    	PieGraph pie = new PieGraph();
+    	GraphicalView gView = pie.getTwoSectionView(this, totalPayable, totalReceivable);
+    	LinearLayout chartView = (LinearLayout) findViewById(R.id.chart);
+    	chartView.addView(gView);
     }
     
-    public double getcurrentPayables (ArrayList<BaseTransaction> transBorrow)
+    public double getcurrentPayable (ArrayList<BaseTransaction> transBorrow)
     {
     	double currentPayable = 0;
     	for(int i = 0; i < transBorrow.size(); i++)
@@ -84,7 +81,7 @@ public class StatisticActivity extends TitleActivity
     	return currentPayable;
     }
     
-    public double getcurrentReceivables (ArrayList<BaseTransaction> transLend)
+    public double getcurrentReceivable (ArrayList<BaseTransaction> transLend)
     {
     	double currentReceivable = 0;
     	for(int i = 0; i < transLend.size(); i++)
