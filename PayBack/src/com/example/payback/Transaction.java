@@ -29,6 +29,14 @@ class BaseTransaction extends Transaction{
 		this.amount = amount;
 		this.comment = comment;
 	}
+	BaseTransaction(String lenderEmail, String borrowerEmail, double amount, String comment, boolean resolved)
+	{
+		this.lenderEmail = lenderEmail;
+		this.borrowerEmail = borrowerEmail;
+		this.amount = amount;
+		this.comment = comment;
+		this.resolved = resolved;
+	}
 	public String getLenderEmail() {
 		return lenderEmail;
 	}
