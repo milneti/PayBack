@@ -7,6 +7,7 @@ abstract class Transaction {
 	String lenderEmail, borrowerEmail;
 	double amount;
 	String comment;
+	boolean resolved;
 }
 class BaseTransaction extends Transaction{
 
@@ -19,6 +20,7 @@ class BaseTransaction extends Transaction{
 		this.borrowerEmail = "";
 		this.amount = 0;
 		this.comment = "";
+		this.resolved = false;
 	}
 	BaseTransaction(String lenderEmail, String borrowerEmail, double amount, String comment)
 	{
@@ -63,12 +65,14 @@ class ResolveTransaction extends Transaction{
 		this.amount = amount;
 		this.message = message;
 		this.date = currDateToString();
+		this.resolved = false;
 	}
 	ResolveTransaction (String amount, String message)
 	{
 		this.amount = Double.parseDouble(amount);
 		this.message = message;
 		this.date = currDateToString();
+		this.resolved = false;
 	}
 	static String currDateToString()
 	{
