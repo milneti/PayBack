@@ -82,6 +82,7 @@ public class User extends Account{
 				trans.setComment(arr.getJSONObject(i).get("Comment").toString());
 			else
 				trans.setComment("No Comment");
+			trans.setResolved(arr.getJSONObject(i).getBoolean("BOOLEANNAME"));
 		}
 	}
 	public ArrayList<BaseTransaction> getTransLend(){
@@ -95,6 +96,7 @@ public class User extends Account{
 			trans.setBorrowerEmail(uEmail);
 			trans.setAmount(Double.parseDouble(arr.getJSONObject(i).get("Amount").toString()));
 			trans.setComment(arr.getJSONObject(i).get("Description").toString());
+			trans.setResolved(arr.getJSONObject(i).getBoolean("BOOLEANNAME"));
 		}
 	}
 	public ArrayList<BaseTransaction> getTransBorrow(){
