@@ -51,24 +51,26 @@ public class StatisticActivity extends TitleActivity
 	    ArrayList<BaseTransaction> transBorrow = user.getTransBorrow();
 	    ArrayList<BaseTransaction> transLend = user.getTransLend();
 	    
-//    	double currentPayables = getcurrentPayables(transBorrow);
-//    	double currentReceivables = getcurrentReceivables(transLend);
+//    	double currentPayable = getcurrentPayables(transBorrow);
+//    	double currentReceivable = getcurrentReceivables(transLend);
 //    	
-    	double totalPayables = getTotalPayables(transBorrow);
-    	double totalReceivables = getTotalReceivables(transLend);
+    	double totalPayable = getTotalPayable(transBorrow);
+    	double totalReceivable = getTotalReceivable(transLend);
     	
-    	int numTransaction = transBorrow.size();
+    	int numTransaction = transLend.size();
     	
     	
     	//Append value to textview
+    	TextView numTransactionTextView = (TextView) findViewById(R.id.numTransaction);
+    	numTransactionTextView.append(Integer.toString(numTransaction));
 //    	TextView currentPayableTextView = (TextView) findViewById(R.id.currentPayables);
 //    	currentPayableTextView.append(String.format("$%.2f", currentPayables));
 //    	TextView currentReceivableTextView = (TextView) findViewById(R.id.currentReceivables);
 //    	currentReceivableTextView.append(String.format("$%.2f", currentReceivables));
     	TextView TotalPayableTextView = (TextView) findViewById(R.id.totalPayables);
-    	TotalPayableTextView.append(String.format("$%.2f", totalPayables));
-//    	TextView TotalReceivableTextView = (TextView) findViewById(R.id.totalReceivables);
-//    	TotalReceivableTextView.append(String.format("$%.2f", totalReceivables));
+    	TotalPayableTextView.append(String.format("$%.2f", totalPayable));
+    	TextView TotalReceivableTextView = (TextView) findViewById(R.id.totalReceivables);
+    	TotalReceivableTextView.append(String.format("$%.2f", totalReceivable));
 //    	
 //    	//Display Pie Graph
 //    	PieGraph pie = new PieGraph();
@@ -101,26 +103,26 @@ public class StatisticActivity extends TitleActivity
 //    	return totalPayables;
 //    }
     
-    public double getTotalPayables (ArrayList<BaseTransaction> transBorrow)
+    public double getTotalPayable (ArrayList<BaseTransaction> transBorrow)
     {
-    	double totalPayables = 0;
+    	double totalPayable = 0;
     	for(int i = 0; i < transBorrow.size(); i++)
     	{
-    		totalPayables += transBorrow.get(i).getAmount();
+    		totalPayable += transBorrow.get(i).getAmount();
     	}
     	
-    	return totalPayables;
+    	return totalPayable;
     }
     
-    public double getTotalReceivables (ArrayList<BaseTransaction> transLend)
+    public double getTotalReceivable (ArrayList<BaseTransaction> transLend)
     {
-    	double totalPayables = 0;
+    	double totalReceivable = 0;
     	for(int i = 0; i < transLend.size(); i++)
     	{
-    		totalPayables += transLend.get(i).getAmount();
+    		totalReceivable += transLend.get(i).getAmount();
     	}
     	
-    	return totalPayables;
+    	return totalReceivable;
     }
     
 //    public double getCurrentPayableFromJSONArray(transactionJSONArray)
