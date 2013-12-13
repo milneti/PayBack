@@ -71,33 +71,56 @@ public class User extends Account{
 		this.transAsLend = new ArrayList<BaseTransaction>();
 		this.transAsBorrow = new ArrayList<BaseTransaction>();
 	}
-	static void setTransLendList(JSONObject obj, String uEmail) throws JSONException{
+	static ArrayList<BaseTransaction> makeTransLendList(JSONObject obj, String uEmail) throws JSONException{
+		ArrayList<BaseTransaction> list = new ArrayList<BaseTransaction>();
 		JSONArray arr = obj.getJSONArray("transactions");
 		for(int i = 0; i < arr.length(); i++){
 			BaseTransaction trans = new BaseTransaction();
 			trans.setLenderEmail(uEmail);
 			trans.setBorrowerEmail(arr.getJSONObject(i).get("Email").toString());
 			trans.setAmount(Double.parseDouble(arr.getJSONObject(i).get("Amount").toString()));
-			if(arr.getJSONObject(i).has("Comment"))
-				trans.setComment(arr.getJSONObject(i).get("Comment").toString());
+			if(arr.getJSONObject(i).has("Description"))
+				trans.setComment(arr.getJSONObject(i).get("Description").toString());
 			else
 				trans.setComment("No Comment");
-			trans.setResolved(arr.getJSONObject(i).getBoolean("ResolvedFlag"));
+			if(arr.getJSONObject(i).getString("ResolvedFlag").equalsIgnoreCase("0")){
+				trans.setResolved(false);
+			}
+			else
+				trans.setResolved(true);
+			list.add(trans);
 		}
+		return list;
 	}
-	public ArrayList<BaseTransaction> getTransLend(){
-		return transAsLend;
-	}
-	static void setTransBorrowList(JSONObject obj, String uEmail) throws JSONException{
+	static ArrayList<BaseTransaction> makeTransBorrowList(JSONObject obj, String uEmail) throws JSONException{
+		ArrayList<BaseTransaction> list = new ArrayList<BaseTransaction>();
 		JSONArray arr = obj.getJSONArray("transactions");
 		for(int i = 0; i < arr.length(); i++){
 			BaseTransaction trans = new BaseTransaction();
 			trans.setLenderEmail(arr.getJSONObject(i).get("Email").toString());
 			trans.setBorrowerEmail(uEmail);
 			trans.setAmount(Double.parseDouble(arr.getJSONObject(i).get("Amount").toString()));
-			trans.setComment(arr.getJSONObject(i).get("Description").toString());
-			trans.setResolved(arr.getJSONObject(i).getBoolean("ResolvedFlag"));
+			if(arr.getJSONObject(i).has("Description"))
+				trans.setComment(arr.getJSONObject(i).get("Description").toString());
+			else
+				trans.setComment("No Comment");
+			if(arr.getJSONObject(i).getString("ResolvedFlag").equalsIgnoreCase("0")){
+				trans.setResolved(false);
+			}
+			else
+				trans.setResolved(true);
+			list.add(trans);
 		}
+		return list;
+	}
+	public void setTransLendList(ArrayList<BaseTransaction> list){
+		this.transAsLend = list;
+	}
+	public ArrayList<BaseTransaction> getTransLend(){
+		return transAsLend;
+	}
+	public void setTransBorrowList(ArrayList<BaseTransaction> list) throws JSONException{
+		this.transAsBorrow = list;
 	}
 	public ArrayList<BaseTransaction> getTransBorrow(){
 		return transAsBorrow;
@@ -156,10 +179,10 @@ public class User extends Account{
 			JSONArray array = obj.getJSONArray("notifications");
 			for(int i = 0; i < array.length(); i++){
 				Notification n = new Notification();
-				n.setMessage(array.getJSONObject(i).getString("comment"));
+				n.setMessage(array.getJSONObject(i).getString("SendInfo"));
 				n.setToEmail(email);
-				n.setFromEmail(array.getJSONObject(i).getString("email"));
-				n.setDate(array.getJSONObject(i).getString("date"));
+				n.setFromEmail(array.getJSONObject(i).getString("Email"));
+				n.setDate(array.getJSONObject(i).getString("NoteDate"));
 				n.setNotid(array.getJSONObject(i).getString("NoteID"));
 				list.add(n);
 			}

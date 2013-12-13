@@ -151,6 +151,7 @@ public class Transaction5Activity extends TitleActivity
 
 	    for(int i = 0; i < borrowers.size(); i++){
 	    	try {
+	    		AccessNet.AddNotif(from, fromPass, from + " created a transaction with you", borrowers.get(i).getEmail());
 	    		AccessNet.AddTrans(from, fromPass, borrowAmount.get(i), comment, from, borrowers.get(i).getEmail());
 	    	}catch (JSONException e) {
 				e.printStackTrace();
