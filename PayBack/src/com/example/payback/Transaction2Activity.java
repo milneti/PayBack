@@ -111,6 +111,7 @@ public class Transaction2Activity extends TitleActivity  {
         
         intent.putExtras(Bundle);
 	    startActivity(intent);
+	    finish();
 	}
 	
 	public void showTrans3(View view)
@@ -174,7 +175,7 @@ public class Transaction2Activity extends TitleActivity  {
 	        intent.putExtras(Bundle);
 	        startActivity(intent);
 	    }
-
+	    finish();
     }
 
 

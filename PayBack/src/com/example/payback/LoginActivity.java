@@ -57,6 +57,7 @@ public class LoginActivity extends TitleActivity
 	
 	public void Login(View view) throws InterruptedException, JSONException, IOException 
 	{
+		
 		Button button = (Button)findViewById(R.id.sign_in_button);
 		button.setVisibility(View.GONE);
 		ProgressBar spin = (ProgressBar)findViewById(R.id.ProgBar);

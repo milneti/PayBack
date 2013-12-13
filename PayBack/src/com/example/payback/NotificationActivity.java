@@ -41,7 +41,7 @@ public class NotificationActivity extends TitleActivity
 		registerReceiver(pkr, filter);
 	/*TODO*/
 		try {
-			user.setNotifications(user.parseNotifs(AccessNet.lookupNotifsEmailSent(user.getEmail(),user.getPassword()),user.getEmail()));
+			user.setNotifications(user.parseNotifs(AccessNet.lookupAllNotifs(user.getEmail(),user.getPassword()),user.getEmail()));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (JSONException e) {
