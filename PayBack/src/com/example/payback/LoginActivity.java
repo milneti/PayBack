@@ -14,10 +14,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -56,66 +54,6 @@ public class LoginActivity extends TitleActivity
 		finish();
         System.exit(0);
 	}
-	private boolean login;
-	private boolean checked;
-	private class Loader extends AsyncTask<Void, User, Integer>{
-		
-		private ProgressDialog Dialog = new ProgressDialog(LoginActivity.this);
-		private User usert;
-		
-		private Loader(User userin){
-			usert = userin;
-		}
-		//ProgressBar spin = (ProgressBar)findViewById(R.id.ProgBar);
-		//spin.setVisibility(View.VISIBLE);
-		@Override
-	    protected void onPreExecute()
-	    {
-	        Dialog.setMessage("Logging in...");
-	        Dialog.show();
-	    }
-
-	    /*protected Integer doInBackground(User user) throws InterruptedException 
-	    {
-	        //Task for doing something 
-	    	Integer retval = 0;
-	    	if (AccessNet.AccountLogin(user.getEmail(),user.getPassword()))
-	    			retval =1;
-	        return 0;
-	    }*/
-
-	    @Override
-	    protected void onPostExecute(Integer result)
-	    {
-	    	checked = false;
-	        /*if(result==1)
-	        {
-	        	login=true;
-	        	
-	        }else{
-	        	login =false;
-	        }*/
-	        // after completed finished the progressbar
-	        Dialog.dismiss();
-	    }
-
-		@Override
-		protected Integer doInBackground(Void... params) {
-			Integer retval = 0;
-	    	try {
-				if (AccessNet.AccountLogin(usert.getEmail(),usert.getPassword())){
-					retval =1;
-					login=true;
-				}
-						
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	        return 0;
-		}
-		
-	}
 	
 	public void Login(View view) throws InterruptedException, JSONException, IOException 
 	{
@@ -124,7 +62,6 @@ public class LoginActivity extends TitleActivity
 		button.setVisibility(View.GONE);
 		ProgressBar spin = (ProgressBar)findViewById(R.id.ProgBar);
 		spin.setVisibility(View.VISIBLE);
-		login = false; checked = true;
 		
 		//for log in, url stub is AccountLogin.php
 		Logger CONLOG = Logger.getLogger(LoginActivity.class .getName());
@@ -153,10 +90,8 @@ public class LoginActivity extends TitleActivity
 			Toast.makeText(getApplicationContext(), "Email: \""+email+"\" is not a valid email address!", Toast.LENGTH_SHORT).show();
 		}
 		else
-		{	
-			new Loader(new User(email, password)).execute();
-			do{
-			if(login){
+		{			
+			if(AccessNet.AccountLogin(email,password)){
 				if (((CheckBox)findViewById(R.id.rememberLogin)).isChecked())
 					rememberLogin();
 				else
@@ -168,13 +103,35 @@ public class LoginActivity extends TitleActivity
 				
 				//user is declared in TitleActivity, which every activity extends
 				user = new User(email, password); 
-
+				/*
+				JSONObject friends = AccessNet.lookupFriends(email,password);
+				user.setFriends(user.parseFriends(friends));
+				
+				JSONObject transAsBorrower = AccessNet.lookupTransBorrower(user.getEmail(), user.getPassword());
+				JSONObject transAsLender = AccessNet.lookupTransLender(user.getEmail(), user.getPassword());
+				
+				if(transAsBorrower.get("result").toString().equalsIgnoreCase("1"))
+				{
+					user.setTransBorrowList(transAsBorrower,user.getEmail());
+				}
+				if(transAsLender.get("result").toString().equalsIgnoreCase("1"))
+				{
+					user.setTransLendList(transAsLender,user.getEmail());
+				}
+				*/
 				refreshServerData();
-
+				/*
+				ArrayList<Friend> dummy = new ArrayList<Friend>();
+				dummy.add(new Friend());
+				
+				if(friends.getString("NULL").equalsIgnoreCase("false"))
+					user.setFriends(dummy);
+				else
+					user.setFriends(parseFriends(friends));
+					*/
 				startActivity(intent);
 				Toast.makeText(getApplicationContext(),"Welcome", Toast.LENGTH_SHORT).show();
 				this.finish();
-				break;
 			}
 
 			else
@@ -184,7 +141,6 @@ public class LoginActivity extends TitleActivity
 				spin.setVisibility(View.GONE);
 				button.setVisibility(View.VISIBLE);
 			}
-			}while(checked);
 		}
 	}
 	public void removeLoginFile()
