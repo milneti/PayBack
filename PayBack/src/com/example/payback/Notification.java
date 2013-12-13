@@ -9,13 +9,14 @@ public class Notification implements Comparable<Notification>{
 	private String date; 	//new format: "2013-12-12 12:29:56"
 							//old format: "Nov 17 2013, 12:19 AM"
 	private boolean read;
+	private int notid;
 	
 	Notification (String from, String to, String message, String dateToParse)
 	{
 		this.fromEmail = from;
 		this.toEmail = to;
 		this.message = message;
-		this.read = false;
+		this.setRead(false);
 		//  0123456789012345
 		// "2013-01-08 01:53:36"
 	}
@@ -26,8 +27,10 @@ public class Notification implements Comparable<Notification>{
 		this.fromEmail = from;
 		this.toEmail = to;
 		this.message = message;
-		this.date = currDateToString();
-		this.read = false;
+		//this.date = currDateToString();
+		this.date = "2013-12-12 12:29:56";
+		this.setRead(false);
+		
 	}
 	Notification(){}
 	
@@ -39,10 +42,10 @@ public class Notification implements Comparable<Notification>{
 	{
 		String d1 = date;
 		String d2 = other.date;
-		d1.replace('-', ' ');
-		d1.replace(':', ' ');
-		d2.replace('-', ' ');
-		d2.replace(':', ' ');
+		d1 = d1.replace('-', ' ');
+		d1 = d1.replace(':', ' ');
+		d2 = d2.replace('-', ' ');
+		d2 = d2.replace(':', ' ');
 		String[] d1s = d1.split(" ");
 		String[] d2s = d2.split(" ");
 		for(int i = 0; i < d1s.length; i++)
@@ -166,5 +169,15 @@ public class Notification implements Comparable<Notification>{
 	}
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+
+	public boolean isRead() {
+		return read;
+	}
+
+
+	public void setRead(boolean read) {
+		this.read = read;
 	}
 }
