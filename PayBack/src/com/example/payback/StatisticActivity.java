@@ -1,5 +1,7 @@
 package com.example.payback;
 
+import java.util.ArrayList;
+
 import org.achartengine.GraphicalView;
 import org.achartengine.model.TimeSeries;
 
@@ -46,19 +48,25 @@ public class StatisticActivity extends TitleActivity
     
     public void displayValue ()
     {   
-//    	double currentPayables = getcurrentPayables();
-//    	double currentReceivables = getcurrentReceivables();
+	    ArrayList<BaseTransaction> transBorrow = user.getTransBorrow();
+	    ArrayList<BaseTransaction> transLend = user.getTransLend();
+	    
+//    	double currentPayables = getcurrentPayables(transBorrow);
+//    	double currentReceivables = getcurrentReceivables(transLend);
 //    	
-//    	double totalPayables = getTotalPayables();
-//    	double totalReceivables = getTotalReceivables();
-//    	
-//    	//Append value to textview
+    	double totalPayables = getTotalPayables(transBorrow);
+    	double totalReceivables = getTotalReceivables(transLend);
+    	
+    	int numTransaction = transBorrow.size();
+    	
+    	
+    	//Append value to textview
 //    	TextView currentPayableTextView = (TextView) findViewById(R.id.currentPayables);
 //    	currentPayableTextView.append(String.format("$%.2f", currentPayables));
 //    	TextView currentReceivableTextView = (TextView) findViewById(R.id.currentReceivables);
 //    	currentReceivableTextView.append(String.format("$%.2f", currentReceivables));
-//    	TextView TotalPayableTextView = (TextView) findViewById(R.id.totalPayables);
-//    	TotalPayableTextView.append(String.format("$%.2f", totalPayables));
+    	TextView TotalPayableTextView = (TextView) findViewById(R.id.totalPayables);
+    	TotalPayableTextView.append(String.format("$%.2f", totalPayables));
 //    	TextView TotalReceivableTextView = (TextView) findViewById(R.id.totalReceivables);
 //    	TotalReceivableTextView.append(String.format("$%.2f", totalReceivables));
 //    	
@@ -81,42 +89,40 @@ public class StatisticActivity extends TitleActivity
 //    	
 //    	return currentPayable;
 //    }
-    
-//    public double getTotalPayables ()
-//    {
-//    	/*get JSON*/
-//    	JSONOBJECT jObject = new JSONObject();
-//    	JSONArray transactionJSONArray = JObject.getJSONArray("Transaction");
-//    	
-//    	/*get total payable*/
-//    	double totalPayable = getTotalPayableFromJSONArray(transactionJSONArray);
-//    	
-//    	return totalPayable;
-//    }
+    }
     
 //    public double getcurrentReceivables ()
 //    {
-//    	/*get JSON*/
-//    	JSONOBJECT jObject = new JSONObject();
-//    	JSONArray transactionJSONArray = JObject.getJSONArray("Transaction");
+//    	double totalPayables = 0;
+//    	for(int i = 0; i < transBorrow.size(); i++)
+//    	{
+//    		totalPayables += transBorrow.get(i).getAmount();
+//    	}
 //    	
-//    	/*get current receivable*/
-//    	double currentReceivable = getCurrentRecievableFromJSONArray(transactionJSONArray);
-//    
-//    	return currentReceivable;
+//    	return totalPayables;
 //    }
     
-//    public double getTotalReceivables ()
-//    {
-//    	/*get JSON*/
-//    	JSONOBJECT jObject = new JSONObject();
-//    	JSONArray transactionJSONArray = JObject.getJSONArray("Transaction");
-//    	
-//    	/*get total receivable*/
-//    	double totalReceivable = getTotalReceivableFromJSONArray(transactionJSONArray);
-//    	
-//    	return totalReceivable;
-//    }
+    public double getTotalPayables (ArrayList<BaseTransaction> transBorrow)
+    {
+    	double totalPayables = 0;
+    	for(int i = 0; i < transBorrow.size(); i++)
+    	{
+    		totalPayables += transBorrow.get(i).getAmount();
+    	}
+    	
+    	return totalPayables;
+    }
+    
+    public double getTotalReceivables (ArrayList<BaseTransaction> transLend)
+    {
+    	double totalPayables = 0;
+    	for(int i = 0; i < transLend.size(); i++)
+    	{
+    		totalPayables += transLend.get(i).getAmount();
+    	}
+    	
+    	return totalPayables;
+    }
     
 //    public double getCurrentPayableFromJSONArray(transactionJSONArray)
 //    {
