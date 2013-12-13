@@ -30,7 +30,7 @@ public class NotificationActivity extends TitleActivity
 	static PageKillReceiver pkr;		//used for PageKillReceiver.java
 	static IntentFilter filter;
 	
-	static final boolean DEMO = true;
+	static final boolean DEMO = false;
 	static ArrayList<CheckBox> cbs;
 	ListView listview;
 	ArrayList<Notification> nots;
