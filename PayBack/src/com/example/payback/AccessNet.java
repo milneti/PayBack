@@ -182,14 +182,12 @@ class AccessNet{
 	public static JSONObject lookupNotifsEmailSent(String uemail, String password ) throws InterruptedException, JSONException{
 		return lookupNotifs(uemail, password, "emailsent", uemail);	
 	}
-<<<<<<< HEAD
 	public static JSONObject lookupEmailIn(String uemail, String password) throws InterruptedException, JSONException{
 		return lookupNotifs(uemail, password, "emailin", uemail);	
-=======
-	public static JSONObject lookupNotifsEmailIn(String uemail, String password) throws InterruptedException, JSONException{
-		return lookupNotifs(uemail, password, "emailin");	
->>>>>>> 8d28e751fc5ca1fdd22f0a418dff724f7106039c
 	}
+//	public static JSONObject lookupNotifsEmailIn(String uemail, String password) throws InterruptedException, JSONException{
+//		return lookupNotifs(uemail, password, "emailin");	
+//	}
 	public static JSONObject lookupNotifs(String uemail, String password, String attribute, String value) throws InterruptedException, JSONException{
 		String params = "email="+uemail+"&password="+password+"&attribute="+attribute+"&value="+value;
 		String urlstub = "db_notif_lookup.php";	

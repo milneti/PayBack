@@ -1,6 +1,7 @@
 package com.example.payback;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.json.JSONException;
 
@@ -27,7 +28,7 @@ public class NotificationActivity extends TitleActivity
 	static PageKillReceiver pkr;		//used for PageKillReceiver.java
 	static IntentFilter filter;
 	
-	static final boolean DEMO = true;
+	//static final boolean DEMO = true;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class NotificationActivity extends TitleActivity
 		filter = new IntentFilter();
 		filter.addAction("com.Payback.Logout_Intent");
 		registerReceiver(pkr, filter);
-	/*TODO*/
+
 		try {
 			user.setNotifications(user.parseNotifs(AccessNet.lookupNotifsEmailSent(user.getEmail(),user.getPassword()),user.getEmail()));
 		} catch (InterruptedException e) {
@@ -47,8 +48,10 @@ public class NotificationActivity extends TitleActivity
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-
+		
 		ArrayList<Notification> nots = user.getNotifications();
+		Collections.sort(nots);
+		
 		
 		final ListView listview = (ListView) findViewById(R.id.listview);
 		/*

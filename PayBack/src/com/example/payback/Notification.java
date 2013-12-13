@@ -2,11 +2,12 @@ package com.example.payback;
 
 import java.util.Calendar;
 
-public class Notification {
+public class Notification implements Comparable<Notification>{
 	private String fromEmail;
 	private String toEmail;
 	private String message;
-	private String date; //format: "Nov 17 2013, 12:19 AM"
+	private String date; 	//new format: "2013-12-12 12:29:56"
+							//old format: "Nov 17 2013, 12:19 AM"
 	private boolean read;
 	
 	Notification (String from, String to, String message, String dateToParse)
@@ -29,6 +30,34 @@ public class Notification {
 		this.read = false;
 	}
 	Notification(){}
+	
+	//Used to create a chronological order of dates, like the following:
+	//"2012-12-12 12:29:56"
+	//"2013-12-12 12:29:56"
+	//...
+	public int compareTo(Notification other) //chronological order
+	{
+		String d1 = date;
+		String d2 = other.date;
+		d1.replace('-', ' ');
+		d1.replace(':', ' ');
+		d2.replace('-', ' ');
+		d2.replace(':', ' ');
+		String[] d1s = d1.split(" ");
+		String[] d2s = d2.split(" ");
+		for(int i = 0; i < d1s.length; i++)
+		{
+			int x = Integer.parseInt(d1s[i]);
+			int y = Integer.parseInt(d2s[i]);
+			if(x > y)
+				return 1;
+			else if(x < y)
+				return -1;
+		}
+		
+		return 0; //equivalent dates
+	}
+	
 	/*
 	static String parseDateToString(String input)
 	{
