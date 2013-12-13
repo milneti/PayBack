@@ -181,7 +181,6 @@ public class StatisticActivity extends TitleActivity
     
 	public TimeSeries getReceivableSeries (String seriesName)
 	{
-	    ArrayList<BaseTransaction> transBorrow = user.getTransBorrow();
 	    ArrayList<BaseTransaction> transLend = user.getTransLend();
 	    
 //		int[] x = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }; // x values!
