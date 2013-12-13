@@ -51,7 +51,7 @@ public class TitleActivity extends Activity {
 		if(obj.get("result").toString().equalsIgnoreCase("1")){
 			user.setTransLendList(obj,user.getEmail());
 		}
-		obj = AccessNet.lookupNotifsEmailSent(user.getEmail(),user.getPassword());
+		obj = AccessNet.lookupAllNotifs(user.getEmail(),user.getPassword());
 		if(obj!=null){
 			user.setNotifications(user.parseNotifs(obj,user.getEmail()));
 		}

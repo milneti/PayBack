@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="@string/Cancel"
+        android:text="@string/Previous"
         android:onClick="showMainMenu" />
 
     <Button

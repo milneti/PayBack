@@ -47,7 +47,7 @@ public class ContactActivity extends TitleActivity
 
 		contactlistview = (ListView) findViewById(R.id.listofselected);
 		friendList = buildFriendList();
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.activity_contact_iteminlist, friendList);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.textview, friendList);
 		contactlistview.setAdapter(adapter);
 		registerForContextMenu(contactlistview);
 

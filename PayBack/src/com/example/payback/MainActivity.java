@@ -28,6 +28,13 @@ public class MainActivity extends TitleActivity
 		return true;
 	}
 	*/
+	@Override
+	public void onBackPressed() 
+	{
+		finish();
+        System.exit(0);
+	}
+	
     public void CreateTrsn(View view)
     {    	
 		int transCostInt = 0;
@@ -51,36 +58,42 @@ public class MainActivity extends TitleActivity
     
         intent.putExtras(Bundle);
         startActivity(intent);
+        finish();
     }
     
     public void ResolveTrsn(View view)
     {
     	Intent intent = new Intent(this, ResolveTransactionActivity.class);
         startActivity(intent);
+        finish();
     }
     
     public void Contact(View view)
     {
     	Intent intent = new Intent(this, ContactActivity.class);
         startActivity(intent);
+        finish();
     }
     
     public void ManageGroup(View view)
     {
     	Intent intent = new Intent(this, ManageGroupActivity.class);
         startActivity(intent);
+        finish();
     }
     
     public void Notification(View view)
     {
     	Intent intent = new Intent(this, NotificationActivity.class);
         startActivity(intent);
+        finish();
     }
     
     public void Statistic(View view)
     {
     	Intent intent = new Intent(this, StatisticActivity.class);
         startActivity(intent);
+        finish();
     }
     
     public void MainLogout(View view)
@@ -90,12 +103,14 @@ public class MainActivity extends TitleActivity
     	sendBroadcast(broadcastIntent);
 
         this.finish(); //activity is done and should be closed
+        System.exit(0);
     }
     
     public void Setting(View view)
     {
     	Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
+        finish();
     }
 
 }
