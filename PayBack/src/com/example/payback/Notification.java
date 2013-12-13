@@ -2,19 +2,21 @@ package com.example.payback;
 
 import java.util.Calendar;
 
-public class Notification {
+public class Notification implements Comparable<Notification>{
 	private String fromEmail;
 	private String toEmail;
 	private String message;
-	private String date; //format: "Nov 17 2013, 12:19 AM"
+	private String date; 	//new format: "2013-12-12 12:29:56"
+							//old format: "Nov 17 2013, 12:19 AM"
 	private boolean read;
+	private int notid;
 	
 	Notification (String from, String to, String message, String dateToParse)
 	{
 		this.fromEmail = from;
 		this.toEmail = to;
 		this.message = message;
-		this.read = false;
+		this.setRead(false);
 		//  0123456789012345
 		// "2013-01-08 01:53:36"
 	}
@@ -25,10 +27,40 @@ public class Notification {
 		this.fromEmail = from;
 		this.toEmail = to;
 		this.message = message;
-		this.date = currDateToString();
-		this.read = false;
+		//this.date = currDateToString();
+		this.date = "2013-12-12 12:29:56";
+		this.setRead(false);
+		
 	}
 	Notification(){}
+	
+	//Used to create a chronological order of dates, like the following:
+	//"2012-12-12 12:29:56"
+	//"2013-12-12 12:29:56"
+	//...
+	public int compareTo(Notification other) //chronological order
+	{
+		String d1 = date;
+		String d2 = other.date;
+		d1 = d1.replace('-', ' ');
+		d1 = d1.replace(':', ' ');
+		d2 = d2.replace('-', ' ');
+		d2 = d2.replace(':', ' ');
+		String[] d1s = d1.split(" ");
+		String[] d2s = d2.split(" ");
+		for(int i = 0; i < d1s.length; i++)
+		{
+			int x = Integer.parseInt(d1s[i]);
+			int y = Integer.parseInt(d2s[i]);
+			if(x > y)
+				return 1;
+			else if(x < y)
+				return -1;
+		}
+		
+		return 0; //equivalent dates
+	}
+	
 	/*
 	static String parseDateToString(String input)
 	{
@@ -137,5 +169,15 @@ public class Notification {
 	}
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+
+	public boolean isRead() {
+		return read;
+	}
+
+
+	public void setRead(boolean read) {
+		this.read = read;
 	}
 }

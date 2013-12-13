@@ -61,5 +61,7 @@
     <string name="resolvetransaction_activity_title">Resolve A Transaction</string>
     <string name="developerMode">Developer Mode</string>
     <string name="remember">Remember Me?</string>
+    <string name="delete_me">Delete</string>
+    
 
 </resources>

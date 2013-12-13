@@ -3,16 +3,25 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="6dip" >
-        
+        <CheckBox 
+        android:id="@+id/check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+            />
         <TextView
         android:id="@+id/from"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
+        android:layout_toRightOf="@+id/check"
         android:ellipsize="marquee"
         android:singleLine="true"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textColor="@color/White"
+        />
    
         <TextView
         android:id="@+id/date"
@@ -22,14 +31,19 @@
         android:layout_alignParentRight="true"
         android:ellipsize="marquee"
         android:singleLine="true"
-        android:textSize="12sp" />
- 
+        android:textSize="12sp"
+        android:textColor="@color/White"
+         />
+
         <TextView
         android:id="@+id/secondLine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/from"
+        android:layout_below="@+id/from"
+        android:layout_toRightOf="@+id/check"
         android:ellipsize="marquee"
         android:singleLine="true"
+        android:textColor="@color/White"
         android:textSize="13sp" />
+
    </RelativeLayout> 
