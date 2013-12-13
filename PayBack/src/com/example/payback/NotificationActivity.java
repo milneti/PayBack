@@ -56,7 +56,7 @@ public class NotificationActivity extends TitleActivity
 		nots = user.getNotifications();
 
 		listview = (ListView) findViewById(R.id.listview);
-		
+		/*
 		if(DEMO)
 		{
 			nots.add(new Notification("Santa C.", "Will", "Santa added you as a friend."));
@@ -66,7 +66,7 @@ public class NotificationActivity extends TitleActivity
 			nots.add(new Notification("Nigerian P.", "Will", "Nigerian has sent you notice of a pending transaction."));
 
 		}
-		
+		*/
 			//final StableArrayAdapter adapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, al);
 		
 		View v = getLayoutInflater().inflate(R.layout.activity_noti_footer, null);
