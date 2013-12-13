@@ -59,7 +59,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:onClick="displayTransactionsHistory"
-            android:text="Transactions History" />
+            android:text="Transactions History"
+            android:textSize="24sp" />
 
 <!--         <Button -->
 <!--             android:id="@+id/BarGraph" -->
@@ -95,13 +96,12 @@
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/linearLayout1"
-        android:layout_marginBottom="27dp"
-        android:layout_marginRight="22dp"
         android:onClick="showMainMenu"
-        android:text="Back" />
+        android:text="Home"
+        android:textSize="24sp" />
 
 </RelativeLayout>
