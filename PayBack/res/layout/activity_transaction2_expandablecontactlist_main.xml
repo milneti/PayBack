@@ -33,14 +33,6 @@
         android:layout_weight="0"
         android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/devB"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:onClick="showCreateContact"
-            android:text="@string/transaction2_newContact" />
-
     </LinearLayout>
 
     <LinearLayout
