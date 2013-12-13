@@ -185,10 +185,10 @@ public class ContactActivity extends TitleActivity
 		}else{
 			if(AccessNet.AddFriend(email, user.getEmail(), user.getPassword())){		
 				if(AccessNet.AddNotif(user.getEmail(), user.getPassword(), user.getEmail() + " Added you as a Friend", email)){
-					Toast.makeText(getApplicationContext(),"Notif sent", Toast.LENGTH_SHORT).show();
+					//Toast.makeText(getApplicationContext(),"Notif sent", Toast.LENGTH_SHORT).show();
 				}
-				else
-					Toast.makeText(getApplicationContext(),"No Notif Made", Toast.LENGTH_SHORT).show();
+				//else
+					//Toast.makeText(getApplicationContext(),"No Notif Made", Toast.LENGTH_SHORT).show();
 				
 				//update list
 				JSONObject friends = AccessNet.lookupFriends(user.getEmail(),user.getPassword());
