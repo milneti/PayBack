@@ -38,6 +38,16 @@ public class TitleActivity extends Activity {
 		finish();
 		startActivity(getIntent());
 	}
+	public void refreshTrans() throws JSONException, InterruptedException{
+		JSONObject obj = AccessNet.lookupTransBorrower(user.getEmail(),user.getPassword());
+		if(obj.get("result").toString().equalsIgnoreCase("1")){
+			user.setTransBorrowList(user.makeTransBorrowList(obj,user.getEmail()));
+		}
+		obj = AccessNet.lookupTransLender(user.getEmail(),user.getPassword());
+		if(obj.get("result").toString().equalsIgnoreCase("1")){
+			user.setTransLendList(user.makeTransLendList(obj,user.getEmail()));
+		}
+	}
 	public void refreshServerData() throws InterruptedException, JSONException{
 		JSONObject obj = AccessNet.lookupFriends(user.getEmail(),user.getPassword());
 		if(obj.get("result").toString().equalsIgnoreCase("1")){

@@ -208,6 +208,15 @@ class AccessNet{
 			retval=true;
 		return retval;//jsonServerCall(urlstub, params);
 	}
+	public static boolean transFlagger(String uemail, String password, String transID, String setFlag) throws InterruptedException, JSONException{
+		boolean retval = false;
+		String params = "userEmail="+uemail+"&password="+password+"&transID="+transID+"&setFlag="+setFlag;//setFlag must be "read" or "unread"
+		String urlstub = "db_notif_updateFlag.php";	
+		JSONObject obj = jsonServerCall(urlstub, params);
+		if(obj.get("result").toString().equalsIgnoreCase("1"))
+			retval=true;
+		return retval;//jsonServerCall(urlstub, params);
+	}
 	
 	public static boolean modifyUserEmail(String uemail, String password, String value) throws InterruptedException{
 		return modifyUser(uemail,password,value,"email");

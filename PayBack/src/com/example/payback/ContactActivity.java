@@ -73,7 +73,7 @@ public class ContactActivity extends TitleActivity
 			for (int i = 0; i<menuItems.length; i++) {
 				menu.add(Menu.NONE, i, i, menuItems[i]);
 			}
-			Toast.makeText(getApplicationContext(),"menu up", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getApplicationContext(),"menu up", Toast.LENGTH_SHORT).show();
 		}
 		
 	}

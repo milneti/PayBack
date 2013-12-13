@@ -88,6 +88,7 @@ public class User extends Account{
 			}
 			else
 				trans.setResolved(true);
+			trans.setID(arr.getJSONObject(i).getString("TransID"));
 			list.add(trans);
 		}
 		return list;
@@ -109,6 +110,7 @@ public class User extends Account{
 			}
 			else
 				trans.setResolved(true);
+			trans.setTransDate(arr.getJSONObject(i).get("TransDate").toString());
 			list.add(trans);
 		}
 		return list;
