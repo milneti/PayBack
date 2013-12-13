@@ -160,6 +160,7 @@ public class User extends Account{
 				n.setToEmail(email);
 				n.setFromEmail(array.getJSONObject(i).getString("email"));
 				n.setDate(array.getJSONObject(i).getString("date"));
+				n.setNotid(array.getJSONObject(i).getString("NoteID"));
 				list.add(n);
 			}
 		} catch (JSONException e) {

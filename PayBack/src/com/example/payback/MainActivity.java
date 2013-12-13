@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends TitleActivity
 {
@@ -15,7 +16,14 @@ public class MainActivity extends TitleActivity
 	 {
 		super.onCreate(savedInstanceState);
 		modifyTitle("Main Menu",R.layout.activity_main);
-		
+		int count = 0;
+		for(Notification n : user.getNotifications())
+		{
+			if(!n.isRead())
+				count++;
+		}
+		TextView notTitle = (TextView) findViewById(R.id.NotificationB);
+		notTitle.setText("Notifications (" + count + " new)");
 		Intent broadcastIntent = new Intent();
     	broadcastIntent.setAction("com.Payback.StayLoggedIn_Intent");
     	sendBroadcast(broadcastIntent);

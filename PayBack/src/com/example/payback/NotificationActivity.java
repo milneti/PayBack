@@ -30,7 +30,7 @@ public class NotificationActivity extends TitleActivity
 	static PageKillReceiver pkr;		//used for PageKillReceiver.java
 	static IntentFilter filter;
 	
-	static final boolean DEMO = false;
+	static final boolean DEMO = true;
 	static ArrayList<CheckBox> cbs;
 	ListView listview;
 	ArrayList<Notification> nots;
@@ -56,7 +56,7 @@ public class NotificationActivity extends TitleActivity
 		nots = user.getNotifications();
 
 		listview = (ListView) findViewById(R.id.listview);
-		/*
+		
 		if(DEMO)
 		{
 			nots.add(new Notification("Santa C.", "Will", "Santa added you as a friend."));
@@ -66,7 +66,7 @@ public class NotificationActivity extends TitleActivity
 			nots.add(new Notification("Nigerian P.", "Will", "Nigerian has sent you notice of a pending transaction."));
 
 		}
-		*/
+		
 			//final StableArrayAdapter adapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, al);
 		
 		View v = getLayoutInflater().inflate(R.layout.activity_noti_footer, null);
@@ -83,14 +83,36 @@ public class NotificationActivity extends TitleActivity
 	{
 		for(int i = cbs.size() - 1; i >= 0; i--) //backwards so that our ordering doesn't get screwed up
 		{
-			if(cbs.get(i).isChecked())
+			if(cbs.get(i).isChecked()){
+				try {
+					AccessNet.DeleteOneNotif(user.getEmail(), user.getPassword(),nots.get(i).getNotid());
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				nots.remove(i);
+			}
 		}
 		cbs = new ArrayList<CheckBox>();
 		NotiAdapter na = new NotiAdapter(this, android.R.layout.simple_list_item_1, nots, cbs);
 		listview.setAdapter(na);
 		setContentView(listview);
 		//TODO: delete all of the checked notifications server-side
+	}
+	static void markAsRead(Notification n)
+	{
+		try {
+			AccessNet.noteFlagger(user.getEmail(), user.getPassword(), n.getNotid(), "read");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
@@ -147,6 +169,7 @@ class NotiAdapter extends ArrayAdapter<Notification>
 	    			TextView messageInner = (TextView) v.findViewById(R.id.secondLine);
 	    			messageInner.setTextColor(Color.WHITE);
 	    			
+	    			NotificationActivity.markAsRead(al.get(position));
 	    			//TODO: update the server so that this notification is now read
 	    		}
 	    	});

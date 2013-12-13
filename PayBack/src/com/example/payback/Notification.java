@@ -9,7 +9,7 @@ public class Notification implements Comparable<Notification>{
 	private String date; 	//new format: "2013-12-12 12:29:56"
 							//old format: "Nov 17 2013, 12:19 AM"
 	private boolean read;
-	private int notid;
+	private String notid;
 	
 	Notification (String from, String to, String message, String dateToParse)
 	{
@@ -179,5 +179,15 @@ public class Notification implements Comparable<Notification>{
 
 	public void setRead(boolean read) {
 		this.read = read;
+	}
+
+
+	public String getNotid() {
+		return notid;
+	}
+
+
+	public void setNotid(String notid) {
+		this.notid = notid;
 	}
 }

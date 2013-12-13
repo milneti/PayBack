@@ -69,7 +69,8 @@
                     android:minHeight="85dp"
                     android:minWidth="143dp"
                     android:onClick="Notification"
-                    android:text="Notifications" />
+                    android:text="Notifications"
+                    android:textSize="12dp" />
 
             </LinearLayout>
 
