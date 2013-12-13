@@ -61,6 +61,12 @@ class BaseTransaction extends Transaction{
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	public boolean getResolved() {
+		return resolved;
+	}
+	public void setResolved(boolean resolved) {
+		this.resolved = resolved;
+	}
 }
 class ResolveTransaction extends Transaction{
 	private double amount;
