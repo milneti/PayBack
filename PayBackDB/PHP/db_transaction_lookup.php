@@ -6,8 +6,8 @@ $response = array();
 // include db config class
 require_once dirname(__FILE__) . '/db_config.php';
 
-$userID = filter_input(INPUT_POST, 'userID', FILTER_SANITIZE_NUMBER_FLOAT);
 $replace = array('+', '-');
+$userID = filter_input(INPUT_POST, 'userID', FILTER_SANITIZE_NUMBER_FLOAT);
 $userID = substr(str_pad(str_replace($replace, '', $userID), 8, '0', STR_PAD_LEFT), -8, 8);
 $userEmail = $_POST['userEmail'];
 $password = $_POST['password'];
@@ -72,7 +72,7 @@ else if (strlen($password) > 0) {
     if ($userID != false) {
 	    //check that lookupWith is one of the following: userAsBorrower, userAsLender
 	    if ($lookupWith == "userAsBorrower"){
-		    $lookup = mysqli_query($link, "Select `TransID`, `LenderID` AS `AccountID`, `Email`, `Fname`, `Lname`, `Amount`, `Description`, `TransDate` FROM `Transaction` JOIN `Account` ON `AccountID` = `LenderID` WHERE `BorrowerID` = $userID ORDER BY `TransID`;");
+		    $lookup = mysqli_query($link, "SELECT `TransID`, `LenderID` AS `AccountID`, `Email`, `Fname`, `Lname`, `Amount`, `Description`, `TransDate` FROM `Transaction` JOIN `Account` ON `AccountID` = `LenderID` WHERE `BorrowerID` = $userID ORDER BY `TransID`;");
             if ($lookup) {
                 $response["result"] = 1;
                 $response["message"] = "Transaction lookup successful with User as Borrower.";
@@ -98,7 +98,7 @@ else if (strlen($password) > 0) {
             }
 	    }
 	    else if($lookupWith == "userAsLender"){
-	        $lookup = mysqli_query($link, "Select `TransID`, `BorrowerID` AS `AccountID`, `Email`, `Fname`, `Lname`, `Amount`, `Description`, `TransDate` FROM `Transaction` JOIN `Account` ON `AccountID` = `BorrowerID` WHERE `LenderID` = $userID ORDER BY `TransID`;");
+	        $lookup = mysqli_query($link, "SELECT `TransID`, `BorrowerID` AS `AccountID`, `Email`, `Fname`, `Lname`, `Amount`, `Description`, `TransDate` FROM `Transaction` JOIN `Account` ON `AccountID` = `BorrowerID` WHERE `LenderID` = $userID ORDER BY `TransID`;");
             if ($lookup) {
                 $response["result"] = 1;
                 $response["message"] = "Transaction lookup successful with User as Lender.";
