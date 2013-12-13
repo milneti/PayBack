@@ -75,6 +75,21 @@
  </fieldset>
 </form>
 
+<form action="db_transaction_updateFlag.php" method="post">
+ <fieldset>
+ <legend>Update a Transactions's ResolvedFlag by ID:</legend>
+  Updates flag for transaction with given ID; user must be the lender.<br>
+  'userID': <input type="text" name="userID"> (OR) 'userEmail': <input type="text" name="userEmail"> <br>
+   User ID or email required.<br>
+  'password': <input type="password" name="password"> User password required<br>
+  'transID': <input type="text" name="transID"> Transaction ID required<br>
+  'setFlag': <br>
+  <input type="radio" name="setFlag" value="resolved"> ='resolved' (1)
+  <input type="radio" name="setFlag" value="unresolved"> ='unresolved' (0)<br>
+  <input type="submit" value="Submit"> (db_transaction_updateFlag.php)
+ </fieldset>
+</form>
+
 <form action="db_friendof_create.php" method="post">
  <fieldset>
  <legend>Add Contact:</legend>
@@ -146,7 +161,6 @@
  </fieldset>
 </form>
 
-
 <form action="db_notif_updateFlag.php" method="post">
  <fieldset>
  <legend>Update a Notification's ReadFlag by ID:</legend>
@@ -161,7 +175,6 @@
   <input type="submit" value="Submit"> (db_notif_updateFlag.php)
  </fieldset>
 </form>
-
 
 <form action="db_notif_deleteAll.php" method="post">
  <fieldset>
